@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import { projects, publications } from '../data/library';
+
+const c = site.home.en;
+---
+
+<BaseLayout
+  title={site.name}
+  description="Meysam Ghanbari — Researcher in Optical & Satellite Communications."
+  lang="en"
+  path="/"
+>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <h1>{site.name}</h1>
+        <p class="role">{site.role.en}</p>
+        <h2>{c.headline}</h2>
+        <p class="lede">{c.intro}</p>
+        <div class="hero-actions">
+          <a class="button" href="/research">{c.primaryCta}</a>
+          <a class="button ghost" href="/contact">{c.secondaryCta}</a>
+        </div>
+        <div class="signal-row" aria-label="Research focus">
+          <span>Optical links</span><span>Satellite networks</span><span>Photonics</span><span>AI</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Professional portrait placeholder">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="portrait-frame">
+          <div class="portrait-monogram">MG</div>
+          <div class="portrait-label">Professional portrait</div>
+        </div>
+        <div class="visual-chip chip-a">FSO</div>
+        <div class="visual-chip chip-b">ISL</div>
+        <div class="visual-chip chip-c">PHOTONICS</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">RESEARCH</p>
+        <h2>{c.researchTitle}</h2>
+        <p>{c.researchIntro}</p>
+      </div>
+      <div class="card-grid research-grid">
+        {site.themes.en.map(([title, text], i) => (
+          <article class="card research-card">
+            <span class="card-index">0{i + 1}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="eyebrow">TECHNOLOGY</p>
+          <h2>{c.projectTitle}</h2>
+        </div>
+        <p>{c.projectIntro}</p>
+      </div>
+      <div class="card-grid three">
+        {projects.en.map((project) => (
+          <article class="card project-card">
+            <p class="tag">{project.tag}</p>
+            <h3>{project.title}</h3>
+            <p>{project.summary}</p>
+            <a class="text-link" href={project.href}>Explore project direction →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="eyebrow">PUBLICATIONS</p>
+          <h2>{c.publicationTitle}</h2>
+        </div>
+        <p>{c.publicationIntro}</p>
+      </div>
+      <div class="publication-list">
+        {publications.map((paper) => (
+          <article class="publication-row">
+            <div>
+              <p class="tag">{paper.type} · {paper.year}</p>
+              <h3>{paper.title}</h3>
+              <p>{paper.venue}</p>
+            </div>
+            <span class="publication-arrow">↗</span>
+          </article>
+        ))}
+      </div>
+      <a class="text-link large-link" href="/publications">View publication library →</a>
+    </div>
+  </section>
+
+  <section class="section section-collaboration">
+    <div class="shell collaboration-card">
+      <div>
+        <p class="eyebrow">COLLABORATION</p>
+        <h2>{c.collaborationTitle}</h2>
+        <p>{c.collaborationText}</p>
+      </div>
+      <a class="button light" href="/contact">{c.collaborationCta}</a>
+    </div>
+  </section>
+</BaseLayout>
