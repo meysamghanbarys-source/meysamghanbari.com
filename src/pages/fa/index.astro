@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { projects, publications } from '../../data/library';
+
+const c = site.home.fa;
+---
+
+<BaseLayout
+  title={site.name}
+  description="میثم قنبری — پژوهشگر مخابرات نوری و ماهواره‌ای."
+  lang="fa"
+  path="/fa/"
+>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <h1>{site.name}</h1>
+        <p class="role">{site.role.fa}</p>
+        <h2>{c.headline}</h2>
+        <p class="lede">{c.intro}</p>
+        <div class="hero-actions">
+          <a class="button" href="/fa/research">{c.primaryCta}</a>
+          <a class="button ghost" href="/fa/contact">{c.secondaryCta}</a>
+        </div>
+        <div class="signal-row" aria-label="محورهای پژوهش">
+          <span>Optical Links</span><span>Satellite Networks</span><span>Photonics</span><span>AI</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="محل تصویر حرفه‌ای">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="portrait-frame">
+          <div class="portrait-monogram">MG</div>
+          <div class="portrait-label">تصویر حرفه‌ای</div>
+        </div>
+        <div class="visual-chip chip-a">FSO</div>
+        <div class="visual-chip chip-b">ISL</div>
+        <div class="visual-chip chip-c">PHOTONICS</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">پژوهش</p>
+        <h2>{c.researchTitle}</h2>
+        <p>{c.researchIntro}</p>
+      </div>
+      <div class="card-grid research-grid">
+        {site.themes.fa.map(([title, text], i) => (
+          <article class="card research-card">
+            <span class="card-index">0{i + 1}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="eyebrow">فناوری</p>
+          <h2>{c.projectTitle}</h2>
+        </div>
+        <p>{c.projectIntro}</p>
+      </div>
+      <div class="card-grid three">
+        {projects.fa.map((project) => (
+          <article class="card project-card">
+            <p class="tag">{project.tag}</p>
+            <h3>{project.title}</h3>
+            <p>{project.summary}</p>
+            <a class="text-link" href={project.href}>مشاهده مسیر پروژه ←</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="eyebrow">مقالات</p>
+          <h2>{c.publicationTitle}</h2>
+        </div>
+        <p>{c.publicationIntro}</p>
+      </div>
+      <div class="publication-list" dir="ltr">
+        {publications.map((paper) => (
+          <article class="publication-row">
+            <div>
+              <p class="tag">{paper.type} · {paper.year}</p>
+              <h3>{paper.title}</h3>
+              <p>{paper.venue}</p>
+            </div>
+            <span class="publication-arrow">↗</span>
+          </article>
+        ))}
+      </div>
+      <a class="text-link large-link" href="/fa/publications">مشاهده همه مقالات ←</a>
+    </div>
+  </section>
+
+  <section class="section section-collaboration">
+    <div class="shell collaboration-card">
+      <div>
+        <p class="eyebrow">همکاری</p>
+        <h2>{c.collaborationTitle}</h2>
+        <p>{c.collaborationText}</p>
+      </div>
+      <a class="button light" href="/fa/contact">{c.collaborationCta}</a>
+    </div>
+  </section>
+</BaseLayout>

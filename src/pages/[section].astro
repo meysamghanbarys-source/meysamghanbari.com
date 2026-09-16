@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sectionIds, site } from '../data/site';
+import { projects, publications, videos, insights, mediaSlots } from '../data/library';
+
+export function getStaticPaths() {
+  return sectionIds.map((section) => ({
+    params: { section },
+    props: { section }
+  }));
+}
+
+const { section } = Astro.props;
+const data = site.sections.en[section];
+const path = `/${section}`;
+---
+
+<BaseLayout title={data.title} description={data.intro} lang="en" path={path}>
+  <section class="page-hero">
+    <div class="shell narrow">
+      <p class="eyebrow">{data.kicker}</p>
+      <h1>{data.title}</h1>
+      <p class="page-intro">{data.intro}</p>
+    </div>
+  </section>
+
+  {section === 'research' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="card-grid research-grid">
+          {site.themes.en.map(([title, text], i) => (
+            <article class="card research-card">
+              <span class="card-index">0{i + 1}</span>
+              <h2>{title}</h2>
+              <p>{text}</p>
+              <div class="card-rule"></div>
+              <p class="micro">Dedicated theme page ready to be added.</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'projects' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="card-grid three">
+          {projects.en.map((project) => (
+            <article class="card project-card">
+              <p class="tag">{project.tag}</p>
+              <h2>{project.title}</h2>
+              <p>{project.summary}</p>
+              <div class="project-meta">
+                <span>System page</span><span>Figures</span><span>Related papers</span><span>Video</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'publications' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="filter-row">
+          <span class="filter active">All</span>
+          <span class="filter">Journals</span>
+          <span class="filter">Conferences</span>
+        </div>
+        <div class="publication-list">
+          {publications.map((paper) => (
+            <article class="publication-row">
+              <div>
+                <p class="tag">{paper.type} · {paper.year}</p>
+                <h2>{paper.title}</h2>
+                <p>{paper.venue}</p>
+              </div>
+              <div class="publication-actions">
+                <span>Paper page</span><span>PDF</span><span>Video</span><span>DOI</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'videos' && (
+    <section class="section section-tight">
+      <div class="shell">
+        {videos.length === 0 ? (
+          <div class="empty-state">
+            <span class="empty-icon">▶</span>
+            <h2>Video library ready</h2>
+            <p>Add a YouTube or Vimeo URL to <code>src/data/library.ts</code>. The layout is ready for paper videos, talks and technical explainers.</p>
+          </div>
+        ) : (
+          <div class="card-grid three">
+            {videos.map((video) => <article class="card"><h2>{video.title}</h2></article>)}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {section === 'insights' && (
+    <section class="section section-tight">
+      <div class="shell">
+        {insights.length === 0 ? (
+          <div class="empty-state">
+            <span class="empty-icon">✦</span>
+            <h2>Insight publishing system ready</h2>
+            <p>Technical notes and perspectives can be added without changing the core design.</p>
+          </div>
+        ) : (
+          <div class="card-grid three">
+            {insights.map((item) => <article class="card"><h2>{item.title}</h2><p>{item.excerpt}</p></article>)}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {section === 'media' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="media-grid">
+          {mediaSlots.map((label, i) => (
+            <figure class={`media-slot media-slot-${(i % 3) + 1}`}>
+              <div class="media-placeholder"><span>MG</span></div>
+              <figcaption>{label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'about' && (
+    <section class="section section-tight">
+      <div class="shell about-grid">
+        <div class="about-visual">
+          <div class="portrait-frame portrait-large">
+            <div class="portrait-monogram">MG</div>
+            <div class="portrait-label">Professional portrait</div>
+          </div>
+        </div>
+        <div class="prose">
+          <h2>Research identity</h2>
+          <p>{data.intro}</p>
+          <h2>Core interests</h2>
+          <ul>
+            <li>Optical and free-space optical communications</li>
+            <li>Inter-satellite optical links and space networking</li>
+            <li>Beam tracking and pointing-error mitigation</li>
+            <li>Photonic communication architectures</li>
+            <li>AI-assisted and physics-informed communication systems</li>
+          </ul>
+          <h2>Long-term direction</h2>
+          <p>Build research that can move from analytical models and prototypes toward real deep-tech systems, collaborations and commercialization.</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'contact' && (
+    <section class="section section-tight">
+      <div class="shell contact-grid">
+        <a class="contact-card" href={`mailto:${site.contactEmail}`}>
+          <span class="tag">DIRECT EMAIL</span>
+          <h2>{site.contactEmail}</h2>
+          <p>Research collaboration, industry R&D and technical conversations.</p>
+          <span class="text-link">Send email →</span>
+        </a>
+        <div class="contact-card">
+          <span class="tag">COLLABORATION AREAS</span>
+          <h2>Work with Meysam</h2>
+          <ul>
+            <li>Research collaboration</li>
+            <li>Industry & R&D</li>
+            <li>Technical consulting</li>
+            <li>Speaking & media</li>
+            <li>Deep-tech opportunities</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-note">
+    <div class="shell narrow">
+      <p>{data.note}</p>
+    </div>
+  </section>
+</BaseLayout>

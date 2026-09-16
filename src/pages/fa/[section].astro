@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sectionIds, site } from '../../data/site';
+import { projects, publications, videos, insights, mediaSlots } from '../../data/library';
+
+export function getStaticPaths() {
+  return sectionIds.map((section) => ({
+    params: { section },
+    props: { section }
+  }));
+}
+
+const { section } = Astro.props;
+const data = site.sections.fa[section];
+const path = `/fa/${section}`;
+---
+
+<BaseLayout title={data.title} description={data.intro} lang="fa" path={path}>
+  <section class="page-hero">
+    <div class="shell narrow">
+      <p class="eyebrow">{data.kicker}</p>
+      <h1>{data.title}</h1>
+      <p class="page-intro">{data.intro}</p>
+    </div>
+  </section>
+
+  {section === 'research' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="card-grid research-grid">
+          {site.themes.fa.map(([title, text], i) => (
+            <article class="card research-card">
+              <span class="card-index">0{i + 1}</span>
+              <h2>{title}</h2>
+              <p>{text}</p>
+              <div class="card-rule"></div>
+              <p class="micro">آماده ایجاد صفحه مستقل برای این محور.</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'projects' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="card-grid three">
+          {projects.fa.map((project) => (
+            <article class="card project-card">
+              <p class="tag">{project.tag}</p>
+              <h2>{project.title}</h2>
+              <p>{project.summary}</p>
+              <div class="project-meta">
+                <span>صفحه سیستم</span><span>شکل‌ها</span><span>مقالات</span><span>ویدئو</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'publications' && (
+    <section class="section section-tight">
+      <div class="shell" dir="ltr">
+        <div class="filter-row">
+          <span class="filter active">All</span>
+          <span class="filter">Journals</span>
+          <span class="filter">Conferences</span>
+        </div>
+        <div class="publication-list">
+          {publications.map((paper) => (
+            <article class="publication-row">
+              <div>
+                <p class="tag">{paper.type} · {paper.year}</p>
+                <h2>{paper.title}</h2>
+                <p>{paper.venue}</p>
+              </div>
+              <div class="publication-actions">
+                <span>Page</span><span>PDF</span><span>Video</span><span>DOI</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'videos' && (
+    <section class="section section-tight">
+      <div class="shell">
+        {videos.length === 0 ? (
+          <div class="empty-state">
+            <span class="empty-icon">▶</span>
+            <h2>کتابخانه ویدئو آماده است</h2>
+            <p>لینک YouTube یا Vimeo در فایل داده اضافه می‌شود و طراحی آماده نمایش ویدئوی مقاله، ارائه و محتوای فنی است.</p>
+          </div>
+        ) : (
+          <div class="card-grid three">
+            {videos.map((video) => <article class="card"><h2>{video.title}</h2></article>)}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {section === 'insights' && (
+    <section class="section section-tight">
+      <div class="shell">
+        {insights.length === 0 ? (
+          <div class="empty-state">
+            <span class="empty-icon">✦</span>
+            <h2>سیستم انتشار یادداشت آماده است</h2>
+            <p>یادداشت‌های فنی و دیدگاه‌ها بدون تغییر طراحی اصلی قابل اضافه‌شدن هستند.</p>
+          </div>
+        ) : (
+          <div class="card-grid three">
+            {insights.map((item) => <article class="card"><h2>{item.title}</h2><p>{item.excerpt}</p></article>)}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {section === 'media' && (
+    <section class="section section-tight">
+      <div class="shell">
+        <div class="media-grid">
+          {mediaSlots.map((label, i) => (
+            <figure class={`media-slot media-slot-${(i % 3) + 1}`}>
+              <div class="media-placeholder"><span>MG</span></div>
+              <figcaption>{label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'about' && (
+    <section class="section section-tight">
+      <div class="shell about-grid">
+        <div class="about-visual">
+          <div class="portrait-frame portrait-large">
+            <div class="portrait-monogram">MG</div>
+            <div class="portrait-label">تصویر حرفه‌ای</div>
+          </div>
+        </div>
+        <div class="prose">
+          <h2>هویت پژوهشی</h2>
+          <p>{data.intro}</p>
+          <h2>محورهای اصلی</h2>
+          <ul>
+            <li>مخابرات نوری و فضای آزاد</li>
+            <li>لینک‌های نوری بین‌ماهواره‌ای و شبکه‌های فضایی</li>
+            <li>رهگیری پرتو و کاهش خطای نشانه‌روی</li>
+            <li>معماری‌های مخابرات فوتونیکی</li>
+            <li>سامانه‌های ارتباطی هوشمند و فیزیک‌محور</li>
+          </ul>
+          <h2>جهت بلندمدت</h2>
+          <p>تبدیل پژوهش از مدل‌های تحلیلی و نمونه‌های فنی به سامانه‌های واقعی دیپ‌تک، همکاری صنعتی و تجاری‌سازی.</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {section === 'contact' && (
+    <section class="section section-tight">
+      <div class="shell contact-grid">
+        <a class="contact-card" href={`mailto:${site.contactEmail}`}>
+          <span class="tag">ایمیل مستقیم</span>
+          <h2 dir="ltr">{site.contactEmail}</h2>
+          <p>همکاری پژوهشی، تحقیق‌وتوسعه صنعتی و گفت‌وگوی فنی.</p>
+          <span class="text-link">ارسال ایمیل ←</span>
+        </a>
+        <div class="contact-card">
+          <span class="tag">حوزه‌های همکاری</span>
+          <h2>همکاری با میثم</h2>
+          <ul>
+            <li>همکاری پژوهشی</li>
+            <li>تحقیق‌وتوسعه صنعتی</li>
+            <li>مشاوره فنی</li>
+            <li>سخنرانی و رسانه</li>
+            <li>فرصت‌های دیپ‌تک</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section-note">
+    <div class="shell narrow">
+      <p>{data.note}</p>
+    </div>
+  </section>
+</BaseLayout>

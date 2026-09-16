@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meysamghanbari.com/sitemap-index.xml
