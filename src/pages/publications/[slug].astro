@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { publications } from '../../data/library';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return publications.map((paper) => ({ params: { slug: paper.slug }, props: { paper } }));
+}
+
+const { paper } = Astro.props;
+const path = `/publications/${paper.slug}`;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: paper.title,
+  author: paper.authors,
+  datePublished: paper.status === 'Published' ? paper.year : undefined,
+  publisher: paper.venue,
+  url: `${site.domain}${path}`,
+  about: paper.tags
+};
+---
+
+<BaseLayout title={paper.title} description={paper.summaryEn} lang="en" path={path}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
+  <section class="paper-hero">
+    <div class="space-grid-bg" aria-hidden="true"></div>
+    <div class="shell paper-shell">
+      <a class="back-link" href="/publications">← Publications</a>
+      <div class="paper-meta-line">
+        <span>{paper.type}</span><span>{paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
+      </div>
+      <h1>{paper.title}</h1>
+      <p class="paper-authors">{paper.authors}</p>
+      <p class="paper-venue">{paper.venue}</p>
+      <div class="paper-actions">
+        {paper.doi && <a class="button" href={paper.doi} target="_blank" rel="noreferrer">DOI</a>}
+        {paper.pdf && <a class="button ghost" href={paper.pdf} target="_blank" rel="noreferrer">PDF</a>}
+        {paper.video && <a class="button ghost" href={paper.video} target="_blank" rel="noreferrer">Video</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper-body-section">
+    <div class="shell paper-content-grid">
+      <article class="paper-main">
+        <p class="eyebrow">EDITORIAL SUMMARY</p>
+        <h2>Overview</h2>
+        <p class="paper-summary">{paper.summaryEn}</p>
+
+        <h2>Research focus</h2>
+        <p>This page provides a concise website summary based on the current publication title and CV entry. Detailed claims, numerical results and contribution statements should be expanded only from the final paper or verified author materials.</p>
+
+        <h2>Publication record</h2>
+        <dl class="paper-record">
+          <div><dt>Authors</dt><dd>{paper.authors}</dd></div>
+          <div><dt>Venue</dt><dd>{paper.venue}</dd></div>
+          <div><dt>Year</dt><dd>{paper.year}</dd></div>
+          <div><dt>Status</dt><dd>{paper.status}</dd></div>
+        </dl>
+      </article>
+
+      <aside class="paper-sidebar">
+        <div class="side-card">
+          <p class="eyebrow">KEYWORDS</p>
+          <div class="tag-cloud">{paper.tags.map((tag) => <span>{tag}</span>)}</div>
+        </div>
+        <div class="side-card">
+          <p class="eyebrow">RELATED ENQUIRIES</p>
+          <p>For technical discussion, research collaboration or related project enquiries, contact the research office.</p>
+          <a class="text-link" href="/contact">Contact →</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

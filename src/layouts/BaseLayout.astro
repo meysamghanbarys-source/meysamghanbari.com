@@ -7,13 +7,15 @@ interface Props {
   description: string;
   lang?: 'en' | 'fa';
   path?: string;
+  image?: string;
 }
 
 const {
   title,
   description,
   lang = 'en',
-  path = '/'
+  path = '/',
+  image = site.ogImage
 } = Astro.props;
 
 const isFa = lang === 'fa';
@@ -24,16 +26,25 @@ const alternatePath = isFa
   ? (canonicalPath === '/fa/' || canonicalPath === '/fa' ? '/' : canonicalPath.replace(/^\/fa/, ''))
   : (canonicalPath === '/' ? '/fa/' : `/fa${canonicalPath}`);
 const alternate = `${site.domain}${alternatePath === '/' ? '' : alternatePath}`;
-const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
+const pageTitle = title === site.name
+  ? `${site.name} | Optical & Satellite Communications Researcher`
+  : `${title} | ${site.name}`;
 const items = isFa ? nav.fa : nav.en;
 const homeHref = isFa ? '/fa/' : '/';
 const contactHref = isFa ? '/fa/contact' : '/contact';
+const cvLabel = isFa ? 'CV' : 'CV';
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: site.name,
+  alternateName: site.alternateName,
   url: site.domain,
-  jobTitle: site.role.en
+  image: `${site.domain}${site.heroImage}`,
+  jobTitle: site.role.en,
+  email: site.contactEmail,
+  knowsAbout: site.knowsAbout,
+  sameAs: Object.values(site.socialLinks).filter(Boolean)
 };
 ---
 
@@ -42,13 +53,15 @@ const personSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#08111f" />
+    <meta name="theme-color" content="#050b13" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang={isFa ? 'en' : 'fa'} href={alternate} />
     <link rel="alternate" hreflang={isFa ? 'fa' : 'en'} href={canonical} />
-    <link rel="alternate" hreflang="x-default" href={`${site.domain}`} />
+    <link rel="alternate" hreflang="x-default" href={site.domain} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <meta property="og:type" content="website" />
@@ -57,12 +70,16 @@ const personSchema = {
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content={isFa ? 'fa_IR' : 'en_US'} />
+    <meta property="og:image" content={`${site.domain}${image}`} />
+    <meta property="og:image:alt" content={`${site.name} — ${site.role.en}`} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site.domain}${image}`} />
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    <slot name="head" />
   </head>
   <body>
     <header class="site-header">
@@ -80,7 +97,8 @@ const personSchema = {
 
         <div class="header-actions">
           <a class="language-link" href={alternatePath}>{isFa ? 'EN' : 'FA'}</a>
-          <a class="button small" href={contactHref}>{isFa ? 'همکاری' : 'Collaborate'}</a>
+          <a class="cv-link" href={site.cvUrl} target="_blank" rel="noreferrer">{cvLabel}</a>
+          <a class="button small" href={contactHref}>{isFa ? 'ارتباط' : 'Contact'}</a>
         </div>
 
         <details class="mobile-nav">
@@ -89,6 +107,7 @@ const personSchema = {
             {items.map(([id, label]) => (
               <a href={isFa ? `/fa/${id}` : `/${id}`}>{label}</a>
             ))}
+            <a href={site.cvUrl} target="_blank" rel="noreferrer">CV</a>
             <a href={alternatePath}>{isFa ? 'English' : 'فارسی'}</a>
           </div>
         </details>
@@ -109,17 +128,17 @@ const personSchema = {
           <p>{isFa ? site.role.fa : site.role.en}</p>
         </div>
         <div>
-          <strong>{isFa ? 'تمرکز' : 'Focus'}</strong>
-          <p>{isFa ? 'Optical · Satellite · Photonics · AI' : 'Optical · Satellite · Photonics · AI'}</p>
+          <strong>{isFa ? 'تمرکز' : 'Research focus'}</strong>
+          <p>OISL · FSO · Receiver Design · PAT · NTN · Quantum · AI</p>
         </div>
         <div>
-          <strong>{isFa ? 'ارتباط' : 'Contact'}</strong>
+          <strong>{isFa ? 'ارتباط پژوهشی' : 'Research enquiries'}</strong>
           <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
         </div>
       </div>
       <div class="shell footer-bottom">
         <span>© {new Date().getFullYear()} {site.name}</span>
-        <span>{isFa ? 'ساخته‌شده برای رشد بلندمدت یک برند پژوهشی.' : 'Built as a long-term research brand asset.'}</span>
+        <span>{isFa ? 'وب‌سایت رسمی پژوهشی' : 'Official research website'}</span>
       </div>
     </footer>
   </body>

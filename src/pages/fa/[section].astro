@@ -1,22 +1,22 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sectionIds, site } from '../../data/site';
-import { projects, publications, videos, insights, mediaSlots } from '../../data/library';
+import { projects, publications, videos, insights, upcoming, media } from '../../data/library';
 
 export function getStaticPaths() {
-  return sectionIds.map((section) => ({
-    params: { section },
-    props: { section }
-  }));
+  return sectionIds.map((section) => ({ params: { section }, props: { section } }));
 }
 
 const { section } = Astro.props;
 const data = site.sections.fa[section];
 const path = `/fa/${section}`;
+const journals = publications.filter((p) => p.type === 'Journal');
+const conferences = publications.filter((p) => p.type === 'Conference');
 ---
 
 <BaseLayout title={data.title} description={data.intro} lang="fa" path={path}>
-  <section class="page-hero">
+  <section class="page-hero page-hero-space">
+    <div class="space-grid-bg" aria-hidden="true"></div>
     <div class="shell narrow">
       <p class="eyebrow">{data.kicker}</p>
       <h1>{data.title}</h1>
@@ -33,10 +33,24 @@ const path = `/fa/${section}`;
               <span class="card-index">0{i + 1}</span>
               <h2>{title}</h2>
               <p>{text}</p>
-              <div class="card-rule"></div>
-              <p class="micro">آماده ایجاد صفحه مستقل برای این محور.</p>
             </article>
           ))}
+        </div>
+        <div class="expertise-panel">
+          <div>
+            <p class="eyebrow">پروفایل فنی</p>
+            <h2>مدل‌سازی تحلیلی، طراحی گیرنده و پیاده‌سازی سامانه‌های مخابراتی</h2>
+          </div>
+          <div class="expertise-list" dir="ltr">
+            <span>Link budgets & Gaussian-beam propagation</span>
+            <span>Receiver noise & sensitivity</span>
+            <span>Photodetector / TIA interfaces</span>
+            <span>Pointing error & jitter</span>
+            <span>Acquisition, alignment & fine tracking</span>
+            <span>BER / SER / outage modeling</span>
+            <span>Monte Carlo simulation & optimization</span>
+            <span>MATLAB · Python · C · FPGA</span>
+          </div>
         </div>
       </div>
     </section>
@@ -45,15 +59,14 @@ const path = `/fa/${section}`;
   {section === 'projects' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="card-grid three">
-          {projects.fa.map((project) => (
-            <article class="card project-card">
+        <div class="card-grid two project-detail-grid">
+          {projects.fa.map((project, i) => (
+            <article class="card project-card project-card-large">
+              <span class="card-index">0{i + 1}</span>
               <p class="tag">{project.tag}</p>
               <h2>{project.title}</h2>
               <p>{project.summary}</p>
-              <div class="project-meta">
-                <span>صفحه سیستم</span><span>شکل‌ها</span><span>مقالات</span><span>ویدئو</span>
-              </div>
+              <div class="project-meta"><span>Architecture</span><span>Analysis</span><span>Simulation</span><span>Publication</span></div>
             </article>
           ))}
         </div>
@@ -64,134 +77,77 @@ const path = `/fa/${section}`;
   {section === 'publications' && (
     <section class="section section-tight">
       <div class="shell" dir="ltr">
-        <div class="filter-row">
-          <span class="filter active">All</span>
-          <span class="filter">Journals</span>
-          <span class="filter">Conferences</span>
+        <div class="publication-group">
+          <div class="group-heading"><span>JOURNALS</span><strong>{journals.length}</strong></div>
+          <div class="publication-list">
+            {journals.map((paper) => (
+              <a class="publication-row publication-link" href={`/fa/publications/${paper.slug}`}>
+                <div><p class="tag">{paper.year} · {paper.status}</p><h2>{paper.title}</h2><p>{paper.authors}</p><p>{paper.venue}</p></div>
+                <span class="publication-arrow">↗</span>
+              </a>
+            ))}
+          </div>
         </div>
-        <div class="publication-list">
-          {publications.map((paper) => (
-            <article class="publication-row">
-              <div>
-                <p class="tag">{paper.type} · {paper.year}</p>
-                <h2>{paper.title}</h2>
-                <p>{paper.venue}</p>
-              </div>
-              <div class="publication-actions">
-                <span>Page</span><span>PDF</span><span>Video</span><span>DOI</span>
-              </div>
-            </article>
-          ))}
+        <div class="publication-group">
+          <div class="group-heading"><span>CONFERENCES</span><strong>{conferences.length}</strong></div>
+          <div class="publication-list">
+            {conferences.map((paper) => (
+              <a class="publication-row publication-link" href={`/fa/publications/${paper.slug}`}>
+                <div><p class="tag">{paper.year} · {paper.status}</p><h2>{paper.title}</h2><p>{paper.authors}</p><p>{paper.venue}</p></div>
+                <span class="publication-arrow">↗</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   )}
 
   {section === 'videos' && (
-    <section class="section section-tight">
-      <div class="shell">
-        {videos.length === 0 ? (
-          <div class="empty-state">
-            <span class="empty-icon">▶</span>
-            <h2>کتابخانه ویدئو آماده است</h2>
-            <p>لینک YouTube یا Vimeo در فایل داده اضافه می‌شود و طراحی آماده نمایش ویدئوی مقاله، ارائه و محتوای فنی است.</p>
-          </div>
-        ) : (
-          <div class="card-grid three">
-            {videos.map((video) => <article class="card"><h2>{video.title}</h2></article>)}
-          </div>
-        )}
-      </div>
-    </section>
+    <section class="section section-tight"><div class="shell">
+      {videos.length === 0 ? <div class="empty-state"><span class="empty-icon">▶</span><h2>کتابخانه ویدئو آماده است</h2><p>با در دسترس قرار گرفتن لینک عمومی، ویدئوهای مقاله، ارائه کنفرانسی و توضیح فنی در این بخش اضافه می‌شوند.</p></div> : null}
+    </div></section>
   )}
 
   {section === 'insights' && (
-    <section class="section section-tight">
-      <div class="shell">
-        {insights.length === 0 ? (
-          <div class="empty-state">
-            <span class="empty-icon">✦</span>
-            <h2>سیستم انتشار یادداشت آماده است</h2>
-            <p>یادداشت‌های فنی و دیدگاه‌ها بدون تغییر طراحی اصلی قابل اضافه‌شدن هستند.</p>
-          </div>
-        ) : (
-          <div class="card-grid three">
-            {insights.map((item) => <article class="card"><h2>{item.title}</h2><p>{item.excerpt}</p></article>)}
-          </div>
-        )}
-      </div>
-    </section>
+    <section class="section section-tight"><div class="shell">
+      {insights.length === 0 ? <div class="empty-state insight-empty"><span class="empty-icon">✦</span><h2>دیدگاه‌های فنی در این بخش منتشر خواهند شد</h2><p>موضوعات می‌توانند شامل آینده شبکه‌های نوری بین‌ماهواره‌ای، رهگیری پرتو، گیرنده‌های فوتونیکی، هوش مصنوعی در مخابرات فضایی و روندهای دیپ‌تک باشند.</p></div> : null}
+    </div></section>
+  )}
+
+  {section === 'upcoming' && (
+    <section class="section section-tight"><div class="shell">
+      {upcoming.length === 0 ? (
+        <div class="upcoming-empty"><div class="upcoming-orbit" aria-hidden="true"></div><p class="eyebrow">تقویم</p><h2>هنوز حضور عمومی جدیدی اعلام نشده است.</h2><p>کنفرانس‌ها، بازدیدهای پژوهشی، سخنرانی‌ها، کارگاه‌ها و حضورهای حرفه‌ای پس از نهایی‌شدن تاریخ در این بخش منتشر می‌شوند.</p><a class="button ghost" href="/fa/contact">ارسال دعوت</a></div>
+      ) : null}
+    </div></section>
   )}
 
   {section === 'media' && (
-    <section class="section section-tight">
-      <div class="shell">
-        <div class="media-grid">
-          {mediaSlots.map((label, i) => (
-            <figure class={`media-slot media-slot-${(i % 3) + 1}`}>
-              <div class="media-placeholder"><span>MG</span></div>
-              <figcaption>{label}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
+    <section class="section section-tight"><div class="shell"><div class="media-grid-v2">
+      {media.map((item, i) => <figure class={`media-card media-card-${i + 1}`}><img src={item.src} alt={item.alt} loading={i < 2 ? 'eager' : 'lazy'} /><figcaption>{item.labelFa}</figcaption></figure>)}
+    </div></div></section>
   )}
 
   {section === 'about' && (
-    <section class="section section-tight">
-      <div class="shell about-grid">
-        <div class="about-visual">
-          <div class="portrait-frame portrait-large">
-            <div class="portrait-monogram">MG</div>
-            <div class="portrait-label">تصویر حرفه‌ای</div>
-          </div>
-        </div>
-        <div class="prose">
-          <h2>هویت پژوهشی</h2>
-          <p>{data.intro}</p>
-          <h2>محورهای اصلی</h2>
-          <ul>
-            <li>مخابرات نوری و فضای آزاد</li>
-            <li>لینک‌های نوری بین‌ماهواره‌ای و شبکه‌های فضایی</li>
-            <li>رهگیری پرتو و کاهش خطای نشانه‌روی</li>
-            <li>معماری‌های مخابرات فوتونیکی</li>
-            <li>سامانه‌های ارتباطی هوشمند و فیزیک‌محور</li>
-          </ul>
-          <h2>جهت بلندمدت</h2>
-          <p>تبدیل پژوهش از مدل‌های تحلیلی و نمونه‌های فنی به سامانه‌های واقعی دیپ‌تک، همکاری صنعتی و تجاری‌سازی.</p>
-        </div>
+    <section class="section section-tight"><div class="shell about-grid about-grid-v2">
+      <div class="about-visual"><img class="about-portrait" src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="میثم قنبری در محیط پژوهشی ماهواره و مخابرات نوری" /></div>
+      <div class="prose">
+        <p class="eyebrow">پروفایل</p><h2>سامانه‌های مخابرات نوری، ماهواره‌ای و پیشرفته</h2>
+        <p>میثم قنبری پژوهشگر و مهندسی در حوزه مخابرات ماهواره‌ای و نوری است و فعالیت فنی او لینک‌های نوری بین‌ماهواره‌ای، FSO، طراحی گیرنده و TIA و مسائل pointing، acquisition و tracking را پوشش می‌دهد.</p>
+        <p>کار فنی او شامل مدل‌سازی تحلیلی و مونت‌کارلو برای بودجه لینک، نویز گیرنده، انتشار پرتو، هم‌ترازی، BER/SER و outage و همچنین FPGA، MATLAB/Python/C، دوقلوهای دیجیتال فیزیک‌محور و اتوماسیون صنعتی است.</p>
+        <h2>تمرکز پژوهشی</h2><ul><li>لینک‌های نوری بین‌ماهواره‌ای</li><li>سامانه‌های FSO و شبکه‌های غیرزمینی</li><li>معماری گیرنده و حساسیت</li><li>PAT و رهگیری دقیق</li><li>لینک‌های کوانتومی</li><li>مدل‌سازی تحلیلی، مونت‌کارلو و دوقلوهای دیجیتال</li></ul>
+        <div class="about-actions"><a class="button" href={site.cvUrl} target="_blank" rel="noreferrer">CV</a><a class="button ghost" href="/fa/contact">ارتباط پژوهشی</a></div>
       </div>
-    </section>
+    </div></section>
   )}
 
   {section === 'contact' && (
-    <section class="section section-tight">
-      <div class="shell contact-grid">
-        <a class="contact-card" href={`mailto:${site.contactEmail}`}>
-          <span class="tag">ایمیل مستقیم</span>
-          <h2 dir="ltr">{site.contactEmail}</h2>
-          <p>همکاری پژوهشی، تحقیق‌وتوسعه صنعتی و گفت‌وگوی فنی.</p>
-          <span class="text-link">ارسال ایمیل ←</span>
-        </a>
-        <div class="contact-card">
-          <span class="tag">حوزه‌های همکاری</span>
-          <h2>همکاری با میثم</h2>
-          <ul>
-            <li>همکاری پژوهشی</li>
-            <li>تحقیق‌وتوسعه صنعتی</li>
-            <li>مشاوره فنی</li>
-            <li>سخنرانی و رسانه</li>
-            <li>فرصت‌های دیپ‌تک</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <section class="section section-tight"><div class="shell contact-grid">
+      <a class="contact-card" href={`mailto:${site.contactEmail}`}><span class="tag">ایمیل مستقیم</span><h2 dir="ltr">{site.contactEmail}</h2><p>برای همکاری پژوهشی، تحقیق‌وتوسعه صنعتی، مشاوره فنی، سخنرانی، رسانه و فرصت‌های دیپ‌تک.</p><span class="text-link">ارسال ایمیل ←</span></a>
+      <div class="contact-card contact-photo-card"><img src="/images/media/meysam-ghanbari-research-workspace.webp" alt="میثم قنبری در محیط کار پژوهشی" loading="lazy" /><div class="contact-photo-copy"><span class="tag">انواع درخواست</span><p>Research collaboration · Industry R&D · Technical consulting · Speaking · Media · Deep-tech</p></div></div>
+    </div></section>
   )}
 
-  <section class="section section-note">
-    <div class="shell narrow">
-      <p>{data.note}</p>
-    </div>
-  </section>
+  <section class="section section-note"><div class="shell narrow"><p>{data.note}</p></div></section>
 </BaseLayout>

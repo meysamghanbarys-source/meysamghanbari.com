@@ -4,16 +4,21 @@ import { site } from '../../data/site';
 import { projects, publications } from '../../data/library';
 
 const c = site.home.fa;
+const featured = publications.slice(0, 5);
 ---
 
 <BaseLayout
   title={site.name}
-  description="میثم قنبری — پژوهشگر مخابرات نوری و ماهواره‌ای."
+  description="وب‌سایت رسمی پژوهشی میثم قنبری در حوزه مخابرات نوری، ماهواره‌ای و سامانه‌های مخابراتی پیشرفته."
   lang="fa"
   path="/fa/"
+  image={site.heroImage}
 >
-  <section class="hero">
-    <div class="shell hero-grid">
+  <section class="hero hero-space">
+    <div class="hero-space-bg" style={`background-image:url('${site.heroImage}')`}></div>
+    <div class="hero-space-overlay"></div>
+    <div class="orbit-lines" aria-hidden="true"></div>
+    <div class="shell hero-grid hero-grid-space">
       <div class="hero-copy">
         <p class="eyebrow">{c.eyebrow}</p>
         <h1>{site.name}</h1>
@@ -23,22 +28,19 @@ const c = site.home.fa;
         <div class="hero-actions">
           <a class="button" href="/fa/research">{c.primaryCta}</a>
           <a class="button ghost" href="/fa/contact">{c.secondaryCta}</a>
+          <a class="button ghost" href={site.cvUrl} target="_blank" rel="noreferrer">CV</a>
         </div>
         <div class="signal-row" aria-label="محورهای پژوهش">
-          <span>Optical Links</span><span>Satellite Networks</span><span>Photonics</span><span>AI</span>
+          <span>OISL</span><span>FSO</span><span>Receiver Design</span><span>PAT</span><span>NTN</span><span>Quantum</span>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="محل تصویر حرفه‌ای">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="portrait-frame">
-          <div class="portrait-monogram">MG</div>
-          <div class="portrait-label">تصویر حرفه‌ای</div>
+      <div class="hero-profile-card">
+        <img src="/images/profile/meysam-ghanbari-formal-portrait.webp" alt="پرتره رسمی میثم قنبری" loading="eager" fetchpriority="high" />
+        <div class="hero-profile-caption">
+          <span>MEYSAM GHANBARI</span>
+          <small>Optical · Satellite · Advanced Communications</small>
         </div>
-        <div class="visual-chip chip-a">FSO</div>
-        <div class="visual-chip chip-b">ISL</div>
-        <div class="visual-chip chip-c">PHOTONICS</div>
       </div>
     </div>
   </section>
@@ -62,22 +64,36 @@ const c = site.home.fa;
     </div>
   </section>
 
+  <section class="section section-visual-break">
+    <div class="shell visual-break-grid">
+      <div class="visual-break-image">
+        <img src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="میثم قنبری در محیط فناوری ماهواره و مخابرات نوری" loading="lazy" />
+      </div>
+      <div class="visual-break-copy">
+        <p class="eyebrow">ماهواره · نوری · دیپ‌تک</p>
+        <h2>پژوهش با تمرکز بر سامانه‌هایی که از مدل‌سازی تحلیلی به طراحی مهندسی نزدیک می‌شوند.</h2>
+        <p>این پورتفولیو مدل‌سازی تحلیلی، شبیه‌سازی، طراحی گیرنده، مسائل کنترل پرتو، مفاهیم فوتونیکی و روش‌های داده‌محور را در کنار هم قرار می‌دهد.</p>
+        <a class="text-link large-link" href="/fa/projects">مشاهده پروژه‌ها ←</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-muted">
     <div class="shell">
       <div class="section-heading split-heading">
         <div>
-          <p class="eyebrow">فناوری</p>
+          <p class="eyebrow">مهندسی</p>
           <h2>{c.projectTitle}</h2>
         </div>
         <p>{c.projectIntro}</p>
       </div>
-      <div class="card-grid three">
+      <div class="card-grid four">
         {projects.fa.map((project) => (
           <article class="card project-card">
             <p class="tag">{project.tag}</p>
             <h3>{project.title}</h3>
             <p>{project.summary}</p>
-            <a class="text-link" href={project.href}>مشاهده مسیر پروژه ←</a>
+            <a class="text-link" href={project.href}>پورتفولیوی پروژه ←</a>
           </article>
         ))}
       </div>
@@ -94,25 +110,37 @@ const c = site.home.fa;
         <p>{c.publicationIntro}</p>
       </div>
       <div class="publication-list" dir="ltr">
-        {publications.map((paper) => (
-          <article class="publication-row">
+        {featured.map((paper) => (
+          <a class="publication-row publication-link" href={`/fa/publications/${paper.slug}`}>
             <div>
-              <p class="tag">{paper.type} · {paper.year}</p>
+              <p class="tag">{paper.type} · {paper.year} · {paper.status}</p>
               <h3>{paper.title}</h3>
               <p>{paper.venue}</p>
             </div>
             <span class="publication-arrow">↗</span>
-          </article>
+          </a>
         ))}
       </div>
-      <a class="text-link large-link" href="/fa/publications">مشاهده همه مقالات ←</a>
+      <a class="text-link large-link" href="/fa/publications">مشاهده کتابخانه کامل مقالات ←</a>
+    </div>
+  </section>
+
+  <section class="section media-strip-section">
+    <div class="shell media-strip">
+      <img src="/images/media/meysam-ghanbari-research-presentation.webp" alt="ارائه پژوهشی حرفه‌ای میثم قنبری" loading="lazy" />
+      <div>
+        <p class="eyebrow">رسانه و ارائه‌ها</p>
+        <h2>آرشیو تصویری حرفه‌ای</h2>
+        <p>پرتره‌ها، محیط‌های فنی و تصاویر ارائه به ایجاد هویت پژوهشی منسجم در سایت و نتایج جست‌وجوی تصویر کمک می‌کنند.</p>
+        <a class="text-link large-link" href="/fa/media">مشاهده رسانه ←</a>
+      </div>
     </div>
   </section>
 
   <section class="section section-collaboration">
     <div class="shell collaboration-card">
       <div>
-        <p class="eyebrow">همکاری</p>
+        <p class="eyebrow">درخواست‌ها</p>
         <h2>{c.collaborationTitle}</h2>
         <p>{c.collaborationText}</p>
       </div>

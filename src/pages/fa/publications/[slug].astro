@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publications } from '../../../data/library';
+
+export function getStaticPaths() {
+  return publications.map((paper) => ({ params: { slug: paper.slug }, props: { paper } }));
+}
+
+const { paper } = Astro.props;
+const path = `/fa/publications/${paper.slug}`;
+---
+
+<BaseLayout title={paper.title} description={paper.summaryFa} lang="fa" path={path}>
+  <section class="paper-hero">
+    <div class="space-grid-bg" aria-hidden="true"></div>
+    <div class="shell paper-shell">
+      <a class="back-link" href="/fa/publications">مقالات ←</a>
+      <div class="paper-meta-line" dir="ltr"><span>{paper.type}</span><span>{paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span></div>
+      <h1 dir="ltr">{paper.title}</h1>
+      <p class="paper-authors" dir="ltr">{paper.authors}</p>
+      <p class="paper-venue" dir="ltr">{paper.venue}</p>
+    </div>
+  </section>
+
+  <section class="section paper-body-section">
+    <div class="shell paper-content-grid">
+      <article class="paper-main">
+        <p class="eyebrow">خلاصه وب‌سایت</p>
+        <h2>مرور کلی</h2>
+        <p class="paper-summary">{paper.summaryFa}</p>
+        <h2>تمرکز پژوهش</h2>
+        <p>این صفحه یک خلاصه کوتاه بر اساس عنوان مقاله و اطلاعات موجود در CV ارائه می‌کند. جزئیات عددی، نتایج و contributionهای دقیق فقط پس از تطبیق با نسخه نهایی مقاله یا منابع تأییدشده نویسنده اضافه خواهند شد.</p>
+        <h2>مشخصات انتشار</h2>
+        <dl class="paper-record">
+          <div><dt>نویسندگان</dt><dd dir="ltr">{paper.authors}</dd></div>
+          <div><dt>محل انتشار</dt><dd dir="ltr">{paper.venue}</dd></div>
+          <div><dt>سال</dt><dd>{paper.year}</dd></div>
+          <div><dt>وضعیت</dt><dd>{paper.status}</dd></div>
+        </dl>
+      </article>
+      <aside class="paper-sidebar">
+        <div class="side-card"><p class="eyebrow">کلیدواژه‌ها</p><div class="tag-cloud" dir="ltr">{paper.tags.map((tag) => <span>{tag}</span>)}</div></div>
+        <div class="side-card"><p class="eyebrow">ارتباط</p><p>برای گفت‌وگوی فنی، همکاری پژوهشی یا پروژه‌های مرتبط از صفحه ارتباط استفاده شود.</p><a class="text-link" href="/fa/contact">ارتباط ←</a></div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

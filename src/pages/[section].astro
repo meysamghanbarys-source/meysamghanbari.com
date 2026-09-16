@@ -1,22 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sectionIds, site } from '../data/site';
-import { projects, publications, videos, insights, mediaSlots } from '../data/library';
+import { projects, publications, videos, insights, upcoming, media } from '../data/library';
 
 export function getStaticPaths() {
-  return sectionIds.map((section) => ({
-    params: { section },
-    props: { section }
-  }));
+  return sectionIds.map((section) => ({ params: { section }, props: { section } }));
 }
 
 const { section } = Astro.props;
 const data = site.sections.en[section];
 const path = `/${section}`;
+const journals = publications.filter((p) => p.type === 'Journal');
+const conferences = publications.filter((p) => p.type === 'Conference');
 ---
 
 <BaseLayout title={data.title} description={data.intro} lang="en" path={path}>
-  <section class="page-hero">
+  <section class="page-hero page-hero-space">
+    <div class="space-grid-bg" aria-hidden="true"></div>
     <div class="shell narrow">
       <p class="eyebrow">{data.kicker}</p>
       <h1>{data.title}</h1>
@@ -33,10 +33,24 @@ const path = `/${section}`;
               <span class="card-index">0{i + 1}</span>
               <h2>{title}</h2>
               <p>{text}</p>
-              <div class="card-rule"></div>
-              <p class="micro">Dedicated theme page ready to be added.</p>
             </article>
           ))}
+        </div>
+        <div class="expertise-panel">
+          <div>
+            <p class="eyebrow">TECHNICAL PROFILE</p>
+            <h2>Analytical modeling, receiver design and communication-system implementation</h2>
+          </div>
+          <div class="expertise-list">
+            <span>Link budgets & Gaussian-beam propagation</span>
+            <span>Receiver noise & sensitivity</span>
+            <span>Photodetector / TIA interfaces</span>
+            <span>Pointing error & jitter</span>
+            <span>Acquisition, alignment & fine tracking</span>
+            <span>BER / SER / outage modeling</span>
+            <span>Monte Carlo simulation & optimization</span>
+            <span>MATLAB · Python · C · FPGA</span>
+          </div>
         </div>
       </div>
     </section>
@@ -45,14 +59,15 @@ const path = `/${section}`;
   {section === 'projects' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="card-grid three">
-          {projects.en.map((project) => (
-            <article class="card project-card">
+        <div class="card-grid two project-detail-grid">
+          {projects.en.map((project, i) => (
+            <article class="card project-card project-card-large">
+              <span class="card-index">0{i + 1}</span>
               <p class="tag">{project.tag}</p>
               <h2>{project.title}</h2>
               <p>{project.summary}</p>
               <div class="project-meta">
-                <span>System page</span><span>Figures</span><span>Related papers</span><span>Video</span>
+                <span>Architecture</span><span>Analysis</span><span>Simulation</span><span>Publication</span>
               </div>
             </article>
           ))}
@@ -64,24 +79,38 @@ const path = `/${section}`;
   {section === 'publications' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="filter-row">
-          <span class="filter active">All</span>
-          <span class="filter">Journals</span>
-          <span class="filter">Conferences</span>
+        <div class="publication-group">
+          <div class="group-heading"><span>JOURNALS</span><strong>{journals.length}</strong></div>
+          <div class="publication-list">
+            {journals.map((paper) => (
+              <a class="publication-row publication-link" href={`/publications/${paper.slug}`}>
+                <div>
+                  <p class="tag">{paper.year} · {paper.status}</p>
+                  <h2>{paper.title}</h2>
+                  <p>{paper.authors}</p>
+                  <p>{paper.venue}</p>
+                </div>
+                <span class="publication-arrow">↗</span>
+              </a>
+            ))}
+          </div>
         </div>
-        <div class="publication-list">
-          {publications.map((paper) => (
-            <article class="publication-row">
-              <div>
-                <p class="tag">{paper.type} · {paper.year}</p>
-                <h2>{paper.title}</h2>
-                <p>{paper.venue}</p>
-              </div>
-              <div class="publication-actions">
-                <span>Paper page</span><span>PDF</span><span>Video</span><span>DOI</span>
-              </div>
-            </article>
-          ))}
+
+        <div class="publication-group">
+          <div class="group-heading"><span>CONFERENCES</span><strong>{conferences.length}</strong></div>
+          <div class="publication-list">
+            {conferences.map((paper) => (
+              <a class="publication-row publication-link" href={`/publications/${paper.slug}`}>
+                <div>
+                  <p class="tag">{paper.year} · {paper.status}</p>
+                  <h2>{paper.title}</h2>
+                  <p>{paper.authors}</p>
+                  <p>{paper.venue}</p>
+                </div>
+                <span class="publication-arrow">↗</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -94,7 +123,7 @@ const path = `/${section}`;
           <div class="empty-state">
             <span class="empty-icon">▶</span>
             <h2>Video library ready</h2>
-            <p>Add a YouTube or Vimeo URL to <code>src/data/library.ts</code>. The layout is ready for paper videos, talks and technical explainers.</p>
+            <p>Paper videos, conference presentations and technical explainers can be added as soon as public links are available.</p>
           </div>
         ) : (
           <div class="card-grid three">
@@ -109,10 +138,10 @@ const path = `/${section}`;
     <section class="section section-tight">
       <div class="shell">
         {insights.length === 0 ? (
-          <div class="empty-state">
+          <div class="empty-state insight-empty">
             <span class="empty-icon">✦</span>
-            <h2>Insight publishing system ready</h2>
-            <p>Technical notes and perspectives can be added without changing the core design.</p>
+            <h2>Technical perspectives will appear here</h2>
+            <p>Future entries can cover topics such as the evolution of inter-satellite optical networks, beam tracking, photonic receivers, AI-assisted space communications and broader deep-tech trends.</p>
           </div>
         ) : (
           <div class="card-grid three">
@@ -123,14 +152,38 @@ const path = `/${section}`;
     </section>
   )}
 
+  {section === 'upcoming' && (
+    <section class="section section-tight">
+      <div class="shell">
+        {upcoming.length === 0 ? (
+          <div class="upcoming-empty">
+            <div class="upcoming-orbit" aria-hidden="true"></div>
+            <p class="eyebrow">CALENDAR</p>
+            <h2>No public appearances announced yet.</h2>
+            <p>Confirmed conferences, research visits, talks, workshops and professional appearances will be published here as dates are finalized.</p>
+            <a class="button ghost" href="/contact">Send an invitation</a>
+          </div>
+        ) : (
+          <div class="timeline">
+            {upcoming.map((item) => (
+              <article class="timeline-item">
+                <span>{item.date}</span><h2>{item.title}</h2><p>{item.type} · {item.location}</p>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
   {section === 'media' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="media-grid">
-          {mediaSlots.map((label, i) => (
-            <figure class={`media-slot media-slot-${(i % 3) + 1}`}>
-              <div class="media-placeholder"><span>MG</span></div>
-              <figcaption>{label}</figcaption>
+        <div class="media-grid-v2">
+          {media.map((item, i) => (
+            <figure class={`media-card media-card-${i + 1}`}>
+              <img src={item.src} alt={item.alt} loading={i < 2 ? 'eager' : 'lazy'} />
+              <figcaption>{item.labelEn}</figcaption>
             </figure>
           ))}
         </div>
@@ -140,26 +193,33 @@ const path = `/${section}`;
 
   {section === 'about' && (
     <section class="section section-tight">
-      <div class="shell about-grid">
+      <div class="shell about-grid about-grid-v2">
         <div class="about-visual">
-          <div class="portrait-frame portrait-large">
-            <div class="portrait-monogram">MG</div>
-            <div class="portrait-label">Professional portrait</div>
-          </div>
+          <img class="about-portrait" src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="Meysam Ghanbari in a satellite and optical communications research environment" />
         </div>
         <div class="prose">
-          <h2>Research identity</h2>
-          <p>{data.intro}</p>
-          <h2>Core interests</h2>
+          <p class="eyebrow">PROFILE</p>
+          <h2>Satellite, optical and advanced communication systems</h2>
+          <p>Meysam Ghanbari is a researcher and engineer focused on satellite and optical communications, including inter-satellite optical links, free-space optical systems, optical receiver and TIA design, and pointing, acquisition and tracking.</p>
+          <p>His technical work includes end-to-end analytical and Monte Carlo modeling for link budgets, receiver noise, beam propagation, alignment, BER/SER and outage, alongside FPGA development, MATLAB/Python/C, physics-based digital twins and industrial automation.</p>
+
+          <h2>Current research focus</h2>
           <ul>
-            <li>Optical and free-space optical communications</li>
-            <li>Inter-satellite optical links and space networking</li>
-            <li>Beam tracking and pointing-error mitigation</li>
-            <li>Photonic communication architectures</li>
-            <li>AI-assisted and physics-informed communication systems</li>
+            <li>Inter-satellite optical links and optical satellite communications</li>
+            <li>Free-space optical and non-terrestrial communication systems</li>
+            <li>Optical receiver architecture, sensitivity and TIA interfaces</li>
+            <li>Pointing, acquisition, alignment and fine tracking</li>
+            <li>Quantum optical communication links</li>
+            <li>Analytical modeling, Monte Carlo simulation and physics-based digital twins</li>
           </ul>
-          <h2>Long-term direction</h2>
-          <p>Build research that can move from analytical models and prototypes toward real deep-tech systems, collaborations and commercialization.</p>
+
+          <h2>Engineering background</h2>
+          <p>Additional engineering experience includes FPGA and digital systems, signal-processing implementation, PSpice and Proteus, Siemens PLC programming, SCL, STEP 7, WinCC and Siemens Twin Builder.</p>
+
+          <div class="about-actions">
+            <a class="button" href={site.cvUrl} target="_blank" rel="noreferrer">View CV</a>
+            <a class="button ghost" href="/contact">Research enquiries</a>
+          </div>
         </div>
       </div>
     </section>
@@ -171,19 +231,15 @@ const path = `/${section}`;
         <a class="contact-card" href={`mailto:${site.contactEmail}`}>
           <span class="tag">DIRECT EMAIL</span>
           <h2>{site.contactEmail}</h2>
-          <p>Research collaboration, industry R&D and technical conversations.</p>
+          <p>For research collaboration, industry R&D, technical consulting, speaking, media and deep-tech enquiries.</p>
           <span class="text-link">Send email →</span>
         </a>
-        <div class="contact-card">
-          <span class="tag">COLLABORATION AREAS</span>
-          <h2>Work with Meysam</h2>
-          <ul>
-            <li>Research collaboration</li>
-            <li>Industry & R&D</li>
-            <li>Technical consulting</li>
-            <li>Speaking & media</li>
-            <li>Deep-tech opportunities</li>
-          </ul>
+        <div class="contact-card contact-photo-card">
+          <img src="/images/media/meysam-ghanbari-research-workspace.webp" alt="Meysam Ghanbari working at a research desk" loading="lazy" />
+          <div class="contact-photo-copy">
+            <span class="tag">ENQUIRY TYPES</span>
+            <p>Research collaboration · Industry R&D · Technical consulting · Speaking · Media · Deep-tech opportunities</p>
+          </div>
         </div>
       </div>
     </section>

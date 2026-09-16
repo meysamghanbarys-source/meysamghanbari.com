@@ -4,6 +4,7 @@ export const sectionIds = [
   'publications',
   'videos',
   'insights',
+  'upcoming',
   'media',
   'about',
   'contact'
@@ -16,6 +17,7 @@ export const nav = {
     ['publications', 'Publications'],
     ['videos', 'Videos & Talks'],
     ['insights', 'Insights'],
+    ['upcoming', 'Upcoming'],
     ['media', 'Media'],
     ['about', 'About'],
     ['contact', 'Contact']
@@ -25,9 +27,10 @@ export const nav = {
     ['projects', 'پروژه‌ها'],
     ['publications', 'مقالات'],
     ['videos', 'ویدئو و ارائه‌ها'],
-    ['insights', 'یادداشت‌ها'],
+    ['insights', 'دیدگاه‌ها'],
+    ['upcoming', 'رویدادهای پیش‌رو'],
     ['media', 'رسانه'],
-    ['about', 'درباره من'],
+    ['about', 'درباره'],
     ['contact', 'ارتباط']
   ]
 };
@@ -35,11 +38,15 @@ export const nav = {
 export const site = {
   domain: 'https://meysamghanbari.com',
   name: 'Meysam Ghanbari',
+  alternateName: 'میثم قنبری',
   role: {
-    en: 'Researcher in Optical & Satellite Communications',
-    fa: 'پژوهشگر مخابرات نوری و ماهواره‌ای'
+    en: 'Researcher in Optical, Satellite & Advanced Communication Systems',
+    fa: 'پژوهشگر سامانه‌های مخابرات نوری، ماهواره‌ای و پیشرفته'
   },
-  contactEmail: 'contact@meysamghanbari.com',
+  contactEmail: 'megh89467@hbku.edu.qa',
+  heroImage: '/images/profile/meysam-ghanbari-space-communications-researcher.webp',
+  ogImage: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp',
+  cvUrl: '/documents/Meysam_Ghanbari_CV.pdf',
   socialLinks: {
     scholar: '',
     orcid: '',
@@ -47,155 +54,179 @@ export const site = {
     linkedin: '',
     github: 'https://github.com/meysamghanbarys-source'
   },
+  knowsAbout: [
+    'Optical satellite communications',
+    'Inter-satellite optical links',
+    'Free-space optical communications',
+    'Pointing, acquisition and tracking',
+    'Optical receiver design',
+    'Photonic communication systems',
+    'Non-terrestrial networks',
+    'Quantum optical communications',
+    'Physics-based digital twins',
+    'FPGA and communication-system implementation'
+  ],
   home: {
     en: {
-      eyebrow: 'OPTICAL · SATELLITE · PHOTONIC SYSTEMS',
-      headline: 'Researching the communication systems that connect the next generation of space networks.',
-      intro: 'I work on optical wireless links, inter-satellite communications, photonic receiver architectures, beam tracking, and AI-assisted communication systems.',
+      eyebrow: 'OFFICIAL RESEARCH WEBSITE',
+      headline: 'Research across optical links, satellite networks and advanced communication systems.',
+      intro: 'This website presents the research, publications, engineering projects, technical perspectives and professional activities of Meysam Ghanbari.',
       primaryCta: 'Explore research',
-      secondaryCta: 'Work with me',
-      researchTitle: 'Research themes',
-      researchIntro: 'A focused portfolio around high-capacity optical links, resilient receivers, and autonomous space communication systems.',
-      projectTitle: 'Selected technology directions',
-      projectIntro: 'Research is presented as technology and systems—not only as a list of papers.',
+      secondaryCta: 'Research enquiries',
+      researchTitle: 'Research portfolio',
+      researchIntro: 'Current work spans inter-satellite optical links, free-space optical systems, receiver architecture, pointing and tracking, non-terrestrial networks and intelligent communication systems.',
+      projectTitle: 'Selected engineering directions',
+      projectIntro: 'Selected projects are presented as technical systems, with emphasis on the underlying communication problem, analytical model and engineering architecture.',
       publicationTitle: 'Selected publications',
-      publicationIntro: 'Verified publications and conference work with dedicated pages, media and external links.',
-      collaborationTitle: 'Research & industry collaboration',
-      collaborationText: 'Open to serious research collaboration, industrial R&D, technical discussions, speaking, and future deep-tech opportunities.',
-      collaborationCta: 'Start a conversation'
+      publicationIntro: 'Journal and conference work is organized as a research library with dedicated pages, editorial summaries and publication status.',
+      collaborationTitle: 'Research, industry and technical enquiries',
+      collaborationText: 'Research collaborations, industrial R&D discussions, technical consulting enquiries, speaking requests and deep-tech opportunities can be directed through the contact page.',
+      collaborationCta: 'Contact'
     },
     fa: {
-      eyebrow: 'سیستم‌های نوری · ماهواره‌ای · فوتونیکی',
-      headline: 'پژوهش روی سامانه‌های مخابراتی نسل بعدی شبکه‌های فضایی.',
-      intro: 'حوزه کاری من شامل لینک‌های مخابرات نوری، ارتباطات بین‌ماهواره‌ای، گیرنده‌های فوتونیکی، رهگیری پرتو و سامانه‌های مخابراتی مبتنی بر هوش مصنوعی است.',
+      eyebrow: 'وب‌سایت رسمی پژوهشی',
+      headline: 'پژوهش در حوزه لینک‌های نوری، شبکه‌های ماهواره‌ای و سامانه‌های مخابراتی پیشرفته.',
+      intro: 'این وب‌سایت پژوهش‌ها، مقالات، پروژه‌های مهندسی، دیدگاه‌های فنی و فعالیت‌های حرفه‌ای میثم قنبری را ارائه می‌کند.',
       primaryCta: 'مشاهده پژوهش‌ها',
-      secondaryCta: 'همکاری با من',
-      researchTitle: 'محورهای پژوهشی',
-      researchIntro: 'تمرکز بر لینک‌های نوری پرظرفیت، گیرنده‌های مقاوم و سامانه‌های ارتباطی خودکار برای شبکه‌های فضایی.',
-      projectTitle: 'فناوری‌ها و پروژه‌های منتخب',
-      projectIntro: 'پژوهش‌ها به‌صورت فناوری و سیستم معرفی می‌شوند، نه صرفاً یک فهرست مقاله.',
+      secondaryCta: 'ارتباط پژوهشی',
+      researchTitle: 'پورتفولیوی پژوهشی',
+      researchIntro: 'فعالیت‌های پژوهشی شامل لینک‌های نوری بین‌ماهواره‌ای، سامانه‌های FSO، معماری گیرنده، رهگیری و نشانه‌روی، شبکه‌های غیرزمینی و سامانه‌های مخابراتی هوشمند است.',
+      projectTitle: 'مسیرهای مهندسی منتخب',
+      projectIntro: 'پروژه‌های منتخب به‌صورت سیستم‌های فنی ارائه می‌شوند و بر مسئله مخابراتی، مدل تحلیلی و معماری مهندسی تمرکز دارند.',
       publicationTitle: 'مقالات منتخب',
-      publicationIntro: 'مقالات تأییدشده همراه با صفحه اختصاصی، محتوای رسانه‌ای و لینک‌های اصلی.',
-      collaborationTitle: 'همکاری پژوهشی و صنعتی',
-      collaborationText: 'برای همکاری پژوهشی، تحقیق‌وتوسعه صنعتی، گفت‌وگوهای فنی، ارائه و فرصت‌های دیپ‌تک آماده همکاری هستم.',
-      collaborationCta: 'شروع گفتگو'
+      publicationIntro: 'مقالات ژورنالی و کنفرانسی در قالب یک کتابخانه پژوهشی با صفحه اختصاصی، توضیح و وضعیت انتشار سازمان‌دهی شده‌اند.',
+      collaborationTitle: 'همکاری پژوهشی، صنعتی و فنی',
+      collaborationText: 'درخواست‌های همکاری پژوهشی، تحقیق‌وتوسعه صنعتی، مشاوره فنی، سخنرانی و فرصت‌های دیپ‌تک از طریق صفحه ارتباط قابل ارسال هستند.',
+      collaborationCta: 'ارتباط'
     }
   },
   themes: {
     en: [
-      ['Optical Satellite Communications', 'High-capacity free-space optical links for satellite and space networks.'],
-      ['Inter-Satellite Optical Links', 'Link architectures, regenerative relaying, channel effects and robust receiver design.'],
-      ['Beam Tracking & Pointing', 'Receiver-side tracking, pointing-error mitigation and predictive fine tracking.'],
-      ['Photonic Communication Systems', 'All-optical and optoelectronic architectures for communication and signal processing.'],
-      ['AI-Assisted Optical Networks', 'Physics-informed and data-driven methods for monitoring, estimation and autonomy.']
+      ['Optical Satellite Communications', 'Inter-satellite and space optical links, link budgets, receiver models and propagation constraints.'],
+      ['Free-Space Optical Systems', 'Beam propagation, pointing errors, atmospheric effects, outage, BER/SER and analytical optimization.'],
+      ['Optical Receiver & PAT Design', 'Receiver architecture, photodetector/TIA interfaces, acquisition, alignment, fine tracking and angle estimation.'],
+      ['Non-Terrestrial & Quantum Links', 'HAPS/UAV systems, quantum optical links, timing, polarization alignment and narrow-beam networking.'],
+      ['AI-Assisted Communication Systems', 'Physics-informed digital twins, deep-learning surrogates, estimation, localization and communication-system autonomy.']
     ],
     fa: [
-      ['مخابرات نوری ماهواره‌ای', 'لینک‌های نوری فضای آزاد با ظرفیت بالا برای ماهواره‌ها و شبکه‌های فضایی.'],
-      ['لینک‌های نوری بین‌ماهواره‌ای', 'معماری لینک، رله بازتولیدی، اثرات کانال و طراحی گیرنده مقاوم.'],
-      ['رهگیری پرتو و خطای نشانه‌روی', 'رهگیری در سمت گیرنده، کاهش خطای نشانه‌روی و رهگیری پیش‌بینانه دقیق.'],
-      ['سامانه‌های مخابرات فوتونیکی', 'معماری‌های تمام‌نوری و اپتوالکترونیکی برای مخابرات و پردازش سیگنال.'],
-      ['شبکه‌های نوری مبتنی بر هوش مصنوعی', 'روش‌های فیزیک‌محور و داده‌محور برای پایش، تخمین و خودکارسازی.']
+      ['مخابرات نوری ماهواره‌ای', 'لینک‌های نوری بین‌ماهواره‌ای و فضایی، بودجه لینک، مدل گیرنده و محدودیت‌های انتشار.'],
+      ['سامانه‌های نوری فضای آزاد', 'انتشار پرتو، خطای نشانه‌روی، اثرات محیطی، outage، BER/SER و بهینه‌سازی تحلیلی.'],
+      ['طراحی گیرنده و PAT', 'معماری گیرنده، رابط فوتودیود/TIA، acquisition، alignment، رهگیری دقیق و تخمین زاویه.'],
+      ['شبکه‌های غیرزمینی و کوانتومی', 'سامانه‌های HAPS/UAV، لینک‌های کوانتومی، زمان‌بندی، هم‌ترازی قطبش و شبکه‌های narrow-beam.'],
+      ['سامانه‌های مخابراتی مبتنی بر هوش مصنوعی', 'دوقلوهای دیجیتال فیزیک‌محور، مدل‌های surrogate، تخمین، مکان‌یابی و خودکارسازی سامانه‌های مخابراتی.']
     ]
   },
   sections: {
     en: {
       research: {
         title: 'Research',
-        kicker: 'FOCUSED RESEARCH PORTFOLIO',
-        intro: 'My research centers on optical and satellite communication systems, with emphasis on physical-layer modeling, receiver architectures, tracking, photonic processing, and intelligent autonomy.',
-        note: 'This page is designed to grow into dedicated research-theme pages with figures, models, publications, videos and collaboration links.'
+        kicker: 'RESEARCH PORTFOLIO',
+        intro: 'The research portfolio is centered on satellite and optical communications, including OISL, FSO, receiver design, PAT, non-terrestrial networking, quantum optical links and data-driven communication-system modeling.',
+        note: 'Research themes are expanded as verified projects, papers, figures, models and technical media become available.'
       },
       projects: {
         title: 'Projects & Technologies',
-        kicker: 'FROM MODELS TO TECHNOLOGY',
-        intro: 'Selected research directions are presented as systems and technologies so visitors can understand the problem, the technical idea, and its potential impact.',
-        note: 'Each project can later receive its own URL, system figure, technical summary, related publications, code, video and commercialization contact.'
+        kicker: 'ENGINEERING DIRECTIONS',
+        intro: 'Selected projects highlight system architecture, analytical modeling and engineering design across optical and satellite communication systems.',
+        note: 'Project pages can be expanded with system figures, simulation assets, publications, code, videos and collaboration notes.'
       },
       publications: {
         title: 'Publications',
-        kicker: 'PEER-REVIEWED RESEARCH',
-        intro: 'A structured library of journal and conference publications. Every verified paper can have a dedicated landing page with abstract, figures, citation, DOI, PDF and video.',
-        note: 'Only verified bibliographic information should be published.'
+        kicker: 'JOURNAL & CONFERENCE RESEARCH',
+        intro: 'A complete research library covering published, accepted and submitted journal and conference work.',
+        note: 'Publication status and bibliographic details are presented from the current CV and should be updated whenever a venue, DOI or publication status changes.'
       },
       videos: {
         title: 'Videos & Talks',
-        kicker: 'RESEARCH, EXPLAINED VISUALLY',
-        intro: 'Paper videos, conference presentations, technical explainers, interviews and future speaking appearances can live here.',
-        note: 'For performance and discovery, long videos should normally be hosted on YouTube or Vimeo and embedded here.'
+        kicker: 'RESEARCH COMMUNICATION',
+        intro: 'This section is reserved for paper videos, conference presentations, technical explainers, interviews and speaking appearances.',
+        note: 'Long-form video should normally be hosted on YouTube or Vimeo and embedded here for discoverability and performance.'
       },
       insights: {
         title: 'Insights',
-        kicker: 'TECHNICAL NOTES & PERSPECTIVES',
-        intro: 'Short technical articles, explainers and perspectives on optical communications, satellite systems, photonics and deep-tech.',
-        note: 'This section can become a major long-term SEO and authority asset.'
+        kicker: 'TECHNICAL PERSPECTIVES',
+        intro: 'A space for concise technical perspectives on the future of optical communications, satellite networking, photonics, quantum links and deep-tech engineering.',
+        note: 'This section is intended for signed technical viewpoints and forward-looking commentary rather than personal diary-style posts.'
+      },
+      upcoming: {
+        title: 'Upcoming',
+        kicker: 'CONFERENCES · VISITS · TALKS',
+        intro: 'Confirmed upcoming conferences, research visits, presentations, workshops and professional appearances will be listed here.',
+        note: 'Only confirmed public appearances should be published. Draft travel plans and unconfirmed invitations should remain private.'
       },
       media: {
         title: 'Media',
-        kicker: 'PROFESSIONAL VISUAL ARCHIVE',
-        intro: 'Professional portraits, conferences, presentations, research events and selected technical imagery.',
-        note: 'Use original high-resolution images, descriptive filenames and accurate alt text. Avoid repetitive or artificial-looking photo dumps.'
+        kicker: 'PROFESSIONAL IMAGE LIBRARY',
+        intro: 'A curated visual archive of professional portraits, research presentations, technical environments and conference-related activity.',
+        note: 'Images are published with descriptive filenames and alt text to support accessibility, consistent branding and image search discovery.'
       },
       about: {
         title: 'About',
-        kicker: 'RESEARCHER · ENGINEER · BUILDER',
-        intro: 'Meysam Ghanbari is a researcher working on optical and satellite communication systems, with interests spanning free-space optical links, inter-satellite networks, photonic architectures, tracking and intelligent communication systems.',
-        note: 'Academic affiliations and biography details can be added factually while keeping the primary positioning centered on research and technology.'
+        kicker: 'RESEARCHER · ENGINEER · TECHNICAL BUILDER',
+        intro: 'Meysam Ghanbari is a researcher and engineer working across satellite and optical communications, with technical activity spanning OISL, FSO, receiver design, PAT, quantum optical links, FPGA development, analytical modeling and physics-based digital twins.',
+        note: 'The website is positioned as an official research profile. Academic affiliation is presented as factual background rather than the primary identity.'
       },
       contact: {
         title: 'Contact',
-        kicker: 'COLLABORATE',
-        intro: 'For research collaboration, industrial R&D, technical consulting, speaking, media or future deep-tech opportunities, get in touch directly.',
-        note: 'The branded email address should be activated before launch.'
+        kicker: 'RESEARCH & PROFESSIONAL ENQUIRIES',
+        intro: 'Research collaboration, industrial R&D, technical consulting, speaking, media and deep-tech enquiries can be directed to the contact address below.',
+        note: 'A branded domain email can replace the current institutional address when it is activated.'
       }
     },
     fa: {
       research: {
         title: 'پژوهش',
-        kicker: 'پورتفولیوی پژوهشی متمرکز',
-        intro: 'پژوهش‌های من بر سامانه‌های مخابرات نوری و ماهواره‌ای متمرکز است؛ از مدل‌سازی لایه فیزیکی و معماری گیرنده تا رهگیری، پردازش فوتونیکی و خودکارسازی هوشمند.',
-        note: 'این صفحه در آینده می‌تواند برای هر محور پژوهشی صفحه مستقل با شکل، مدل، مقاله، ویدئو و لینک همکاری داشته باشد.'
+        kicker: 'پورتفولیوی پژوهشی',
+        intro: 'پورتفولیوی پژوهشی بر مخابرات ماهواره‌ای و نوری متمرکز است و حوزه‌هایی مانند OISL، FSO، طراحی گیرنده، PAT، شبکه‌های غیرزمینی، لینک‌های کوانتومی و مدل‌سازی داده‌محور سامانه‌های مخابراتی را پوشش می‌دهد.',
+        note: 'با اضافه‌شدن پروژه‌ها، مقالات، شکل‌ها، مدل‌ها و محتوای فنی تأییدشده، هر محور پژوهشی قابل توسعه است.'
       },
       projects: {
         title: 'پروژه‌ها و فناوری‌ها',
-        kicker: 'از مدل تا فناوری',
-        intro: 'جهت‌های پژوهشی منتخب به شکل سیستم و فناوری معرفی می‌شوند تا مسئله، ایده فنی و اثر بالقوه آن‌ها به‌سرعت قابل درک باشد.',
-        note: 'برای هر پروژه می‌توان صفحه مستقل، شکل سیستم، خلاصه فنی، مقاله‌های مرتبط، کد، ویدئو و مسیر همکاری تجاری ایجاد کرد.'
+        kicker: 'مسیرهای مهندسی',
+        intro: 'پروژه‌های منتخب معماری سیستم، مدل‌سازی تحلیلی و طراحی مهندسی در سامانه‌های مخابرات نوری و ماهواره‌ای را نشان می‌دهند.',
+        note: 'صفحات پروژه می‌توانند با شکل سیستم، نتایج شبیه‌سازی، مقالات مرتبط، کد، ویدئو و توضیحات همکاری توسعه یابند.'
       },
       publications: {
         title: 'مقالات',
-        kicker: 'پژوهش داوری‌شده',
-        intro: 'کتابخانه‌ای ساختاریافته از مقالات ژورنالی و کنفرانسی. هر مقاله تأییدشده می‌تواند صفحه اختصاصی همراه با چکیده، شکل، رفرنس، DOI، PDF و ویدئو داشته باشد.',
-        note: 'فقط اطلاعات کتابشناختی تأییدشده منتشر می‌شود.'
+        kicker: 'پژوهش ژورنالی و کنفرانسی',
+        intro: 'کتابخانه کامل پژوهشی شامل مقالات منتشرشده، پذیرفته‌شده و ارسال‌شده ژورنالی و کنفرانسی.',
+        note: 'وضعیت انتشار و اطلاعات کتابشناختی از CV فعلی گرفته شده و در صورت تغییر venue، DOI یا status باید به‌روزرسانی شود.'
       },
       videos: {
         title: 'ویدئو و ارائه‌ها',
-        kicker: 'پژوهش به زبان تصویر',
-        intro: 'ویدئوهای مقالات، ارائه‌های کنفرانسی، توضیحات فنی، مصاحبه‌ها و سخنرانی‌ها در این بخش قرار می‌گیرند.',
-        note: 'برای سرعت و دیده‌شدن بهتر، ویدئوهای بلند بهتر است در YouTube یا Vimeo میزبانی و در سایت Embed شوند.'
+        kicker: 'ارائه پژوهش',
+        intro: 'این بخش برای ویدئوی مقالات، ارائه‌های کنفرانسی، توضیحات فنی، مصاحبه‌ها و سخنرانی‌ها در نظر گرفته شده است.',
+        note: 'برای ویدئوهای طولانی، میزبانی در YouTube یا Vimeo و نمایش در سایت مناسب‌تر است.'
       },
       insights: {
-        title: 'یادداشت‌ها',
-        kicker: 'یادداشت فنی و دیدگاه',
-        intro: 'مقاله‌های کوتاه، توضیحات فنی و دیدگاه‌ها درباره مخابرات نوری، سامانه‌های ماهواره‌ای، فوتونیک و دیپ‌تک.',
-        note: 'این بخش می‌تواند در بلندمدت یکی از دارایی‌های اصلی SEO و اعتبار علمی سایت باشد.'
+        title: 'دیدگاه‌ها',
+        kicker: 'دیدگاه‌های فنی',
+        intro: 'بخشی برای دیدگاه‌های فنی کوتاه درباره آینده مخابرات نوری، شبکه‌های ماهواره‌ای، فوتونیک، ارتباطات کوانتومی و مهندسی دیپ‌تک.',
+        note: 'این بخش برای تحلیل و دیدگاه فنی امضاشده طراحی شده است، نه نوشته‌های شخصی و روزمره.'
+      },
+      upcoming: {
+        title: 'رویدادهای پیش‌رو',
+        kicker: 'کنفرانس · بازدید · سخنرانی',
+        intro: 'کنفرانس‌ها، بازدیدهای پژوهشی، ارائه‌ها، کارگاه‌ها و حضورهای حرفه‌ای تأییدشده در این بخش منتشر می‌شوند.',
+        note: 'فقط برنامه‌های عمومی و تأییدشده منتشر شوند. برنامه‌های سفر و دعوت‌های تأییدنشده خصوصی باقی بمانند.'
       },
       media: {
         title: 'رسانه',
-        kicker: 'آرشیو تصویری حرفه‌ای',
-        intro: 'پرتره‌های حرفه‌ای، کنفرانس‌ها، ارائه‌ها، رویدادهای پژوهشی و تصاویر منتخب فنی.',
-        note: 'از تصاویر اصلی با کیفیت بالا، نام فایل توصیفی و متن جایگزین دقیق استفاده می‌شود.'
+        kicker: 'کتابخانه تصویری حرفه‌ای',
+        intro: 'آرشیوی منتخب از پرتره‌های حرفه‌ای، ارائه‌های پژوهشی، محیط‌های فنی و فعالیت‌های مرتبط با کنفرانس‌ها.',
+        note: 'تصاویر با نام فایل توصیفی و متن جایگزین دقیق منتشر می‌شوند تا هویت بصری، دسترس‌پذیری و دیده‌شدن در جست‌وجوی تصویر تقویت شود.'
       },
       about: {
-        title: 'درباره من',
-        kicker: 'پژوهشگر · مهندس · سازنده',
-        intro: 'میثم قنبری پژوهشگری در حوزه سامانه‌های مخابرات نوری و ماهواره‌ای است و روی لینک‌های نوری فضای آزاد، شبکه‌های بین‌ماهواره‌ای، معماری‌های فوتونیکی، رهگیری و سامانه‌های ارتباطی هوشمند کار می‌کند.',
-        note: 'وابستگی‌های دانشگاهی و جزئیات زندگی‌نامه به‌صورت دقیق اضافه می‌شوند، بدون اینکه هویت اصلی سایت از پژوهش و فناوری فاصله بگیرد.'
+        title: 'درباره',
+        kicker: 'پژوهشگر · مهندس · سازنده فنی',
+        intro: 'میثم قنبری پژوهشگر و مهندسی در حوزه مخابرات نوری و ماهواره‌ای است و فعالیت فنی او OISL، FSO، طراحی گیرنده، PAT، لینک‌های کوانتومی، FPGA، مدل‌سازی تحلیلی و دوقلوهای دیجیتال فیزیک‌محور را پوشش می‌دهد.',
+        note: 'وب‌سایت به‌عنوان یک پروفایل رسمی پژوهشی تنظیم شده است و وابستگی دانشگاهی به‌عنوان اطلاعات زمینه‌ای ارائه می‌شود، نه هویت اصلی.'
       },
       contact: {
         title: 'ارتباط',
-        kicker: 'همکاری',
-        intro: 'برای همکاری پژوهشی، تحقیق‌وتوسعه صنعتی، مشاوره فنی، سخنرانی، رسانه یا فرصت‌های آینده دیپ‌تک می‌توانید مستقیماً تماس بگیرید.',
-        note: 'ایمیل حرفه‌ای دامنه قبل از انتشار نهایی فعال خواهد شد.'
+        kicker: 'درخواست‌های پژوهشی و حرفه‌ای',
+        intro: 'درخواست‌های همکاری پژوهشی، تحقیق‌وتوسعه صنعتی، مشاوره فنی، سخنرانی، رسانه و فرصت‌های دیپ‌تک می‌توانند به آدرس زیر ارسال شوند.',
+        note: 'پس از فعال‌شدن ایمیل دامنه، آدرس سازمانی فعلی می‌تواند با ایمیل رسمی سایت جایگزین شود.'
       }
     }
   }
