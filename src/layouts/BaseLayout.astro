@@ -32,19 +32,30 @@ const pageTitle = title === site.name
 const items = isFa ? nav.fa : nav.en;
 const homeHref = isFa ? '/fa/' : '/';
 const contactHref = isFa ? '/fa/contact' : '/contact';
-const cvLabel = isFa ? 'CV' : 'CV';
 
-const personSchema = {
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: site.name,
-  alternateName: site.alternateName,
-  url: site.domain,
-  image: `${site.domain}${site.heroImage}`,
-  jobTitle: site.role.en,
-  email: site.contactEmail,
-  knowsAbout: site.knowsAbout,
-  sameAs: Object.values(site.socialLinks).filter(Boolean)
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site.domain}/#website`,
+      url: site.domain,
+      name: site.name,
+      alternateName: site.alternateName
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site.domain}/#person`,
+      name: site.name,
+      alternateName: site.alternateName,
+      url: site.domain,
+      image: `${site.domain}${site.heroImage}`,
+      jobTitle: site.role.en,
+      email: site.contactEmail,
+      knowsAbout: site.knowsAbout,
+      sameAs: Object.values(site.socialLinks).filter(Boolean)
+    }
+  ]
 };
 ---
 
@@ -78,7 +89,7 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${site.domain}${image}`} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <slot name="head" />
   </head>
   <body>
@@ -97,7 +108,6 @@ const personSchema = {
 
         <div class="header-actions">
           <a class="language-link" href={alternatePath}>{isFa ? 'EN' : 'FA'}</a>
-          <a class="cv-link" href={site.cvUrl} target="_blank" rel="noreferrer">{cvLabel}</a>
           <a class="button small" href={contactHref}>{isFa ? 'ارتباط' : 'Contact'}</a>
         </div>
 
@@ -107,7 +117,6 @@ const personSchema = {
             {items.map(([id, label]) => (
               <a href={isFa ? `/fa/${id}` : `/${id}`}>{label}</a>
             ))}
-            <a href={site.cvUrl} target="_blank" rel="noreferrer">CV</a>
             <a href={alternatePath}>{isFa ? 'English' : 'فارسی'}</a>
           </div>
         </details>

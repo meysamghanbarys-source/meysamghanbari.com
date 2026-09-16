@@ -4,7 +4,7 @@ Official bilingual research website for Meysam Ghanbari.
 
 ## Positioning
 
-The site is intentionally written in formal third-person voice, as an official research website rather than a first-person diary or student profile.
+The site is intentionally written in formal third-person voice, as an formal third-person research profile with a visual space-technology aesthetic.
 
 Primary identity:
 
@@ -36,7 +36,7 @@ The research profile, technical expertise, projects and publication records were
 - Static output
 - Sitemap
 - Person structured data
-- SEO-oriented image naming and alt text
+- structured media assets
 
 ## Cloudflare settings
 

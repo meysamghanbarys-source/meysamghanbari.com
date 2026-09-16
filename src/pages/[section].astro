@@ -12,17 +12,43 @@ const data = site.sections.en[section];
 const path = `/${section}`;
 const journals = publications.filter((p) => p.type === 'Journal');
 const conferences = publications.filter((p) => p.type === 'Conference');
+
+const sectionVisuals = {
+  research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Orbital research systems' },
+  projects: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Engineering directions' },
+  publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Publication library' },
+  videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'Presentations and talks' },
+  insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Technical perspectives' },
+  upcoming: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'Upcoming appearances' },
+  media: { image: '/images/profile/meysam-ghanbari-formal-portrait.webp', label: 'Media library' },
+  about: { image: '/images/profile/meysam-ghanbari-professional-headshot.webp', label: 'Research profile' },
+  contact: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'Research enquiries' }
+} as const;
+
+const visual = sectionVisuals[section];
 ---
 
 <BaseLayout title={data.title} description={data.intro} lang="en" path={path}>
-  <section class="page-hero page-hero-space">
-    <div class="space-grid-bg" aria-hidden="true"></div>
-    <div class="shell narrow">
+  
+<section class={`page-hero page-hero-space page-hero-${section}`}>
+  <div class="space-grid-bg" aria-hidden="true"></div>
+  <div class="page-hero-backdrop" style={`background-image:url('${visual.image}')`}></div>
+  <div class="page-hero-orbit" aria-hidden="true"></div>
+  <div class="shell page-hero-shell">
+    <div class="page-hero-copy narrow">
       <p class="eyebrow">{data.kicker}</p>
       <h1>{data.title}</h1>
       <p class="page-intro">{data.intro}</p>
     </div>
-  </section>
+    <div class="page-hero-sidecard">
+      <img src={visual.image} alt={visual.label} loading="eager" />
+      <div>
+        <span>{visual.label}</span>
+        <small>{site.name}</small>
+      </div>
+    </div>
+  </div>
+</section>
 
   {section === 'research' && (
     <section class="section section-tight">
@@ -122,8 +148,8 @@ const conferences = publications.filter((p) => p.type === 'Conference');
         {videos.length === 0 ? (
           <div class="empty-state">
             <span class="empty-icon">▶</span>
-            <h2>Video library ready</h2>
-            <p>Paper videos, conference presentations and technical explainers can be added as soon as public links are available.</p>
+            <h2>No public videos listed</h2>
+            <p>Research presentations and technical media will be listed when publicly available.</p>
           </div>
         ) : (
           <div class="card-grid three">
@@ -140,8 +166,8 @@ const conferences = publications.filter((p) => p.type === 'Conference');
         {insights.length === 0 ? (
           <div class="empty-state insight-empty">
             <span class="empty-icon">✦</span>
-            <h2>Technical perspectives will appear here</h2>
-            <p>Future entries can cover topics such as the evolution of inter-satellite optical networks, beam tracking, photonic receivers, AI-assisted space communications and broader deep-tech trends.</p>
+            <h2>Perspectives</h2>
+            <p>No technical perspectives have been published yet.</p>
           </div>
         ) : (
           <div class="card-grid three">
@@ -159,8 +185,8 @@ const conferences = publications.filter((p) => p.type === 'Conference');
           <div class="upcoming-empty">
             <div class="upcoming-orbit" aria-hidden="true"></div>
             <p class="eyebrow">CALENDAR</p>
-            <h2>No public appearances announced yet.</h2>
-            <p>Confirmed conferences, research visits, talks, workshops and professional appearances will be published here as dates are finalized.</p>
+            <h2>No upcoming public appearances are currently listed.</h2>
+            <p>For invitations, research visits or speaking enquiries, please use the contact page.</p>
             <a class="button ghost" href="/contact">Send an invitation</a>
           </div>
         ) : (
@@ -200,7 +226,7 @@ const conferences = publications.filter((p) => p.type === 'Conference');
         <div class="prose">
           <p class="eyebrow">PROFILE</p>
           <h2>Satellite, optical and advanced communication systems</h2>
-          <p>Meysam Ghanbari is a researcher and engineer focused on satellite and optical communications, including inter-satellite optical links, free-space optical systems, optical receiver and TIA design, and pointing, acquisition and tracking.</p>
+          <p>Meysam Ghanbari is a researcher and engineer working across optical and satellite communications, with emphasis on inter-satellite optical links, free-space optical systems, receiver architecture and beam-control problems.</p>
           <p>His technical work includes end-to-end analytical and Monte Carlo modeling for link budgets, receiver noise, beam propagation, alignment, BER/SER and outage, alongside FPGA development, MATLAB/Python/C, physics-based digital twins and industrial automation.</p>
 
           <h2>Current research focus</h2>
@@ -217,7 +243,7 @@ const conferences = publications.filter((p) => p.type === 'Conference');
           <p>Additional engineering experience includes FPGA and digital systems, signal-processing implementation, PSpice and Proteus, Siemens PLC programming, SCL, STEP 7, WinCC and Siemens Twin Builder.</p>
 
           <div class="about-actions">
-            <a class="button" href={site.cvUrl} target="_blank" rel="noreferrer">View CV</a>
+            <a class="button" href="/publications">Publication library</a>
             <a class="button ghost" href="/contact">Research enquiries</a>
           </div>
         </div>
@@ -244,10 +270,4 @@ const conferences = publications.filter((p) => p.type === 'Conference');
       </div>
     </section>
   )}
-
-  <section class="section section-note">
-    <div class="shell narrow">
-      <p>{data.note}</p>
-    </div>
-  </section>
 </BaseLayout>

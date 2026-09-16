@@ -12,17 +12,43 @@ const data = site.sections.fa[section];
 const path = `/fa/${section}`;
 const journals = publications.filter((p) => p.type === 'Journal');
 const conferences = publications.filter((p) => p.type === 'Conference');
+
+const sectionVisuals = {
+  research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'حوزه پژوهشی' },
+  projects: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'مسیرهای مهندسی' },
+  publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'کتابخانه مقالات' },
+  videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'ارائه‌ها و سخنرانی‌ها' },
+  insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'دیدگاه‌های فنی' },
+  upcoming: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'رویدادهای پیش‌رو' },
+  media: { image: '/images/profile/meysam-ghanbari-formal-portrait.webp', label: 'آرشیو رسانه' },
+  about: { image: '/images/profile/meysam-ghanbari-professional-headshot.webp', label: 'پروفایل پژوهشی' },
+  contact: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'ارتباط پژوهشی' }
+} as const;
+
+const visual = sectionVisuals[section];
 ---
 
 <BaseLayout title={data.title} description={data.intro} lang="fa" path={path}>
-  <section class="page-hero page-hero-space">
-    <div class="space-grid-bg" aria-hidden="true"></div>
-    <div class="shell narrow">
+  
+<section class={`page-hero page-hero-space page-hero-${section}`}>
+  <div class="space-grid-bg" aria-hidden="true"></div>
+  <div class="page-hero-backdrop" style={`background-image:url('${visual.image}')`}></div>
+  <div class="page-hero-orbit" aria-hidden="true"></div>
+  <div class="shell page-hero-shell">
+    <div class="page-hero-copy narrow">
       <p class="eyebrow">{data.kicker}</p>
       <h1>{data.title}</h1>
       <p class="page-intro">{data.intro}</p>
     </div>
-  </section>
+    <div class="page-hero-sidecard">
+      <img src={visual.image} alt={visual.label} loading="eager" />
+      <div>
+        <span>{visual.label}</span>
+        <small>{site.name}</small>
+      </div>
+    </div>
+  </div>
+</section>
 
   {section === 'research' && (
     <section class="section section-tight">
@@ -105,20 +131,20 @@ const conferences = publications.filter((p) => p.type === 'Conference');
 
   {section === 'videos' && (
     <section class="section section-tight"><div class="shell">
-      {videos.length === 0 ? <div class="empty-state"><span class="empty-icon">▶</span><h2>کتابخانه ویدئو آماده است</h2><p>با در دسترس قرار گرفتن لینک عمومی، ویدئوهای مقاله، ارائه کنفرانسی و توضیح فنی در این بخش اضافه می‌شوند.</p></div> : null}
+      {videos.length === 0 ? <div class="empty-state"><span class="empty-icon">▶</span><h2>ویدئوی عمومی ثبت نشده است</h2><p>ارائه‌های پژوهشی و محتوای فنی عمومی در این بخش نمایش داده خواهند شد.</p></div> : null}
     </div></section>
   )}
 
   {section === 'insights' && (
     <section class="section section-tight"><div class="shell">
-      {insights.length === 0 ? <div class="empty-state insight-empty"><span class="empty-icon">✦</span><h2>دیدگاه‌های فنی در این بخش منتشر خواهند شد</h2><p>موضوعات می‌توانند شامل آینده شبکه‌های نوری بین‌ماهواره‌ای، رهگیری پرتو، گیرنده‌های فوتونیکی، هوش مصنوعی در مخابرات فضایی و روندهای دیپ‌تک باشند.</p></div> : null}
+      {insights.length === 0 ? <div class="empty-state insight-empty"><span class="empty-icon">✦</span><h2>دیدگاه‌ها</h2><p>هنوز دیدگاه فنی عمومی در این بخش منتشر نشده است.</p></div> : null}
     </div></section>
   )}
 
   {section === 'upcoming' && (
     <section class="section section-tight"><div class="shell">
       {upcoming.length === 0 ? (
-        <div class="upcoming-empty"><div class="upcoming-orbit" aria-hidden="true"></div><p class="eyebrow">تقویم</p><h2>هنوز حضور عمومی جدیدی اعلام نشده است.</h2><p>کنفرانس‌ها، بازدیدهای پژوهشی، سخنرانی‌ها، کارگاه‌ها و حضورهای حرفه‌ای پس از نهایی‌شدن تاریخ در این بخش منتشر می‌شوند.</p><a class="button ghost" href="/fa/contact">ارسال دعوت</a></div>
+        <div class="upcoming-empty"><div class="upcoming-orbit" aria-hidden="true"></div><p class="eyebrow">تقویم</p><h2>در حال حاضر رویداد عمومی پیش‌رو ثبت نشده است.</h2><p>برای دعوت، بازدید پژوهشی یا درخواست سخنرانی از صفحه ارتباط استفاده شود.</p><a class="button ghost" href="/fa/contact">ارسال دعوت</a></div>
       ) : null}
     </div></section>
   )}
@@ -137,7 +163,7 @@ const conferences = publications.filter((p) => p.type === 'Conference');
         <p>میثم قنبری پژوهشگر و مهندسی در حوزه مخابرات ماهواره‌ای و نوری است و فعالیت فنی او لینک‌های نوری بین‌ماهواره‌ای، FSO، طراحی گیرنده و TIA و مسائل pointing، acquisition و tracking را پوشش می‌دهد.</p>
         <p>کار فنی او شامل مدل‌سازی تحلیلی و مونت‌کارلو برای بودجه لینک، نویز گیرنده، انتشار پرتو، هم‌ترازی، BER/SER و outage و همچنین FPGA، MATLAB/Python/C، دوقلوهای دیجیتال فیزیک‌محور و اتوماسیون صنعتی است.</p>
         <h2>تمرکز پژوهشی</h2><ul><li>لینک‌های نوری بین‌ماهواره‌ای</li><li>سامانه‌های FSO و شبکه‌های غیرزمینی</li><li>معماری گیرنده و حساسیت</li><li>PAT و رهگیری دقیق</li><li>لینک‌های کوانتومی</li><li>مدل‌سازی تحلیلی، مونت‌کارلو و دوقلوهای دیجیتال</li></ul>
-        <div class="about-actions"><a class="button" href={site.cvUrl} target="_blank" rel="noreferrer">CV</a><a class="button ghost" href="/fa/contact">ارتباط پژوهشی</a></div>
+        <div class="about-actions"><a class="button" href="/fa/publications">کتابخانه مقالات</a><a class="button ghost" href="/fa/contact">ارتباط پژوهشی</a></div>
       </div>
     </div></section>
   )}
@@ -148,6 +174,4 @@ const conferences = publications.filter((p) => p.type === 'Conference');
       <div class="contact-card contact-photo-card"><img src="/images/media/meysam-ghanbari-research-workspace.webp" alt="میثم قنبری در محیط کار پژوهشی" loading="lazy" /><div class="contact-photo-copy"><span class="tag">انواع درخواست</span><p>Research collaboration · Industry R&D · Technical consulting · Speaking · Media · Deep-tech</p></div></div>
     </div></section>
   )}
-
-  <section class="section section-note"><div class="shell narrow"><p>{data.note}</p></div></section>
 </BaseLayout>
