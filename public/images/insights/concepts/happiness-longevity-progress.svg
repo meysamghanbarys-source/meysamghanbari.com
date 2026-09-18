@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+  <title id="t">Competing objectives</title><desc id="d">Future Systems conceptual diagram by Meysam Ghanbari</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071423"/><stop offset="1" stop-color="#03070e"/></linearGradient><radialGradient id="g"><stop stop-color="#f2c879" stop-opacity=".95"/><stop offset="1" stop-color="#65d9ff" stop-opacity=".2"/></radialGradient><pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#b9eaff" stroke-opacity=".055"/></pattern></defs>
+  <rect width="1200" height="675" fill="url(#bg)"/><rect width="1200" height="675" fill="url(#grid)"/>
+  <g fill="none" stroke="#f2c879" stroke-width="3" stroke-opacity=".72"><path d="M600 145 V540 M280 250 H920 M310 250 L190 510 H430 Z M890 250 L770 510 H1010 Z"/><circle cx="600" cy="160" r="52" fill="url(#g)"/></g>
+  <g fill="#f2c879" fill-opacity=".72"><circle cx="88" cy="82" r="5"/><circle cx="1112" cy="593" r="5"/></g>
+  <path d="M80 610 H310" stroke="#65d9ff" stroke-width="4"/><path d="M890 66 H1120" stroke="#f2c879" stroke-width="4"/>
+  </svg>
