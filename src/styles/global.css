@@ -219,7 +219,9 @@
   .future-article-hero { padding:76px 0 44px; }
   .future-article-heading h1 { font-size:47px; }
   .future-article-heading > p { font-size:17px; }
-  .future-portrait-frame { display:none; }
+  .future-portrait-frame { display:block; width:100%; max-width:none; margin-top:8px; transform:none; }
+  .future-portrait-frame img { aspect-ratio:16/9; object-position:var(--portrait-x,25%) 30%; }
+  .visual-variant-3 .future-portrait-frame { transform:none; }
   .future-article-layout { gap:42px; padding-block:58px; }
   .future-article-rail { grid-template-columns:1fr; }
   .future-thesis,.future-tension,.future-conclusion { padding:26px 22px; }
