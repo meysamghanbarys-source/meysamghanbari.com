@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { insights } from '../../data/insights';
+
+const domainSchema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage',
+  name: 'Intelligence, Governance & Civilization',
+  url: `${site.domain}/insights/intelligence-governance`,
+  isPartOf: { '@type': 'CollectionPage', name: 'Future Systems', url: `${site.domain}/insights` },
+  author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name }
+};
+---
+
+<BaseLayout title="Intelligence, Governance & Civilization" description="Meysam Ghanbari’s Future Systems collection on superintelligence, AI governance, technocracy, democracy, long-term planning and future civilization." path="/insights/intelligence-governance" image="/images/insights/meysam-ghanbari-superintelligence-human-enhancement.webp" imageAlt="Meysam Ghanbari exploring intelligence and the governance of future civilization" alternateAvailable={false} languagePath="/fa/insights">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(domainSchema)}></script>
+  <section class="future-domain-hero">
+    <div class="shell future-domain-hero-grid"><div><a class="future-breadcrumb" href="/insights">← Future Systems</a><p class="eyebrow">DOMAIN 01 · CURRENT COLLECTION</p><h1>Intelligence, Governance & Civilization</h1><p>Fifteen connected inquiries into superintelligence, political legitimacy, technocracy, institutional design, human evolution and civilization-scale objectives.</p><div class="future-domain-stats"><span><strong>15</strong> Insights</span><span><strong>7</strong> topic clusters</span><span><strong>1</strong> recurring question</span></div></div><figure><img src="/images/insights/meysam-ghanbari-superintelligence-human-enhancement.webp" alt="Meysam Ghanbari in an advanced intelligence environment" width="1672" height="941" loading="eager" /></figure></div>
+  </section>
+  <section class="domain-question"><div class="shell"><span>THE RECURRING QUESTION</span><h2>Who defines the objective function?</h2><p>Prediction can improve. Optimization can accelerate. But survival, freedom, happiness, longevity, equality and progress cannot be weighted by computation alone.</p></div></section>
+  <section class="section"><div class="shell"><div class="collection-sequence">{insights.map((item, index) => <a class={`sequence-item theme-${item.theme}`} href={`/insights/${item.slug}`}><div><span>{item.number}</span><small>{item.readTime} · {item.primaryKeyword}</small></div><h2>{item.title}</h2><p>{item.excerpt}</p><img src={item.conceptImage} alt="" loading="lazy" /><b>Open Insight →</b></a>)}</div></div></section>
+  <section class="future-related-domains"><div class="shell"><p class="eyebrow">WHERE THIS DOMAIN CONNECTS</p><h2>A larger Future Systems architecture</h2><div><span>Technology</span><span>Longevityscape</span><span>Future Civilization</span><span>Human Enhancement</span><span>Space & Expansion</span><span>Science & Society</span></div><a class="button ghost" href="/insights">Return to the ecosystem</a></div></section>
+</BaseLayout>

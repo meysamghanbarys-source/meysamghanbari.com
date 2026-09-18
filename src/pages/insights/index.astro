@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { insights, insightDomains } from '../../data/insights';
+
+const featured = [insights[0], insights[9], insights[11]];
+const collectionSchema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage',
+  name: 'Future Systems — Insights by Meysam Ghanbari',
+  url: `${site.domain}/insights`,
+  description: 'An organized body of ideas on AI, governance, civilization, longevity, human enhancement, technology and the long-term future.',
+  author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name },
+  hasPart: insights.map((item) => ({ '@type': 'Article', name: item.title, url: `${site.domain}/insights/${item.slug}` }))
+};
+---
+
+<BaseLayout title="Future Systems — Insights" description="Future Systems by Meysam Ghanbari: rigorous essays on AI governance, superintelligence, future institutions, civilization, longevity and human enhancement." path="/insights" image="/images/insights/meysam-ghanbari-future-systems-governance.webp" imageAlt="Meysam Ghanbari in the Future Systems editorial environment" alternateAvailable={false} languagePath="/fa/insights">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)}></script>
+  <section class="future-hub-hero">
+    <img class="future-hub-bg" src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="" aria-hidden="true" />
+    <div class="future-hub-overlay" aria-hidden="true"></div>
+    <div class="shell future-hub-grid">
+      <div><p class="eyebrow">MEYSAM GHANBARI · INTELLECTUAL ECOSYSTEM</p><span class="future-systems-mark">FUTURE / SYSTEMS</span><h1>Ideas for civilizations intelligent enough to design their future.</h1><p class="hub-lede">Future Systems is an organized body of essays by Meysam Ghanbari exploring intelligence, governance, technology, longevity, human enhancement and the long-term survival and expansion of civilization.</p><div class="hero-actions"><a class="button" href="#latest-insights">Explore the collection</a><a class="button ghost" href="/insights/intelligence-governance">Enter the first domain</a></div></div>
+      <figure><img src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="Meysam Ghanbari exploring intelligence, governance and future civilization" width="1672" height="941" loading="eager" /><figcaption><strong>Meysam Ghanbari</strong><span>Researcher · Systems Thinker · Future Technologist</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="future-manifesto"><div class="shell future-manifesto-grid"><div><p class="eyebrow">THE PREMISE</p><h2>Government, technology and civilization are systems. Systems can be examined—and redesigned.</h2></div><div><p>These Insights do not present contested political conclusions as scientific facts. They separate evidence, interpretation, values and unresolved questions.</p><p>The recurring challenge is simple to state and difficult to solve: <strong>if society becomes an optimization problem, who defines the objective function?</strong></p></div></div></section>
+
+  <section class="section future-domains"><div class="shell"><div class="section-heading"><div><p class="eyebrow">INTELLECTUAL MAP</p><h2>Seven domains. One expanding system.</h2></div><p>Domains organize the ideas. Insights are the publishing format.</p></div><div class="future-domain-grid">{insightDomains.map((item, index) => item.state === 'active' ? <a class="future-domain-card active" href={`/insights/${item.slug}`}><span>0{index + 1}</span><small>ACTIVE DOMAIN</small><h3>{item.title}</h3><p>{item.description}</p><b>Explore domain →</b></a> : <article class="future-domain-card"><span>0{index + 1}</span><small>FRAMEWORK READY</small><h3>{item.title}</h3><p>{item.description}</p></article>)}</div></div></section>
+
+  <section class="section future-featured"><div class="shell"><div class="section-heading"><div><p class="eyebrow">FEATURED IDEAS</p><h2>Three questions at civilization scale.</h2></div></div><div class="future-feature-grid">{featured.map((item, index) => <a class={`future-feature-item feature-${index + 1}`} href={`/insights/${item.slug}`}><img src={item.portrait} alt={item.portraitAlt} loading={index === 0 ? 'eager' : 'lazy'} /><div><span>INSIGHT {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>Read the argument →</b></div></a>)}</div></div></section>
+
+  <section id="latest-insights" class="section future-library"><div class="shell"><div class="section-heading"><div><p class="eyebrow">CURRENT COLLECTION · 2026</p><h2>Intelligence, Governance & Civilization</h2></div><a class="text-link" href="/insights/intelligence-governance">View domain →</a></div><div class="future-card-grid">{insights.map((item) => <a class={`future-card theme-${item.theme}`} href={`/insights/${item.slug}`}><span>{item.number} · {item.readTime}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><div class="future-card-tags"><i>{item.primaryKeyword}</i><i>{item.keywords[0]}</i></div><b>Read Insight →</b></a>)}</div></div></section>
+
+  <section class="future-bridge"><div class="shell future-bridge-grid"><div><p class="eyebrow">RESEARCH × FUTURE SYSTEMS</p><h2>Built beside an active deep-tech research portfolio.</h2><p>Future Systems complements—rather than replaces—Meysam Ghanbari’s formal work in optical communications, satellite systems, AI-assisted communications and emerging network technologies.</p></div><div><a href="/research"><span>RESEARCH</span><strong>Explore the technical portfolio</strong></a><a href="/projects"><span>PROJECTS</span><strong>View engineered systems</strong></a><a href="/contact"><span>COLLABORATE</span><strong>Start a serious discussion</strong></a></div></div></section>
+</BaseLayout>
