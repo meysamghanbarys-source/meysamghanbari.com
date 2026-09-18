@@ -1,111 +1,189 @@
-
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
-import { publications } from '../data/library';
+import { projects, publications } from '../data/library';
 
-const c = site.home.en;
-const featured = publications.slice(0, 4);
+const featured = publications.filter((paper) => paper.featured).slice(0, 4);
+const activities = publications.slice(0, 7);
 ---
 
 <BaseLayout
   title={site.name}
-  description="Official research website of Meysam Ghanbari, focused on optical, satellite and advanced communication systems."
+  description="Meysam Ghanbari researches optical communications, inter-satellite optical links, satellite networks, quantum timing, terahertz systems and AI for communications."
   lang="en"
   path="/"
   image={site.heroImage}
 >
-  <section class="hero hero-space hero-space-clean">
+  <section class="hero hero-command">
     <div class="hero-space-bg" style={`background-image:url('${site.heroImage}')`}></div>
     <div class="hero-space-overlay"></div>
-    <div class="orbit-lines orbit-lines-animated" aria-hidden="true"></div>
     <div class="hero-stars" aria-hidden="true"></div>
-    <div class="hero-planet hero-planet-main" aria-hidden="true"></div>
-    <div class="shell hero-grid hero-grid-space hero-grid-clean">
-      <div class="hero-copy hero-copy-clean">
-        <p class="eyebrow">{c.eyebrow}</p>
-        <h1>{site.name}</h1>
-        <p class="role">{site.role.en}</p>
-        <h2>{c.headline}</h2>
-        <p class="lede lede-compact">{c.intro}</p>
+    <div class="orbit-lines orbit-lines-animated" aria-hidden="true"></div>
+    <div class="shell hero-command-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">OFFICIAL RESEARCH HEADQUARTERS · MEYSAM GHANBARI</p>
+        <h1>Meysam<br />Ghanbari</h1>
+        <p class="role">Optical, Satellite & Advanced Communication Systems</p>
+        <h2>Engineering communication systems for space, light and the networks beyond 6G.</h2>
+        <p class="lede">Research across inter-satellite optical links, advanced receivers, free-space optics, quantum timing, terahertz communications and AI-assisted networks.</p>
         <div class="hero-actions">
-          <a class="button" href="/research">Research</a>
-          <a class="button ghost" href="/publications">Publications</a>
-          <a class="button ghost" href="/contact">Contact</a>
+          <a class="button" href="/research">Explore the research</a>
+          <a class="button ghost" href="/projects">View technologies</a>
+          <a class="button ghost" href="/contact">Discuss a challenge</a>
         </div>
         <div class="signal-row" aria-label="Research focus">
-          <span>OISL</span><span>FSO</span><span>Receiver Systems</span><span>PAT</span><span>Quantum</span>
+          <span>OISL</span><span>FSO</span><span>Optical Receivers</span><span>6G / NTN</span><span>Quantum</span><span>Terahertz</span><span>AI</span>
         </div>
       </div>
 
-      <div class="hero-profile-card hero-profile-card-clean">
+      <div class="hero-instrument" aria-label="Research profile">
+        <div class="hero-instrument-head">
+          <span>RESEARCH PROFILE</span><span class="live-dot">ACTIVE</span>
+        </div>
         <img
           src="/images/profile/meysam-ghanbari-formal-portrait.webp"
-          alt="Formal portrait of Meysam Ghanbari"
+          alt="Formal portrait of Meysam Ghanbari, optical and satellite communications researcher"
+          width="1024"
+          height="1536"
           loading="eager"
           fetchpriority="high"
         />
-        <div class="hero-profile-caption">
-          <span>MEYSAM GHANBARI</span>
-          <small>Optical · Satellite · Deep-Tech Communications</small>
+        <div class="instrument-grid">
+          <div><small>PRIMARY FIELD</small><strong>Optical communications</strong></div>
+          <div><small>SYSTEM SCALE</small><strong>Device → network</strong></div>
+          <div><small>PLATFORMS</small><strong>Satellite · HAPS · UAV</strong></div>
+          <div><small>METHODS</small><strong>Analysis · simulation · AI</strong></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-home-panels">
-    <div class="shell home-panels-grid">
-      <a class="home-panel home-panel-research" href="/research">
-        <span class="tag">RESEARCH</span>
-        <h3>Optical and satellite systems</h3>
-        <p>Receiver architecture, OISL, FSO, PAT and non-terrestrial communications.</p>
-      </a>
-      <a class="home-panel home-panel-publications" href="/publications">
-        <span class="tag">PUBLICATIONS</span>
-        <h3>Journal and conference work</h3>
-        <p>A structured publication library with dedicated paper pages and summaries.</p>
-      </a>
-      <a class="home-panel home-panel-insights" href="/insights">
-        <span class="tag">INSIGHTS</span>
-        <h3>Future-facing technical perspectives</h3>
-        <p>Ideas on advanced communications, photonics, space systems and deep-tech directions.</p>
-      </a>
+  <section class="mission-strip" aria-label="Research positioning">
+    <div class="shell mission-grid">
+      <p>Researcher</p><span>×</span><p>Communication systems engineer</p><span>×</span><p>Deep-tech builder</p>
+    </div>
+  </section>
+
+  <section class="section" id="research-ecosystem">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="eyebrow">RESEARCH ECOSYSTEM</p><h2>One research program. Eight connected frontiers.</h2></div>
+        <p>The portfolio links physical-layer modeling, optical hardware constraints and intelligent networking—from individual receiver architectures to city- and space-scale systems.</p>
+      </div>
+      <div class="domain-grid">
+        {site.themes.en.map(([title, text], index) => (
+          <a class={`domain-card domain-card-${(index % 4) + 1}`} href="/research">
+            <span class="domain-index">0{index + 1}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+            <span class="card-cta">Explore domain ↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-projects-home">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="eyebrow">FEATURED TECHNOLOGIES</p><h2>Research translated into systems.</h2></div>
+        <p>Each project page frames the engineering problem, architecture, method, evidence and practical relevance without exposing confidential or unpublished detail.</p>
+      </div>
+      <div class="project-portfolio-grid">
+        {projects.en.map((project) => (
+          <a class="project-portfolio-card" href={project.href}>
+            <div class="project-card-top"><span>{project.number}</span><span>{project.status}</span></div>
+            <p class="tag">{project.category}</p>
+            <h3>{project.title}</h3>
+            <p>{project.summary}</p>
+            <div class="project-meta">{project.tags.map((tag) => <span>{tag}</span>)}</div>
+            <span class="project-explore">Explore project <b>↗</b></span>
+          </a>
+        ))}
+      </div>
+      <a class="text-link large-link" href="/projects">View all projects and technologies →</a>
+    </div>
+  </section>
+
+  <section class="section activity-section">
+    <div class="shell">
+      <div class="section-heading split-heading">
+        <div><p class="eyebrow">RECENT ACTIVITIES</p><h2>Research activity, not a blog feed.</h2></div>
+        <p>A structured view of recent public research records. Status labels remain explicit so submitted, accepted and published work are never conflated.</p>
+      </div>
+      <div class="activity-rail" aria-label="Recent research activities">
+        {activities.map((paper, index) => (
+          <a class="activity-card" href={`/publications/${paper.slug}`}>
+            <div class="activity-order">{String(index + 1).padStart(2, '0')}</div>
+            <p class="tag">{paper.year} · {paper.status}</p>
+            <h3>{paper.title}</h3>
+            <p>{paper.venue}</p>
+            <span>View record ↗</span>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="section section-muted">
     <div class="shell">
       <div class="section-heading split-heading">
-        <div>
-          <p class="eyebrow">FEATURED PUBLICATIONS</p>
-          <h2>Selected work</h2>
-        </div>
-        <p>Representative papers across optical links, intelligent communication systems and satellite communications.</p>
+        <div><p class="eyebrow">RESEARCH LIBRARY</p><h2>Selected publications as discoverable research assets.</h2></div>
+        <p>Each featured paper has an individual page that explains the problem, central idea, research context, metadata and related technical work.</p>
       </div>
-      <div class="publication-list">
-        {featured.map((paper) => (
-          <a class="publication-row publication-link" href={`/publications/${paper.slug}`}>
-            <div>
-              <p class="tag">{paper.type} · {paper.year} · {paper.status}</p>
-              <h3>{paper.title}</h3>
-              <p>{paper.venue}</p>
-            </div>
-            <span class="publication-arrow">↗</span>
+      <div class="publication-card-grid">
+        {featured.map((paper, index) => (
+          <a class="publication-card" href={`/publications/${paper.slug}`}>
+            <div class="publication-card-head"><span>{String(index + 1).padStart(2, '0')}</span><span>{paper.type} · {paper.year}</span></div>
+            <span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
+            <h3>{paper.title}</h3>
+            <p>{paper.summaryEn}</p>
+            <div class="tag-cloud">{paper.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}</div>
+            <span class="project-explore">Explore research <b>↗</b></span>
           </a>
         ))}
       </div>
-      <a class="text-link large-link" href="/publications">View publication library →</a>
+      <a class="text-link large-link" href="/publications">Open the complete research library →</a>
+    </div>
+  </section>
+
+  <section class="section profile-feature">
+    <div class="shell profile-feature-grid">
+      <div class="profile-feature-image">
+        <img src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="Meysam Ghanbari in a satellite and optical communications research environment" width="1122" height="1402" loading="lazy" />
+      </div>
+      <div>
+        <p class="eyebrow">RESEARCHER PROFILE</p>
+        <h2>Where communication theory meets optical architecture.</h2>
+        <p>Meysam Ghanbari works across analytical communication theory, receiver architecture, beam control, satellite networking and data-driven modeling. The unifying goal is to make highly directional communication systems more capable, explainable and robust.</p>
+        <div class="capability-list">
+          <span>Analytical modeling</span><span>Receiver design</span><span>Monte Carlo simulation</span><span>Link engineering</span><span>Optimization</span><span>AI for communications</span>
+        </div>
+        <div class="hero-actions"><a class="button" href="/about">View professional profile</a><a class="button ghost" href="/media">Media archive</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section media-home-section">
+    <div class="shell media-home-grid">
+      <div>
+        <p class="eyebrow">TALKS & MEDIA</p>
+        <h2>A visual record of research communication.</h2>
+        <p>Professional portraits, research environments and presentation material are curated as part of Meysam Ghanbari’s public scientific identity. Public talk records are added only when verified media is available.</p>
+        <div class="hero-actions"><a class="button ghost" href="/videos">Videos & talks</a><a class="button ghost" href="/media">Media library</a></div>
+      </div>
+      <img src="/images/media/meysam-ghanbari-research-presentation.webp" alt="Meysam Ghanbari giving a professional research presentation" width="1672" height="941" loading="lazy" />
     </div>
   </section>
 
   <section class="section section-collaboration">
-    <div class="shell collaboration-card">
+    <div class="shell collaboration-card collaboration-card-strong">
       <div>
-        <p class="eyebrow">ENQUIRIES</p>
-        <h2>Research, advisory and speaking enquiries</h2>
-        <p>For collaborations, technical discussions, consulting, speaking invitations and industry opportunities, please use the contact page.</p>
+        <p class="eyebrow">RESEARCH COLLABORATION & TECHNICAL CONSULTATION</p>
+        <h2>Bring a difficult communication problem into the conversation.</h2>
+        <p>For research collaboration, optical or satellite communication challenges, industrial R&D, technical consultation, project guidance, visiting research and speaking enquiries.</p>
       </div>
-      <a class="button light" href="/contact">Contact</a>
+      <div class="collaboration-actions"><a class="button light" href="/contact">Discuss a research problem</a><a class="text-link" href={`mailto:${site.contactEmail}`}>Email directly →</a></div>
     </div>
   </section>
 </BaseLayout>
