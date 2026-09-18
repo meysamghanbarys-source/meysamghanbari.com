@@ -1,28 +1,90 @@
-export const projects = {
+export type Project = {
+  slug: string;
+  number: string;
+  title: string;
+  category: string;
+  tag: string;
+  summary: string;
+  status: 'Research program' | 'Submitted research' | 'Published research';
+  tags: string[];
+  problem: string;
+  idea: string;
+  approach: string[];
+  contributions: string[];
+  relevance: string;
+  relatedPublicationSlugs: string[];
+  href: string;
+};
+
+export const projects: { en: Project[]; fa: Array<{ title: string; tag: string; summary: string; href: string }> } = {
   en: [
     {
+      slug: 'integrated-optical-receiver-oisl',
+      number: '01',
       title: 'Integrated Optical Receiver for OISL',
+      category: 'Optical receiver architecture',
       tag: 'OISL · Receiver Design · Fine Tracking',
       summary: 'A receiver architecture combining communication detection and fine tracking, with analysis of detector geometry, received-power distribution and alignment sensitivity for inter-satellite FSO links.',
-      href: '/projects'
+      status: 'Submitted research',
+      tags: ['Architecture', 'Analysis', 'Optimization', 'Simulation'],
+      problem: 'Inter-satellite optical terminals must maintain a narrow optical link while recovering data under small alignment errors and platform motion.',
+      idea: 'Use one integrated optical receiver concept to support communication detection and fine tracking without treating the two functions as isolated subsystems.',
+      approach: ['Receiver and detector geometry', 'Received-power distribution analysis', 'Alignment-sensitivity evaluation', 'Numerical optimization and validation'],
+      contributions: ['Integrated communication-and-tracking architecture', 'Geometry-aware power analysis', 'Fine-tracking sensitivity framework'],
+      relevance: 'The work is relevant to compact optical terminals that must coordinate acquisition, tracking and communication under strict mass, alignment and sensitivity constraints.',
+      relatedPublicationSlugs: ['integrated-optical-receiver-communication-fine-tracking-inter-satellite'],
+      href: '/projects/integrated-optical-receiver-oisl'
     },
     {
+      slug: 'all-optical-multi-hop-inter-satellite-relaying',
+      number: '02',
       title: 'All-Optical Multi-Hop Inter-Satellite Relaying',
+      category: 'Space optical networking',
       tag: 'OISL · M-PAM · Regenerative Relaying',
       summary: 'Closed-form performance modeling and regenerative M-PAM relay design for multi-hop optical inter-satellite links, supported by numerical and Monte Carlo evaluation.',
-      href: '/projects'
+      status: 'Submitted research',
+      tags: ['Architecture', 'Analysis', 'Simulation', 'Publication'],
+      problem: 'Long optical routes across satellite networks require relay strategies that manage noise, symbol errors and hardware limits across multiple hops.',
+      idea: 'Model an all-optical regenerative relay chain for M-PAM transmission and express end-to-end behavior through per-hop analytical building blocks.',
+      approach: ['Multi-hop optical architecture', 'Receiver and amplifier modeling', 'Closed-form performance analysis', 'Numerical and Monte Carlo validation'],
+      contributions: ['Regenerative multi-hop optical framework', 'Closed-form error analysis', 'Hardware-aware relay modeling'],
+      relevance: 'The framework connects communication theory with the practical design of future optical crosslink networks and regenerative satellite relay payloads.',
+      relatedPublicationSlugs: ['all-optical-multi-hop-inter-satellite-relaying-m-pam'],
+      href: '/projects/all-optical-multi-hop-inter-satellite-relaying'
     },
     {
+      slug: 'power-neutral-information-energy-transfer',
+      number: '03',
       title: 'Power-Neutral Information & Energy Transfer',
+      category: 'Optical information and energy transfer',
       tag: 'FSO · Stokes Signaling · Energy Transfer',
       summary: 'An analytical inter-satellite FSO framework using Stokes-orthogonal signaling to coordinate information reception and optical energy transfer under power constraints.',
-      href: '/projects'
+      status: 'Submitted research',
+      tags: ['System Design', 'Analysis', 'Optimization', 'Publication'],
+      problem: 'A space optical receiver may need to recover information while also managing the energy available from the received optical signal.',
+      idea: 'Coordinate information and energy paths through Stokes-orthogonal signaling so the same inter-satellite optical link can be studied as a joint communication-and-power system.',
+      approach: ['Polarization-domain signaling', 'Receiver path modeling', 'Information-performance analysis', 'Optical energy-transfer evaluation'],
+      contributions: ['Power-neutral system formulation', 'Stokes-orthogonal signaling architecture', 'Joint information-and-energy analysis'],
+      relevance: 'The research explores energy-aware optical terminal concepts for spacecraft where power, aperture and payload resources are tightly constrained.',
+      relatedPublicationSlugs: ['power-neutral-information-energy-transfer-inter-satellite-fso-stokes'],
+      href: '/projects/power-neutral-information-energy-transfer'
     },
     {
+      slug: 'inter-haps-multi-branch-optical-reception',
+      number: '04',
       title: 'Inter-HAPS Multi-Branch Optical Reception',
+      category: 'Aerial optical systems',
       tag: 'HAPS · Optical Receiver · Multi-Branch',
       summary: 'A progressively attenuated multi-branch receiver strategy and analytical performance model for inter-HAPS optical links.',
-      href: '/projects'
+      status: 'Submitted research',
+      tags: ['Architecture', 'Analysis', 'Simulation', 'Optimization'],
+      problem: 'Optical links between high-altitude platforms must remain useful across changing received power, alignment conditions and detector operating limits.',
+      idea: 'Distribute reception across progressively attenuated branches and select a useful nonsaturated branch rather than relying on a single operating point.',
+      approach: ['Multi-branch receiver architecture', 'Power and saturation modeling', 'Outage analysis', 'Monte Carlo verification'],
+      contributions: ['Progressive attenuation strategy', 'Branch-selection model', 'Analytical outage framework'],
+      relevance: 'The project targets robust optical reception for aerial platforms subject to large link-distance and received-power variations.',
+      relatedPublicationSlugs: ['progressively-attenuated-multi-branch-reception-inter-haps'],
+      href: '/projects/inter-haps-multi-branch-optical-reception'
     }
   ],
   fa: [
@@ -64,7 +126,13 @@ export type Publication = {
   summaryEn: string;
   summaryFa: string;
   tags: string[];
+  featured?: boolean;
+  problemEn?: string;
+  ideaEn?: string;
+  relevanceEn?: string;
+  relatedProjectSlugs?: string[];
   doi?: string;
+  externalUrl?: string;
   pdf?: string;
   video?: string;
 };
@@ -78,9 +146,14 @@ export const publications: Publication[] = [
     type: 'Journal',
     year: '2026',
     status: 'Submitted',
+    featured: true,
     summaryEn: 'This work develops an all-optical regenerative multi-hop architecture for inter-satellite optical links using M-PAM signaling. The associated research program emphasizes closed-form performance modeling, regenerative relay operation and numerical or Monte Carlo validation.',
     summaryFa: 'این پژوهش یک معماری بازتولیدی تمام‌نوری چندهاپی برای لینک‌های نوری بین‌ماهواره‌ای با سیگنالینگ M-PAM توسعه می‌دهد و بر مدل‌سازی فرم‌بسته، عملکرد رله بازتولیدی و اعتبارسنجی عددی یا مونت‌کارلو تمرکز دارد.',
-    tags: ['OISL', 'M-PAM', 'All-Optical Relaying', 'Closed-Form Analysis']
+    tags: ['OISL', 'M-PAM', 'All-Optical Relaying', 'Closed-Form Analysis'],
+    problemEn: 'Multi-hop inter-satellite optical links require an end-to-end model that captures relay regeneration, optical amplification and symbol-error propagation across the chain.',
+    ideaEn: 'Represent the system as a sequence of regenerative optical hops and connect their transition behavior analytically for M-PAM transmission.',
+    relevanceEn: 'The study supports the design of high-capacity optical crosslink networks in which multiple satellites act as communication relays.',
+    relatedProjectSlugs: ['all-optical-multi-hop-inter-satellite-relaying']
   },
   {
     slug: 'future-communications-narrow-beams-pointing-errors-alignment-limits',
@@ -90,9 +163,13 @@ export const publications: Publication[] = [
     type: 'Journal',
     year: '2026',
     status: 'Published',
+    featured: true,
     summaryEn: 'A forward-looking survey on pointing errors, alignment limits and the increasing importance of beam-control constraints as future communication systems move toward narrow-beam operation.',
     summaryFa: 'مروری آینده‌نگر بر خطاهای نشانه‌روی، محدودیت‌های هم‌ترازی و اهمیت روزافزون کنترل پرتو در سامانه‌های مخابراتی narrow-beam آینده.',
-    tags: ['Pointing Error', 'Alignment', 'Narrow Beams', '6G', 'Survey']
+    tags: ['Pointing Error', 'Alignment', 'Narrow Beams', '6G', 'Survey'],
+    problemEn: 'Future high-frequency and optical communication systems increasingly depend on narrow beams, making alignment error a first-order system constraint.',
+    ideaEn: 'Organize the pointing-error and alignment literature around the mechanisms, limits and design choices that become critical as beams narrow.',
+    relevanceEn: 'The survey provides a systems view for researchers and engineers designing directional links across optical, terahertz and future 6G platforms.'
   },
   {
     slug: 'city-scale-quantum-timing-wireless-synchronization-quantum-hubs',
@@ -102,9 +179,14 @@ export const publications: Publication[] = [
     type: 'Journal',
     year: '2026',
     status: 'Published',
+    featured: true,
     summaryEn: 'This publication addresses wireless synchronization for city-scale quantum timing architectures organized around quantum hubs.',
     summaryFa: 'این مقاله به هم‌زمان‌سازی بی‌سیم برای معماری‌های زمان‌بندی کوانتومی در مقیاس شهری مبتنی بر quantum hub می‌پردازد.',
-    tags: ['Quantum Timing', 'Synchronization', 'Quantum Hubs', 'Wireless Networks']
+    tags: ['Quantum Timing', 'Synchronization', 'Quantum Hubs', 'Wireless Networks'],
+    problemEn: 'City-scale quantum systems need a practical way to distribute timing and synchronization beyond isolated laboratory links.',
+    ideaEn: 'Study wireless synchronization around quantum hubs as an architectural layer for city-scale quantum timing.',
+    relevanceEn: 'The work links quantum infrastructure with communication-network design and timing distribution at urban scale.',
+    externalUrl: 'https://ieeexplore.ieee.org/document/11598901/'
   },
   {
     slug: 'joint-tracking-polarization-alignment-satellite-qkd',
@@ -114,9 +196,13 @@ export const publications: Publication[] = [
     type: 'Journal',
     year: '2026',
     status: 'Published',
+    featured: true,
     summaryEn: 'This work studies real-time joint tracking and polarization alignment for satellite quantum key distribution using an artificial-angle auxiliary system.',
     summaryFa: 'این پژوهش رهگیری بلادرنگ و هم‌ترازی قطبش را برای QKD ماهواره‌ای با استفاده از یک سامانه کمکی artificial-angle بررسی می‌کند.',
-    tags: ['Satellite QKD', 'Tracking', 'Polarization Alignment', 'Quantum Communications']
+    tags: ['Satellite QKD', 'Tracking', 'Polarization Alignment', 'Quantum Communications'],
+    problemEn: 'Satellite quantum key distribution depends on simultaneous spatial tracking and polarization alignment under platform motion.',
+    ideaEn: 'Use an artificial-angle auxiliary system to support real-time joint tracking and polarization alignment.',
+    relevanceEn: 'The receiver-side coordination addressed by this work is central to operational satellite quantum links.'
   },
   {
     slug: 'terahertz-coverage-fixed-wing-uavs',
@@ -126,9 +212,13 @@ export const publications: Publication[] = [
     type: 'Journal',
     year: '2026',
     status: 'Published',
+    featured: true,
     summaryEn: 'An analytical framework for terahertz coverage with fixed-wing UAVs, with emphasis on closed-form outage modeling.',
     summaryFa: 'چارچوبی تحلیلی برای پوشش تراهرتز با UAV بال‌ثابت با تمرکز بر مدل‌سازی فرم‌بسته outage.',
-    tags: ['Terahertz', 'UAV', 'Coverage', 'Outage Modeling']
+    tags: ['Terahertz', 'UAV', 'Coverage', 'Outage Modeling'],
+    problemEn: 'Fixed-wing UAV motion and terahertz propagation create coverage and outage behavior that cannot be understood from static terrestrial models alone.',
+    ideaEn: 'Develop an analytical coverage framework with closed-form outage modeling for fixed-wing UAV terahertz links.',
+    relevanceEn: 'The framework is relevant to aerial backhaul and future high-frequency non-terrestrial networks.'
   },
   {
     slug: 'optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies',
@@ -138,9 +228,13 @@ export const publications: Publication[] = [
     type: 'Journal',
     year: '2024',
     status: 'Published',
+    featured: true,
     summaryEn: 'This study considers beamwidth optimization for UAV-to-HAP free-space optical links under pointing inaccuracies, with outage probability as the primary performance objective.',
     summaryFa: 'این مطالعه به بهینه‌سازی beamwidth برای لینک‌های FSO از UAV به HAP تحت خطاهای نشانه‌روی با تمرکز بر احتمال outage می‌پردازد.',
-    tags: ['FSO', 'UAV-to-HAP', 'Beamwidth Optimization', 'Pointing Error']
+    tags: ['FSO', 'UAV-to-HAP', 'Beamwidth Optimization', 'Pointing Error'],
+    problemEn: 'UAV-to-HAP optical links must balance beam spread against pointing uncertainty to limit outage.',
+    ideaEn: 'Select the optical beamwidth that minimizes outage probability under pointing inaccuracies.',
+    relevanceEn: 'The analysis provides a direct design variable for aerial optical terminals operating under alignment uncertainty.'
   },
   {
     slug: 'integrated-optical-receiver-communication-fine-tracking-inter-satellite',
@@ -150,9 +244,14 @@ export const publications: Publication[] = [
     type: 'Conference',
     year: '2027',
     status: 'Submitted',
+    featured: true,
     summaryEn: 'An integrated receiver concept that combines communication detection and fine tracking for inter-satellite optical links, including detector geometry, power distribution and alignment sensitivity.',
     summaryFa: 'مفهوم یک گیرنده یکپارچه که آشکارسازی مخابرات و رهگیری دقیق را برای لینک‌های نوری بین‌ماهواره‌ای ترکیب می‌کند و هندسه آشکارساز، توزیع توان و حساسیت هم‌ترازی را در نظر می‌گیرد.',
-    tags: ['OISL', 'Optical Receiver', 'Fine Tracking', 'PAT']
+    tags: ['OISL', 'Optical Receiver', 'Fine Tracking', 'PAT'],
+    problemEn: 'An inter-satellite terminal must recover communication data while measuring small angular errors for fine tracking.',
+    ideaEn: 'Integrate communication detection and fine tracking in one optical receiver architecture.',
+    relevanceEn: 'The concept targets compact satellite terminals in which optical, mechanical and detector resources must be shared carefully.',
+    relatedProjectSlugs: ['integrated-optical-receiver-oisl']
   },
   {
     slug: 'progressively-attenuated-multi-branch-reception-inter-haps',
@@ -162,9 +261,14 @@ export const publications: Publication[] = [
     type: 'Conference',
     year: '2027',
     status: 'Submitted',
+    featured: true,
     summaryEn: 'A progressively attenuated multi-branch optical reception strategy for inter-HAPS links, accompanied by an analytical performance model.',
     summaryFa: 'راهبرد دریافت نوری چندشاخه با تضعیف تدریجی برای لینک‌های بین HAPS همراه با مدل تحلیلی عملکرد.',
-    tags: ['HAPS', 'Optical Reception', 'Multi-Branch', 'FSO']
+    tags: ['HAPS', 'Optical Reception', 'Multi-Branch', 'FSO'],
+    problemEn: 'Inter-HAPS optical receivers must operate across wide power variation without relying on one detector branch that may saturate or fall below threshold.',
+    ideaEn: 'Use progressively attenuated parallel branches and select a usable nonsaturated reception path.',
+    relevanceEn: 'The strategy addresses resilient optical reception for high-altitude platforms over changing link conditions.',
+    relatedProjectSlugs: ['inter-haps-multi-branch-optical-reception']
   },
   {
     slug: 'power-neutral-information-energy-transfer-inter-satellite-fso-stokes',
@@ -174,9 +278,14 @@ export const publications: Publication[] = [
     type: 'Conference',
     year: '2027',
     status: 'Submitted',
+    featured: true,
     summaryEn: 'An inter-satellite FSO framework using Stokes-orthogonal signaling to coordinate information reception and optical energy transfer under power constraints.',
     summaryFa: 'چارچوب FSO بین‌ماهواره‌ای مبتنی بر سیگنالینگ Stokes-orthogonal برای هماهنگ‌سازی دریافت اطلاعات و انتقال انرژی نوری تحت محدودیت توان.',
-    tags: ['Inter-Satellite FSO', 'Stokes Signaling', 'Energy Transfer', 'Power Neutrality']
+    tags: ['Inter-Satellite FSO', 'Stokes Signaling', 'Energy Transfer', 'Power Neutrality'],
+    problemEn: 'Space optical links are normally optimized for information transfer even when the received optical power may also have value for onboard energy management.',
+    ideaEn: 'Use Stokes-orthogonal signaling to study coordinated information recovery and optical energy transfer within one inter-satellite link.',
+    relevanceEn: 'The work explores communication architectures that treat power as a system resource rather than a separate afterthought.',
+    relatedProjectSlugs: ['power-neutral-information-energy-transfer']
   },
   {
     slug: 'ai-assisted-outdoor-optical-networks-camera-sensing-localization',
