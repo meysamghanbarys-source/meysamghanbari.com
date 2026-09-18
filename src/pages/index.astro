@@ -1,10 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
-import { projects, publications } from '../data/library';
+import { projects, publications, upcoming } from '../data/library';
 
 const featured = publications.filter((paper) => paper.featured).slice(0, 4);
-const activities = publications.slice(0, 7);
+const activities = [
+  ...(upcoming[0] ? [{
+    href: '/upcoming',
+    year: '2027',
+    status: upcoming[0].status,
+    title: `${upcoming[0].conference}: ${upcoming[0].paperTitle}`,
+    venue: `${upcoming[0].date} · ${upcoming[0].location}`
+  }] : []),
+  ...publications.slice(0, upcoming[0] ? 6 : 7).map((paper) => ({
+    href: `/publications/${paper.slug}`,
+    year: paper.year,
+    status: paper.status,
+    title: paper.title,
+    venue: paper.venue
+  }))
+];
 ---
 
 <BaseLayout
@@ -113,7 +128,7 @@ const activities = publications.slice(0, 7);
       </div>
       <div class="activity-rail" aria-label="Recent research activities">
         {activities.map((paper, index) => (
-          <a class="activity-card" href={`/publications/${paper.slug}`}>
+          <a class="activity-card" href={paper.href}>
             <div class="activity-order">{String(index + 1).padStart(2, '0')}</div>
             <p class="tag">{paper.year} · {paper.status}</p>
             <h3>{paper.title}</h3>
