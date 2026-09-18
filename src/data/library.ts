@@ -401,11 +401,57 @@ export const insights: Array<{
 
 export const upcoming: Array<{
   title: string;
+  titleFa: string;
   date: string;
+  startDate: string;
+  endDate: string;
   location: string;
+  locationFa: string;
+  venue: string;
   type: string;
-  url?: string;
-}> = [];
+  typeFa: string;
+  status: string;
+  question: string;
+  questionFa: string;
+  description: string;
+  descriptionFa: string;
+  conference: string;
+  conferenceUrl: string;
+  image: string;
+  imageAlt: string;
+  paperTitle: string;
+  paperUrl: string;
+  researchUrl: string;
+  projectUrl: string;
+  tags: string[];
+}> = [
+  {
+    title: 'Meysam Ghanbari at IEEE VTC 2027-Spring',
+    titleFa: 'ارائه میثم قنبری در IEEE VTC 2027-Spring',
+    date: '20–23 June 2027',
+    startDate: '2027-06-20',
+    endDate: '2027-06-23',
+    location: 'Hamburg, Germany',
+    locationFa: 'هامبورگ، آلمان',
+    venue: 'Grand Elysée Hotel Hamburg',
+    type: 'Scheduled research presentation',
+    typeFa: 'ارائه پژوهشی برنامه‌ریزی‌شده',
+    status: 'Scheduled',
+    question: 'How can an inter-HAPS optical receiver remain reliable when one detector branch saturates while another falls below its sensitivity threshold?',
+    questionFa: 'چگونه یک گیرنده نوری بین‌ـHAPS می‌تواند زمانی که یک شاخه اشباع می‌شود و شاخه‌ای دیگر پایین‌تر از آستانه حساسیت قرار می‌گیرد، همچنان قابل‌اعتماد بماند؟',
+    description: 'At IEEE VTC 2027-Spring in Hamburg, Meysam Ghanbari is scheduled to present a progressively attenuated multi-branch receiver developed to address this challenge. The architecture is designed to preserve a usable, nonsaturated optical detection path across changing received-power conditions.',
+    descriptionFa: 'میثم قنبری در IEEE VTC 2027-Spring در هامبورگ، راهکار گیرنده چندشاخه با تضعیف تدریجی را برای پاسخ به این مسئله ارائه خواهد کرد. این معماری برای حفظ یک مسیر آشکارسازی نوری قابل‌استفاده و غیراشباع در شرایط تغییر توان دریافتی طراحی شده است.',
+    conference: 'The 2027 IEEE 105th Vehicular Technology Conference',
+    conferenceUrl: 'https://events.vtsociety.org/vtc2027-spring/',
+    image: '/images/events/vtc2027-spring-hamburg-official-conference.jpg',
+    imageAlt: 'Official IEEE VTC 2027-Spring conference visual showing Hamburg, Germany, and the 20–23 June 2027 dates',
+    paperTitle: 'Progressively Attenuated Multi-Branch Reception for Inter-HAPS Optical Links',
+    paperUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=U6s7sawAAAAJ&sortby=pubdate&citation_for_view=U6s7sawAAAAJ:MXK_kJrjxJIC',
+    researchUrl: '/publications/progressively-attenuated-multi-branch-reception-inter-haps',
+    projectUrl: '/projects/inter-haps-multi-branch-optical-reception',
+    tags: ['Inter-HAPS', 'Optical Wireless', 'Multi-Branch Receiver', 'FSO']
+  }
+];
 
 export const media = [
   {
