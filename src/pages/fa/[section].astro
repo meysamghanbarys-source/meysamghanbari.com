@@ -12,6 +12,7 @@ const data = site.sections.fa[section];
 const path = `/fa/${section}`;
 const journals = publications.filter((p) => p.type === 'Journal');
 const conferences = publications.filter((p) => p.type === 'Conference');
+const upcomingEvent = upcoming[0];
 
 const sectionVisuals = {
   research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'حوزه پژوهشی' },
@@ -19,7 +20,7 @@ const sectionVisuals = {
   publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'کتابخانه مقالات' },
   videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'ارائه‌ها و سخنرانی‌ها' },
   insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'دیدگاه‌های فنی' },
-  upcoming: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'رویدادهای پیش‌رو' },
+  upcoming: { image: upcomingEvent?.image ?? '/images/media/meysam-ghanbari-research-presentation.webp', label: 'IEEE VTC 2027-Spring · هامبورگ' },
   media: { image: '/images/profile/meysam-ghanbari-formal-portrait.webp', label: 'آرشیو رسانه' },
   about: { image: '/images/profile/meysam-ghanbari-professional-headshot.webp', label: 'پروفایل پژوهشی' },
   contact: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'ارتباط پژوهشی' }
@@ -28,7 +29,14 @@ const sectionVisuals = {
 const visual = sectionVisuals[section];
 ---
 
-<BaseLayout title={data.title} description={data.intro} lang="fa" path={path}>
+<BaseLayout
+  title={data.title}
+  description={section === 'upcoming' && upcomingEvent ? 'میثم قنبری در IEEE VTC 2027-Spring در هامبورگ پژوهش خود درباره گیرنده نوری چندشاخه برای لینک‌های بین HAPS را ارائه خواهد کرد.' : data.intro}
+  lang="fa"
+  path={path}
+  image={section === 'upcoming' && upcomingEvent ? upcomingEvent.image : undefined}
+  imageAlt={section === 'upcoming' && upcomingEvent ? upcomingEvent.imageAlt : undefined}
+>
   
 <section class={`page-hero page-hero-space page-hero-${section}`}>
   <div class="space-grid-bg" aria-hidden="true"></div>
@@ -145,7 +153,24 @@ const visual = sectionVisuals[section];
     <section class="section section-tight"><div class="shell">
       {upcoming.length === 0 ? (
         <div class="upcoming-empty"><div class="upcoming-orbit" aria-hidden="true"></div><p class="eyebrow">تقویم</p><h2>در حال حاضر رویداد عمومی پیش‌رو ثبت نشده است.</h2><p>برای دعوت، بازدید پژوهشی یا درخواست سخنرانی از صفحه ارتباط استفاده شود.</p><a class="button ghost" href="/fa/contact">ارسال دعوت</a></div>
-      ) : null}
+      ) : (
+        <div class="upcoming-list">
+          {upcoming.map((item) => (
+            <article class="upcoming-feature">
+              <div class="upcoming-feature-copy">
+                <div class="event-status-line"><span class="status-pill status-scheduled">برنامه‌ریزی‌شده</span><span>{item.date}</span><span>{item.locationFa}</span></div>
+                <p class="eyebrow">سؤال پژوهشی</p>
+                <h2>{item.questionFa}</h2>
+                <p class="event-answer">{item.descriptionFa}</p>
+                <div class="event-paper"><span>مقاله ارائه</span><h3><a href={item.paperUrl} target="_blank" rel="noreferrer">{item.paperTitle}</a></h3></div>
+                <div class="tag-cloud event-tags">{item.tags.map((tag) => <span>{tag}</span>)}</div>
+                <div class="event-actions"><a class="button" href={item.conferenceUrl} target="_blank" rel="noreferrer">وب‌سایت رسمی کنفرانس ↗</a><a class="button ghost" href={item.paperUrl} target="_blank" rel="noreferrer">Google Scholar ↗</a><a class="text-link" href={`/fa${item.researchUrl}`}>مشاهده پژوهش ←</a></div>
+              </div>
+              <figure class="upcoming-feature-visual"><img src={item.image} alt={item.imageAlt} width="1280" height="720" loading="eager" /><figcaption><span>{item.conference}</span><small>{item.typeFa} · {item.venue}</small></figcaption></figure>
+            </article>
+          ))}
+        </div>
+      )}
     </div></section>
   )}
 
