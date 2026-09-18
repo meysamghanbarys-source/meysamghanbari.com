@@ -8,6 +8,8 @@ interface Props {
   lang?: 'en' | 'fa';
   path?: string;
   image?: string;
+  alternateAvailable?: boolean;
+  languagePath?: string;
 }
 
 const {
@@ -15,16 +17,18 @@ const {
   description,
   lang = 'en',
   path = '/',
-  image = site.ogImage
+  image = site.ogImage,
+  alternateAvailable = true,
+  languagePath
 } = Astro.props;
 
 const isFa = lang === 'fa';
 const dir = isFa ? 'rtl' : 'ltr';
 const canonicalPath = path.startsWith('/') ? path : `/${path}`;
 const canonical = `${site.domain}${canonicalPath === '/' ? '' : canonicalPath}`;
-const alternatePath = isFa
+const alternatePath = languagePath ?? (isFa
   ? (canonicalPath === '/fa/' || canonicalPath === '/fa' ? '/' : canonicalPath.replace(/^\/fa/, ''))
-  : (canonicalPath === '/' ? '/fa/' : `/fa${canonicalPath}`);
+  : (canonicalPath === '/' ? '/fa/' : `/fa${canonicalPath}`));
 const alternate = `${site.domain}${alternatePath === '/' ? '' : alternatePath}`;
 const pageTitle = title === site.name
   ? `${site.name} | Optical & Satellite Communications Researcher`
@@ -32,6 +36,17 @@ const pageTitle = title === site.name
 const items = isFa ? nav.fa : nav.en;
 const homeHref = isFa ? '/fa/' : '/';
 const contactHref = isFa ? '/fa/contact' : '/contact';
+const currentSection = canonicalPath.replace(/^\/fa\/?/, '/').split('/').filter(Boolean)[0] ?? 'home';
+const breadcrumbParts = canonicalPath.split('/').filter(Boolean).filter((part) => part !== 'fa');
+const breadcrumbs = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: site.domain },
+  ...breadcrumbParts.map((part, index) => ({
+    '@type': 'ListItem',
+    position: index + 2,
+    name: part.replace(/-/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()),
+    item: `${site.domain}/${breadcrumbParts.slice(0, index + 1).join('/')}`
+  }))
+];
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -54,6 +69,10 @@ const structuredData = {
       email: site.contactEmail,
       knowsAbout: site.knowsAbout,
       sameAs: Object.values(site.socialLinks).filter(Boolean)
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs
     }
   ]
 };
@@ -63,14 +82,14 @@ const structuredData = {
 <html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#050b13" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={isFa ? 'en' : 'fa'} href={alternate} />
+    {alternateAvailable && <link rel="alternate" hreflang={isFa ? 'en' : 'fa'} href={alternate} />}
     <link rel="alternate" hreflang={isFa ? 'fa' : 'en'} href={canonical} />
     <link rel="alternate" hreflang="x-default" href={site.domain} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -93,6 +112,7 @@ const structuredData = {
     <slot name="head" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="shell header-inner">
         <a class="brand" href={homeHref} aria-label={`${site.name} home`}>
@@ -102,7 +122,7 @@ const structuredData = {
 
         <nav class="desktop-nav" aria-label="Primary navigation">
           {items.map(([id, label]) => (
-            <a href={isFa ? `/fa/${id}` : `/${id}`}>{label}</a>
+            <a href={isFa ? `/fa/${id}` : `/${id}`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
           ))}
         </nav>
 
@@ -115,7 +135,7 @@ const structuredData = {
           <summary aria-label="Open navigation">☰</summary>
           <div class="mobile-panel">
             {items.map(([id, label]) => (
-              <a href={isFa ? `/fa/${id}` : `/${id}`}>{label}</a>
+              <a href={isFa ? `/fa/${id}` : `/${id}`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
             ))}
             <a href={alternatePath}>{isFa ? 'English' : 'فارسی'}</a>
           </div>
@@ -123,7 +143,7 @@ const structuredData = {
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 
@@ -143,8 +163,12 @@ const structuredData = {
         <div>
           <strong>{isFa ? 'ارتباط پژوهشی' : 'Research enquiries'}</strong>
           <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
+          {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">ORCID profile ↗</a></p>}
         </div>
       </div>
+      <nav class="shell footer-nav" aria-label="Footer navigation">
+        {items.map(([id, label]) => <a href={isFa ? `/fa/${id}` : `/${id}`}>{label}</a>)}
+      </nav>
       <div class="shell footer-bottom">
         <span>© {new Date().getFullYear()} {site.name}</span>
         <span>{isFa ? 'وب‌سایت رسمی پژوهشی' : 'Official research website'}</span>
