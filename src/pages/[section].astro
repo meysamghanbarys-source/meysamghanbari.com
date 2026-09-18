@@ -4,7 +4,7 @@ import { sectionIds, site } from '../data/site';
 import { projects, publications, videos, insights, upcoming, media } from '../data/library';
 
 export function getStaticPaths() {
-  return sectionIds.map((section) => ({ params: { section }, props: { section } }));
+  return sectionIds.filter((section) => section !== 'insights').map((section) => ({ params: { section }, props: { section } }));
 }
 
 const { section } = Astro.props;

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 import { projects, publications, upcoming } from '../data/library';
+import { insights } from '../data/insights';
 
 const featured = publications.filter((paper) => paper.featured).slice(0, 4);
 const activities = [
@@ -159,6 +160,24 @@ const activities = [
         ))}
       </div>
       <a class="text-link large-link" href="/publications">Open the complete research library →</a>
+    </div>
+  </section>
+
+  <section class="section home-future-systems">
+    <div class="shell">
+      <div class="home-future-header">
+        <div><p class="eyebrow">FUTURE SYSTEMS · INSIGHTS</p><h2>An intellectual system for thinking beyond the next technology cycle.</h2></div>
+        <p>Essays by Meysam Ghanbari on AI governance, superintelligence, long-term institutions, human enhancement and the future of civilization.</p>
+      </div>
+      <div class="home-future-grid">
+        {insights.slice(0, 3).map((item, index) => (
+          <a class={`home-future-card theme-${item.theme}`} href={`/insights/${item.slug}`}>
+            <img src={index === 0 ? item.portrait : item.conceptImage} alt={index === 0 ? item.portraitAlt : item.conceptAlt} width="1200" height="675" loading="lazy" />
+            <div><span>INSIGHT {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>Read in Future Systems →</b></div>
+          </a>
+        ))}
+      </div>
+      <div class="home-future-action"><a class="button" href="/insights">Enter Future Systems</a><a class="text-link" href="/insights/intelligence-governance">Intelligence, Governance & Civilization →</a></div>
     </div>
   </section>
 
