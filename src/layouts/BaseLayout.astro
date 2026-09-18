@@ -12,6 +12,7 @@ interface Props {
   ogType?: 'website' | 'article';
   alternateAvailable?: boolean;
   languagePath?: string;
+  breadcrumbNames?: string[];
 }
 
 const {
@@ -23,7 +24,8 @@ const {
   imageAlt = `${site.name} — ${site.role.en}`,
   ogType = 'website',
   alternateAvailable = true,
-  languagePath
+  languagePath,
+  breadcrumbNames
 } = Astro.props;
 
 const isFa = lang === 'fa';
@@ -43,12 +45,12 @@ const contactHref = isFa ? '/fa/contact' : '/contact';
 const currentSection = canonicalPath.replace(/^\/fa\/?/, '/').split('/').filter(Boolean)[0] ?? 'home';
 const breadcrumbParts = canonicalPath.split('/').filter(Boolean).filter((part) => part !== 'fa');
 const breadcrumbs = [
-  { '@type': 'ListItem', position: 1, name: 'Home', item: site.domain },
+  { '@type': 'ListItem', position: 1, name: isFa ? 'خانه' : 'Home', item: isFa ? `${site.domain}/fa` : site.domain },
   ...breadcrumbParts.map((part, index) => ({
     '@type': 'ListItem',
     position: index + 2,
-    name: part.replace(/-/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()),
-    item: `${site.domain}/${breadcrumbParts.slice(0, index + 1).join('/')}`
+    name: breadcrumbNames?.[index] ?? part.replace(/-/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()),
+    item: `${site.domain}${isFa ? '/fa' : ''}/${breadcrumbParts.slice(0, index + 1).join('/')}`
   }))
 ];
 
@@ -116,15 +118,15 @@ const structuredData = {
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">{isFa ? 'رفتن به محتوای اصلی' : 'Skip to content'}</a>
     <header class="site-header">
       <div class="shell header-inner">
-        <a class="brand" href={homeHref} aria-label={`${site.name} home`}>
+        <a class="brand" href={homeHref} aria-label={isFa ? 'صفحه اصلی میثم قنبری' : `${site.name} home`}>
           <span class="brand-mark">MG</span>
           <span class="brand-name">{site.name}</span>
         </a>
 
-        <nav class="desktop-nav" aria-label="Primary navigation">
+        <nav class="desktop-nav" aria-label={isFa ? 'پیمایش اصلی' : 'Primary navigation'}>
           {items.map(([id, label]) => (
             <a href={isFa ? `/fa/${id}` : `/${id}`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
           ))}
@@ -136,7 +138,7 @@ const structuredData = {
         </div>
 
         <details class="mobile-nav">
-          <summary aria-label="Open navigation">☰</summary>
+          <summary aria-label={isFa ? 'بازکردن منو' : 'Open navigation'}>☰</summary>
           <div class="mobile-panel">
             {items.map(([id, label]) => (
               <a href={isFa ? `/fa/${id}` : `/${id}`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
@@ -167,10 +169,10 @@ const structuredData = {
         <div>
           <strong>{isFa ? 'ارتباط پژوهشی' : 'Research enquiries'}</strong>
           <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
-          {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">ORCID profile ↗</a></p>}
+          {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">{isFa ? 'پروفایل ORCID' : 'ORCID profile'} ↗</a></p>}
         </div>
       </div>
-      <nav class="shell footer-nav" aria-label="Footer navigation">
+      <nav class="shell footer-nav" aria-label={isFa ? 'پیمایش پایین صفحه' : 'Footer navigation'}>
         {items.map(([id, label]) => <a href={isFa ? `/fa/${id}` : `/${id}`}>{label}</a>)}
       </nav>
       <div class="shell footer-bottom">
