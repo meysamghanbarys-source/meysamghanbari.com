@@ -37,8 +37,7 @@ const articleSchema = {
   image={insight.portrait}
   imageAlt={insight.portraitAlt}
   ogType="article"
-  alternateAvailable={false}
-  languagePath="/fa/insights"
+  languagePath={`/fa/insights/${insight.slug}`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)}></script>
   <meta property="article:published_time" content={insight.datePublished} slot="head" />
