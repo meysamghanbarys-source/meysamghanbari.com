@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+import { insightsFa } from '../../../data/insights-fa';
+
+const domainSchema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage',
+  name: 'هوش، حکمرانی و تمدن',
+  url: `${site.domain}/fa/insights/intelligence-governance`,
+  inLanguage: 'fa-IR',
+  isPartOf: { '@type': 'CollectionPage', name: 'Future Systems', url: `${site.domain}/fa/insights` },
+  author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name, alternateName: site.alternateName }
+};
+---
+
+<BaseLayout
+  title="هوش، حکمرانی و تمدن"
+  description="مجموعه Future Systems میثم قنبری درباره ابرهوش، حکمرانی AI، تکنوکراسی، دموکراسی، برنامه‌ریزی بلندمدت و تمدن آینده."
+  lang="fa"
+  path="/fa/insights/intelligence-governance"
+  languagePath="/insights/intelligence-governance"
+  breadcrumbNames={['دیدگاه‌ها', 'هوش، حکمرانی و تمدن']}
+  image="/images/insights/meysam-ghanbari-superintelligence-human-enhancement.webp"
+  imageAlt="میثم قنبری در حال بررسی هوش و حکمرانی تمدن آینده"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(domainSchema)}></script>
+  <section class="future-domain-hero">
+    <div class="shell future-domain-hero-grid">
+      <div>
+        <a class="future-breadcrumb" href="/fa/insights">Future Systems ←</a>
+        <p class="eyebrow">دامنه ۰۱ · مجموعهٔ جاری</p>
+        <h1>هوش، حکمرانی و تمدن</h1>
+        <p>پانزده جستار به‌هم‌پیوسته دربارهٔ ابرهوش، مشروعیت سیاسی، تکنوکراسی، طراحی نهادی، تکامل انسان و هدف‌های تمدنی.</p>
+        <div class="future-domain-stats"><span><strong>۱۵</strong> دیدگاه</span><span><strong>۷</strong> خوشهٔ موضوعی</span><span><strong>۱</strong> پرسش تکرارشونده</span></div>
+      </div>
+      <figure><img src="/images/insights/meysam-ghanbari-superintelligence-human-enhancement.webp" alt="میثم قنبری در محیط پیشرفتهٔ هوش مصنوعی" width="1672" height="941" loading="eager" /></figure>
+    </div>
+  </section>
+
+  <section class="domain-question"><div class="shell"><span>پرسش تکرارشونده</span><h2>تابع هدف را چه کسی تعریف می‌کند؟</h2><p>پیش‌بینی می‌تواند بهتر و بهینه‌سازی سریع‌تر شود؛ اما وزن بقا، آزادی، شادی، طول عمر، برابری و پیشرفت را محاسبه به‌تنهایی تعیین نمی‌کند.</p></div></section>
+
+  <section class="section"><div class="shell"><div class="collection-sequence">{insightsFa.map((item) => <a class={`sequence-item theme-${item.theme}`} href={`/fa/insights/${item.slug}`}><div><span>{item.number}</span><small>{item.readTime} · {item.primaryKeyword}</small></div><h2>{item.title}</h2><p>{item.excerpt}</p><img src={item.conceptImage} alt="" loading="lazy" /><b>بازکردن دیدگاه ←</b></a>)}</div></div></section>
+
+  <section class="future-related-domains"><div class="shell"><p class="eyebrow">پیوندهای این دامنه</p><h2>معماری بزرگ‌تر Future Systems</h2><div><span>فناوری</span><span>Longevityscape</span><span>تمدن آینده</span><span>ارتقای انسان</span><span>فضا و گسترش</span><span>علم و جامعه</span></div><a class="button ghost" href="/fa/insights">بازگشت به اکوسیستم</a></div></section>
+</BaseLayout>

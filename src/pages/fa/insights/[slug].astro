@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+import { insightsFa } from '../../../data/insights-fa';
+
+export function getStaticPaths() {
+  return insightsFa.map((insight) => ({ params: { slug: insight.slug }, props: { insight } }));
+}
+
+const { insight } = Astro.props;
+const related = insight.related.map((slug) => insightsFa.find((item) => item.slug === slug)).filter(Boolean);
+const visualIndex = Number(insight.number) - 1;
+const portraitPositions = ['22%','34%','17%','42%','28%','11%','38%','25%','46%','72%','81%','18%','67%','31%','44%'];
+const heroHues = [0,8,-5,14,-9,4,18,-12,7,0,-7,16,5,-18,11];
+const canonical = `${site.domain}/fa/insights/${insight.slug}`;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${canonical}#article`,
+  headline: insight.title,
+  description: insight.metaDescription,
+  inLanguage: 'fa-IR',
+  image: [`${site.domain}${insight.portrait}`, `${site.domain}${insight.conceptImage}`],
+  datePublished: insight.datePublished,
+  dateModified: insight.dateModified,
+  mainEntityOfPage: canonical,
+  articleSection: insight.domain,
+  keywords: [insight.primaryKeyword, ...insight.keywords].join(', '),
+  author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name, alternateName: site.alternateName, url: site.domain },
+  publisher: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name, alternateName: site.alternateName, url: site.domain }
+};
+---
+
+<BaseLayout
+  title={insight.seoTitle.replace(' | میثم قنبری', '')}
+  description={insight.metaDescription}
+  lang="fa"
+  path={`/fa/insights/${insight.slug}`}
+  languagePath={`/insights/${insight.slug}`}
+  breadcrumbNames={['دیدگاه‌ها', insight.title]}
+  image={insight.portrait}
+  imageAlt={insight.portraitAlt}
+  ogType="article"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)}></script>
+  <meta property="article:published_time" content={insight.datePublished} slot="head" />
+  <meta property="article:modified_time" content={insight.dateModified} slot="head" />
+  <meta property="article:author" content={site.name} slot="head" />
+
+  <article class={`future-article theme-${insight.theme} visual-variant-${(visualIndex % 5) + 1}`} style={`--portrait-x:${portraitPositions[visualIndex]};--hero-hue:${heroHues[visualIndex]}deg`}>
+    <header class="future-article-hero">
+      <img class="future-article-backdrop" src={insight.portrait} alt="" aria-hidden="true" />
+      <div class="future-article-veil" aria-hidden="true"></div>
+      <div class="shell future-article-hero-grid">
+        <div class="future-article-heading">
+          <a class="future-breadcrumb" href="/fa/insights">Future Systems</a>
+          <span aria-hidden="true">/</span>
+          <a class="future-breadcrumb" href={`/fa/insights/${insight.domainSlug}`}>{insight.domain}</a>
+          <div class="future-meta"><span>دیدگاه {insight.number}</span><span>{insight.readTime} مطالعه</span><time datetime={insight.datePublished}>۱۸ سپتامبر ۲۰۲۶</time></div>
+          <h1>{insight.title}</h1>
+          <p>{insight.hook}</p>
+        </div>
+        <figure class="future-portrait-frame">
+          <img src={insight.portrait} alt={insight.portraitAlt} width="1672" height="941" loading="eager" />
+          <figcaption>میثم قنبری · Future Systems</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="shell future-article-layout">
+      <aside class="future-article-rail" aria-label="اطلاعات مقاله">
+        <span class="rail-label">دامنه</span><a href={`/fa/insights/${insight.domainSlug}`}>{insight.domain}</a>
+        <span class="rail-label">موضوع اصلی</span><strong>{insight.primaryKeyword}</strong>
+        <span class="rail-label">نویسنده</span><a href="/fa/about">میثم قنبری</a>
+        <span class="rail-label">کاوش</span><a href="/fa/insights">همهٔ دیدگاه‌های Future Systems</a>
+      </aside>
+
+      <div class="future-article-body">
+        <section class="future-thesis" aria-label="تز اصلی"><span>تز اصلی</span><p>{insight.thesis}</p></section>
+
+        {insight.sections.map((section, index) => (
+          <>
+            <section class="future-copy-section">
+              <span class="section-marker">0{index + 1}</span>
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </section>
+            {index === 1 && (
+              <figure class="future-concept-figure">
+                <img src={insight.conceptImage} alt={insight.conceptAlt} width="1200" height="675" loading="lazy" />
+                <figcaption>{insight.conceptAlt}؛ تصویر مفهومی اختصاصی Future Systems.</figcaption>
+              </figure>
+            )}
+          </>
+        ))}
+
+        <section class="future-tension"><span>پرسش دشوار</span><h2>{insight.tensionTitle}</h2>{insight.tension.map((paragraph) => <p>{paragraph}</p>)}</section>
+        <section class="future-conclusion"><span>جمع‌بندی</span><p>{insight.conclusion}</p></section>
+
+        <section class="future-faq" aria-labelledby="faq-title">
+          <p class="eyebrow">پرسش‌های خوانندگان</p><h2 id="faq-title">پرسش‌های تکمیلی</h2>
+          {insight.faqs.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </section>
+
+        <section class="future-sources" aria-labelledby="sources-title">
+          <p class="eyebrow">لایهٔ شواهد</p><h2 id="sources-title">منابع و مطالعهٔ بیشتر</h2>
+          <ol>{insight.sources.map((source) => <li><a href={source.url} target="_blank" rel="noreferrer"><strong>{source.name}</strong><span>{source.publisher} ↗</span></a></li>)}</ol>
+          <p class="source-note">منابع، زمینهٔ مستند نوشته را پشتیبانی می‌کنند. نتیجه‌گیری‌های تفسیری، دیدگاه میثم قنبری هستند و به‌عنوان حقیقت علمی قطعی ارائه نمی‌شوند.</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="shell future-author-box">
+      <img src="/images/insights/meysam-ghanbari-future-systems-author.webp" alt="میثم قنبری، پژوهشگر و نویسندهٔ Future Systems" width="1400" height="1050" loading="lazy" />
+      <div><p class="eyebrow">دربارهٔ نویسنده</p><h2>میثم قنبری</h2><p>پژوهشگری در حوزهٔ مخابرات پیشرفته، دیپ‌تک، سامانه‌های مبتنی بر هوش مصنوعی و فناوری‌ها و نهادهایی که می‌توانند آیندهٔ تمدن انسانی را شکل دهند.</p><div class="author-links"><a href="/fa/about">درباره میثم</a><a href="/fa/research">پژوهش</a><a href="/fa/contact">ارتباط و همکاری</a></div></div>
+    </section>
+
+    <section class="section future-related"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">ادامهٔ سیستم</p><h2>دیدگاه‌های مرتبط</h2></div><a class="text-link" href={`/fa/insights/${insight.domainSlug}`}>مشاهده دامنه ←</a></div>
+      <div class="future-card-grid">{related.map((item) => <a class={`future-card theme-${item.theme}`} href={`/fa/insights/${item.slug}`}><span>{item.number} · {item.readTime}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>مطالعه دیدگاه ←</b></a>)}</div>
+    </div></section>
+
+    <section class="future-collaboration"><div class="shell"><p class="eyebrow">پژوهش · آینده‌نگری · سیستم‌ها</p><h2>دربارهٔ یک سیستم آینده که ارزش طراحی دارد گفت‌وگو کنیم.</h2><p>پژوهش آینده‌محور، سخنرانی، همکاری میان‌رشته‌ای و گفت‌وگوهای فنی جدی از طریق صفحهٔ ارتباط قابل پیگیری هستند.</p><a class="button" href="/fa/contact">آغاز گفت‌وگو</a></div></section>
+  </article>
+</BaseLayout>

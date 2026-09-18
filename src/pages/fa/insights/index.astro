@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+import { insightsFa, insightDomainsFa } from '../../../data/insights-fa';
+
+const featured = [insightsFa[0], insightsFa[9], insightsFa[11]];
+const collectionSchema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage',
+  name: 'Future Systems — دیدگاه‌های میثم قنبری',
+  url: `${site.domain}/fa/insights`,
+  inLanguage: 'fa-IR',
+  description: 'مجموعه‌ای سازمان‌یافته از ایده‌ها دربارهٔ هوش مصنوعی، حکمرانی، تمدن، طول عمر، ارتقای انسان، فناوری و آیندهٔ بلندمدت.',
+  author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name, alternateName: site.alternateName },
+  hasPart: insightsFa.map((item) => ({ '@type': 'Article', name: item.title, url: `${site.domain}/fa/insights/${item.slug}`, inLanguage: 'fa-IR' }))
+};
+---
+
+<BaseLayout
+  title="Future Systems — دیدگاه‌ها"
+  description="Future Systems میثم قنبری؛ مجموعه‌ای تحلیلی درباره حکمرانی هوش مصنوعی، ابرهوش، نهادهای آینده، تمدن، طول عمر و ارتقای انسان."
+  lang="fa"
+  path="/fa/insights"
+  languagePath="/insights"
+  breadcrumbNames={['دیدگاه‌ها']}
+  image="/images/insights/meysam-ghanbari-future-systems-governance.webp"
+  imageAlt="میثم قنبری در محیط تحلیلی Future Systems"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)}></script>
+
+  <section class="future-hub-hero">
+    <img class="future-hub-bg" src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="" aria-hidden="true" />
+    <div class="future-hub-overlay" aria-hidden="true"></div>
+    <div class="shell future-hub-grid">
+      <div>
+        <p class="eyebrow">میثم قنبری · اکوسیستم فکری</p>
+        <span class="future-systems-mark" dir="ltr">FUTURE / SYSTEMS</span>
+        <h1>ایده‌هایی برای تمدنی که بتواند آیندهٔ خود را طراحی کند.</h1>
+        <p class="hub-lede">Future Systems مجموعه‌ای سازمان‌یافته از نوشته‌های میثم قنبری دربارهٔ هوش، حکمرانی، فناوری، طول عمر، ارتقای انسان و بقا و گسترش بلندمدت تمدن است.</p>
+        <div class="hero-actions"><a class="button" href="#latest-insights">مشاهده مجموعه</a><a class="button ghost" href="/fa/insights/intelligence-governance">ورود به دامنهٔ نخست</a></div>
+      </div>
+      <figure>
+        <img src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="میثم قنبری در حال بررسی هوش، حکمرانی و تمدن آینده" width="1672" height="941" loading="eager" />
+        <figcaption><strong>میثم قنبری</strong><span>پژوهشگر · متفکر سیستم‌ها · آینده‌نگر فناوری</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="future-manifesto"><div class="shell future-manifesto-grid">
+    <div><p class="eyebrow">فرض اصلی</p><h2>دولت، فناوری و تمدن همگی سیستم‌اند؛ و سیستم‌ها را می‌توان بررسی و بازطراحی کرد.</h2></div>
+    <div><p>این دیدگاه‌ها نتیجه‌گیری‌های سیاسی مورد اختلاف را به‌عنوان حقیقت علمی ارائه نمی‌کنند. شواهد، تفسیر، ارزش و پرسش‌های حل‌نشده از یکدیگر جدا می‌شوند.</p><p>چالش تکرارشونده ساده اما دشوار است: <strong>اگر جامعه به مسئله‌ای برای بهینه‌سازی تبدیل شود، تابع هدف را چه کسی تعیین می‌کند؟</strong></p></div>
+  </div></section>
+
+  <section class="section future-domains"><div class="shell">
+    <div class="section-heading"><div><p class="eyebrow">نقشهٔ فکری</p><h2>هفت دامنه؛ یک سیستم در حال گسترش.</h2></div><p>دامنه‌ها ایده‌ها را سازمان می‌دهند و دیدگاه‌ها قالب انتشار آن‌ها هستند.</p></div>
+    <div class="future-domain-grid">{insightDomainsFa.map((item, index) => item.state === 'active'
+      ? <a class="future-domain-card active" href={`/fa/insights/${item.slug}`}><span>0{index + 1}</span><small>دامنهٔ فعال</small><h3>{item.title}</h3><p>{item.description}</p><b>مشاهده دامنه ←</b></a>
+      : <article class="future-domain-card"><span>0{index + 1}</span><small>آمادهٔ توسعه</small><h3>{item.title}</h3><p>{item.description}</p></article>
+    )}</div>
+  </div></section>
+
+  <section class="section future-featured"><div class="shell">
+    <div class="section-heading"><div><p class="eyebrow">ایده‌های منتخب</p><h2>سه پرسش در مقیاس تمدن.</h2></div></div>
+    <div class="future-feature-grid">{featured.map((item, index) => <a class={`future-feature-item feature-${index + 1}`} href={`/fa/insights/${item.slug}`}><img src={item.portrait} alt={item.portraitAlt} loading={index === 0 ? 'eager' : 'lazy'} /><div><span>دیدگاه {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>مطالعه استدلال ←</b></div></a>)}</div>
+  </div></section>
+
+  <section id="latest-insights" class="section future-library"><div class="shell">
+    <div class="section-heading"><div><p class="eyebrow">مجموعهٔ جاری · ۲۰۲۶</p><h2>هوش، حکمرانی و تمدن</h2></div><a class="text-link" href="/fa/insights/intelligence-governance">مشاهده دامنه ←</a></div>
+    <div class="future-card-grid">{insightsFa.map((item) => <a class={`future-card theme-${item.theme}`} href={`/fa/insights/${item.slug}`}><span>{item.number} · {item.readTime}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><div class="future-card-tags"><i>{item.primaryKeyword}</i><i>{item.keywords[0]}</i></div><b>مطالعه دیدگاه ←</b></a>)}</div>
+  </div></section>
+
+  <section class="future-bridge"><div class="shell future-bridge-grid">
+    <div><p class="eyebrow">پژوهش × FUTURE SYSTEMS</p><h2>در کنار یک پورتفولیوی فعال دیپ‌تک.</h2><p>Future Systems جای پژوهش رسمی میثم قنبری در مخابرات نوری، سامانه‌های ماهواره‌ای، ارتباطات مبتنی بر AI و شبکه‌های نوظهور را نمی‌گیرد؛ آن را به پرسش‌های بزرگ‌تر آینده متصل می‌کند.</p></div>
+    <div><a href="/fa/research"><span>پژوهش</span><strong>مشاهده پورتفولیوی فنی</strong></a><a href="/fa/projects"><span>پروژه‌ها</span><strong>سامانه‌های مهندسی‌شده</strong></a><a href="/fa/contact"><span>همکاری</span><strong>آغاز یک گفت‌وگوی جدی</strong></a></div>
+  </div></section>
+</BaseLayout>
