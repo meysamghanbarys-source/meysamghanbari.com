@@ -48,7 +48,7 @@ export const site = {
   ogImage: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp',
   socialLinks: {
     scholar: '',
-    orcid: '',
+    orcid: 'https://orcid.org/0009-0000-6072-4199',
     ieee: '',
     linkedin: '',
     github: 'https://github.com/meysamghanbarys-source'
@@ -101,18 +101,24 @@ export const site = {
   },
   themes: {
     en: [
-      ['Optical Satellite Communications', 'Inter-satellite and space optical links, link budgets, receiver models and propagation constraints.'],
-      ['Free-Space Optical Systems', 'Beam propagation, pointing errors, atmospheric effects, outage, BER/SER and analytical optimization.'],
-      ['Optical Receiver & PAT Design', 'Receiver architecture, photodetector/TIA interfaces, acquisition, alignment, fine tracking and angle estimation.'],
-      ['Non-Terrestrial & Quantum Links', 'HAPS/UAV systems, quantum optical links, timing, polarization alignment and narrow-beam networking.'],
-      ['AI-Assisted Communication Systems', 'Physics-informed digital twins, deep-learning surrogates, estimation, localization and communication-system autonomy.']
+      ['Inter-Satellite Optical Communications', 'Optical crosslinks, multi-hop relaying, link budgets and propagation constraints for high-capacity space networks.'],
+      ['Advanced Optical Receivers', 'Receiver architecture, photodetector interfaces, detection, sensitivity and integrated communication-and-tracking concepts.'],
+      ['FSO & Optical Wireless', 'Gaussian-beam propagation, pointing error, atmospheric effects, outage, BER/SER and analytical optimization.'],
+      ['Satellite & NTN Systems', 'Communication architectures for satellites, HAPS and UAV platforms across emerging non-terrestrial networks.'],
+      ['Quantum Communications & Timing', 'Satellite QKD, polarization alignment, quantum hubs, synchronization and narrow-beam quantum links.'],
+      ['Terahertz Communications', 'Coverage, mobility and outage analysis for high-frequency aerial and non-terrestrial communication systems.'],
+      ['AI for Communication Systems', 'Deep-learning surrogates, sensing, estimation, localization and physics-informed communication-system intelligence.'],
+      ['HAPS & UAV Networks', 'Optical and terahertz links for aerial platforms, including multi-branch reception and beamwidth optimization.']
     ],
     fa: [
-      ['مخابرات نوری ماهواره‌ای', 'لینک‌های نوری بین‌ماهواره‌ای و فضایی، بودجه لینک، مدل گیرنده و محدودیت‌های انتشار.'],
-      ['سامانه‌های نوری فضای آزاد', 'انتشار پرتو، خطای نشانه‌روی، اثرات محیطی، outage، BER/SER و بهینه‌سازی تحلیلی.'],
-      ['طراحی گیرنده و PAT', 'معماری گیرنده، رابط فوتودیود/TIA، acquisition، alignment، رهگیری دقیق و تخمین زاویه.'],
-      ['شبکه‌های غیرزمینی و کوانتومی', 'سامانه‌های HAPS/UAV، لینک‌های کوانتومی، زمان‌بندی، هم‌ترازی قطبش و شبکه‌های narrow-beam.'],
-      ['سامانه‌های مخابراتی مبتنی بر هوش مصنوعی', 'دوقلوهای دیجیتال فیزیک‌محور، مدل‌های surrogate، تخمین، مکان‌یابی و خودکارسازی سامانه‌های مخابراتی.']
+      ['مخابرات نوری بین‌ماهواره‌ای', 'لینک‌های نوری فضایی، رله چندهاپی، بودجه لینک و محدودیت‌های انتشار برای شبکه‌های فضایی پرظرفیت.'],
+      ['گیرنده‌های نوری پیشرفته', 'معماری گیرنده، رابط آشکارساز، حساسیت و مفاهیم یکپارچه مخابرات و رهگیری.'],
+      ['FSO و مخابرات نوری بی‌سیم', 'انتشار پرتو گاوسی، خطای نشانه‌روی، اثرات جوی، outage، BER/SER و بهینه‌سازی تحلیلی.'],
+      ['سامانه‌های ماهواره‌ای و NTN', 'معماری‌های ارتباطی برای ماهواره، HAPS و UAV در شبکه‌های غیرزمینی نوظهور.'],
+      ['مخابرات و زمان‌بندی کوانتومی', 'QKD ماهواره‌ای، هم‌ترازی قطبش، هاب‌های کوانتومی و هم‌زمان‌سازی.'],
+      ['مخابرات تراهرتز', 'تحلیل پوشش، تحرک و outage برای سامانه‌های مخابراتی هوایی و غیرزمینی فرکانس بالا.'],
+      ['هوش مصنوعی برای مخابرات', 'مدل‌های surrogate، حسگری، تخمین، مکان‌یابی و هوشمندی فیزیک‌محور سامانه‌های مخابراتی.'],
+      ['شبکه‌های HAPS و UAV', 'لینک‌های نوری و تراهرتز برای پلتفرم‌های هوایی، دریافت چندشاخه و بهینه‌سازی beamwidth.']
     ]
   },
   sections: {
