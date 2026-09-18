@@ -53,12 +53,21 @@ const visual = sectionVisuals[section];
   {section === 'research' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="card-grid research-grid">
+        <div class="research-system-map">
+          <div class="system-map-core">
+            <span>MG</span>
+            <strong>Advanced communication systems</strong>
+            <small>Physics · architecture · intelligence</small>
+          </div>
+          <div class="system-map-orbit" aria-hidden="true"></div>
+        </div>
+        <div class="domain-grid research-domain-grid">
           {site.themes.en.map(([title, text], i) => (
-            <article class="card research-card">
-              <span class="card-index">0{i + 1}</span>
+            <article class={`domain-card domain-card-${(i % 4) + 1}`}>
+              <span class="domain-index">0{i + 1}</span>
               <h2>{title}</h2>
               <p>{text}</p>
+              <div class="domain-links"><a href="/projects">Related projects →</a><a href="/publications">Publications →</a></div>
             </article>
           ))}
         </div>
@@ -85,19 +94,21 @@ const visual = sectionVisuals[section];
   {section === 'projects' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="card-grid two project-detail-grid">
-          {projects.en.map((project, i) => (
-            <article class="card project-card project-card-large">
-              <span class="card-index">0{i + 1}</span>
-              <p class="tag">{project.tag}</p>
+        <div class="project-portfolio-grid project-index-grid">
+          {projects.en.map((project) => (
+            <a class="project-portfolio-card" href={project.href}>
+              <div class="project-card-top"><span>{project.number}</span><span>{project.status}</span></div>
+              <p class="tag">{project.category}</p>
               <h2>{project.title}</h2>
               <p>{project.summary}</p>
               <div class="project-meta">
-                <span>Architecture</span><span>Analysis</span><span>Simulation</span><span>Publication</span>
+                {project.tags.map((tag) => <span>{tag}</span>)}
               </div>
-            </article>
+              <span class="project-explore">Explore project <b>↗</b></span>
+            </a>
           ))}
         </div>
+        <div class="knowledge-graph-note"><span>RESEARCH GRAPH</span><p>Every project connects to its related publications and research domains, creating a navigable technical record rather than an isolated portfolio card.</p></div>
       </div>
     </section>
   )}
@@ -107,16 +118,15 @@ const visual = sectionVisuals[section];
       <div class="shell">
         <div class="publication-group">
           <div class="group-heading"><span>JOURNALS</span><strong>{journals.length}</strong></div>
-          <div class="publication-list">
-            {journals.map((paper) => (
-              <a class="publication-row publication-link" href={`/publications/${paper.slug}`}>
-                <div>
-                  <p class="tag">{paper.year} · {paper.status}</p>
-                  <h2>{paper.title}</h2>
-                  <p>{paper.authors}</p>
-                  <p>{paper.venue}</p>
-                </div>
-                <span class="publication-arrow">↗</span>
+          <div class="publication-card-grid">
+            {journals.map((paper, index) => (
+              <a class="publication-card" href={`/publications/${paper.slug}`}>
+                <div class="publication-card-head"><span>J{String(index + 1).padStart(2, '0')}</span><span>{paper.year} · {paper.venue}</span></div>
+                <span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
+                <h2>{paper.title}</h2>
+                <p>{paper.summaryEn}</p>
+                <div class="tag-cloud">{paper.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}</div>
+                <span class="project-explore">Explore research <b>↗</b></span>
               </a>
             ))}
           </div>
@@ -124,16 +134,15 @@ const visual = sectionVisuals[section];
 
         <div class="publication-group">
           <div class="group-heading"><span>CONFERENCES</span><strong>{conferences.length}</strong></div>
-          <div class="publication-list">
-            {conferences.map((paper) => (
-              <a class="publication-row publication-link" href={`/publications/${paper.slug}`}>
-                <div>
-                  <p class="tag">{paper.year} · {paper.status}</p>
-                  <h2>{paper.title}</h2>
-                  <p>{paper.authors}</p>
-                  <p>{paper.venue}</p>
-                </div>
-                <span class="publication-arrow">↗</span>
+          <div class="publication-card-grid">
+            {conferences.map((paper, index) => (
+              <a class="publication-card" href={`/publications/${paper.slug}`}>
+                <div class="publication-card-head"><span>C{String(index + 1).padStart(2, '0')}</span><span>{paper.year} · {paper.venue}</span></div>
+                <span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
+                <h2>{paper.title}</h2>
+                <p>{paper.summaryEn}</p>
+                <div class="tag-cloud">{paper.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}</div>
+                <span class="project-explore">Explore research <b>↗</b></span>
               </a>
             ))}
           </div>
@@ -146,10 +155,18 @@ const visual = sectionVisuals[section];
     <section class="section section-tight">
       <div class="shell">
         {videos.length === 0 ? (
-          <div class="empty-state">
-            <span class="empty-icon">▶</span>
-            <h2>No public videos listed</h2>
-            <p>Research presentations and technical media will be listed when publicly available.</p>
+          <div class="talk-library-empty">
+            <div class="talk-stage">
+              <img src="/images/media/meysam-ghanbari-research-presentation.webp" alt="Meysam Ghanbari during a professional research presentation" width="1672" height="941" loading="eager" />
+              <span>PUBLIC MEDIA ARCHIVE</span>
+            </div>
+            <div>
+              <p class="eyebrow">VERIFIED RECORDS ONLY</p>
+              <h2>The speaking library is ready for confirmed public media.</h2>
+              <p>No public videos are currently listed. Future records will identify the event, research topic, year, context and verified source rather than displaying uncontextualized embeds.</p>
+              <div class="talk-format-grid"><span>Conference presentations</span><span>Technical explainers</span><span>Research interviews</span></div>
+              <a class="button ghost" href="/contact">Speaking & presentation enquiries</a>
+            </div>
           </div>
         ) : (
           <div class="card-grid three">
@@ -164,10 +181,13 @@ const visual = sectionVisuals[section];
     <section class="section section-tight">
       <div class="shell">
         {insights.length === 0 ? (
-          <div class="empty-state insight-empty">
-            <span class="empty-icon">✦</span>
-            <h2>Perspectives</h2>
-            <p>No technical perspectives have been published yet.</p>
+          <div>
+            <div class="insight-intro"><p class="eyebrow">KNOWLEDGE PLATFORM</p><h2>Technical insight without filler.</h2><p>No insight articles have been published yet. When added, they will translate real research questions into rigorous, accessible explanations—not generic commentary.</p></div>
+            <div class="insight-category-grid">
+              {['Optical Communications', 'Space Networks', 'Quantum Systems', 'AI for Communications', '6G / NTN', 'Research Commentary'].map((category, index) => (
+                <article><span>0{index + 1}</span><h3>{category}</h3><p>Future verified analysis and research explainers.</p></article>
+              ))}
+            </div>
           </div>
         ) : (
           <div class="card-grid three">
@@ -182,11 +202,12 @@ const visual = sectionVisuals[section];
     <section class="section section-tight">
       <div class="shell">
         {upcoming.length === 0 ? (
-          <div class="upcoming-empty">
+          <div class="upcoming-empty upcoming-system">
             <div class="upcoming-orbit" aria-hidden="true"></div>
-            <p class="eyebrow">CALENDAR</p>
-            <h2>No upcoming public appearances are currently listed.</h2>
-            <p>For invitations, research visits or speaking enquiries, please use the contact page.</p>
+            <p class="eyebrow">PUBLIC SCHEDULE</p>
+            <h2>No confirmed public appearances are currently listed.</h2>
+            <p>Confirmed events and planned or prospective activity are kept separate. Nothing is presented as attendance or participation before it is verified.</p>
+            <div class="status-legend"><span><i class="confirmed"></i>Confirmed</span><span><i class="planned"></i>Planned / prospective</span><span><i class="completed"></i>Completed</span></div>
             <a class="button ghost" href="/contact">Send an invitation</a>
           </div>
         ) : (
@@ -224,12 +245,14 @@ const visual = sectionVisuals[section];
           <img class="about-portrait" src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="Meysam Ghanbari in a satellite and optical communications research environment" />
         </div>
         <div class="prose">
-          <p class="eyebrow">PROFILE</p>
-          <h2>Satellite, optical and advanced communication systems</h2>
-          <p>Meysam Ghanbari is a researcher and engineer working across optical and satellite communications, with emphasis on inter-satellite optical links, free-space optical systems, receiver architecture and beam-control problems.</p>
-          <p>His technical work includes end-to-end analytical and Monte Carlo modeling for link budgets, receiver noise, beam propagation, alignment, BER/SER and outage, alongside FPGA development, MATLAB/Python/C, physics-based digital twins and industrial automation.</p>
+          <p class="eyebrow">IDENTITY</p>
+          <h2>Research at the intersection of light, space and intelligent networks.</h2>
+          <p>Meysam Ghanbari is a researcher and communication-systems engineer working across optical and satellite communications. His research connects theoretical performance analysis with receiver architecture, beam-control constraints and emerging non-terrestrial networks.</p>
 
-          <h2>Current research focus</h2>
+          <h2>Research direction</h2>
+          <p>Current work examines how highly directional links can be made more robust, efficient and operationally useful—from inter-satellite optical relaying and integrated receivers to quantum timing, terahertz coverage and AI-assisted sensing.</p>
+
+          <h2>Technical expertise</h2>
           <ul>
             <li>Inter-satellite optical links and optical satellite communications</li>
             <li>Free-space optical and non-terrestrial communication systems</li>
@@ -239,8 +262,13 @@ const visual = sectionVisuals[section];
             <li>Analytical modeling, Monte Carlo simulation and physics-based digital twins</li>
           </ul>
 
-          <h2>Engineering background</h2>
-          <p>Additional engineering experience includes FPGA and digital systems, signal-processing implementation, PSpice and Proteus, Siemens PLC programming, SCL, STEP 7, WinCC and Siemens Twin Builder.</p>
+          <h2>Research philosophy</h2>
+          <p>The work is organized around a systems question: how should propagation, optics, detectors, algorithms and network behavior be designed together rather than optimized in isolation? Analytical derivation, simulation and implementation-aware modeling are used to keep proposed architectures technically interpretable.</p>
+
+          <h2>Future direction</h2>
+          <p>The long-term direction is toward advanced communication systems that bridge academic research and deep-tech engineering across space communications, photonics, quantum infrastructure and intelligent networks.</p>
+
+          <div class="milestone-grid"><div><strong>Optical systems</strong><span>Links, receivers and tracking</span></div><div><strong>Network scale</strong><span>Satellite, aerial and city-scale systems</span></div><div><strong>Methods</strong><span>Analysis, simulation and AI</span></div></div>
 
           <div class="about-actions">
             <a class="button" href="/publications">Publication library</a>
@@ -253,21 +281,48 @@ const visual = sectionVisuals[section];
 
   {section === 'contact' && (
     <section class="section section-tight">
-      <div class="shell contact-grid">
-        <a class="contact-card" href={`mailto:${site.contactEmail}`}>
-          <span class="tag">DIRECT EMAIL</span>
-          <h2>{site.contactEmail}</h2>
-          <p>For research collaboration, industry R&D, technical consulting, speaking, media and deep-tech enquiries.</p>
-          <span class="text-link">Send email →</span>
-        </a>
-        <div class="contact-card contact-photo-card">
-          <img src="/images/media/meysam-ghanbari-research-workspace.webp" alt="Meysam Ghanbari working at a research desk" loading="lazy" />
-          <div class="contact-photo-copy">
-            <span class="tag">ENQUIRY TYPES</span>
-            <p>Research collaboration · Industry R&D · Technical consulting · Speaking · Media · Deep-tech opportunities</p>
+      <div class="shell contact-layout">
+        <div class="contact-paths">
+          <p class="eyebrow">START WITH THE RIGHT PATH</p>
+          <h2>Serious enquiries, clearly routed.</h2>
+          <p>Share the technical context, organization and intended form of collaboration. Messages remain concise and go directly to Meysam Ghanbari.</p>
+          <div class="contact-path-grid">
+            <div><strong>Research collaboration</strong><span>Joint studies, papers and research visits</span></div>
+            <div><strong>Industry & R&D</strong><span>Optical, satellite and advanced communication challenges</span></div>
+            <div><strong>Technical consultation</strong><span>System modeling, architecture and analysis</span></div>
+            <div><strong>Speaking & media</strong><span>Presentations, interviews and technical discussion</span></div>
           </div>
+          <a class="direct-email" href={`mailto:${site.contactEmail}`}><small>DIRECT EMAIL</small><strong>{site.contactEmail}</strong><span>↗</span></a>
         </div>
+
+        <form class="enquiry-form" data-enquiry-form data-email={site.contactEmail}>
+          <div class="form-head"><span>STRUCTURED ENQUIRY</span><small>All fields except organization are required</small></div>
+          <label>Name<input type="text" name="name" autocomplete="name" required /></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+          <label>Organization / University<input type="text" name="organization" autocomplete="organization" /></label>
+          <label>Area of Interest<input type="text" name="area" placeholder="e.g. inter-satellite optical links" required /></label>
+          <label>Type of Request
+            <select name="requestType" required>
+              <option value="">Select a request type</option>
+              <option>Research Collaboration</option><option>Technical Consultation</option><option>Project Guidance</option><option>Industrial R&D</option><option>Visiting Research</option><option>Speaking / Presentation</option><option>Other</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows="6" required></textarea></label>
+          <button class="button" type="submit">Prepare enquiry email</button>
+          <p class="form-note">This opens the visitor’s email application with the structured message prepared for review before sending.</p>
+        </form>
       </div>
+      <script>
+        const form = document.querySelector<HTMLFormElement>('[data-enquiry-form]');
+        form?.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const data = new FormData(form);
+          const recipient = form.getAttribute('data-email');
+          const subject = `${data.get('requestType')} enquiry — ${data.get('area')}`;
+          const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nOrganization / University: ${data.get('organization') || 'Not provided'}\nArea of Interest: ${data.get('area')}\nType of Request: ${data.get('requestType')}\n\nMessage:\n${data.get('message')}`;
+          window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+      </script>
     </section>
   )}
 </BaseLayout>
