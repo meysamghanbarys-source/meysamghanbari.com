@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects, publications } from '../../data/library';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return projects.en.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const path = `/projects/${project.slug}`;
+const relatedPublications = publications.filter((paper) => project.relatedPublicationSlugs.includes(paper.slug));
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.title,
+  description: project.summary,
+  url: `${site.domain}${path}`,
+  creator: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name },
+  about: project.tags,
+  isPartOf: { '@type': 'WebSite', '@id': `${site.domain}/#website` }
+};
+---
+
+<BaseLayout title={project.title} description={project.summary} lang="en" path={path} image="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alternateAvailable={false} languagePath="/fa/projects">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(projectSchema)}></script>
+
+  <section class="project-hero">
+    <div class="space-grid-bg" aria-hidden="true"></div>
+    <div class="project-hero-orbit" aria-hidden="true"></div>
+    <div class="shell project-hero-grid">
+      <div>
+        <a class="back-link" href="/projects">← Projects & technologies</a>
+        <div class="project-kicker"><span>{project.number}</span><span>{project.category}</span><span>{project.status}</span></div>
+        <h1>{project.title}</h1>
+        <p>{project.summary}</p>
+        <div class="project-meta">{project.tags.map((tag) => <span>{tag}</span>)}</div>
+      </div>
+      <div class="project-hero-panel">
+        <small>TECHNICAL DOMAIN</small><strong>{project.tag}</strong>
+        <div><span>Problem</span><span>Architecture</span><span>Analysis</span><span>Evidence</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section project-story">
+    <div class="shell project-story-grid">
+      <article class="project-story-main">
+        <section><p class="eyebrow">01 · THE PROBLEM</p><h2>What this project addresses</h2><p>{project.problem}</p></section>
+        <section><p class="eyebrow">02 · THE IDEA</p><h2>System concept</h2><p>{project.idea}</p></section>
+        <section><p class="eyebrow">03 · TECHNICAL APPROACH</p><h2>How the research is structured</h2><div class="method-grid">{project.approach.map((item, index) => <div><span>0{index + 1}</span><strong>{item}</strong></div>)}</div></section>
+        <section><p class="eyebrow">04 · KEY CONTRIBUTIONS</p><h2>What the research contributes</h2><ul class="contribution-list">{project.contributions.map((item) => <li>{item}</li>)}</ul></section>
+        <section><p class="eyebrow">05 · WHY IT MATTERS</p><h2>Engineering relevance</h2><p>{project.relevance}</p></section>
+
+        {relatedPublications.length > 0 && (
+          <section><p class="eyebrow">RELATED PUBLICATION</p><h2>Research record</h2><div class="related-records">{relatedPublications.map((paper) => <a href={`/publications/${paper.slug}`}><span>{paper.year} · {paper.status}</span><strong>{paper.title}</strong><small>{paper.venue} ↗</small></a>)}</div></section>
+        )}
+      </article>
+
+      <aside class="project-story-sidebar">
+        <div class="side-card sticky-card"><p class="eyebrow">PROJECT AT A GLANCE</p><dl><div><dt>Category</dt><dd>{project.category}</dd></div><div><dt>Status</dt><dd>{project.status}</dd></div><div><dt>Researcher</dt><dd>Meysam Ghanbari</dd></div><div><dt>Methods</dt><dd>{project.tags.join(' · ')}</dd></div></dl></div>
+        <div class="side-card"><p class="eyebrow">RELATED RESEARCH</p><p>Explore the wider research ecosystem behind this project.</p><a class="text-link" href="/research">Research domains →</a><a class="text-link" href="/publications">Publication library →</a></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-collaboration">
+    <div class="shell collaboration-card">
+      <div><p class="eyebrow">COLLABORATION OPPORTUNITY</p><h2>Discuss a related research or engineering challenge.</h2><p>Research, industrial R&D and technical consultation enquiries connected to this project can be directed to Meysam Ghanbari.</p></div>
+      <a class="button light" href="/contact">Request collaboration</a>
+    </div>
+  </section>
+</BaseLayout>
