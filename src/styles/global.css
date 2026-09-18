@@ -1328,7 +1328,19 @@ body::before {
 .event-related-links span { color: var(--accent); font-size: 9px; font-weight: 850; letter-spacing: .13em; }
 .event-related-links strong { margin: 24px 0 14px; font-size: 15px; line-height: 1.35; }
 .event-related-links small { color: var(--muted); }
-.page-hero-upcoming .page-hero-sidecard img { object-fit: contain; background: #07101a; }
+.page-hero-upcoming .page-hero-sidecard img {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #07101a;
+}
+
+@media (min-width: 1151px) {
+  .page-hero-upcoming .page-hero-shell {
+    grid-template-columns: minmax(0, 1fr) 440px;
+    align-items: center;
+  }
+}
 
 .media-grid-v2 {
   display: grid;
