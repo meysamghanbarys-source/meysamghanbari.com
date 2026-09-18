@@ -9,6 +9,7 @@ interface Props {
   path?: string;
   image?: string;
   imageAlt?: string;
+  ogType?: 'website' | 'article';
   alternateAvailable?: boolean;
   languagePath?: string;
 }
@@ -20,6 +21,7 @@ const {
   path = '/',
   image = site.ogImage,
   imageAlt = `${site.name} — ${site.role.en}`,
+  ogType = 'website',
   alternateAvailable = true,
   languagePath
 } = Astro.props;
@@ -96,7 +98,7 @@ const structuredData = {
     <link rel="alternate" hreflang="x-default" href={site.domain} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
