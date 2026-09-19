@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { achievedRecords, futureTargets, opticalRecords, recordCategories, statusLabels } from '../data/optical-records';
+import { site } from '../data/site';
+
+interface Props { lang: 'en' | 'fa' }
+const { lang } = Astro.props;
+const isFa = lang === 'fa';
+const prefix = isFa ? '/fa' : '';
+const path = `${prefix}/research/optical-communications-records/`;
+const alternatePath = isFa ? '/research/optical-communications-records/' : '/fa/research/optical-communications-records/';
+const title = isFa ? 'رصدخانه رکوردهای مخابرات نوری و ماهواره‌ای' : 'Optical & Satellite Communications Record Observatory';
+const description = isFa
+  ? 'رکوردها، نخستین نمایش‌ها، بنچمارک‌های فنی و اهداف آینده در مخابرات لیزری، ماهواره‌ای، کوانتومی و انتقال توان نوری؛ با منابع اولیه و روش مقایسه شفاف.'
+  : 'Verified records, world firsts, public benchmarks and future targets in laser, satellite, quantum and optical-power links—with primary sources and transparent comparison rules.';
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: title,
+  description,
+  numberOfItems: opticalRecords.length,
+  itemListElement: opticalRecords.map((record, index) => ({
+    '@type': 'ListItem', position: index + 1,
+    url: `${site.domain}${prefix}/research/optical-communications-records/${record.slug}/`,
+    name: record.title[lang]
+  }))
+};
+const labels = isFa ? {
+  kicker: 'RECORD OBSERVATORY · 2026', lead: 'نقشه‌ای مستند از مرزهای مخابرات با نور',
+  intro: 'از ۲۰۰ گیگابیت‌برثانیه در مدار پایین تا دریافت فوتون در فاصلهٔ ۴۶۰ میلیون کیلومتر؛ این رصدخانه رکوردهای ناسازگار را در یک جدول جعلی رتبه‌بندی نمی‌کند. هر نتیجه در کلاس لینک، فاصله، نرخ، دقت و وضعیت واقعی خودش خوانده می‌شود.',
+  explore: 'کنسول‌های رکورد', all: 'همه', open: 'بازکردن پرونده', future: 'اهداف آینده', futureIntro: 'این موارد رکورد محقق‌شده نیستند. آن‌ها اهداف عمومی پروژه‌ها هستند و با رنگ و وضعیت جدا نمایش داده می‌شوند.',
+  method: 'قاعدهٔ اعتبارسنجی', methodTitle: '«بهترین» فقط زمانی استفاده می‌شود که مدرک اجازه بدهد.',
+  methodText: 'منبع رسمی یا مقالهٔ فنی باید صراحتاً رکورد یا نخستین نمایش را پشتیبانی کند. در غیر این صورت، نتیجه به‌عنوان بنچمارک عمومی ثبت می‌شود. برد، نرخ داده، دقت رهگیری، توان، نوع مدار و مدل اعتماد کوانتومی هرگز بدون توضیح کنار هم مقایسه نمی‌شوند.',
+  reviewed: 'آخرین بازبینی منابع: ۱۹ سپتامبر ۲۰۲۶', related: 'پژوهش مرتبط میثم قنبری',
+  relatedTitle: 'از رکورد جهانی تا مسئلهٔ مهندسی بعدی', relatedText: 'این رصدخانه به پروژه‌های میثم قنبری در گیرنده‌های نوری، رهگیری، رلهٔ بین‌ماهواره‌ای و انتقال هم‌زمان اطلاعات و انرژی متصل است.',
+  projects: 'مشاهده پروژه‌های مرتبط', contact: 'بحث درباره یک مسئله فنی', status: 'وضعیت', holder: 'تیم / سامانه', distance: 'فاصله یا هندسه'
+} : {
+  kicker: 'RECORD OBSERVATORY · 2026', lead: 'A sourced map of communication at the edge of light',
+  intro: 'From 200 Gbit/s in low Earth orbit to photon recovery across 460 million kilometres, this observatory does not force incompatible achievements into a false leaderboard. Every result is read in its own link class, distance, rate, precision and evidence context.',
+  explore: 'Record consoles', all: 'All', open: 'Open record file', future: 'Future targets', futureIntro: 'These are not achieved records. They are public programme targets, deliberately separated and labelled.',
+  method: 'Verification rule', methodTitle: '“Best” is used only when the evidence supports it.',
+  methodText: 'An official source or technical paper must explicitly support a record or world-first claim. Otherwise, the result is classified as a public benchmark. Range, data rate, tracking precision, power, orbit class and quantum trust model are never compared without context.',
+  reviewed: 'Sources last reviewed: 19 September 2026', related: 'Related research by Meysam Ghanbari',
+  relatedTitle: 'From a global benchmark to the next engineering problem', relatedText: 'The observatory connects to Meysam Ghanbari’s work on optical receivers, tracking, inter-satellite relays and joint information-energy transfer.',
+  projects: 'Explore related projects', contact: 'Discuss a technical problem', status: 'Status', holder: 'Team / system', distance: 'Distance or geometry'
+};
+---
+
+<BaseLayout title={title} description={description} lang={lang} path={path} languagePath={alternatePath} image="/images/records/optical-record-observatory.svg" imageAlt={isFa ? 'رصدخانه تصویری رکوردهای مخابرات نوری و ماهواره‌ای' : 'Visual observatory of optical and satellite communication records'}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
+  <section class="record-hero">
+    <div class="record-hero-visual" aria-hidden="true"></div>
+    <div class="shell record-hero-grid">
+      <div>
+        <a class="back-link" href={`${prefix}/research`}>{isFa ? '← پژوهش' : '← Research'}</a>
+        <p class="eyebrow">{labels.kicker}</p>
+        <h1>{title}</h1>
+        <p class="record-hero-lead">{labels.lead}</p>
+        <p class="record-hero-intro">{labels.intro}</p>
+      </div>
+      <div class="record-hero-metrics" aria-label={isFa ? 'چند شاخص منتخب' : 'Selected headline metrics'}>
+        <div><strong>200</strong><span>Gbit/s</span><small>TBIRD · LEO</small></div>
+        <div><strong>460M</strong><span>km</span><small>DSOC · DEEP SPACE</small></div>
+        <div><strong>30</strong><span>ps</span><small>QUANTUM TIMING</small></div>
+        <div><strong>&gt;800</strong><span>W</span><small>8.6 KM · POWER</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section record-console-section">
+    <div class="shell">
+      <div class="record-section-head"><div><p class="eyebrow">{labels.explore}</p><h2>{isFa ? 'یک معیار را انتخاب کنید.' : 'Select a measurement axis.'}</h2></div><span>{achievedRecords.length} {isFa ? 'پروندهٔ محقق‌شده' : 'achieved files'}</span></div>
+      <div class="record-tabs" role="tablist" aria-label={labels.explore}>
+        {recordCategories.map((category, index) => <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-record-tab={category.id}><span>{category.code}</span>{category[lang]}</button>)}
+      </div>
+      <div class="record-panels">
+        {recordCategories.map((category, index) => {
+          const records = achievedRecords.filter((record) => record.categoryIds.includes(category.id));
+          return <section class="record-panel" id={category.id} role="tabpanel" data-record-panel={category.id} hidden={index !== 0}>
+            <div class="record-panel-intro"><p>{isFa ? category.descriptionFa : category.descriptionEn}</p><span>{String(records.length).padStart(2, '0')} {isFa ? 'نتیجه' : 'results'}</span></div>
+            <div class="record-grid">
+              {records.map((record, recordIndex) => <a class="record-card" href={`${prefix}/research/optical-communications-records/${record.slug}/`}>
+                <div class="record-card-top"><span>{category.code}-{String(recordIndex + 1).padStart(2, '0')}</span><span class={`record-status status-${record.status}`}>{statusLabels[record.status][lang]}</span></div>
+                <strong class="record-metric">{record.metric[lang]}</strong>
+                <h3>{record.title[lang]}</h3>
+                <p>{record.summary[lang]}</p>
+                <dl><div><dt>{labels.holder}</dt><dd>{record.holder[lang]}</dd></div><div><dt>{labels.distance}</dt><dd>{record.distance[lang]}</dd></div></dl>
+                <span class="record-open">{labels.open} <b>↗</b></span>
+              </a>)}
+            </div>
+          </section>;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section record-future-section">
+    <div class="shell">
+      <div class="record-section-head"><div><p class="eyebrow">FORECAST LAYER</p><h2>{labels.future}</h2><p>{labels.futureIntro}</p></div><span>{futureTargets.length} {isFa ? 'هدف عمومی' : 'public targets'}</span></div>
+      <div class="future-record-grid">
+        {futureTargets.map((record, index) => <a href={`${prefix}/research/optical-communications-records/${record.slug}/`}>
+          <span class="future-index">F-{String(index + 1).padStart(2, '0')}</span><strong>{record.metric[lang]}</strong><h3>{record.title[lang]}</h3><p>{record.summary[lang]}</p><small>{record.year}</small>
+        </a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section record-method-section">
+    <div class="shell record-method-grid">
+      <div><p class="eyebrow">{labels.method}</p><h2>{labels.methodTitle}</h2></div>
+      <div><p>{labels.methodText}</p><ul><li>{isFa ? 'رکورد تأییدشده: منبع اولیه صراحتاً ادعا را پشتیبانی می‌کند.' : 'Verified record: a primary source explicitly supports the claim.'}</li><li>{isFa ? 'بنچمارک: عدد معتبر است، اما مقایسهٔ جهانی قابل دفاع نیست.' : 'Benchmark: the number is credible, but a universal ranking is not defensible.'}</li><li>{isFa ? 'هدف آینده: برنامه یا ظرفیت اعلام‌شده، نه عملکرد محقق‌شده.' : 'Future target: announced programme or capacity, not achieved performance.'}</li></ul><small>{labels.reviewed}</small></div>
+    </div>
+  </section>
+
+  <section class="section record-related-section"><div class="shell record-related-grid"><img src="/images/records/optical-precision-tracking.svg" alt={isFa ? 'نمودار نشانه‌روی و رهگیری دقیق لینک نوری' : 'Precision pointing and tracking diagram for an optical link'} loading="lazy" /><div><p class="eyebrow">{labels.related}</p><h2>{labels.relatedTitle}</h2><p>{labels.relatedText}</p><div class="record-actions"><a class="button" href={`${prefix}/projects`}>{labels.projects}</a><a class="button ghost" href={`${prefix}/contact`}>{labels.contact}</a></div></div></div></section>
+
+  <script is:inline>
+    const activateRecordPanel = (id) => {
+      const activeButton = document.querySelector(`[data-record-tab="${id}"]`);
+      if (!activeButton) return;
+      document.querySelectorAll('[data-record-tab]').forEach((item) => item.setAttribute('aria-selected', item === activeButton ? 'true' : 'false'));
+      document.querySelectorAll('[data-record-panel]').forEach((panel) => { panel.hidden = panel.getAttribute('data-record-panel') !== id; });
+    };
+    document.querySelectorAll('[data-record-tab]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.getAttribute('data-record-tab');
+        activateRecordPanel(id);
+        history.replaceState(null, '', `#${id}`);
+      });
+    });
+    if (location.hash) activateRecordPanel(location.hash.slice(1));
+  </script>
+</BaseLayout>
