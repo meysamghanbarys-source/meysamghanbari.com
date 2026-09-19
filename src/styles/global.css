@@ -2348,7 +2348,7 @@ body::before {
 .research-record-copy > b { color: var(--accent); font-size: 12px; }
 
 .record-hero { position: relative; overflow: hidden; min-height: 760px; padding: 125px 0 88px; border-bottom: 1px solid var(--line); background: #02070f; }
-.record-hero-visual { position: absolute; inset: 0; opacity: .49; background: linear-gradient(90deg, rgba(2,7,15,.96) 0%, rgba(2,7,15,.74) 50%, rgba(2,7,15,.14)), url('/images/records/optical-record-observatory.svg') 70% center/cover no-repeat; }
+.record-hero-visual { position: absolute; inset: 0; opacity: .56; background: linear-gradient(90deg, rgba(2,7,15,.97) 0%, rgba(2,7,15,.77) 48%, rgba(2,7,15,.14)), url('/images/records/optical-record-observatory-photorealistic.webp') 70% center/cover no-repeat; }
 .record-hero::after { content: ""; position: absolute; inset: auto 0 0; height: 260px; background: linear-gradient(transparent,#02070f); pointer-events: none; }
 .record-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.3fr .7fr; gap: 80px; align-items: end; }
 .record-hero h1 { max-width: 1000px; margin: 22px 0; font-size: clamp(58px,7vw,102px); line-height: .94; letter-spacing: -.065em; }
