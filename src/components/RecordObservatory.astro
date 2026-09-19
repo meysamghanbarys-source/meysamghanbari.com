@@ -46,7 +46,7 @@ const labels = isFa ? {
 };
 ---
 
-<BaseLayout title={title} description={description} lang={lang} path={path} languagePath={alternatePath} image="/images/records/optical-record-observatory.svg" imageAlt={isFa ? 'رصدخانه تصویری رکوردهای مخابرات نوری و ماهواره‌ای' : 'Visual observatory of optical and satellite communication records'}>
+<BaseLayout title={title} description={description} lang={lang} path={path} languagePath={alternatePath} image="/images/records/optical-record-observatory-photorealistic.webp" imageAlt={isFa ? 'نمای سینمایی لینک‌های مخابرات نوری در مدار زمین، ماه و اعماق فضا' : 'Cinematic panorama of optical links across Earth orbit, lunar distance and deep space'}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
   <section class="record-hero">
     <div class="record-hero-visual" aria-hidden="true"></div>
@@ -112,7 +112,7 @@ const labels = isFa ? {
     </div>
   </section>
 
-  <section class="section record-related-section"><div class="shell record-related-grid"><img src="/images/records/optical-precision-tracking.svg" alt={isFa ? 'نمودار نشانه‌روی و رهگیری دقیق لینک نوری' : 'Precision pointing and tracking diagram for an optical link'} loading="lazy" /><div><p class="eyebrow">{labels.related}</p><h2>{labels.relatedTitle}</h2><p>{labels.relatedText}</p><div class="record-actions"><a class="button" href={`${prefix}/projects`}>{labels.projects}</a><a class="button ghost" href={`${prefix}/contact`}>{labels.contact}</a></div></div></div></section>
+  <section class="section record-related-section"><div class="shell record-related-grid"><img src="/images/records/optical-precision-tracking-photorealistic.webp" alt={isFa ? 'رندر واقع‌گرایانه ترمینال نوری فضایی و رهگیری دقیق پرتو لیزر' : 'Photorealistic space optical terminal performing precision laser tracking'} loading="lazy" /><div><p class="eyebrow">{labels.related}</p><h2>{labels.relatedTitle}</h2><p>{labels.relatedText}</p><div class="record-actions"><a class="button" href={`${prefix}/projects`}>{labels.projects}</a><a class="button ghost" href={`${prefix}/contact`}>{labels.contact}</a></div></div></div></section>
 
   <script is:inline>
     const activateRecordPanel = (id) => {
