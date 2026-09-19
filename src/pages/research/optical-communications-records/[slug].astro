@@ -1,0 +1,10 @@
+---
+import OpticalRecordDetail from '../../../components/OpticalRecordDetail.astro';
+import { opticalRecords } from '../../../data/optical-records';
+
+export function getStaticPaths() {
+  return opticalRecords.map((record) => ({ params: { slug: record.slug }, props: { record } }));
+}
+const { record } = Astro.props;
+---
+<OpticalRecordDetail lang="en" record={record} />
