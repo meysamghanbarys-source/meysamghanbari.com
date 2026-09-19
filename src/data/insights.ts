@@ -73,7 +73,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'superintelligence and future governance', keywords: ['governance beyond left and right', 'AI governance', 'future political systems'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'cyan-violet',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari in a future-systems environment exploring AI governance beyond left and right',
-    conceptImage: '/images/insights/concepts/beyond-left-right.svg', conceptAlt: 'Conceptual diagram showing political binaries converging into an adaptive governance system',
+    conceptImage: '/images/insights/concepts/beyond-left-right-photorealistic.webp', conceptAlt: 'Future civic chamber where opposing political aisles converge into an adaptive evidence-driven decision system',
     hook: 'What if left and right are no longer the most useful coordinates for governing a technologically complex civilization?',
     thesis: 'Meysam Ghanbari argues that ideology should become a hypothesis to test, not a package to inherit. Advanced AI could compare policy outcomes across many dimensions—but only after society confronts the harder question of who defines success.',
     sections: [
@@ -97,7 +97,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'superintelligence and democracy', keywords: ['future of democracy', 'superintelligent AI', 'AI political decision making'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '10 min', theme: 'blue-amber',
     portrait: intelligencePortrait, portraitAlt: 'Meysam Ghanbari considering superintelligence and the future of democratic institutions',
-    conceptImage: '/images/insights/concepts/superintelligence-democracy.svg', conceptAlt: 'Network diagram contrasting a democratic institution with a larger machine-intelligence system',
+    conceptImage: '/images/insights/concepts/superintelligence-democracy-photorealistic.webp', conceptAlt: 'Democratic assembly beneath a vast transparent artificial-intelligence network',
     hook: 'Democracy distributes authority. Superintelligence could concentrate capability. Future institutions may be forced to reconcile the two.',
     thesis: 'From Ghanbari’s perspective, democracy should be treated as an institutional technology with historic strengths—not as proof that every complex decision is best made through undifferentiated mass preference.',
     sections: [
@@ -121,7 +121,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'AI political decision making', keywords: ['AI in government', 'AI replacing politicians', 'AI decision authority'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'cyan-coral',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari examining the boundary between AI advice and government decision authority',
-    conceptImage: '/images/insights/concepts/ai-political-decisions.svg', conceptAlt: 'Threshold diagram showing stages from AI advice to delegated government authority',
+    conceptImage: '/images/insights/concepts/ai-political-decisions-photorealistic.webp', conceptAlt: 'Future decision chamber contrasting human political judgment with bounded autonomous authority',
     hook: 'An AI recommendation can be ignored. An AI decision changes a person’s life. That boundary deserves constitutional precision.',
     thesis: 'Ghanbari supports deeper AI participation where objectives are clear, performance can be measured and errors can be appealed. He rejects the idea that predictive accuracy alone justifies unlimited political authority.',
     sections: [
@@ -145,7 +145,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'governance optimization', keywords: ['systems engineering governance', 'data-driven government', 'policy optimization'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '10 min', theme: 'teal-violet',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari exploring governance as a dynamic optimization and feedback system',
-    conceptImage: '/images/insights/concepts/governance-optimization.svg', conceptAlt: 'Control-system diagram representing objectives, constraints, feedback and adaptation in governance',
+    conceptImage: '/images/insights/concepts/governance-optimization-photorealistic.webp', conceptAlt: 'Future city systems observatory connecting infrastructure, feedback and adaptive governance',
     hook: 'Every government optimizes something—even when it refuses to say what.',
     thesis: 'Ghanbari proposes treating governance as a constrained, adaptive control problem. The benefit is not mathematical certainty; it is forcing institutions to expose what they value, what they measure and how they respond when policy fails.',
     sections: [
@@ -169,7 +169,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'political short-termism', keywords: ['populism and governance', 'corruption incentives', 'long-term policymaking'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'amber-cyan',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari analyzing political short-termism and long-horizon institutional design',
-    conceptImage: '/images/insights/concepts/political-short-termism.svg', conceptAlt: 'Timeline contrasting short electoral cycles with long civilization-scale consequences',
+    conceptImage: '/images/insights/concepts/political-short-termism-photorealistic.webp', conceptAlt: 'Temporary political stage contrasted with infrastructure built for a century-scale future',
     hook: 'A four-year incentive structure is routinely asked to manage risks that unfold over forty years.',
     thesis: 'Ghanbari’s critique targets institutional incentives: systems that reward promises now, hide costs later and make evidence politically optional will repeatedly produce short horizons—even when many participants are competent.',
     sections: [
@@ -193,7 +193,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'is democracy optimal', keywords: ['future of democracy', 'future political systems', 'democratic reform'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '10 min', theme: 'blue-gold',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari reflecting on democracy as an evolving institutional technology',
-    conceptImage: '/images/insights/concepts/democracy-optimal.svg', conceptAlt: 'Evolution diagram showing historical democratic institutions transitioning toward future systems',
+    conceptImage: '/images/insights/concepts/democracy-optimal-photorealistic.webp', conceptAlt: 'Historic parliamentary architecture evolving into an adaptive future civic institution',
     hook: 'A technology can be historically transformative and still require a new version.',
     thesis: 'Ghanbari’s argument is not that democracy has no value. It is that institutions should be evaluated by how well they protect legitimacy, freedom, competence and long-term survival under contemporary conditions.',
     sections: [
@@ -217,7 +217,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'AI versus voters', keywords: ['can AI govern a country', 'AI policy decisions', 'legitimacy versus competence'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'blue-rose',
     portrait: intelligencePortrait, portraitAlt: 'Meysam Ghanbari examining the tension between AI competence and voter legitimacy',
-    conceptImage: '/images/insights/concepts/ai-voters-decide.svg', conceptAlt: 'Balance diagram representing competence and democratic legitimacy in AI-assisted decisions',
+    conceptImage: '/images/insights/concepts/ai-voters-decide-photorealistic.webp', conceptAlt: 'Citizens confronting an AI forecasting system that models several societal outcomes',
     hook: 'Suppose the model is right more often. Does accuracy create authority?',
     thesis: 'Ghanbari distinguishes epistemic weight from sovereign power. Superior forecasting should matter, especially in technical domains, but decisions must remain constrained by rights, legitimacy and the ability to contest what the system counts as success.',
     sections: [
@@ -241,7 +241,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'post-ideological governance', keywords: ['what comes after left and right', 'future governance', 'adaptive policy'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'violet-cyan',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari exploring post-ideological governance and adaptive policy systems',
-    conceptImage: '/images/insights/concepts/post-ideological-governance.svg', conceptAlt: 'Political spectrum fragmenting into an adaptive evidence-driven policy network',
+    conceptImage: '/images/insights/concepts/post-ideological-governance-photorealistic.webp', conceptAlt: 'Binary political corridor opening into an adaptive evidence-driven policy laboratory',
     hook: 'Post-ideological does not mean value-free. It means refusing to let one identity answer every policy question in advance.',
     thesis: 'Ghanbari imagines governance as modular and adaptive: empirical claims are tested, values are declared and policy packages can be reassembled as conditions change.',
     sections: [
@@ -265,7 +265,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'technocratic governance', keywords: ['technocracy', 'weighted decision making', 'expert political power'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '10 min', theme: 'teal-violet',
     portrait: governancePortrait, portraitAlt: 'Meysam Ghanbari analyzing technocracy, expertise and weighted decision systems',
-    conceptImage: '/images/insights/concepts/technocracy-weighted-decisions.svg', conceptAlt: 'Weighted knowledge diagram showing increasing evidence and decision influence',
+    conceptImage: '/images/insights/concepts/technocracy-weighted-decisions-photorealistic.webp', conceptAlt: 'Multidisciplinary expert council working around a transparent evidence system with public oversight',
     hook: 'A society can affirm equal citizenship without pretending every person has equal knowledge of reactor safety or monetary policy.',
     thesis: 'Ghanbari’s technocratic position gives expertise greater influence in evidence-sensitive domains, but only within institutions designed against credentialism, capture and unreviewable expert power.',
     sections: [
@@ -289,7 +289,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'long-term civilization planning', keywords: ['civilization survival', 'existential risk governance', 'long-term institutions'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '10 min', theme: 'space-gold',
     portrait: civilizationPortrait, portraitAlt: 'Meysam Ghanbari viewing Earth and long-term infrastructure for future civilization',
-    conceptImage: '/images/insights/concepts/civilization-long-term-planning.svg', conceptAlt: 'Century-scale timeline connecting present institutions to long-term civilization resilience',
+    conceptImage: '/images/insights/concepts/civilization-long-term-planning-photorealistic.webp', conceptAlt: 'Resilient Earth infrastructure extending toward orbital systems across a long planning horizon',
     hook: 'The threats most capable of changing civilization are often the least compatible with ordinary political time.',
     thesis: 'Ghanbari argues that long-term capacity is not prediction of one future. It is the ability to preserve options, monitor weak signals and build infrastructure that remains useful across many futures.',
     sections: [
@@ -313,7 +313,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'human survival and space expansion', keywords: ['future civilization', 'human expansion beyond Earth', 'civilization survival'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'space-cyan',
     portrait: civilizationPortrait, portraitAlt: 'Meysam Ghanbari considering human survival, orbital infrastructure and expansion beyond Earth',
-    conceptImage: '/images/insights/concepts/human-survival-expansion.svg', conceptAlt: 'Orbital diagram representing humanity expanding from Earth to a multi-world civilization',
+    conceptImage: '/images/insights/concepts/human-survival-expansion-photorealistic.webp', conceptAlt: 'Credible Earth-to-space expansion pathway connecting orbital, lunar and Mars-bound infrastructure',
     hook: 'Institutions are not monuments. They are survival equipment.',
     thesis: 'From Ghanbari’s perspective, loyalty to an institutional form should never outrank the long-term survival, knowledge and expansion of civilization—provided reform does not sacrifice human rights in the name of an imagined future.',
     sections: [
@@ -337,7 +337,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'future human enhancement', keywords: ['AI human augmentation', 'genetic enhancement', 'neurotechnology', 'transhumanism'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '11 min', theme: 'violet-cyan',
     portrait: intelligencePortrait, portraitAlt: 'Meysam Ghanbari exploring AI augmentation, neurotechnology and the future human',
-    conceptImage: '/images/insights/concepts/future-human-enhancement.svg', conceptAlt: 'Evolution diagram connecting biological humans, neural interfaces and AI augmentation',
+    conceptImage: '/images/insights/concepts/future-human-enhancement-photorealistic.webp', conceptAlt: 'Future biomedical laboratory integrating neural interfaces, genomics and AI-assisted human enhancement',
     hook: 'For most of history, humans adapted to nature. Future humans may increasingly redesign the conditions—and the biology—of adaptation itself.',
     thesis: 'Ghanbari views enhancement as a plausible continuation of civilization’s technological trajectory, but rejects the idea that technical possibility resolves questions of consent, inequality, identity or irreversible harm.',
     sections: [
@@ -361,7 +361,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'governance objective function', keywords: ['happiness versus progress', 'longevity governance', 'civilization objectives'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '9 min', theme: 'gold-cyan',
     portrait: civilizationPortrait, portraitAlt: 'Meysam Ghanbari considering happiness, longevity and long-term civilization progress',
-    conceptImage: '/images/insights/concepts/happiness-longevity-progress.svg', conceptAlt: 'Balance diagram comparing happiness, longevity, survival and scientific progress',
+    conceptImage: '/images/insights/concepts/happiness-longevity-progress-photorealistic.webp', conceptAlt: 'Future civilization crossroads balancing immediate comfort with longevity, science and space progress',
     hook: 'A comfortable generation can consume the research, infrastructure and resilience that a future generation will need.',
     thesis: 'Ghanbari rejects happiness as the single objective of government. He favors a plural civilizational scorecard that includes welfare, freedom, longevity, knowledge, resilience and the capacity for future progress.',
     sections: [
@@ -385,7 +385,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'AI surveillance risks', keywords: ['AI surveillance', 'freedom versus security', 'algorithmic monitoring'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '11 min', theme: 'red-violet',
     portrait: intelligencePortrait, portraitAlt: 'Meysam Ghanbari examining AI surveillance, machine vision and personal autonomy',
-    conceptImage: '/images/insights/concepts/ai-surveillance-freedom.svg', conceptAlt: 'Conceptual AI observation network illustrating surveillance and autonomy tension',
+    conceptImage: '/images/insights/concepts/ai-surveillance-freedom-photorealistic.webp', conceptAlt: 'Networked smart city contrasted with a protected private space to show surveillance and autonomy',
     hook: 'A system that can see enough to prevent harm can also see enough to eliminate private life.',
     thesis: 'Ghanbari takes the optimization benefits of large-scale sensing seriously—while insisting that surveillance infrastructure must be designed as dangerous power, not neutral efficiency.',
     sections: [
@@ -409,7 +409,7 @@ export const insights: Insight[] = [
     primaryKeyword: 'post-work society', keywords: ['AI replacing jobs', 'future of work', 'automation and society', 'post-scarcity'],
     domain, domainSlug, datePublished: '2026-09-18', dateModified: '2026-09-18', readTime: '10 min', theme: 'cyan-teal',
     portrait: intelligencePortrait, portraitAlt: 'Meysam Ghanbari exploring automation, AI and a future post-work society',
-    conceptImage: '/images/insights/concepts/post-work-society.svg', conceptAlt: 'Automated production network illustrating a society where employment is no longer economically necessary',
+    conceptImage: '/images/insights/concepts/post-work-society-photorealistic.webp', conceptAlt: 'Human-centered automated city where people learn, create and conduct science beyond economic necessity',
     hook: 'If machines produce abundance, a job can no longer be the only ticket to income, status or dignity.',
     thesis: 'Ghanbari sees post-work transition as an institutional design problem. Automation can liberate time only if ownership, distribution and social meaning evolve with productive capacity.',
     sections: [
