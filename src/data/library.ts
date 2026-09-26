@@ -92,25 +92,25 @@ export const projects: { en: Project[]; fa: Array<{ title: string; tag: string; 
       title: 'گیرنده یکپارچه نوری برای OISL',
       tag: 'OISL · طراحی گیرنده · رهگیری دقیق',
       summary: 'معماری گیرنده‌ای که آشکارسازی مخابرات و رهگیری دقیق را ترکیب می‌کند و هندسه آشکارساز، توزیع توان دریافتی و حساسیت هم‌ترازی در لینک‌های FSO بین‌ماهواره‌ای را بررسی می‌کند.',
-      href: '/fa/projects'
+      href: '/fa/projects/integrated-optical-receiver-oisl/'
     },
     {
       title: 'رله تمام‌نوری چندهاپی بین‌ماهواره‌ای',
       tag: 'OISL · M-PAM · رله بازتولیدی',
       summary: 'مدل‌سازی فرم‌بسته و طراحی رله بازتولیدی M-PAM برای لینک‌های نوری چندهاپی بین‌ماهواره‌ای همراه با ارزیابی عددی و مونت‌کارلو.',
-      href: '/fa/projects'
+      href: '/fa/projects/all-optical-multi-hop-inter-satellite-relaying/'
     },
     {
       title: 'انتقال اطلاعات و انرژی با توان خنثی',
       tag: 'FSO · سیگنالینگ Stokes · انتقال انرژی',
       summary: 'چارچوب تحلیلی FSO بین‌ماهواره‌ای مبتنی بر سیگنالینگ Stokes-orthogonal برای هماهنگ‌سازی دریافت اطلاعات و انتقال انرژی نوری تحت محدودیت توان.',
-      href: '/fa/projects'
+      href: '/fa/projects/power-neutral-information-energy-transfer/'
     },
     {
       title: 'دریافت نوری چندشاخه برای Inter-HAPS',
       tag: 'HAPS · گیرنده نوری · چندشاخه',
       summary: 'راهبرد گیرنده چندشاخه با تضعیف تدریجی و مدل تحلیلی عملکرد برای لینک‌های نوری بین HAPS.',
-      href: '/fa/projects'
+      href: '/fa/projects/inter-haps-multi-branch-optical-reception/'
     }
   ]
 };
@@ -297,7 +297,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'This conference paper explores AI-assisted camera sensing for monitoring and user localization in next-generation outdoor optical networks.',
     summaryFa: 'این مقاله کنفرانسی استفاده از camera sensing مبتنی بر هوش مصنوعی را برای پایش و مکان‌یابی کاربر در شبکه‌های نوری outdoor نسل بعد بررسی می‌کند.',
-    tags: ['Optical Networks', 'AI', 'Camera Sensing', 'Localization']
+    tags: ['Optical Networks', 'AI', 'Camera Sensing', 'Localization'],
+    problemEn: 'Outdoor optical networks need a way to observe changing users and link conditions without relying only on communication feedback.',
+    ideaEn: 'Explore camera sensing and AI-assisted interpretation as inputs to network monitoring and user localization.',
+    relevanceEn: 'The paper connects visual sensing with optical-network management; the public record does not establish a deployed system.'
   },
   {
     slug: 'hierarchical-deep-learning-turbulence-pointing-error-multi-aperture-fso',
@@ -309,7 +312,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'A hierarchical deep-learning approach for joint estimation of turbulence and pointing error in multi-aperture free-space optical systems.',
     summaryFa: 'رویکردی مبتنی بر یادگیری عمیق سلسله‌مراتبی برای تخمین مشترک turbulence و pointing error در سامانه‌های FSO چنددهانه.',
-    tags: ['FSO', 'Deep Learning', 'Turbulence Estimation', 'Pointing Error']
+    tags: ['FSO', 'Deep Learning', 'Turbulence Estimation', 'Pointing Error'],
+    problemEn: 'Multi-aperture FSO receivers face simultaneous turbulence and pointing disturbances that can be difficult to distinguish from received signals alone.',
+    ideaEn: 'Study hierarchical deep learning for joint estimation of atmospheric turbulence and pointing error.',
+    relevanceEn: 'Separating these impairments can inform adaptive optical-link monitoring and receiver design.'
   },
   {
     slug: 'deep-learning-surrogate-cir-reactive-molecular-diffusion-advection',
@@ -321,7 +327,10 @@ export const publications: Publication[] = [
     status: 'Accepted',
     summaryEn: 'A deep-learning surrogate approach for accelerating channel impulse response prediction in reactive molecular diffusion-advection channels.',
     summaryFa: 'رویکرد surrogate مبتنی بر یادگیری عمیق برای تسریع پیش‌بینی پاسخ ضربه کانال در کانال‌های reactive molecular diffusion-advection.',
-    tags: ['Molecular Communication', 'Deep Learning', 'Surrogate Modeling', 'CIR']
+    tags: ['Molecular Communication', 'Deep Learning', 'Surrogate Modeling', 'CIR'],
+    problemEn: 'Repeated channel-impulse-response prediction in reactive diffusion-advection systems can be computationally demanding.',
+    ideaEn: 'Investigate a learned surrogate for faster CIR prediction in this molecular-communication model.',
+    relevanceEn: 'A fast predictor may make parameter studies and system exploration more practical, subject to validation against the underlying physical model.'
   },
   {
     slug: 'cv-quantum-communications-angular-rejection-filtering',
@@ -333,7 +342,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'Modeling and security analysis of continuous-variable quantum communication systems that employ angular rejection filtering.',
     summaryFa: 'مدل‌سازی و تحلیل امنیت سامانه‌های ارتباطات کوانتومی continuous-variable با استفاده از angular rejection filtering.',
-    tags: ['CV Quantum', 'Angular Filtering', 'Security', 'Quantum Communications']
+    tags: ['CV Quantum', 'Angular Filtering', 'Security', 'Quantum Communications'],
+    problemEn: 'Continuous-variable quantum links must account for angularly dependent reception and the resulting security assumptions.',
+    ideaEn: 'Model angular rejection filtering and examine its implications for link behavior and security analysis.',
+    relevanceEn: 'The work relates receiver-side spatial selectivity to the assessment of quantum communication links.'
   },
   {
     slug: 'optical-irs-assisted-relay-los-qkd',
@@ -345,7 +357,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'A relay architecture using optical intelligent reflecting surfaces to enhance line-of-sight quantum key distribution links.',
     summaryFa: 'معماری رله مبتنی بر optical IRS برای تقویت لینک‌های line-of-sight در توزیع کلید کوانتومی.',
-    tags: ['Optical IRS', 'QKD', 'Relay Architecture', 'LOS']
+    tags: ['Optical IRS', 'QKD', 'Relay Architecture', 'LOS'],
+    problemEn: 'Line-of-sight constraints can limit the placement and continuity of quantum-key-distribution links.',
+    ideaEn: 'Explore an optical intelligent-reflecting-surface-assisted relay architecture for the LOS link.',
+    relevanceEn: 'The architecture examines a possible way to improve geometric flexibility without claiming an operational deployment.'
   },
   {
     slug: 'meteorological-conditions-performance-optimization-miso-fso',
@@ -357,7 +372,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'This paper studies the interaction between meteorological conditions and performance optimization in MISO free-space optical communication.',
     summaryFa: 'این مقاله تعامل شرایط هواشناسی و بهینه‌سازی عملکرد را در مخابرات FSO با ساختار MISO بررسی می‌کند.',
-    tags: ['MISO FSO', 'Meteorological Conditions', 'Optimization']
+    tags: ['MISO FSO', 'Meteorological Conditions', 'Optimization'],
+    problemEn: 'Weather-dependent attenuation changes the design conditions of MISO free-space optical links.',
+    ideaEn: 'Analyze how meteorological conditions interact with performance optimization in the MISO FSO system.',
+    relevanceEn: 'The study helps connect environmental variability with practical optical-link parameter selection.'
   },
   {
     slug: 'ber-mixed-underwater-owc-fso-relaying-pointing-error',
@@ -369,7 +387,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'A bit-error-rate analysis for mixed underwater optical wireless and free-space optical relaying in the presence of pointing error.',
     summaryFa: 'تحلیل BER برای یک سامانه رله ترکیبی underwater OWC-FSO در حضور خطای نشانه‌روی.',
-    tags: ['Underwater OWC', 'FSO', 'Relaying', 'BER', 'Pointing Error']
+    tags: ['Underwater OWC', 'FSO', 'Relaying', 'BER', 'Pointing Error'],
+    problemEn: 'A mixed underwater optical and FSO relay chain must account for pointing errors across unlike optical channels.',
+    ideaEn: 'Analyze bit error rate for the mixed relaying system under pointing uncertainty.',
+    relevanceEn: 'The model provides a performance lens for links that bridge underwater and free-space optical segments.'
   },
   {
     slug: 'outage-uav-mixed-underwater-fso-pointing-errors',
@@ -381,7 +402,10 @@ export const publications: Publication[] = [
     status: 'Published',
     summaryEn: 'An outage performance study of UAV-supported mixed underwater-FSO communication under pointing errors.',
     summaryFa: 'مطالعه عملکرد outage برای ارتباط ترکیبی underwater-FSO مبتنی بر UAV تحت خطاهای نشانه‌روی.',
-    tags: ['UAV', 'Underwater OWC', 'FSO', 'Outage', 'Pointing Error']
+    tags: ['UAV', 'Underwater OWC', 'FSO', 'Outage', 'Pointing Error'],
+    problemEn: 'UAV-supported mixed underwater–FSO systems inherit both heterogeneous propagation and platform-related pointing errors.',
+    ideaEn: 'Study the outage performance of this hybrid communication path under alignment uncertainty.',
+    relevanceEn: 'The analysis clarifies a reliability constraint for aerial support of cross-medium optical communication.'
   }
 ];
 

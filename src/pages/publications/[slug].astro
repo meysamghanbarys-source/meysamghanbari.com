@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { publications } from '../../data/library';
 import { projects } from '../../data/library';
 import { site } from '../../data/site';
+import { publicationSeoTitle } from '../../data/publication-seo';
+import { publicationSchema } from '../../data/publication-schema';
 
 export function getStaticPaths() {
   return publications.map((paper) => ({ params: { slug: paper.slug }, props: { paper } }));
@@ -14,21 +16,10 @@ const relatedProjects = projects.en.filter((project) => paper.relatedProjectSlug
 const relatedPapers = publications
   .filter((candidate) => candidate.slug !== paper.slug && candidate.tags.some((tag) => paper.tags.includes(tag)))
   .slice(0, 3);
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ScholarlyArticle',
-  headline: paper.title,
-  author: paper.authors.split(/,\s*(?:and\s+)?/).map((name) => ({ '@type': 'Person', name })),
-  datePublished: paper.status === 'Published' ? paper.year : undefined,
-  publisher: paper.venue,
-  url: `${site.domain}${path}`,
-  about: paper.tags,
-  sameAs: paper.doi || paper.externalUrl,
-  isPartOf: { '@type': 'WebSite', '@id': `${site.domain}/#website` }
-};
+const articleSchema = publicationSchema(paper, 'en');
 ---
 
-<BaseLayout title={paper.title} description={paper.summaryEn} lang="en" path={path}>
+<BaseLayout title={paper.title} seoTitle={publicationSeoTitle(paper.slug, 'en')} description={paper.summaryEn} lang="en" path={path} image={paper.relatedProjectSlugs?.length ? '/images/profile/meysam-ghanbari-space-communications-researcher.webp' : site.ogImage}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
   <section class="paper-hero paper-hero-product">
     <div class="space-grid-bg" aria-hidden="true"></div>
@@ -53,7 +44,7 @@ const articleSchema = {
   <section class="section paper-body-section">
     <div class="shell paper-content-grid">
       <article class="paper-main">
-        <p class="eyebrow">PUBLICATION HERO</p>
+        <p class="eyebrow">RESEARCH BRIEF</p>
         <h2>Research overview</h2>
         <p class="paper-summary">{paper.summaryEn}</p>
 

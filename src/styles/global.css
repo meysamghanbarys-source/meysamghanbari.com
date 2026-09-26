@@ -97,12 +97,12 @@
 .domain-question h2 { margin:10px 0; font-size:clamp(42px,6vw,80px); letter-spacing:-.06em; }
 .domain-question p { max-width:760px; margin:0 auto; color:var(--muted); font-size:18px; }
 .collection-sequence { display:grid; gap:1px; border:1px solid var(--line); background:var(--line); }
-.sequence-item { --card-accent:var(--accent); position:relative; min-height:290px; display:grid; grid-template-columns:80px minmax(360px,1.2fr) minmax(270px,1fr) 190px 85px; gap:18px; align-items:center; padding:32px; background:#07111e; overflow:hidden; }
+.sequence-item { --card-accent:var(--accent); position:relative; min-height:290px; display:grid; grid-template-columns:80px minmax(0,1.2fr) minmax(0,1fr) 190px 85px; gap:18px; align-items:center; padding:32px; background:#07111e; overflow:hidden; }
 .sequence-item > * { min-width:0; }
 .sequence-item::before { content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--card-accent); }
 .sequence-item > div span { display:block; color:var(--card-accent); font-size:34px; font-weight:900; }
-.sequence-item small { color:#7f8da0; font-size:9px; }
-.sequence-item h2 { margin:0; font-size:clamp(27px,3.2vw,44px); line-height:1; letter-spacing:-.045em; text-wrap:balance; }
+.sequence-item small { color:#9badc2; font-size:11px; }
+.sequence-item h2 { margin:0; font-size:clamp(27px,2.6vw,38px); line-height:1.08; letter-spacing:-.045em; text-wrap:balance; overflow-wrap:break-word; hyphens:auto; }
 .sequence-item p { margin:0; color:var(--muted); line-height:1.6; }
 .sequence-item img { width:100%; aspect-ratio:16/9; object-fit:cover; border:1px solid var(--line); }
 .sequence-item b { color:var(--card-accent); font-size:11px; white-space:nowrap; }
@@ -473,7 +473,10 @@ img {
   position: absolute;
   top: 50px;
   inset-inline-end: 0;
-  width: 260px;
+  width: min(300px, calc(100vw - 32px));
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  z-index: 20;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -1117,7 +1120,7 @@ html[dir="rtl"] .eyebrow {
 
 html[dir="rtl"] .hero h1,
 html[dir="rtl"] .page-hero h1 {
-  direction: ltr;
+  direction: rtl;
   text-align: right;
 }
 
@@ -1125,7 +1128,7 @@ html[dir="rtl"] .publication-list[dir="ltr"] {
   text-align: left;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1280px) {
   .desktop-nav,
   .header-actions {
     display: none;
@@ -2225,9 +2228,9 @@ body::before {
 .system-map-orbit { position: absolute; width: 700px; height: 250px; border: 1px solid rgba(101,217,255,.2); border-radius: 50%; transform: rotate(-9deg); }
 .system-map-orbit::before,.system-map-orbit::after { content: ""; position: absolute; inset: 45px; border: 1px solid rgba(159,140,255,.16); border-radius: 50%; }
 .system-map-orbit::after { inset: -60px 110px; border-color: rgba(255,255,255,.08); transform: rotate(24deg); }
-.domain-links { position: absolute; bottom: 22px; display: flex; gap: 13px; }
+.domain-links { position: absolute; inset-inline: 26px; bottom: 22px; display: flex; flex-wrap: wrap; gap: 7px 13px; }
 .domain-links a { color: var(--accent); font-size: 11px; font-weight: 750; }
-.research-domain-grid .domain-card { min-height: 350px; }
+.research-domain-grid .domain-card { min-height: 380px; padding-bottom: 76px; }
 .knowledge-graph-note { margin-top: 32px; padding: 24px 0; border-block: 1px solid var(--line); display: grid; grid-template-columns: 180px 1fr; gap: 30px; }
 .knowledge-graph-note span { color: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .14em; }
 .knowledge-graph-note p { margin: 0; color: var(--muted); }

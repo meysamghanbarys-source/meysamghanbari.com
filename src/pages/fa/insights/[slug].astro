@@ -12,7 +12,7 @@ const related = insight.related.map((slug) => insightsFa.find((item) => item.slu
 const visualIndex = Number(insight.number) - 1;
 const portraitPositions = ['22%','34%','17%','42%','28%','11%','38%','25%','46%','72%','81%','18%','67%','31%','44%'];
 const heroHues = [0,8,-5,14,-9,4,18,-12,7,0,-7,16,5,-18,11];
-const canonical = `${site.domain}/fa/insights/${insight.slug}`;
+const canonical = `${site.domain}/fa/insights/${insight.slug}/`;
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -49,7 +49,7 @@ const articleSchema = {
 
   <article class={`future-article theme-${insight.theme} visual-variant-${(visualIndex % 5) + 1}`} style={`--portrait-x:${portraitPositions[visualIndex]};--hero-hue:${heroHues[visualIndex]}deg`}>
     <header class="future-article-hero">
-      <img class="future-article-backdrop" src={insight.portrait} alt="" aria-hidden="true" />
+      <img class="future-article-backdrop" src={insight.portrait} alt="" width="1672" height="941" aria-hidden="true" />
       <div class="future-article-veil" aria-hidden="true"></div>
       <div class="shell future-article-hero-grid">
         <div class="future-article-heading">
@@ -87,7 +87,7 @@ const articleSchema = {
             </section>
             {index === 1 && (
               <figure class="future-concept-figure">
-                <img src={insight.conceptImage} alt={insight.conceptAlt} width="1200" height="675" loading="lazy" />
+                <img src={insight.conceptImage} alt={insight.conceptAlt} width="1672" height="941" loading="lazy" />
                 <figcaption>{insight.conceptAlt}؛ تصویر مفهومی اختصاصی Future Systems.</figcaption>
               </figure>
             )}

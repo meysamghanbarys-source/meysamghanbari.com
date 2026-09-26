@@ -172,7 +172,7 @@ const activities = [
       <div class="home-future-grid">
         {insights.slice(0, 3).map((item, index) => (
           <a class={`home-future-card theme-${item.theme}`} href={`/insights/${item.slug}`}>
-            <img src={index === 0 ? item.portrait : item.conceptImage} alt={index === 0 ? item.portraitAlt : item.conceptAlt} width="1200" height="675" loading="lazy" />
+            <img src={index === 0 ? item.portrait : item.conceptImage} alt={index === 0 ? item.portraitAlt : item.conceptAlt} width="1672" height="941" loading="lazy" />
             <div><span>INSIGHT {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>Read in Future Systems →</b></div>
           </a>
         ))}

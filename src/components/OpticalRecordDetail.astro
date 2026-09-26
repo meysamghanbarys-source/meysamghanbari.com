@@ -32,7 +32,7 @@ const labels = isFa ? {
 const schema = {
   '@context': 'https://schema.org', '@type': 'TechArticle',
   headline: record.title[lang], description, image: `${site.domain}${record.image}`,
-  mainEntityOfPage: `${site.domain}${path}`, dateModified: '2026-09-19',
+  mainEntityOfPage: `${site.domain}${path}`, inLanguage: isFa ? 'fa-IR' : 'en', dateModified: '2026-09-19',
   author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name },
   publisher: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name },
   about: record.categoryIds.map((id) => recordCategories.find((category) => category.id === id)?.en).filter(Boolean),
@@ -69,7 +69,7 @@ const schema = {
       </div>
       <aside class="record-detail-sidebar">
         <div class="record-side-card"><span>{isFa ? 'طبقه‌بندی' : 'Classification'}</span>{record.categoryIds.map((id) => { const category = recordCategories.find((item) => item.id === id); return category && <a href={`${basePath}/#${category.id}`}>{category[lang]} <b>{category.code}</b></a>; })}</div>
-        {record.relatedProject && record.relatedProjectLabel && <div class="record-side-card accent"><span>{labels.project}</span><strong>{record.relatedProjectLabel[lang]}</strong><p>{isFa ? 'یک مسیر پژوهشی مرتبط در معماری گیرنده، شبکهٔ نوری یا انتقال انرژی.' : 'A related research direction in receiver architecture, optical networking or energy transfer.'}</p><a class="text-link" href={isFa ? '/fa/projects' : record.relatedProject}>{isFa ? 'مشاهده پروژه‌ها ←' : 'Explore project →'}</a></div>}
+        {record.relatedProject && record.relatedProjectLabel && <div class="record-side-card accent"><span>{labels.project}</span><strong>{record.relatedProjectLabel[lang]}</strong><p>{isFa ? 'یک مسیر پژوهشی مرتبط در معماری گیرنده، شبکهٔ نوری یا انتقال انرژی.' : 'A related research direction in receiver architecture, optical networking or energy transfer.'}</p><a class="text-link" href={`${isFa ? '/fa' : ''}${record.relatedProject}/`}>{isFa ? 'بررسی پروژه ←' : 'Explore project →'}</a></div>}
         <div class="record-side-card"><span>{isFa ? 'یادداشت روش' : 'Method note'}</span><p>{isFa ? 'نبود دادهٔ عمومی یا تفاوت کلاس لینک، دلیل کافی برای ساختن رتبه‌بندی قطعی نیست.' : 'Missing public data or incompatible link classes are not a basis for inventing a definitive ranking.'}</p></div>
       </aside>
     </div></section>

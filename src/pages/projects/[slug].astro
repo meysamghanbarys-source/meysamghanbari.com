@@ -15,14 +15,14 @@ const projectSchema = {
   '@type': 'CreativeWork',
   name: project.title,
   description: project.summary,
-  url: `${site.domain}${path}`,
+  url: `${site.domain}${path}/`,
   creator: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name },
   about: project.tags,
   isPartOf: { '@type': 'WebSite', '@id': `${site.domain}/#website` }
 };
 ---
 
-<BaseLayout title={project.title} description={project.summary} lang="en" path={path} image="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alternateAvailable={false} languagePath="/fa/projects">
+<BaseLayout title={project.title} description={project.summary} lang="en" path={path} image="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" languagePath={`/fa/projects/${project.slug}/`}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(projectSchema)}></script>
 
   <section class="project-hero">

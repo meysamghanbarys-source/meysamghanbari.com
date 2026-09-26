@@ -28,7 +28,7 @@ const collectionSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)}></script>
 
   <section class="future-hub-hero">
-    <img class="future-hub-bg" src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="" aria-hidden="true" />
+    <img class="future-hub-bg" src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="" width="1672" height="941" aria-hidden="true" />
     <div class="future-hub-overlay" aria-hidden="true"></div>
     <div class="shell future-hub-grid">
       <div>
@@ -60,7 +60,7 @@ const collectionSchema = {
 
   <section class="section future-featured"><div class="shell">
     <div class="section-heading"><div><p class="eyebrow">ایده‌های منتخب</p><h2>سه پرسش در مقیاس تمدن.</h2></div></div>
-    <div class="future-feature-grid">{featured.map((item, index) => <a class={`future-feature-item feature-${index + 1}`} href={`/fa/insights/${item.slug}`}><img src={item.portrait} alt={item.portraitAlt} loading={index === 0 ? 'eager' : 'lazy'} /><div><span>دیدگاه {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>مطالعه استدلال ←</b></div></a>)}</div>
+    <div class="future-feature-grid">{featured.map((item, index) => <a class={`future-feature-item feature-${index + 1}`} href={`/fa/insights/${item.slug}`}><img src={item.portrait} alt={item.portraitAlt} width="1672" height="941" loading={index === 0 ? 'eager' : 'lazy'} /><div><span>دیدگاه {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>مطالعه استدلال ←</b></div></a>)}</div>
   </div></section>
 
   <section id="latest-insights" class="section future-library"><div class="shell">

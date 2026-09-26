@@ -43,6 +43,8 @@ const featured = publications.slice(0, 4);
         <img
           src="/images/profile/meysam-ghanbari-formal-portrait.webp"
           alt="پرتره رسمی میثم قنبری"
+          width="1024"
+          height="1536"
           loading="eager"
           fetchpriority="high"
         />
@@ -108,7 +110,7 @@ const featured = publications.slice(0, 4);
       <div class="home-future-grid">
         {insightsFa.slice(0, 3).map((item, index) => (
           <a class={`home-future-card theme-${item.theme}`} href={`/fa/insights/${item.slug}`}>
-            <img src={index === 0 ? item.portrait : item.conceptImage} alt={index === 0 ? item.portraitAlt : item.conceptAlt} width="1200" height="675" loading="lazy" />
+            <img src={index === 0 ? item.portrait : item.conceptImage} alt={index === 0 ? item.portraitAlt : item.conceptAlt} width="1672" height="941" loading="lazy" />
             <div><span>دیدگاه {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>مطالعه در Future Systems ←</b></div>
           </a>
         ))}

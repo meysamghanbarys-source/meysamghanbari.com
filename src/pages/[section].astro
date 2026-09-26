@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sectionIds, site } from '../data/site';
 import { projects, publications, videos, insights, upcoming, media } from '../data/library';
+import { researchDomainLinks } from '../data/research-domains';
 
 export function getStaticPaths() {
   return sectionIds.filter((section) => section !== 'insights').map((section) => ({ params: { section }, props: { section } }));
@@ -22,7 +23,7 @@ const eventSchema = upcomingEvent ? {
   endDate: upcomingEvent.endDate,
   eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  url: `${site.domain}/upcoming`,
+  url: `${site.domain}/upcoming/`,
   image: `${site.domain}${upcomingEvent.image}`,
   location: {
     '@type': 'Place',
@@ -47,20 +48,20 @@ const eventSchema = upcomingEvent ? {
   about: {
     '@type': 'ScholarlyArticle',
     name: upcomingEvent.paperTitle,
-    url: `${site.domain}${upcomingEvent.researchUrl}`
+    url: `${site.domain}${upcomingEvent.researchUrl}/`
   }
 } : null;
 
 const sectionVisuals = {
-  research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Orbital research systems' },
-  projects: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Engineering directions' },
-  publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Publication library' },
-  videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'Presentations and talks' },
-  insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Technical perspectives' },
-  upcoming: { image: upcomingEvent?.image ?? '/images/media/meysam-ghanbari-research-presentation.webp', label: 'IEEE VTC 2027-Spring · Hamburg' },
-  media: { image: '/images/profile/meysam-ghanbari-formal-portrait.webp', label: 'Media library' },
-  about: { image: '/images/profile/meysam-ghanbari-professional-headshot.webp', label: 'Research profile' },
-  contact: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'Research enquiries' }
+  research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Orbital research systems', width: 1122, height: 1402 },
+  projects: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Engineering directions', width: 1122, height: 1402 },
+  publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Publication library', width: 1122, height: 1402 },
+  videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'Presentations and talks', width: 1672, height: 941 },
+  insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Technical perspectives', width: 1122, height: 1402 },
+  upcoming: { image: upcomingEvent?.image ?? '/images/media/meysam-ghanbari-research-presentation.webp', label: 'IEEE VTC 2027-Spring · Hamburg', width: 1280, height: 720 },
+  media: { image: '/images/profile/meysam-ghanbari-formal-portrait.webp', label: 'Media library', width: 1024, height: 1536 },
+  about: { image: '/images/profile/meysam-ghanbari-professional-headshot.webp', label: 'Research profile', width: 1086, height: 1448 },
+  contact: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'Research enquiries', width: 1672, height: 941 }
 } as const;
 
 const visual = sectionVisuals[section];
@@ -87,7 +88,7 @@ const visual = sectionVisuals[section];
       <p class="page-intro">{data.intro}</p>
     </div>
     <div class="page-hero-sidecard">
-      <img src={visual.image} alt={visual.label} loading="eager" />
+      <img src={visual.image} alt={visual.label} width={visual.width} height={visual.height} loading="eager" />
       <div>
         <span>{visual.label}</span>
         <small>{site.name}</small>
@@ -123,7 +124,10 @@ const visual = sectionVisuals[section];
               <span class="domain-index">0{i + 1}</span>
               <h2>{title}</h2>
               <p>{text}</p>
-              <div class="domain-links"><a href="/projects">Related projects →</a><a href="/publications">Publications →</a></div>
+              <div class="domain-links">
+                {researchDomainLinks[i].project && <a href={`/projects/${researchDomainLinks[i].project}/`}>Related project →</a>}
+                <a href={`/publications/${researchDomainLinks[i].publication}/`}>Related publication →</a>
+              </div>
             </article>
           ))}
         </div>
@@ -313,7 +317,7 @@ const visual = sectionVisuals[section];
         <div class="media-grid-v2">
           {media.map((item, i) => (
             <figure class={`media-card media-card-${i + 1}`}>
-              <img src={item.src} alt={item.alt} loading={i < 2 ? 'eager' : 'lazy'} />
+              <img src={item.src} alt={item.alt} width={i < 2 ? 1122 : i < 4 ? 1672 : i === 4 ? 1024 : 1086} height={i < 2 ? 1402 : i < 4 ? 941 : i === 4 ? 1536 : 1448} loading={i < 2 ? 'eager' : 'lazy'} />
               <figcaption>{item.labelEn}</figcaption>
             </figure>
           ))}
@@ -326,7 +330,7 @@ const visual = sectionVisuals[section];
     <section class="section section-tight">
       <div class="shell about-grid about-grid-v2">
         <div class="about-visual">
-          <img class="about-portrait" src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="Meysam Ghanbari in a satellite and optical communications research environment" />
+          <img class="about-portrait" src="/images/profile/meysam-ghanbari-satellite-optical-communications.webp" alt="Meysam Ghanbari in a satellite and optical communications research environment" width="1122" height="1402" loading="lazy" />
         </div>
         <div class="prose">
           <p class="eyebrow">IDENTITY</p>
