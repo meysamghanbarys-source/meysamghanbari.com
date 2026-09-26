@@ -139,7 +139,7 @@ const structuredData = {
         </a>
 
         <nav class="desktop-nav" aria-label={isFa ? 'پیمایش اصلی' : 'Primary navigation'}>
-          {items.map(([id, label]) => (
+          {items.filter(([id]) => id !== 'contact').map(([id, label]) => (
             <a href={isFa ? `/fa/${id}/` : `/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
           ))}
         </nav>

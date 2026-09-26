@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import { projects, publications, upcoming } from '../data/library';
+import { insights } from '../data/insights';
+import { insightsFa } from '../data/insights-fa';
+
+const { lang = 'en' } = Astro.props;
+const fa = lang === 'fa';
+const prefix = fa ? '/fa' : '';
+const arrow = fa ? '←' : '→';
+const featuredProjects = fa ? projects.fa.slice(0, 3) : projects.en.slice(0, 3);
+const featuredPapers = publications.filter((paper) => paper.featured).slice(0, 2);
+const selectedInsights = fa ? insightsFa.slice(0, 2) : insights.slice(0, 2);
+const activity = [
+  ...(upcoming[0] ? [{ title: upcoming[0].paperTitle, detail: fa ? `${upcoming[0].conference} · ${upcoming[0].locationFa}` : `${upcoming[0].conference} · ${upcoming[0].location}`, status: fa ? 'برنامه‌ریزی‌شده' : 'Scheduled', year: '2027', href: `${prefix}/upcoming/` }] : []),
+  ...publications.filter((paper) => paper.status === 'Published').slice(0, 2).map((paper) => ({ title: paper.title, detail: paper.venue, status: fa ? 'منتشرشده' : 'Published', year: paper.year, href: `${prefix}/publications/${paper.slug}/` }))
+];
+const c = fa ? {
+  eyebrow: 'پژوهش / مخابرات نوری / سامانه‌های فضایی', role: 'مخابرات نوری، ماهواره‌ای و سامانه‌های ارتباطی پیشرفته',
+  pitch: 'میثم قنبری معماری گیرنده‌ها و لینک‌های نوری را برای ارتباط میان ماهواره‌ها، سکوهای هوایی و شبکه‌های آینده بررسی می‌کند.',
+  research: 'بررسی پژوهش‌ها', contact: 'گفت‌وگو دربارهٔ یک مسئله',
+  domains: 'حوزه‌های پژوهش', domainsTitle: 'از پرتو و گیرنده تا شبکهٔ فضایی.', domainsText: 'یک برنامهٔ پژوهشی پیوسته، از رفتار لینک نوری تا معماری سامانه و شبکه.',
+  focus: ['لینک‌های نوری بین‌ماهواره‌ای', 'گیرنده‌ها و رهگیری دقیق', 'شبکه‌های غیرزمینی و HAPS'],
+  focusDetail: ['مسیرهای نوری پرظرفیت و رله‌های فضایی', 'آشکارسازی، حساسیت و هم‌ترازی پرتو', 'اتصال سکوهای هوایی و ماهواره‌ای'],
+  allDomains: 'مشاهدهٔ همهٔ حوزه‌ها',
+  work: 'پروژهٔ شاخص', workTitle: 'مهندسی یک لینک نوری قابل اتکا.', workText: 'طراحی گیرنده، هم‌ترازی پرتو و مدل‌سازی عملکرد در محیط‌هایی که تغییرات کوچک مسیر، ارتباط را تحت تأثیر قرار می‌دهد.', workLink: 'کاوش در پروژه‌ها',
+  activity: 'آخرین فعالیت‌ها', activityTitle: 'پژوهش در جریان.', activityLink: 'همهٔ رویدادها',
+  papers: 'کتابخانهٔ پژوهش', papersTitle: 'از مسئله تا مقاله.', papersLink: 'همهٔ مقالات',
+  future: 'Future Systems / دیدگاه‌ها', futureTitle: 'پرسش‌هایی فراتر از سامانهٔ امروز.', futureText: 'جستارهای میثم قنبری دربارهٔ هوش، حکمرانی، فناوری و آیندهٔ تمدن؛ در کنار پژوهش رسمی مخابراتی.', futureLink: 'ورود به دیدگاه‌ها',
+  profile: 'پژوهشگر / مهندس', profileTitle: 'کار در مرز نظریه و سامانه.', profileText: 'فعالیت میثم قنبری مدل‌سازی تحلیلی، طراحی گیرنده و معماری ارتباطات نوری و ماهواره‌ای را به هم پیوند می‌دهد.', profileLink: 'دربارهٔ میثم قنبری', mediaLink: 'رسانه و ارائه‌ها',
+  cta: 'همکاری پژوهشی و فنی', ctaTitle: 'یک مسئلهٔ دشوار ارتباطی دارید؟', ctaText: 'برای همکاری پژوهشی، تحقیق‌وتوسعهٔ صنعتی، مشاورهٔ فنی یا ارائهٔ علمی با میثم قنبری در ارتباط باشید.', ctaLink: 'شروع گفت‌وگو', insightLabel: 'دیدگاه'
+} : {
+  eyebrow: 'RESEARCH / OPTICS / SPACE SYSTEMS', role: 'Optical, Satellite & Advanced Communication Systems',
+  pitch: 'Meysam Ghanbari investigates optical links and receiver architectures that connect satellites, aerial platforms and future networks.',
+  research: 'Explore the research', contact: 'Discuss a research problem',
+  domains: 'RESEARCH DOMAINS', domainsTitle: 'From the optical beam to the space network.', domainsText: 'A connected research program spanning link behavior, receiver architecture and network scale.',
+  focus: ['Inter-satellite optical links', 'Receivers & precision tracking', 'NTN and HAPS networks'],
+  focusDetail: ['High-capacity crosslinks and optical relays', 'Detection, sensitivity and beam alignment', 'Connecting aerial and orbital platforms'],
+  allDomains: 'Explore all research domains',
+  work: 'SELECTED TECHNOLOGY', workTitle: 'Engineering an optical link that holds.', workText: 'Receiver design, beam alignment and performance modeling for environments where small changes in geometry can reshape a communication link.', workLink: 'Explore projects',
+  activity: 'RECENT ACTIVITY', activityTitle: 'Research in motion.', activityLink: 'View upcoming activity',
+  papers: 'RESEARCH LIBRARY', papersTitle: 'From the problem to the paper.', papersLink: 'Open the publication library',
+  future: 'FUTURE SYSTEMS / INSIGHTS', futureTitle: 'Questions beyond today’s systems.', futureText: 'Meysam Ghanbari’s essays on intelligence, governance, technology and civilization sit alongside his formal communications research.', futureLink: 'Enter Future Systems',
+  profile: 'RESEARCHER / ENGINEER', profileTitle: 'Working between theory and systems.', profileText: 'Ghanbari’s work connects analytical modeling, receiver design and optical and satellite communication architecture.', profileLink: 'About Meysam Ghanbari', mediaLink: 'Media & talks',
+  cta: 'RESEARCH & TECHNICAL COLLABORATION', ctaTitle: 'Have a difficult communications problem?', ctaText: 'Discuss research collaboration, industrial R&D, technical consultation or a scientific presentation with Meysam Ghanbari.', ctaLink: 'Start a conversation', insightLabel: 'Insight'
+};
+---
+
+<BaseLayout title={site.name} description={fa ? 'میثم قنبری در زمینهٔ مخابرات نوری و ماهواره‌ای، لینک‌های بین‌ماهواره‌ای، گیرنده‌های پیشرفته و شبکه‌های آینده پژوهش می‌کند.' : 'Meysam Ghanbari researches optical and satellite communications, inter-satellite links, advanced receivers and future networks.'} lang={lang} path={fa ? '/fa/' : '/'} image="/images/profile/meysam-ghanbari-formal-portrait.webp" imageAlt={fa ? 'پرترهٔ میثم قنبری، پژوهشگر مخابرات نوری و ماهواره‌ای' : 'Portrait of Meysam Ghanbari, optical and satellite communications researcher'}>
+  <section class="hq-hero"><div class="hq-hero-backdrop" aria-hidden="true"></div><div class="shell hq-hero-grid">
+    <div class="hq-intro"><p class="eyebrow">{c.eyebrow}</p><h1>{fa ? site.alternateName : site.name}</h1><p class="hq-role">{c.role}</p></div>
+    <figure class="hq-portrait"><img src="/images/profile/meysam-ghanbari-formal-portrait.webp" alt={fa ? 'پرترهٔ رسمی میثم قنبری' : 'Formal portrait of Meysam Ghanbari'} width="1024" height="1536" loading="eager" fetchpriority="high" /><figcaption><span>MEYSAM GHANBARI</span><span>OPTICS · SPACE · SYSTEMS</span></figcaption></figure>
+    <div class="hq-hero-body"><p>{c.pitch}</p><div class="hq-actions"><a class="button" href={`${prefix}/research/`}>{c.research} <span aria-hidden="true">{arrow}</span></a><a class="hq-underlink" href={`${prefix}/contact/`}>{c.contact} <span aria-hidden="true">{arrow}</span></a></div></div>
+  </div><div class="shell hq-hero-bottom"><span>01 / {fa ? 'پژوهش' : 'RESEARCH'}</span><span>OISL&nbsp; / &nbsp;FSO&nbsp; / &nbsp;NTN</span></div></section>
+
+  <section class="hq-section hq-domains" id="research-domains"><div class="shell"><div class="hq-heading"><div><p class="eyebrow">02 / {c.domains}</p><h2>{c.domainsTitle}</h2></div><p>{c.domainsText}</p></div><div class="hq-domain-list">{c.focus.map((title, i) => <a href={`${prefix}/research/`}><span>0{i + 1}</span><div><h3>{title}</h3><p>{c.focusDetail[i]}</p></div><b aria-hidden="true">{arrow}</b></a>)}</div><a class="hq-section-link" href={`${prefix}/research/`}>{c.allDomains} <span aria-hidden="true">{arrow}</span></a></div></section>
+
+  <section class="hq-section hq-work"><div class="shell hq-work-grid"><figure><img src="/images/records/optical-precision-tracking-photorealistic.webp" alt={fa ? 'نمای مفهومی واقع‌گرایانهٔ ترمینال مخابرات نوری و رهگیری پرتو' : 'Conceptual photorealistic view of an optical communication terminal tracking a beam'} width="1672" height="941" loading="lazy" /><figcaption>OPTICAL LINK SYSTEMS / VISUAL INTERPRETATION</figcaption></figure><div class="hq-work-copy"><p class="eyebrow">03 / {c.work}</p><h2>{c.workTitle}</h2><p>{c.workText}</p><div class="hq-project-links">{featuredProjects.map((project, i) => <a href={project.href}><span>0{i + 1}</span><strong>{project.title}</strong><b aria-hidden="true">{arrow}</b></a>)}</div><a class="hq-section-link" href={`${prefix}/projects/`}>{c.workLink} <span aria-hidden="true">{arrow}</span></a></div></div></section>
+
+  <section class="hq-section hq-activity"><div class="shell"><div class="hq-heading"><div><p class="eyebrow">04 / {c.activity}</p><h2>{c.activityTitle}</h2></div><a class="hq-section-link" href={`${prefix}/upcoming/`}>{c.activityLink} <span aria-hidden="true">{arrow}</span></a></div><div class="hq-activity-grid">{activity.map((item) => <a href={item.href}><div><span>{item.year}</span><span>{item.status}</span></div><h3>{item.title}</h3><p>{item.detail}</p><b aria-hidden="true">{arrow}</b></a>)}</div></div></section>
+
+  <section class="hq-section hq-papers"><div class="shell"><div class="hq-heading"><div><p class="eyebrow">05 / {c.papers}</p><h2>{c.papersTitle}</h2></div><a class="hq-section-link" href={`${prefix}/publications/`}>{c.papersLink} <span aria-hidden="true">{arrow}</span></a></div><div class="hq-paper-list">{featuredPapers.map((paper, i) => <a href={`${prefix}/publications/${paper.slug}/`}><span>0{i + 1}</span><div><small>{paper.year} / {paper.status} / {paper.venue}</small><h3>{paper.title}</h3><p>{fa ? paper.summaryFa : paper.summaryEn}</p></div><b aria-hidden="true">{arrow}</b></a>)}</div></div></section>
+
+  <section class="hq-section hq-future"><div class="shell hq-future-grid"><div class="hq-future-copy"><p class="eyebrow">06 / {c.future}</p><h2>{c.futureTitle}</h2><p>{c.futureText}</p><a class="button ghost" href={`${prefix}/insights/`}>{c.futureLink} <span aria-hidden="true">{arrow}</span></a></div><div class="hq-insight-list">{selectedInsights.map((item, i) => <a href={`${prefix}/insights/${item.slug}/`}><img src={item.conceptImage} alt={item.conceptAlt} width="1672" height="941" loading="lazy" /><div><small>{c.insightLabel} / 0{i + 1}</small><h3>{item.cardTitle}</h3><span>{arrow}</span></div></a>)}</div></div></section>
+
+  <section class="hq-section hq-profile"><div class="shell hq-profile-grid"><div><p class="eyebrow">07 / {c.profile}</p><h2>{c.profileTitle}</h2><p>{c.profileText}</p><div class="hq-profile-links"><a href={`${prefix}/about/`}>{c.profileLink} {arrow}</a><a href={`${prefix}/media/`}>{c.mediaLink} {arrow}</a></div></div><img src="/images/media/meysam-ghanbari-research-presentation.webp" alt={fa ? 'میثم قنبری در محیط ارائهٔ پژوهشی' : 'Meysam Ghanbari in a research presentation setting'} width="1672" height="941" loading="lazy" /></div></section>
+
+  <section class="hq-section hq-contact"><div class="shell hq-contact-grid"><div><p class="eyebrow">08 / {c.cta}</p><h2>{c.ctaTitle}</h2><p>{c.ctaText}</p></div><a class="button" href={`${prefix}/contact/`}>{c.ctaLink} <span aria-hidden="true">{arrow}</span></a></div></section>
+</BaseLayout>

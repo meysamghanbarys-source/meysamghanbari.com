@@ -29,9 +29,9 @@ const eventSchema = upcomingEvent ? {
 } : null;
 
 const sectionVisuals = {
-  research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'حوزه پژوهشی', width: 1122, height: 1402 },
-  projects: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'مسیرهای مهندسی', width: 1122, height: 1402 },
-  publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'کتابخانه مقالات', width: 1122, height: 1402 },
+  research: { image: '/images/records/optical-record-observatory-photorealistic.webp', label: 'لینک‌های نوری در مقیاس فضا', width: 1672, height: 941 },
+  projects: { image: '/images/records/optical-precision-tracking-photorealistic.webp', label: 'مهندسی ترمینال نوری', width: 1672, height: 941 },
+  publications: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'کتابخانه پژوهش و مقالات', width: 1672, height: 941 },
   videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'ارائه‌ها و سخنرانی‌ها', width: 1672, height: 941 },
   insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'دیدگاه‌های فنی', width: 1122, height: 1402 },
   upcoming: { image: upcomingEvent?.image ?? '/images/media/meysam-ghanbari-research-presentation.webp', label: 'IEEE VTC 2027-Spring · هامبورگ', width: 1280, height: 720 },
@@ -175,7 +175,7 @@ const visual = sectionVisuals[section];
 
   {section === 'videos' && (
     <section class="section section-tight"><div class="shell">
-      {videos.length === 0 ? <div class="empty-state"><span class="empty-icon">▶</span><h2>ویدئوی عمومی ثبت نشده است</h2><p>ارائه‌های پژوهشی و محتوای فنی عمومی در این بخش نمایش داده خواهند شد.</p></div> : null}
+      {videos.length === 0 ? <div class="talk-library-empty"><div class="talk-stage"><img src="/images/media/meysam-ghanbari-research-presentation.webp" alt="میثم قنبری در محیط ارائهٔ پژوهشی" width="1672" height="941" loading="eager" /><span>ارائه‌ها و سخنرانی‌ها</span></div><div><p class="eyebrow">پژوهش در قاب تصویر</p><h2>ارائهٔ پژوهش برای مخاطبان فنی.</h2><p>ویدئوهای عمومی پس از در دسترس بودن در این بخش ثبت می‌شوند. جزئیات ارائهٔ کنفرانسی پیش‌رو در صفحهٔ رویدادها آمده است.</p>{upcomingEvent && <a class="talk-upcoming-link" href="/fa/upcoming/"><span>پیش‌رو · {upcomingEvent.conference}</span><strong>{upcomingEvent.paperTitle}</strong><b>جزئیات ارائه ←</b></a>}<a class="button ghost" href="/fa/contact/">دعوت به ارائه یا سخنرانی</a></div></div> : null}
     </div></section>
   )}
 

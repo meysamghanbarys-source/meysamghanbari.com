@@ -39,7 +39,7 @@ const domainSchema = {
 
   <section class="domain-question"><div class="shell"><span>پرسش تکرارشونده</span><h2>تابع هدف را چه کسی تعریف می‌کند؟</h2><p>پیش‌بینی می‌تواند بهتر و بهینه‌سازی سریع‌تر شود؛ اما وزن بقا، آزادی، شادی، طول عمر، برابری و پیشرفت را محاسبه به‌تنهایی تعیین نمی‌کند.</p></div></section>
 
-  <section class="section"><div class="shell"><div class="collection-sequence">{insightsFa.map((item) => <a class={`sequence-item theme-${item.theme}`} href={`/fa/insights/${item.slug}`}><div><span>{item.number}</span><small>{item.readTime} · {item.primaryKeyword}</small></div><h2>{item.title}</h2><p>{item.excerpt}</p><img src={item.conceptImage} alt="" width="1672" height="941" loading="lazy" /><b>بازکردن دیدگاه ←</b></a>)}</div></div></section>
+  <section class="section"><div class="shell"><div class="collection-sequence">{insightsFa.map((item) => <a class={`sequence-item theme-${item.theme}`} href={`/fa/insights/${item.slug}`}><div><span>{item.number}</span><small>{item.readTime} · {item.primaryKeyword}</small></div><h2>{item.title}</h2><p>{item.excerpt}</p><img src={item.conceptImage} alt={item.conceptAlt} width="1672" height="941" loading="lazy" /><b>بازکردن دیدگاه ←</b></a>)}</div></div></section>
 
   <section class="future-related-domains"><div class="shell"><p class="eyebrow">پیوندهای این دامنه</p><h2>معماری بزرگ‌تر Future Systems</h2><div><span>فناوری</span><span>Longevityscape</span><span>تمدن آینده</span><span>ارتقای انسان</span><span>فضا و گسترش</span><span>علم و جامعه</span></div><a class="button ghost" href="/fa/insights">بازگشت به اکوسیستم</a></div></section>
 </BaseLayout>

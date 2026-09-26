@@ -53,9 +53,9 @@ const eventSchema = upcomingEvent ? {
 } : null;
 
 const sectionVisuals = {
-  research: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Orbital research systems', width: 1122, height: 1402 },
-  projects: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Engineering directions', width: 1122, height: 1402 },
-  publications: { image: '/images/profile/meysam-ghanbari-space-communications-researcher.webp', label: 'Publication library', width: 1122, height: 1402 },
+  research: { image: '/images/records/optical-record-observatory-photorealistic.webp', label: 'Optical links across space', width: 1672, height: 941 },
+  projects: { image: '/images/records/optical-precision-tracking-photorealistic.webp', label: 'Optical terminal engineering', width: 1672, height: 941 },
+  publications: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'Research and publication library', width: 1672, height: 941 },
   videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'Presentations and talks', width: 1672, height: 941 },
   insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Technical perspectives', width: 1122, height: 1402 },
   upcoming: { image: upcomingEvent?.image ?? '/images/media/meysam-ghanbari-research-presentation.webp', label: 'IEEE VTC 2027-Spring · Hamburg', width: 1280, height: 720 },
@@ -100,14 +100,6 @@ const visual = sectionVisuals[section];
   {section === 'research' && (
     <section class="section section-tight">
       <div class="shell">
-        <div class="research-system-map">
-          <div class="system-map-core">
-            <span>MG</span>
-            <strong>Advanced communication systems</strong>
-            <small>Physics · architecture · intelligence</small>
-          </div>
-          <div class="system-map-orbit" aria-hidden="true"></div>
-        </div>
         <a class="research-record-feature" href="/research/optical-communications-records/">
           <div class="research-record-copy">
             <span>NEW · TECHNICAL OBSERVATORY</span>
@@ -221,10 +213,10 @@ const visual = sectionVisuals[section];
               <span>PUBLIC MEDIA ARCHIVE</span>
             </div>
             <div>
-              <p class="eyebrow">VERIFIED RECORDS ONLY</p>
-              <h2>The speaking library is ready for confirmed public media.</h2>
-              <p>No public videos are currently listed. Future records will identify the event, research topic, year, context and verified source rather than displaying uncontextualized embeds.</p>
-              <div class="talk-format-grid"><span>Conference presentations</span><span>Technical explainers</span><span>Research interviews</span></div>
+              <p class="eyebrow">PRESENTATIONS & TALKS</p>
+              <h2>Research made visible.</h2>
+              <p>Public video recordings will appear here when available. The upcoming conference presentation is listed separately with its research question and event details.</p>
+              {upcomingEvent && <a class="talk-upcoming-link" href="/upcoming/"><span>UPCOMING · {upcomingEvent.conference}</span><strong>{upcomingEvent.paperTitle}</strong><b>View presentation details →</b></a>}
               <a class="button ghost" href="/contact">Speaking & presentation enquiries</a>
             </div>
           </div>
