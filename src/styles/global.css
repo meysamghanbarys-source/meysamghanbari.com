@@ -223,7 +223,7 @@
   .sequence-item > div { display:flex; align-items:center; gap:14px; }
   .sequence-item p { font-size:14px; }
   .future-article-hero { padding:76px 0 44px; }
-  .future-article-heading h1 { font-size:47px; }
+  .future-article-heading h1 { font-size:clamp(36px,10vw,47px); overflow-wrap:break-word; hyphens:auto; }
   .future-article-heading > p { font-size:17px; }
   .future-portrait-frame { display:block; width:100%; max-width:none; margin-top:8px; transform:none; }
   .future-portrait-frame img { aspect-ratio:16/9; object-position:var(--portrait-x,25%) 30%; }
@@ -1743,7 +1743,7 @@ body::before {
   .media-grid-v2 { grid-template-columns: 1fr; }
   .media-card-1,.media-card-2,.media-card-3,.media-card-4,.media-card-5,.media-card-6 { grid-column: auto; }
   .media-card img { min-height: 320px; max-height: 520px; }
-  .paper-hero h1 { font-size: 42px; }
+  .paper-hero h1 { font-size: clamp(34px,10vw,42px); overflow-wrap:break-word; hyphens:auto; }
   .paper-record div { grid-template-columns: 1fr; gap: 6px; }
 }
 
