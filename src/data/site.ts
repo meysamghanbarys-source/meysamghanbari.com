@@ -47,7 +47,7 @@ export const site = {
   heroImage: '/images/profile/meysam-ghanbari-space-communications-researcher.webp',
   ogImage: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp',
   socialLinks: {
-    scholar: '',
+    scholar: 'https://scholar.google.com/citations?user=U6s7sawAAAAJ&hl=en',
     orcid: 'https://orcid.org/0009-0000-6072-4199',
     ieee: '',
     linkedin: '',

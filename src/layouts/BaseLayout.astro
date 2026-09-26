@@ -182,6 +182,7 @@ const structuredData = {
           <strong>{isFa ? 'ارتباط پژوهشی' : 'Research enquiries'}</strong>
           <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
           {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">{isFa ? 'پروفایل ORCID' : 'ORCID profile'} ↗</a></p>}
+          {site.socialLinks.scholar && <p><a href={site.socialLinks.scholar} target="_blank" rel="me noreferrer">{isFa ? 'پروفایل Google Scholar' : 'Google Scholar profile'} ↗</a></p>}
         </div>
       </div>
       <nav class="shell footer-nav" aria-label={isFa ? 'پیمایش پایین صفحه' : 'Footer navigation'}>
