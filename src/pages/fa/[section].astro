@@ -241,6 +241,7 @@ const visual = sectionVisuals[section];
           <div><strong>سخنرانی و رسانه</strong><span>ارائه، مصاحبه و گفتگوی فنی</span></div>
         </div>
         <a class="direct-email" href={`mailto:${site.contactEmail}`}><small>ایمیل مستقیم</small><strong dir="ltr">{site.contactEmail}</strong><span>↗</span></a>
+        {site.socialLinks.linkedin && <a class="direct-email" href={site.socialLinks.linkedin} target="_blank" rel="me noreferrer"><small>پروفایل حرفه‌ای</small><strong dir="ltr">LinkedIn</strong><span>↗</span></a>}
       </div>
       <form class="enquiry-form" data-enquiry-form-fa data-email={site.contactEmail}>
         <div class="form-head"><span>درخواست ساختاریافته</span><small>همهٔ فیلدها به‌جز سازمان ضروری‌اند</small></div>
