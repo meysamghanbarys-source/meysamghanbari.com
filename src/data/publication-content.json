@@ -1,0 +1,1380 @@
+{
+  "updates": {
+    "outage-uav-mixed-underwater-fso-pointing-errors": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mahdi Ataee",
+        "Seyed Mohammad Sajad Sadough"
+      ],
+      "abstract": "In this paper, we investigate the outage performance of a mixed optical wireless communication (OWC) system consisting of an autonomous underwater vehicle (AUV) communicating with an unmanned aerial vehicle (UAV) via a buoying relay. More precisely, the considered setup uses an AUV that transmits a data stream to a decode-and-forward (DF) buoy relay using underwater optical wireless communication (UOWC). The buoy relay then stablishes a free space optical (FSO) link to send the data to the UAV final destination. Our model considers the effect of weak turbulence and pointing error for both UOWC and FSO links. We further analyze the importance of designing an optimal beam width in order to achieve the lowest outage probability of the total emitter-destination link. Numerical results are presented to confirm and support the accuracy of our derived analytical expressions.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/WASOWC54657.2022.9798419",
+      "pages": "1-5",
+      "publicationDate": "2022-05-12",
+      "externalUrl": "https://doi.org/10.1109/WASOWC54657.2022.9798419",
+      "image": {
+        "src": "/images/publications/mixed-underwater-uav.webp",
+        "thumbnail": "/images/publications/mixed-underwater-uav-thumb.webp",
+        "alt": "Concept illustration of an underwater vehicle, surface buoy and UAV linked optically.",
+        "width": 1440,
+        "height": 810,
+        "caption": "Concept illustration supplied for this publication. The analyzed path is AUV → decode-and-forward buoy → UAV; the scene is not a deployment photograph."
+      },
+      "editorial": {
+        "question": "How can an underwater vehicle deliver data to a UAV when pointing errors and turbulence impair both optical hops?",
+        "answer": "The paper models an AUV-to-buoy underwater link followed by a buoy-to-UAV FSO link, combines their outage probabilities for decode-and-forward relaying, and studies beamwidth selection under weak turbulence. Reliability depends on both hops; atmospheric improvement alone cannot remove the underwater attenuation bottleneck.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "The autonomous underwater vehicle sends data to a surface buoy through underwater optical wireless communication. The buoy decodes and forwards that data to the UAV through free-space optical communication. Both hops use intensity modulation and direct detection with on–off keying.",
+              "The underwater and atmospheric channel gains include attenuation, weak lognormal turbulence and geometric pointing loss. Underwater attenuation follows the Beer–Lambert law. The end-to-end calculation treats the two hop outages as independent."
+            ],
+            "source": "Sections II–III"
+          },
+          {
+            "heading": "Method and validation",
+            "paragraphs": [
+              "Per-hop channel distributions lead to closed-form outage expressions. For independent hops, total outage is Pᵤw + Pₐ − PᵤwPₐ: failure of either hop interrupts the relay path. Beamwidth sweeps expose the compromise between collecting optical power and tolerating displacement.",
+              "Numerical and simulation comparisons examine clear-ocean and coastal water, underwater distances of 14–18 m and atmospheric distances of 1–1.2 km. The displayed configuration uses 532 nm underwater and 1550 nm in air, with a 20 cm receiver diameter."
+            ],
+            "source": "Sections III–IV; Eq. (28); Table I"
+          },
+          {
+            "heading": "Results and engineering interpretation",
+            "paragraphs": [
+              "Clear-ocean water gives lower outage than coastal water in the evaluated conditions. At higher transmitted power, underwater attenuation increasingly constrains the complete path.",
+              "The outage-minimizing beamwidth changes with available power. A wider beam can reduce pointing loss when sufficient power is available; a narrower beam concentrates power when attenuation dominates. The optima in the figures are examples for the selected parameters, rather than universal settings."
+            ],
+            "source": "Section IV; Figs. 2–5"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "The evidence is analytical and numerical. The paper does not report an ocean deployment, flight test or demonstrated operational relay. Weak-turbulence models, independent hops, the selected water types and an ideal decode-and-forward relay bound the interpretation. Strong turbulence and vertically layered water require additional modeling."
+            ],
+            "source": "Sections II–V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "ber-mixed-underwater-owc-fso-relaying-pointing-error",
+            "reason": "Extends the mixed underwater–FSO relay problem to layered water, strong turbulence and multiple receiver apertures."
+          },
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "Examines analytical beamwidth design and beam wandering for the aerial optical segment."
+          }
+        ]
+      },
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract and technical explanation follow the supplied manuscript. Bibliographic details are checked against the publisher’s Crossref record.",
+      "summaryEn": "The paper models an AUV-to-buoy underwater link followed by a buoy-to-UAV FSO link, combines their outage probabilities for decode-and-forward relaying, and studies beamwidth selection under weak turbulence. Reliability depends on both hops; atmospheric improvement alone cannot remove the underwater attenuation bottleneck.",
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Ataee, Mahdi",
+        "Sajad Sadough, Seyed Mohammad"
+      ]
+    },
+    "ber-mixed-underwater-owc-fso-relaying-pointing-error": {
+      "authorNames": [
+        "Mahdis Saghaee Jahed",
+        "Meysam Ghanbari",
+        "Seyed Mohammad Sajad Sadough"
+      ],
+      "abstract": "In this paper, we analyze the performance of a dual-hop mixed underwater optical wireless communication (UOWC)-multiple aperture free-space optical (FSO) relaying system by taking into account the effect of strong turbulence under pointing error (PE). To this end, we first derive a statistical channel model for the considered UOWC link alongside with the closed-form expression for its average bit error rate (BER). Then, we address the end-to-end average BER of the considered setup and we discuss the impact of PE in the UOWC link and the number of deployed receivers in the FSO link on different performance indicators. Simulation results are also included to validate the accuracy of our analysis.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/ICEE59167.2023.10334840",
+      "pages": "512-516",
+      "publicationDate": "2023-05-09",
+      "externalUrl": "https://doi.org/10.1109/ICEE59167.2023.10334840",
+      "image": {
+        "src": "/images/publications/underwater-shore-diversity.webp",
+        "thumbnail": "/images/publications/underwater-shore-diversity-thumb.webp",
+        "alt": "Concept illustration of an underwater optical relay reaching multiple shore receivers.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The paper analyzes a ship-mounted decode-and-forward relay and lighthouse receivers; the buoy and seabed devices pictured here are illustrative."
+      },
+      "editorial": {
+        "question": "When do extra FSO receiver apertures help an underwater-to-shore relay, and when does the underwater hop become the bottleneck?",
+        "answer": "A layered underwater channel model is combined with a SIMO FSO hop to evaluate end-to-end bit error rate. Receiver diversity improves the atmospheric hop in the studied conditions, but its end-to-end benefit diminishes once underwater turbulence and pointing errors dominate.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "An AUV transmits to a ship-mounted decode-and-forward relay through an underwater optical link. The ship forwards the recovered signal toward multiple FSO receivers at a lighthouse or shore base station. This is receiver diversity, or SIMO, on the atmospheric hop.",
+              "The vertically stratified underwater channel is modeled as the product of independent Gamma–Gamma layer gains, with attenuation and pointing error. Gamma–Gamma turbulence and pointing loss also enter the atmospheric hop. The system uses IM/DD with M-PAM; the numerical examples use four levels."
+            ],
+            "source": "Section II; Fig. 1; Table I"
+          },
+          {
+            "heading": "Method and validation",
+            "paragraphs": [
+              "The underwater channel distribution yields a closed-form average BER involving the Meijer G-function. It is combined with an existing multiple-aperture FSO BER expression. The decode-and-forward relation is BERₑ₂ₑ = BERᵤw + BERꜰ − 2BERᵤwBERꜰ.",
+              "Analysis is checked against simulations for two and four underwater layers, several pointing-error levels, and one, two or four FSO receivers. Underwater and atmospheric wavelengths are 450 nm and 1550 nm, respectively."
+            ],
+            "source": "Sections III–V; Eqs. (16), (18), (20); Table I"
+          },
+          {
+            "heading": "Results and engineering interpretation",
+            "paragraphs": [
+              "For the atmospheric hop alone, Figure 3 reaches average BER 10⁻³ at approximately 38, 29 and 24 dB with one, two and four receivers, respectively. These values describe the FSO hop under the plotted parameters; they are not end-to-end thresholds.",
+              "In the end-to-end example, additional receivers help over roughly 0–30 dB. Above that region, the underwater hop dominates and adding atmospheric apertures delivers less improvement. Increased underwater pointing error can outweigh a favorable layer configuration."
+            ],
+            "source": "Section V; Figs. 2–4"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "Results concern the specified statistical channels and parameter sweeps, not sea trials or a space relay. Independence between modeled water layers and the adopted pointing model are simplifying assumptions. Extra shore receivers add hardware; diversity cannot compensate indefinitely for an impaired underwater hop."
+            ],
+            "source": "Sections II–VI"
+          }
+        ],
+        "related": [
+          {
+            "slug": "outage-uav-mixed-underwater-fso-pointing-errors",
+            "reason": "Earlier outage analysis of an AUV–buoy–UAV path under weak turbulence."
+          },
+          {
+            "slug": "meteorological-conditions-performance-optimization-miso-fso",
+            "reason": "Studies transmitter diversity (MISO), distinct from this paper’s receiver diversity (SIMO)."
+          }
+        ]
+      },
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract and technical explanation follow the supplied manuscript. Bibliographic details are checked against the publisher’s Crossref record.",
+      "summaryEn": "A layered underwater channel model is combined with a SIMO FSO hop to evaluate end-to-end bit error rate. Receiver diversity improves the atmospheric hop in the studied conditions, but its end-to-end benefit diminishes once underwater turbulence and pointing errors dominate.",
+      "citationNames": [
+        "Jahed, Mahdis Saghaee",
+        "Ghanbari, Meysam",
+        "Sadough, Seyed Mohammad Sajad"
+      ]
+    },
+    "meteorological-conditions-performance-optimization-miso-fso": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mahdis Saghaee Jahed",
+        "Seyed Mohammad Sajad Sadough"
+      ],
+      "abstract": "In this paper, we investigate the effect of meteorological conditions on the performance of a multiple-input single-output (MISO) free-space optical (FSO) communication system. First, by taking into account the effect of pointing error and turbulence, we derive an analytical channel model. Second, we derive a closed-form expression for the outage probability and the average link availability. We further analyze the complexity-performance trade-off and then we propose two beamwidth optimization methods to maximize the overall availability of the system in different weather conditions. We show that a significant performance improvement is achieved by using optimum adaptive beamwidth or by increasing the number of transmitters. The efficiency of the proposed method is validated through simulations using realistic meteorological data of Tehran, Iran.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/ICEE59167.2023.10334716",
+      "pages": "479-483",
+      "publicationDate": "2023-05-09",
+      "externalUrl": "https://doi.org/10.1109/ICEE59167.2023.10334716",
+      "image": {
+        "src": "/images/publications/weather-miso-fso.webp",
+        "thumbnail": "/images/publications/weather-miso-fso-thumb.webp",
+        "alt": "Concept illustration of multiple laser transmitters, one receiver and changing weather.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The paper models weather-dependent turbulence and pointing loss using Tehran data; it neglects attenuation. The rain and fog insets do not represent measured weather tests."
+      },
+      "editorial": {
+        "question": "How should a MISO FSO link choose its beamwidth when weather changes turbulence and pointing loss?",
+        "answer": "The paper derives outage and weather-weighted link availability for several optical transmitters serving one receiver. It compares adaptive beamwidth with a fixed design, using Tehran weather data. A fixed optimized beamwidth approaches the adaptive design in the evaluated conditions while avoiding continuous beamwidth adjustment.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "Multiple transmitters repeat an IM/DD on–off-keyed signal toward one receiver. Lognormal atmospheric gains model turbulence; temperature, relative humidity and wind speed enter a macro-meteorological refractive-index model. The transmitters move together, so their pointing displacements are correlated.",
+              "The analysis deliberately neglects attenuation to isolate turbulence and misalignment. Consequently, the weather illustration does not establish rain- or fog-limited link performance. A sum of lognormal terms is approximated by one lognormal variable to make the outage expression tractable."
+            ],
+            "source": "Sections II–III; Eqs. (3), (8)–(11), (19)–(20)"
+          },
+          {
+            "heading": "Optimization and validation",
+            "paragraphs": [
+              "A closed-form outage expression gives link availability as 100 × (1 − Pout). Availability is averaged over discrete weather conditions with their probabilities. Adaptive optimization selects a beamwidth for each condition; fixed optimization keeps one beamwidth and requires less transmitter adaptation.",
+              "Numerical evaluation uses realistic daily meteorological data for Tehran in February 2022. The configuration includes a 1 km link, 1550 nm wavelength and a 6 cm receiver radius. The manuscript discusses longer-term design, but the reported case study covers one month."
+            ],
+            "source": "Sections IV–VI; Eqs. (26)–(30); Table I; Fig. 3"
+          },
+          {
+            "heading": "Results and the power comparison",
+            "paragraphs": [
+              "In Figure 4, target outage 10⁻⁶ is reached at 29.7 dB for 4 × 1 MISO and 37 dB for SISO. The MISO case transmits total power M × P while SISO transmits P. This comparison therefore combines additional transmit power and spatial diversity; it does not establish an equal-total-power gain.",
+              "Fixed and adaptive beamwidth optimization perform closely for the evaluated transmitter counts. Beamwidth adaptation has the largest relative value where the unoptimized link is most constrained; increasing the transmitter count also increases system complexity."
+            ],
+            "source": "Section VI; Figs. 4–5"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "This is model-based availability evaluated with weather data, not measured uptime from a deployed Tehran link. Neglected attenuation, lognormal approximations, correlated pointing and the month-specific data restrict generalization. The analysis does not establish performance in every climate or under equal total optical power."
+            ],
+            "source": "Sections II–VII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "Investigates fixed and adaptive beamwidth strategies under UAV pointing and beam wandering."
+          },
+          {
+            "slug": "ber-mixed-underwater-owc-fso-relaying-pointing-error",
+            "reason": "Uses multiple receivers on an FSO relay hop, rather than multiple transmitters."
+          }
+        ]
+      },
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract and technical explanation follow the supplied manuscript. Bibliographic details are checked against the publisher’s Crossref record.",
+      "summaryEn": "The paper derives outage and weather-weighted link availability for several optical transmitters serving one receiver. It compares adaptive beamwidth with a fixed design, using Tehran weather data. A fixed optimized beamwidth approaches the adaptive design in the evaluated conditions while avoiding continuous beamwidth adjustment.",
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Jahed, Mahdis Saghaee",
+        "Sajad Sadough, Seyed Mohammad"
+      ]
+    },
+    "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mahdi Ataee",
+        "Seyed Mohammad Sajad Sadough"
+      ],
+      "abstract": "This paper addresses the design of a free-space optical (FSO) link between an unmanned aerial vehicle (UAV) and a high-altitude platform (HAP) in the practical scenario of generalized pointing errors (PE) and beam wandering (BWAN). We particularly focus on the outage probability associated to the UAV-to-HAP link, as performance measure. More precisely, we propose to select appropriately the system parameters such as optical beamwidth used at the UAV and its flight altitude so as to minimize the outage probability. First, we characterize the channel statistics by taking into account the joint influence of attenuation loss, atmospheric turbulence and generalized pointing inaccuracies particularly impaired by BWAN. Second, we use the developed channel expression to formulate the closed-form expressions for outage probability, where we also derive an asymptotic expression at high signal-to-noise ratios (SNR)s, which can be used over a wide range of SNRs. Third, we use the derived asymptotic outage expression to formulate an optimization problem which is then solved to derive the optimum beamwidth at the UAV leading to the instantaneous minimum outage probability under generalized PE and BWAN. We also derive a closed-form expression for the limit of optimum beamwidth under strong PE condition. Fourth, we address the practical scenario of beamwidth optimization for minimizing the average outage probability over diverse pointing and turbulence circumstances that a UAV might potentially encounter throughout its operational trajectory. Finally, we address the optimal UAV altitude to avoid strong turbulence so as to ensure efficient data transmission. Our simulation results validate both the effectiveness and the accuracy of the derived asymptotic outage probability and the adequate choice of beamwidth and flight altitude to minimize the average outage performance. For instance, our results show that at an SNR of 20 dBm, the link availability is increased from 20 % (with nominal beamwidth) to more than 70 % by adopting the proposed beamwidth optimization.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1016/j.ijleo.2024.171953",
+      "volume": "312",
+      "pages": "171953",
+      "articleNumber": "171953",
+      "publicationDate": "2024-09",
+      "journalTitle": "Optik",
+      "externalUrl": "https://doi.org/10.1016/j.ijleo.2024.171953",
+      "image": {
+        "src": "/images/publications/uav-hap-beamwidth.webp",
+        "thumbnail": "/images/publications/uav-hap-beamwidth-thumb.webp",
+        "alt": "Concept illustration of an optical uplink from a UAV to a high-altitude balloon.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The modeled UAV-to-HAP uplink includes pointing displacement and beam wandering; no flight demonstration is claimed."
+      },
+      "editorial": {
+        "question": "Can beamwidth and UAV flight altitude reduce outage on a UAV-to-HAP optical uplink without relying only on more transmit power?",
+        "answer": "The paper combines attenuation, weak atmospheric turbulence, nonzero-boresight pointing error and beam wandering in an outage model. A high-SNR approximation yields a Lambert W-based optimal beamwidth. Altitude sweeps and fixed versus adaptive beamwidth designs identify conditional improvements in modeled link availability.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "A hovering UAV sends an IM/DD on–off-keyed optical uplink to a hovering high-altitude platform. The modeled HAP altitude is 19–22 km. Transmitter and receiver locations are known; transverse position fluctuations are modeled, while small longitudinal fluctuations are neglected.",
+              "Channel gain is the product of deterministic Beer–Lambert attenuation, weak lognormal turbulence and pointing loss. Mechanical jitter may have nonzero means and unequal axis variances. Beam-wander displacement is added to mechanical displacement; an approximation to the resulting Beckmann distribution makes the model tractable. Turbulence fading and pointing loss are treated as independent."
+            ],
+            "source": "Sections II–III; Eqs. (5)–(25)"
+          },
+          {
+            "heading": "Optimization and validation",
+            "paragraphs": [
+              "The exact outage expression is accompanied by a high-SNR approximation. Minimizing the latter produces a closed-form optimum involving the Lambert W-function, using a small-aperture approximation. A limiting beamwidth is also derived for strong pointing error.",
+              "The practical comparison assumes known probabilities of several pointing and beam-wander conditions. Adaptive design changes beamwidth for each condition; the less complex fixed strategy selects one optimized beamwidth for the complete mixture. Simulation and numerical minimization check the analytical expressions."
+            ],
+            "source": "Sections IV–VI; Eqs. (34), (43), (47), (49)–(50)"
+          },
+          {
+            "heading": "Results and engineering interpretation",
+            "paragraphs": [
+              "For the two turbulence profiles and zenith-angle sweeps in the manuscript, most turbulence reduction occurs below roughly 400 m UAV altitude; the 400–600 m region shows diminishing returns. This is a result of the adopted altitude profile, not a universal flight-altitude prescription.",
+              "Analytical and numerically optimized beamwidths agree more closely in the evaluated higher-SNR regime. At stronger pointing error the optimum tends toward the derived upper limit. Fixed and adaptive optimization give similar average availability in the selected mixture, making a fixed design a useful complexity trade-off."
+            ],
+            "source": "Section VI; Figs. 3–9"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "The evidence consists of channel analysis and simulations, not an airborne optical demonstration. Weak turbulence, approximated pointing statistics, known condition probabilities and the asymptotic optimization restrict the result. The supplied manuscript labels some normalized SNR axes in dBm; those labels are preserved in its abstract, but are not reinterpreted here as a universal calibrated SNR specification."
+            ],
+            "source": "Sections III–VI"
+          }
+        ],
+        "related": [
+          {
+            "slug": "outage-uav-mixed-underwater-fso-pointing-errors",
+            "reason": "Models an underwater–buoy–UAV relay and its beamwidth-dependent outage."
+          },
+          {
+            "slug": "meteorological-conditions-performance-optimization-miso-fso",
+            "reason": "Compares fixed and adaptive beamwidth design for weather-dependent terrestrial MISO links."
+          }
+        ]
+      },
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract and technical explanation follow the supplied manuscript. Bibliographic details are checked against the publisher’s Crossref record.",
+      "summaryEn": "The paper combines attenuation, weak atmospheric turbulence, nonzero-boresight pointing error and beam wandering in an outage model. A high-SNR approximation yields a Lambert W-based optimal beamwidth. Altitude sweeps and fixed versus adaptive beamwidth designs identify conditional improvements in modeled link availability.",
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Ataee, Mahdi",
+        "Sadough, Seyed Mohammad Sajad"
+      ]
+    },
+    "future-communications-narrow-beams-pointing-errors-alignment-limits": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mohammad Taghi Dabiri",
+        "Osamah S. Badarneh",
+        "Mazen Hasna",
+        "Yazan H. Al-Badarneh",
+        "Mustafa K. Alshawaqfeh",
+        "Khalid Qaraqe"
+      ],
+      "doi": "10.1109/OJCOMS.2026.3690915",
+      "journalTitle": "IEEE Open Journal of the Communications Society",
+      "volume": "7",
+      "pages": "4959-5006",
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Dabiri, Mohammad Taghi",
+        "Badarneh, Osamah S.",
+        "Hasna, Mazen",
+        "Al-Badarneh, Yazan H.",
+        "Alshawaqfeh, Mustafa K.",
+        "Qaraqe, Khalid A."
+      ],
+      "abstract": "Directional links in free-space optical (FSO), millimeter-wave (mmWave), and terahertz (THz) systems are a cornerstone of emerging 6G networks, yet their reliability is fundamentally limited by pointing errors and misalignment. Existing studies address this impairment using technology-specific definitions, models, and mitigation approaches, which hinders cross-domain comparison and transferable design insight. This survey provides a unified treatment of pointing errors across optical and high-frequency wireless communications. We establish consistent terminology and a cross-technology taxonomy of pointing errors, review angular misalignment and statistical distribution models, and analyze their impact on system performance. Mitigation techniques are systematically surveyed with emphasis on optical systems and their connection to underlying pointing-error models. The survey further provides a detailed examination of pointing-error effects in orbital angular momentum (OAM) links and quantum optical communications, and surveys the corresponding mitigation approaches tailored to mode-dependent impairments and quantum measurement constraints. The survey also outlines open challenges and future research directions. By consolidating fragmented literature into a coherent framework, this work supports consistent analysis and robust design of next-generation directional communication systems.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "publicationDate": "2026",
+      "pdf": "https://arxiv.org/pdf/2512.20874",
+      "summaryEn": "Higher directivity concentrates useful power but makes the link sensitive to platform motion, tracking delay and receiver orientation. The survey connects terminology, geometric and statistical models, performance metrics and mitigation choices across technologies, while showing why optical aperture loss cannot simply stand in for every RF antenna or quantum measurement impairment.",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author spelling and technical explanation follow the supplied survey manuscript. The published journal DOI, volume and pages are verified separately against the publisher record. The final author is listed as Khalid Qaraqe in the supplied title block and Khalid A. Qaraqe in the formal citation.",
+      "image": {
+        "src": "/images/publications/narrow-beam-alignment-survey.webp",
+        "thumbnail": "/images/publications/narrow-beam-alignment-survey-thumb.webp",
+        "alt": "Concept panorama of optical and directional RF links across ground, aerial and satellite platforms, with illustrative misalignment patterns.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this survey. The panorama summarizes FSO, directional RF and non-terrestrial alignment themes; beam colors, satellite scenes and intensity insets are illustrative. They are not a single demonstrated network, measured beam patterns or evidence that all depicted platforms use the same channel model."
+      },
+      "editorial": {
+        "question": "Why must narrow-beam FSO, mmWave and THz links be designed around alignment dynamics rather than ideal beam gain alone?",
+        "answer": "Higher directivity concentrates useful power but makes the link sensitive to platform motion, tracking delay and receiver orientation. The survey connects terminology, geometric and statistical models, performance metrics and mitigation choices across technologies, while showing why optical aperture loss cannot simply stand in for every RF antenna or quantum measurement impairment.",
+        "sections": [
+          {
+            "heading": "Scope and contribution of the survey",
+            "paragraphs": [
+              "The paper organizes a fragmented body of literature around a common sequence: define the impairment, describe its geometry and dynamics, select a statistical model, evaluate the relevant system metric, and match a mitigation mechanism to the modeled error. Its contribution is cross-technology synthesis and design guidance, rather than a new terminal experiment or one universal performance gain.",
+              "The scope covers conventional and mobile FSO, mmWave and THz links, with extended treatment of OAM and free-space quantum communication. Tables I–III compare earlier surveys, establish terminology and define notation. Tables IV–VI consolidate OAM modeling, OAM mitigation and quantum-link studies."
+            ],
+            "source": "Sections I–II; Tables I–III and IV–VI"
+          },
+          {
+            "heading": "A taxonomy that distinguishes physically different errors",
+            "paragraphs": [
+              "Transmitter pointing error shifts the illumination away from its intended target. Receiver angle-of-arrival variation can move a focused spot away from a detector or fiber core even when the receiving lens still collects light. Beam wander describes propagation-induced displacement; platform wobble describes time-varying orientation. These mechanisms require different measurements and corrective actions.",
+              "The survey also discusses frequency-dependent beam squint in wideband RF arrays, polarization-frame mismatch, cross-polarization interference, chromatic effects and OAM mode crosstalk. These are related alignment phenomena, but treating them all as one scalar power-loss coefficient can omit the impairment that actually limits a system."
+            ],
+            "source": "Section II; Table II; Fig. 2"
+          },
+          {
+            "heading": "Optical aperture loss and RF antenna gain are different modeling primitives",
+            "paragraphs": [
+              "For mobile FSO, the survey separates geometrical aperture collection from angle-of-arrival-dependent focal-plane coupling. The former integrates a displaced optical intensity profile over the receiver aperture; the latter depends on focusing optics, detector geometry and field of view. The familiar Gaussian-beam pointing approximation is useful only under its stated geometry and beam-to-aperture assumptions.",
+              "For directional mmWave/THz links, both transmitter and receiver antenna patterns contribute to misalignment loss. The reviewed choices range from full array patterns to two-sector, multi-sector and Gaussian main-lobe approximations. A two-sector abstraction is convenient but can miss sidelobe and transition behavior. Gaussian main-lobe approximations should not be extrapolated to large angular deviations without checking the real pattern."
+            ],
+            "source": "Section IV; Eqs. (1)–(25); Figs. 6–9"
+          },
+          {
+            "heading": "Statistics must reflect platform and tracking dynamics",
+            "paragraphs": [
+              "The distribution review distinguishes zero-boresight radial jitter, nonzero-boresight and unequal-axis models, and extensions for mobile, relayed and aerial systems. A marginal pointing-loss distribution can support outage or BER analysis, but does not by itself describe acquisition delay, temporal bursts of misalignment or the behavior between tracking updates.",
+              "The survey reviews Gaussian, impulsive, bounded and state-dependent tracking descriptions, and highlights stabilizer response speed and accuracy. Balloon pendulum motion and rotation illustrate how orientation changes can affect coverage and handovers. A control loop should be assessed against the disturbance time scale and the platform’s mass, power and actuation limits."
+            ],
+            "source": "Sections III and V; Figs. 3–5"
+          },
+          {
+            "heading": "Mitigation choices and their engineering trade-offs",
+            "paragraphs": [
+              "Coarse gimbal pointing and fine steering mirrors address different angular ranges. Detector arrays provide angular evidence for feedback. Beam divergence control exchanges peak collected power for misalignment tolerance. Beacon-assisted links move part of the tracking burden to a better-resourced terminal; modulating retroreflectors reduce the remote transmitter burden while retaining demanding acquisition and round-trip link-budget constraints.",
+              "Diversity and signal processing complement physical alignment control. Their value depends on correlation, sensing overhead, computational cost and the channel model. The design question is therefore which combination maintains useful link performance under the available hardware and timing budget, rather than which isolated technique has the highest ideal precision."
+            ],
+            "source": "Section VI; Figs. 13–17"
+          },
+          {
+            "heading": "OAM and quantum links require metrics beyond collected power",
+            "paragraphs": [
+              "In OAM links, lateral shifts and tilt change modal overlap, producing crosstalk as well as power loss. The survey reviews mode-dependent models and physical, coding, equalization and learning approaches. Aperture size, beam waist, mode spacing and propagation distance jointly determine tolerance; increasing the number of modes does not guarantee an unrestricted capacity benefit.",
+              "For free-space quantum links, the relevant outcomes include detected photon rates, QBER, secret-key rate and protocol-specific fidelity. Polarization rotation, spatial coupling and modal distortion must be distinguished. The review includes theoretical proposals and experiments from earlier literature; those experiments are evidence for the cited studies, not new demonstrations performed for this survey."
+            ],
+            "source": "Section VII-C–F; Tables IV–VI; Figs. 18–20"
+          },
+          {
+            "heading": "Network-level implications and open research questions",
+            "paragraphs": [
+              "The survey argues that optical inter-satellite alignment should inform route availability and path stability in LEO meshes. It also discusses pointing-aware direct-to-device NTN design, where device orientation, platform steering and resource management interact. These are research directions and conceptual architectures; the paper does not validate a deployed multi-provider constellation or a universal high-frequency handset link.",
+              "The open agenda includes dynamic cross-technology models, coupling of pointing with beam training and recovery, physics-informed learning, cross-layer optimization, high-mobility scenarios, OAM and quantum effects, and reproducible experimental datasets. Any quoted gain or threshold from a reviewed study remains conditional on that study’s optics, antenna pattern, channel, protocol and evaluation method."
+            ],
+            "source": "Section VII-G–H; Figs. 21–22; Section VIII"
+          },
+          {
+            "heading": "How to use the survey and what it does not establish",
+            "paragraphs": [
+              "The framework can help a designer identify omitted error sources, choose a model appropriate to the platform and receiver, and connect a mitigation option to measurable performance. The consolidated literature should be used as a map to the underlying references when selecting numerical design limits.",
+              "The supplied manuscript does not supply a shared experimental benchmark across all three technologies. Its reviewed numerical examples and prior-study results do not establish one transferable alignment tolerance, one best control method or a general security guarantee. The need for measured datasets and fair benchmarking is itself a stated research gap."
+            ],
+            "source": "Sections VIII–IX"
+          }
+        ],
+        "related": [
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "A concrete beamwidth and outage study discussed in the survey’s aerial-link literature."
+          },
+          {
+            "slug": "advancing-oam-fso-pointing-errors-space-terrestrial-links",
+            "reason": "Develops the mode-dependent OAM coupling model reviewed by the survey."
+          },
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "A specific auxiliary architecture for joint spatial and polarization estimation in quantum satellite links."
+          }
+        ]
+      }
+    },
+    "optical-irs-assisted-relay-los-qkd": {
+      "authorNames": [
+        "Given Hamda Al-Maadeed",
+        "Nadeen Abunada",
+        "Rula Ammuri",
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Khalid Qaraqe"
+      ],
+      "abstract": "Free-space quantum key distribution (FS-QKD) enables secure key exchange without fixed infrastructure, but its practical deployment is severely limited by line-of-sight blockage and sensitivity to geometric and atmospheric impairments. This paper investigates an optical intelligent reflecting surface (IRS)assisted quantum communication architecture that establishes an effective indirect path when the direct link is unavailable. An end-to-end channel model is developed for the cascaded transmitter-IRS-receiver link, jointly accounting for geometric coupling losses, IRS phase control, pointing and alignment errors, atmospheric attenuation, and turbulence. The derived model is directly linked to quantum performance metrics, enabling tractable evaluation of the quantum bit error rate and secret key rate. Numerical results demonstrate that IRS-assisted links can substantially enhance robustness against misalignment and reveal an optimal beam-radius configuration that balances geometric loss and pointing-error resilience. The proposed framework provides design-level insight for reliable IRS-assisted FS-QKD under practical channel conditions.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/ICETES68504.2026.11518890",
+      "publicationDate": "2026-04-07",
+      "pages": "477-483",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11518890/",
+      "summaryEn": "The paper models a two-hop transmitter–IRS–receiver path and links photon collection, reflection errors and receiver field of view to QBER and an asymptotic decoy-state BB84 secret-key-rate calculation. Joint beam-radius selection balances pointing tolerance against aperture spillage under the evaluated geometry.",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract and technical explanation follow the supplied published manuscript. Authors, DOI and pagination are checked against the publisher’s record.",
+      "image": {
+        "src": "/images/publications/irs-qkd-cityscape.webp",
+        "thumbnail": "/images/publications/irs-qkd-cityscape-thumb.webp",
+        "width": 1440,
+        "height": 960,
+        "alt": "Concept illustration of a reflected optical path around a blocked direct link in a city.",
+        "caption": "Concept illustration supplied for this publication. The modeled signal follows transmitter → optical IRS → receiver. The vortex patterns and plotted surfaces in this illustration are decorative; the paper uses a Gaussian-beam polarization-QKD model, and the scene is not a deployed network."
+      },
+      "editorial": {
+        "question": "How can an optical reflecting surface support free-space QKD when the direct line of sight is blocked?",
+        "answer": "The paper models a two-hop transmitter–IRS–receiver path and links photon collection, reflection errors and receiver field of view to QBER and an asymptotic decoy-state BB84 secret-key-rate calculation. Joint beam-radius selection balances pointing tolerance against aperture spillage under the evaluated geometry.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "A ground transmitter emits polarization-encoded weak coherent pulses. An optical intelligent reflecting surface redirects them toward a ground receiver when the direct path is blocked. Its tilted circular aperture appears elliptical to the incident beam, which changes photon capture.",
+              "The model includes Gaussian-beam geometry, transmitter pointing error, IRS reflection-angle error, Beer–Lambert attenuation, independent normalized Gamma–Gamma turbulence on two hops, and receiver angle-of-arrival fluctuations. A lens, single-mode fiber and narrow spectral filter feed polarization analysis and single-photon avalanche diodes. The fiber geometry sets the acceptance field of view.",
+              "IRS-induced polarization transformations are assumed deterministic and compensated. The passive scalar reflection coefficient and independent random impairments are modeling assumptions."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(27)"
+          },
+          {
+            "heading": "Analysis and numerical validation",
+            "paragraphs": [
+              "Conditional single-photon detection probability combines capture at the IRS, reflection efficiency, receiver coupling and field-of-view acceptance. Aperture and pointing grids approximate coupling integrals efficiently for parameter sweeps. Under the independence and unit-mean turbulence assumptions, mean transmittance factorizes.",
+              "The averaged channel feeds gain and QBER expressions and an asymptotic decoy-state BB84 secret-key-rate calculation. Numerical examples use 1550 nm pulses at 1 GHz, mean photon number 0.1, two 1 km hops, IRS radius 10 cm, receiver lens radius 5 cm and detector efficiency 0.8."
+            ],
+            "source": "Section III; Eqs. (28)–(43); Section IV"
+          },
+          {
+            "heading": "Results and engineering interpretation",
+            "paragraphs": [
+              "Beam radii that are too narrow are sensitive to pointing displacement; overly broad beams spill power beyond the finite apertures. The manuscript therefore reports an interior optimum for the pair of beam radii at the IRS and receiver, rather than a rule to maximize beam width.",
+              "The numerical comparison uses pointing-error standard deviations of 200 and 400 µrad. Greater misalignment shifts the favorable beam-size region toward wider beams and reduces the modeled secret key rate. Both hops must be considered together because improving one coupling term cannot undo loss in the other."
+            ],
+            "source": "Section IV; Figs. 2–3"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "This is channel analysis and numerical simulation, not a demonstrated urban QKD network. Polarization compensation, independent impairments, a passive scalar IRS and average-transmittance evaluation constrain the interpretation. The asymptotic key-rate model does not establish a complete finite-key implementation or security against every practical side channel.",
+              "Several numerical beam-radius and key-rate values in the manuscript’s prose differ from its figure annotations. The editorial explanation therefore reports the supported trade-off without promoting a universal radius or an absolute demonstrated key rate."
+            ],
+            "source": "Sections II–V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "cv-quantum-communications-angular-rejection-filtering",
+            "reason": "Examines receiver angular filtering in a continuous-variable quantum link, with different protocol and security assumptions."
+          },
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "Addresses the related need to coordinate spatial tracking with polarization alignment in satellite QKD."
+          }
+        ]
+      },
+      "citationNames": [
+        "Al-Maadeed, Given Hamda",
+        "Abunada, Nadeen",
+        "Ammuri, Rula",
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Qaraqe, Khalid"
+      ]
+    },
+    "hierarchical-deep-learning-turbulence-pointing-error-multi-aperture-fso": {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Rula Ammuri",
+        "Mazen Hasna",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Ammuri, Rula",
+        "Hasna, Mazen",
+        "Qaraqe, Khalid A."
+      ],
+      "abstract": "Accurate characterization of free-space optical (FSO) channels requires joint estimation of transmitter pointing errors, receiver angle-of-arrival (AoA) fluctuations, and turbulence-induced fading. However, existing literature addresses these impairments in isolation, since their multiplicative coupling in the received signal severely limits conventional estimators and prevents simultaneous recovery. In this paper, we introduce a novel multi-aperture FSO receiver architecture that leverages spatial diversity across a lens array to decouple these intertwined effects. Building on this hardware design, we propose a hierarchical deep learning framework that sequentially estimates AoA, transmitter pointing error, and turbulence coefficients. This decomposition significantly reduces learning complexity and enables robust inference even under strong atmospheric fading. Simulation results demonstrate that the proposed method achieves near-MAP accuracy with orders-of-magnitude lower computational cost, and substantially outperforms end-to-end learning baselines in terms of estimation accuracy and generalization. To the best of our knowledge, this is the first work to demonstrate practical joint estimation of these three key parameters, paving the way for reliable, turbulence-resilient multi-aperture FSO systems.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/WCNC65185.2026.11555383",
+      "publicationDate": "2026-04",
+      "pages": "1-6",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11555383/",
+      "pdf": "https://arxiv.org/pdf/2512.12178v1",
+      "summaryEn": "The paper separates the estimation into stages: normalized quadrant signals reveal angle of arrival, compensated lens aggregates estimate transmitter pointing error, and subtraction and gain removal recover receiver jitter and per-lens turbulence. Simulations show that the advantage depends on the parameter being estimated and the number of receiver lenses.",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author spelling and technical explanation follow the supplied arXiv v1 manuscript (13 December 2025). The published WCNC 2026 DOI and pagination are verified separately against the publisher record.",
+      "image": {
+        "src": "/images/publications/hierarchical-fso-estimation.webp",
+        "thumbnail": "/images/publications/hierarchical-fso-estimation-thumb.webp",
+        "alt": "Concept illustration of an FSO beam, atmospheric distortion, a lens array and neural estimation.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The paper models multiple lenses, each feeding a quad photodetector, and staged estimation of channel impairments. The scenery, neural-network drawing and heatmaps are illustrative, not measurements from an installed mountain link."
+      },
+      "editorial": {
+        "question": "Can a lens-array FSO receiver distinguish transmitter pointing error, receiver angular jitter and turbulence from the same measurements?",
+        "answer": "The paper separates the estimation into stages: normalized quadrant signals reveal angle of arrival, compensated lens aggregates estimate transmitter pointing error, and subtraction and gain removal recover receiver jitter and per-lens turbulence. Simulations show that the advantage depends on the parameter being estimated and the number of receiver lenses.",
+        "sections": [
+          {
+            "heading": "Receiver architecture and channel assumptions",
+            "paragraphs": [
+              "An array of small lenses replaces one large collection optic. Each lens focuses onto its own quad photodetector, giving four spatial measurements per aperture. Transmitter angular error displaces the Gaussian beam on the lens plane; combined transmitter error and independent receiver jitter displace focal spots across the quadrant cells.",
+              "The model uses a beam much wider than an individual lens, a Gaussian approximation to the focal point-spread function, independent per-aperture Gamma–Gamma fades and additive Gaussian detector noise. Each measured current is the product of pointing gain, angle-of-arrival gain and turbulence, plus noise."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(18)"
+          },
+          {
+            "heading": "Hierarchical inference and validation",
+            "paragraphs": [
+              "Stage 1 normalizes each lens’s four quadrant outputs to suppress common multiplicative gain and estimates angle of arrival with an MLP. It then aggregates the quadrant currents and removes estimated angular gain. Stage 2 estimates transmitter pointing error from the compensated lens signals. Stage 3 subtracts the angular estimates for receiver jitter and divides out pointing gain to estimate turbulence.",
+              "The supplied manuscript generates two million channel realizations per setup, divided equally between training and testing. It compares hierarchical learning, a larger end-to-end MLP and an exhaustive MAP reference. The default model uses a 500 m link, 1550 nm wavelength, 2 cm lens radius and 4, 16 or 64 lenses. Block averaging assumes that the impairments remain constant over 1000 samples."
+            ],
+            "source": "Sections III–IV; Eqs. (19)–(36)"
+          },
+          {
+            "heading": "Results and engineering interpretation",
+            "paragraphs": [
+              "Table II reports lower angle-of-arrival NMSE for hierarchical learning at each tested array size. With 16 lenses, x-axis AoA NMSE is 0.0010 for hierarchical learning versus 0.0025 for the end-to-end baseline. This is a parameter-specific simulation comparison, not universal superiority across all estimates.",
+              "The end-to-end model gives somewhat better transmitter-pointing estimates in the reported comparisons. More lenses improve the spatial evidence available to both methods. Turbulence recovery is especially sensitive to pointing-estimation errors: with only four lenses, the hierarchical turbulence NMSE becomes extremely large because dividing by an incorrectly estimated small pointing gain amplifies error. Sixteen and 64 lenses produce far more reliable estimates under the modeled conditions."
+            ],
+            "source": "Section IV; Tables I–II"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "The evidence is simulation using a physics-based data generator, not a built receiver or field experiment. Independent fades, the wide-beam approximation, Gaussian focal spots and quasi-static blocks limit transfer to real hardware. Stage errors propagate through compensation and division; small estimated gains can destabilize turbulence recovery.",
+              "The manuscript’s near-MAP statement is supported by selected sample comparisons. Its large-scale NMSE table compares the two learning methods because exhaustive MAP evaluation is impractical at that scale. The paper does not establish a measured hardware inference latency or universal generalization outside the generated channel conditions."
+            ],
+            "source": "Sections II–IV; Tables I–II"
+          }
+        ],
+        "related": [
+          {
+            "slug": "ber-mixed-underwater-owc-fso-relaying-pointing-error",
+            "reason": "Uses multiple atmospheric receiver apertures for BER improvement rather than joint impairment estimation."
+          },
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "Shows why estimating pointing conditions matters for beamwidth-dependent outage design."
+          }
+        ]
+      }
+    },
+    "ai-assisted-outdoor-optical-networks-camera-sensing-localization": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mohammad Taghi Dabiri",
+        "Rula Ammuri",
+        "Mazen Hasna",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Dabiri, Mohammad Taghi",
+        "Ammuri, Rula",
+        "Hasna, Mazen",
+        "Qaraqe, Khalid A."
+      ],
+      "doi": "10.1109/ICC59461.2026.11587943",
+      "publicationDate": "2026-05",
+      "pages": "1-6",
+      "abstract": "We consider outdoor optical access points (OAPs), which, enabled by recent advances in metasurface technology, have attracted growing interest. While OAPs promise high data rates and strong physical-layer security, practical deployments still expose vulnerabilities and misuse patterns that necessitate a dedicated monitoring layer—the focus of this work. We therefore propose a user positioning and monitoring system that infers locations from spatial intensity measurements on a photodetector (PD) array. Specifically, our hybrid approach couples an optics-informed forward model and sparse, model-based inversion with a lightweight data-driven calibration stage, yielding high accuracy at low computational cost. This design preserves the interpretability and stability of model-based reconstruction while leveraging learning to absorb residual nonidealities and device-specific distortions. Under identical hardware and training conditions (both with 5 × 10⁵ samples), the hybrid method attains consistently lower mean-squared error than a generic deep-learning baseline while using substantially less training time and compute. Accuracy improves with array resolution and saturates around 60 × 60–80 × 80, indicating a favorable accuracy–complexity trade-off for real-time deployment. The resulting position estimates can be cross-checked with real-time network logs to enable continuous monitoring, anomaly detection (e.g., potential eavesdropping), and access control in outdoor optical access networks.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "summaryEn": "The proposed monitoring module maps incoming residual beams onto a photodetector array. A lightweight heatmap network, peak extraction, optimal correspondence and geometric inversion estimate source locations; comparison with authorized network records can then indicate unexplained transmitters. The reported positioning gains come from synthetic Monte Carlo data, not a deployed surveillance or access-control system.",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11587943/",
+      "pdf": "https://arxiv.org/pdf/2512.18087v1",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author spelling and technical explanation follow the supplied arXiv v1 manuscript (19 December 2025). The ICC 2026 DOI, pagination and Glasgow location are verified separately against the publisher record.",
+      "image": {
+        "src": "/images/publications/optical-city-localization.webp",
+        "thumbnail": "/images/publications/optical-city-localization-thumb.webp",
+        "alt": "Concept illustration of an optical access point, focal-plane intensity sensing, neural inference and city-scale source localization.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The paper models an aerial IRS/MRR access point with a co-located optical monitoring lens and detector array; the illustrated street-mounted array and city dashboard are conceptual. Colored beams, people, maps and heatmaps are not field measurements or evidence of person identification."
+      },
+      "editorial": {
+        "question": "Can an optical access point locate multiple interrogating transmitters from overlapping intensity spots and flag unexplained activity?",
+        "answer": "The proposed monitoring module maps incoming residual beams onto a photodetector array. A lightweight heatmap network, peak extraction, optimal correspondence and geometric inversion estimate source locations; comparison with authorized network records can then indicate unexplained transmitters. The reported positioning gains come from synthetic Monte Carlo data, not a deployed surveillance or access-control system.",
+        "sections": [
+          {
+            "heading": "Monitoring architecture and modeled signals",
+            "paragraphs": [
+              "An IRS or modulating retroreflector access point can receive interrogation from an unauthorized transmitter within its field of view. The proposed sensing module uses the residual beam energy that extends beyond the access-point aperture. A wide-field lens and a camera-like photodetector array convert incident directions into spatial intensity patterns.",
+              "The model combines Gaussian beam illumination, residual boresight and pointing jitter, Gamma–Gamma turbulence, attenuation, lens transmission and additive thermal noise. A beam much wider than the receiving lens permits a local plane-wave approximation. Source powers add on the sensing array, where close incident directions can produce merged or overlapping spots."
+            ],
+            "source": "Sections II–III; Fig. 1; Eqs. (1)–(16)"
+          },
+          {
+            "heading": "Hybrid inference, assignment and inverse geometry",
+            "paragraphs": [
+              "A shallow convolutional network produces an identity-free heatmap. Non-maximum suppression extracts candidate centroids. The manuscript defines a linear assignment problem for one-to-one correspondence, with Euclidean costs in the homogeneous case, uncertainty-weighted costs for unequal blur and dummy nodes for missed or spurious detections. The assignment is optimal for its chosen cost, not a proof that the full learned pipeline recovers every source correctly.",
+              "Inverse angle-to-sensor mapping converts centroids into incident angles and lateral ground coordinates using the known platform height. The supplied formulation uses true centroids to define and evaluate correspondence; an operational identity association would require an available reference such as claimed positions or network records. Geometry alone does not identify a transmitter or prove malicious intent."
+            ],
+            "source": "Section IV; Eqs. (17)–(20)"
+          },
+          {
+            "heading": "Simulation conditions and reported comparison",
+            "paragraphs": [
+              "The Monte Carlo study uses a 300 m access-point altitude, a 250 × 250 m ground region, 1 W interrogator power, a 0.6 m beam radius and five to nine simultaneous transmitters. Array resolutions range from 10 × 10 to 100 × 100. Both the proposed method and the end-to-end baseline are trained with 500,000 synthetic samples under the same reported hardware conditions.",
+              "Table I reports positioning MSE of 0.9 m² for the hybrid method versus 2.3 m² for the baseline at 60 × 60 pixels. The hybrid values change to 0.84 m² and 0.81 m² at 80 × 80 and 100 × 100, showing diminishing returns in this setup. These are mean-squared positioning errors, not guaranteed maximum errors or measured field accuracy. The manuscript reports approximately twice the training time for the baseline."
+            ],
+            "source": "Section V; Table I; Fig. 3"
+          },
+          {
+            "heading": "Engineering interpretation and limitations",
+            "paragraphs": [
+              "The central benefit is optical situational awareness: a spatial estimate can be checked against authorized transmissions and claimed positions. This can support anomaly indication, while separate network logic determines authorization and any response. Strongly overlapping signatures remain difficult; the manuscript’s example with closely spaced sources has larger localization errors.",
+              "The evidence is synthetic simulation. The manuscript does not report field tests, attack-classification precision or recall, an end-to-end access-control experiment, or a measured inference latency. Its default sensing integration is one second, so the faster training comparison does not establish a sub-millisecond operational monitor. Atmospheric, blur and device assumptions require calibration before transfer to hardware."
+            ],
+            "source": "Sections III–V; Fig. 3"
+          }
+        ],
+        "related": [
+          {
+            "slug": "hierarchical-deep-learning-turbulence-pointing-error-multi-aperture-fso",
+            "reason": "Uses optical geometry and staged learning to separate channel impairments rather than locate multiple transmitters."
+          },
+          {
+            "slug": "secrecy-analysis-pinching-antenna-systems",
+            "reason": "Studies physical-layer secrecy through an analytical eavesdropper geometry model in a different access architecture."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Places receiver field of view, alignment and sensing overhead in a broader directional-link context."
+          }
+        ]
+      }
+    },
+    "joint-tracking-polarization-alignment-satellite-qkd": {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Rula Ammuri",
+        "Mazen Hasna",
+        "Khalid A. Qaraqe"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Ammuri, Rula",
+        "Hasna, Mazen",
+        "Qaraqe, Khalid A."
+      ],
+      "doi": "10.1109/TCOMM.2026.3706615",
+      "journalTitle": "IEEE Transactions on Communications",
+      "volume": "74",
+      "pages": "11062-11075",
+      "publicationDate": "2026-06-24",
+      "abstract": "Polarization-encoded satellite quantum key distribution (QKD) demands simultaneous, high-precision alignment of both spatial pointing and polarization reference frames. However, classical tracking systems ignore polarization, and existing QKD solutions treat it via slow, separate calibration, leaving a critical gap for real-time joint stabilization in dynamic inter-satellite links. This work introduces a novel dual-wavelength auxiliary system that, through a new artificial-angle diversity scheme, renders the transmitter tracking error observable after single-mode fiber coupling in a practical sense, thereby enabling joint estimation. We propose a family of estimators: a three-dimensional maximum-likelihood (3D-ML) benchmark, a new decoupled two-stage 2D-ML method, and a novel log-linear approximate ML (Log-Lin) estimator. The Log-Lin method decouples polarization estimation and solves the tracking error via a fast, deterministic weighted least-squares procedure, offering a closed-form solution. Furthermore, we provide a comprehensive design analysis that characterizes the critical trade-offs between tracking and polarization accuracy with respect to tunable parameters, most notably the artificial-angle radius. Extensive Monte Carlo simulations for a 1000-km inter-satellite link demonstrate that the Log-Lin estimator achieves micro-radian tracking and sub-degree polarization accuracy while completing in only 30µs, over two orders of magnitude faster than iterative searches. These results establish a practical pathway toward real-time joint stabilization of quantum satellite links.",
+      "abstractLabel": "Abstract · published article",
+      "summaryEn": "A strong auxiliary wavelength shares the quantum optical path. Controlled transmitter angular offsets make received auxiliary power vary across known states, while paired polarization measurements isolate reference-frame rotation. A log-linear estimator then trades a small accuracy penalty for much shorter reported processing time than iterative searches in the simulated inter-satellite case.",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11576084/",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, full author list, publication date and technical explanation follow the supplied published IEEE article. The DOI, volume and pagination are also verified against the publisher record.",
+      "image": {
+        "src": "/images/publications/satellite-qkd-joint-alignment.webp",
+        "thumbnail": "/images/publications/satellite-qkd-joint-alignment-thumb.webp",
+        "alt": "Concept illustration of a dual-wavelength auxiliary link between satellites for joint pointing and polarization estimation.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The receiver in the paper taps an AoA sensing branch before single-mode fiber coupling, then separates quantum and auxiliary wavelengths and measures polarization with paired photodiodes. The simplified array inset and plotted bars here are illustrative, not the paper’s measured data or estimator ranking; comprehensive 2D-ML has the lowest reported tracking RMSE, while Log-Lin has the shortest runtime."
+      },
+      "editorial": {
+        "question": "How can a satellite QKD terminal estimate transmitter pointing error and polarization rotation after single-mode fiber coupling removes spatial detail?",
+        "answer": "A strong auxiliary wavelength shares the quantum optical path. Controlled transmitter angular offsets make received auxiliary power vary across known states, while paired polarization measurements isolate reference-frame rotation. A log-linear estimator then trades a small accuracy penalty for much shorter reported processing time than iterative searches in the simulated inter-satellite case.",
+        "sections": [
+          {
+            "heading": "Shared optical path and complementary measurements",
+            "paragraphs": [
+              "The quantum wavelength carries polarization-encoded signals; a stronger classical auxiliary wavelength provides enough power for tracking and polarization measurements. An AoA branch taps light before single-mode fiber coupling to address receiver orientation. After the fiber, wavelength separation sends quantum light to the QKD receiver and auxiliary light to a basis selector, polarization beam splitter and paired photodiodes.",
+              "The model distinguishes transmitter pointing deviation, receiver angular jitter and roll-induced polarization rotation. Gaussian pointing loss and a finite field of view determine collected auxiliary power. Atmospheric Gamma–Gamma fading is included for ground-to-LEO modeling, but the principal numerical study is a 1000 km inter-satellite path with turbulence neglected."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(18)"
+          },
+          {
+            "heading": "Artificial-angle diversity and estimator design",
+            "paragraphs": [
+              "Each update includes a zero-offset state and known small auxiliary pointing offsets, each followed by four deterministic polarization subpulses. The offsets create state-dependent power measurements that reveal the transmitter tracking error otherwise hidden by symmetric single-mode coupling. Normalized differences between paired photodiode outputs cancel common power factors and approximately isolate polarization rotation at sufficiently high auxiliary SNR.",
+              "The paper develops joint 3D maximum likelihood, decoupled 2D maximum likelihood and a log-linear approximate method. The latter uses logarithmic power ratios and weighted least squares for the two tracking components. Its derivation assumes small angles and channel conditions that are approximately constant during the update. It is an approximation with an accuracy–latency trade-off."
+            ],
+            "source": "Section III; Propositions 1–2; Algorithms 1–2"
+          },
+          {
+            "heading": "Validation setup and the accuracy–latency trade-off",
+            "paragraphs": [
+              "The baseline uses a 45 m beam radius at the 1000 km receiver plane, 5 cm effective aperture radius, 15 µrad transmitter and receiver jitter, 30 dBm auxiliary transmit power, eight artificial-offset states and a 0.1 ms update interval. The tracking comparison uses 500,000 Monte Carlo trials. Comprehensive 2D-ML is compared with the expensive 3D-ML reference on 100 random samples, with reported average component deviations below 1%.",
+              "The article reports approximately 0.4 µrad tracking RMSE for comprehensive 2D-ML, 2.2 µrad for the limited search and 2.7 µrad for Log-Lin. Corresponding reported runtimes are about 4.5 ms, 1.0 ms and 0.03 ms per sample. Log-Lin is fastest, while the comprehensive search is most accurate. The limited search can produce a distinct population of outliers when the true error lies outside its search region."
+            ],
+            "source": "Section IV; Tables II–III; Fig. 2"
+          },
+          {
+            "heading": "Design parameters and engineering meaning",
+            "paragraphs": [
+              "Artificial-offset radius must provide enough spatial diversity without excessive pointing loss. The studied case identifies an approximately 8–16 µrad favorable range and selects the lower end to preserve polarization accuracy. This range is conditional on the baseline optics, noise and jitter; it is not a universal satellite-terminal setting.",
+              "Beam width similarly balances sensitivity against collected-power robustness. A longer measurement interval improves estimation SNR but may violate the quasi-static assumption and make corrections stale. The reported 30 µs is estimator execution time in the simulation environment, not the complete sensing, communication, actuator and feedback-loop latency."
+            ],
+            "source": "Section IV; Figs. 3–5"
+          },
+          {
+            "heading": "Scope and limitations for a quantum terminal",
+            "paragraphs": [
+              "The work establishes an analytical auxiliary architecture and simulation-based estimator comparison. It does not demonstrate an orbital terminal, a closed-loop hardware implementation or an experimentally measured secret-key-rate increase. The detailed quantum detection path, background noise and complete key-rate analysis are explicitly outside the paper’s main scope.",
+              "Implementation requires both wavelengths to remain single-mode in the common fiber, adequate isolation of the strong auxiliary signal from the quantum detector, synchronization of offset and polarization states, and a functioning receiver AoA subsystem. The high-SNR normalization and quasi-static log-linear approximation can lose accuracy outside their operating conditions. Improved alignment supports QKD, but does not replace protocol-specific security analysis."
+            ],
+            "source": "Sections II-E, III and IV; footnotes 3–4; Section V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "optical-irs-assisted-relay-los-qkd",
+            "reason": "Studies how two-hop optical alignment and aperture design affect modeled QKD performance."
+          },
+          {
+            "slug": "hierarchical-deep-learning-turbulence-pointing-error-multi-aperture-fso",
+            "reason": "Separates transmitter error and receiver jitter using a lens array instead of deliberate auxiliary offsets."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Reviews the broader interaction between spatial alignment, polarization and quantum-link metrics."
+          }
+        ]
+      }
+    },
+    "terahertz-coverage-fixed-wing-uavs": {
+      "authorNames": [
+        "Mikail Erdem",
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Mazen Omar Hasna",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Erdem, Mikail",
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Hasna, Mazen Omar",
+        "Qaraqe, Khalid"
+      ],
+      "doi": "10.1109/TVT.2026.3717678",
+      "journalTitle": "IEEE Transactions on Vehicular Technology",
+      "venue": "IEEE Transactions on Vehicular Technology, Early Access, pp. 1-10",
+      "pages": "1-10",
+      "publicationDate": "2026",
+      "abstract": "This paper investigates terahertz (THz) coverage using fixed-wing unmanned aerial vehicles (UAVs), where severe free space path loss, atmospheric absorption, and beam misalignment effects create significant coverage holes. To overcome the high computational cost of Monte Carlo based coverage evaluation, a coverage analysis framework is developed that incorporates circular trajectory parameterization and a composite THz channel including line-of-sight probability, absorption loss, beam misalignment, and small-scale fading. A new closed-form outage probability expression is derived for each grid cell, enabling fast and accurate coverage computation. Using this analytical model, a trajectory-parameter analysis framework is developed to evaluate altitude–radius configurations to minimize coverage holes over the target area. Simulation results validate the exact match between the proposed closed-form and Monte Carlo evaluations and reveal several interesting behaviors for fixed-wing UAVs, including optimal altitude–radius pairs and nontrivial coverage patterns. The proposed framework enables efficient trajectory design and reliable THz coverage with fixed-wing UAV platforms.",
+      "abstractLabel": "Abstract · supplied accepted manuscript",
+      "summaryEn": "The paper derives a closed-form composite-channel outage model for each ground grid cell and uses it to compare circular-flight altitude and radius choices. The study balances line-of-sight probability, atmospheric loss, directional beam misalignment and fading. Its coverage and timing results are conditional numerical evaluations of a modeled four-UAV deployment.",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11626598/",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, full author list and technical explanation follow the supplied accepted author manuscript. The DOI and Early Access pagination are verified against the publisher record; no final volume or issue is assigned in that record.",
+      "image": {
+        "src": "/images/publications/fixed-wing-thz-coverage.webp",
+        "thumbnail": "/images/publications/fixed-wing-thz-coverage-thumb.webp",
+        "alt": "Concept illustration of a fixed-wing UAV following a circular trajectory, with directional THz ground coverage and illustrative analysis panels.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The numerical study models four UAVs serving a square grid; the city, visible beam, single prominent aircraft and plotted panels here are illustrative. The plots are not reproduced paper data or evidence of a measured urban deployment."
+      },
+      "editorial": {
+        "question": "How can circular fixed-wing UAV trajectories be evaluated for THz coverage without repeating expensive Monte Carlo fading simulations for every candidate?",
+        "answer": "The paper derives a closed-form composite-channel outage model for each ground grid cell and uses it to compare circular-flight altitude and radius choices. The study balances line-of-sight probability, atmospheric loss, directional beam misalignment and fading. Its coverage and timing results are conditional numerical evaluations of a modeled four-UAV deployment.",
+        "sections": [
+          {
+            "heading": "Network geometry and composite THz channel",
+            "paragraphs": [
+              "Fixed-wing platforms continuously move rather than hover. The model parameterizes each circular path by center, altitude, radius, angular speed and initial phase. Ground coverage is evaluated at grid-cell centers, with service determined by the best available UAV link and a target-rate threshold.",
+              "The channel combines deterministic free-space and absorption loss, probabilistic line of sight, directional beam-misalignment fading and α–µ small-scale fading. Non-line-of-sight links count as outage. Atmospheric emissivity determines a frequency-dependent noise term. Independent links, negligible co-channel interference and unobstructed belly-mounted antenna placement are assumed."
+            ],
+            "source": "Sections II–III-A; Eqs. (1)–(22)"
+          },
+          {
+            "heading": "Closed-form outage and trajectory-parameter selection",
+            "paragraphs": [
+              "The derivation converts the rate requirement into an SNR threshold, then combines line-of-sight occurrence with a closed-form composite-channel CDF involving Whittaker functions. With independent UAV links, a ground cell is in outage when all candidate links fail. The analytical expression replaces random fading generation during repeated coverage evaluation.",
+              "The paper formulates coverage-hole minimization with area, turning-radius and collision constraints. Its numerical study specializes this broader formulation to symmetric UAV centers and geometrically chosen phase offsets, then evaluates altitude–radius pairs. It does not demonstrate a global optimizer over every center, phase and flight parameter."
+            ],
+            "source": "Section III; Proposition 1; Eqs. (23)–(42); Appendix"
+          },
+          {
+            "heading": "Validation conditions and computational comparison",
+            "paragraphs": [
+              "The evaluated area is 2 km × 2 km, divided into 50 m × 50 m cells and served by four fixed-wing UAVs. Link parameters include 300 GHz carrier frequency, 2 GHz bandwidth, 30 dBm transmit power, 29 dBi total effective antenna gain and a 16 × 16 array configuration. Monte Carlo comparisons use 500,000 random realizations.",
+              "For the reported fading evaluation across the grid, the manuscript gives an average Monte Carlo time of 21.59 s and an analytical time of 3.56 ms on an Intel Core i9-13900 workstation with 64 GB RAM. This is a reported computation benchmark for the evaluated channel task, not a measured radio-network latency or a guaranteed speedup on every processor."
+            ],
+            "source": "Section IV; Table I; Figs. 2–4"
+          },
+          {
+            "heading": "Coverage results and their engineering interpretation",
+            "paragraphs": [
+              "The results show that higher altitude is not always better: improving line of sight must be balanced against increased link distance and misalignment-sensitive gain. Instantaneous coverage patterns also change with the relative positions along the circular paths. The best radius for one cell or one phase need not minimize holes across the full area and complete rotation.",
+              "Under the paper’s evaluated coverage-hole criterion, an altitude of 650 m and radius of 200 m give the highest reported coverage percentage, 98.50%, across the tested full-motion configurations. A grid is classified as a hole when its outage probability exceeds 0.1. These numbers are conditional on the stated geometry, hardware parameters, channel distributions and thresholds; they are not universal flight settings."
+            ],
+            "source": "Section IV; Figs. 3–7"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "The evidence is analytical modeling and simulation, not a flight campaign or a built UAV-mounted THz transceiver. The authors explicitly treat the power, gain and array values as system-level link-budget assumptions; practical integration needs separate RF hardware design, fabrication and testing.",
+              "Independence, negligible interference, probabilistic blockage and simplified flight geometry limit transfer to crowded or correlated deployments. The study evaluates feasible altitude–radius candidates in a symmetric layout and does not establish terrain-specific coverage, handover delay, flight-control behavior or end-to-end network throughput. The analytical model should be checked against the intended service threshold and deployment conditions before operational use."
+            ],
+            "source": "Sections II and IV; Section V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Reviews antenna-pattern and pointing-error models across directional THz and optical systems."
+          },
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "Studies a related geometry and pointing trade-off for an optical UAV-to-HAP link."
+          }
+        ]
+      }
+    },
+    "cv-quantum-communications-angular-rejection-filtering": {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Rula Ammuri",
+        "Saif Al-Kuwari",
+        "Mazen Hasna",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Ammuri, Rula",
+        "Al-Kuwari, Saif",
+        "Hasna, Mazen",
+        "Qaraqe, Khalid A."
+      ],
+      "doi": "10.1109/ICUFN69619.2026.11628813",
+      "venue": "IEEE ICUFN, Milan, Italy, pp. 593-598",
+      "pages": "593-598",
+      "publicationDate": "2026-07",
+      "abstract": "Continuous-variable quantum key distribution (CV-QKD) over free-space optical links is a promising approach for secure communication, but its performance is limited by turbulence, pointing errors, and angular leakage that can be exploited by an eavesdropper. To mitigate this, we consider an angular rejection filter that defines a safe-zone at the receiver and blocks signals from outside the desired cone. A system and channel model is developed including turbulence, misalignment, and safe-zone effects, and information-theoretic metrics are derived to evaluate security. Simulation results show that the safe-zone significantly reduces information leakage and that careful tuning of beam waist, angular threshold, and aperture size is essential for maximizing the secret key rate. Larger apertures improve performance but increase receiver size, while longer links require sub-100 µrad alignment accuracy. These results highlight safe-zone enforcement and parameter optimization as effective strategies for practical and secure CV-QKD.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "summaryEn": "The study combines a physically protected angular safe-zone with a pointing-based acceptance threshold. It models how beam width, receiver aperture and angular jitter divide optical power between Bob and an idealized eavesdropper, then evaluates a security-rate trade-off. The reported benefit is conditional on the protected-zone assumption and the paper’s simplified channel and security expressions.",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11628813/",
+      "pdf": "https://arxiv.org/pdf/2512.18097v1",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author order and technical explanation follow the supplied arXiv v1 manuscript dated 19 December 2025. The conference DOI, pages and July 2026 publication month are verified against the publisher metadata. The formal citation includes the publisher’s middle initial for Khalid A. Qaraqe; the manuscript author display is retained.",
+      "image": {
+        "src": "/images/publications/cv-qkd-angular-safe-zone.webp",
+        "thumbnail": "/images/publications/cv-qkd-angular-safe-zone-thumb.webp",
+        "alt": "Concept illustration of a ground-to-UAV quantum optical link, a receiver lens with an absorbing guard ring and light outside the protected zone.",
+        "width": 1440,
+        "height": 810,
+        "caption": "Concept illustration supplied for this publication. The ground-to-UAV scene and lens with an absorbing guard visualize the modeled safe-zone; the visible beams and potential eavesdropper are illustrative. This image is not evidence of a working filter, a physical attack or a measured quantum-key-distribution experiment."
+      },
+      "editorial": {
+        "question": "Can angular rejection and pointing-based acceptance reduce information leakage in a free-space continuous-variable quantum link?",
+        "answer": "The study combines a physically protected angular safe-zone with a pointing-based acceptance threshold. It models how beam width, receiver aperture and angular jitter divide optical power between Bob and an idealized eavesdropper, then evaluates a security-rate trade-off. The reported benefit is conditional on the protected-zone assumption and the paper’s simplified channel and security expressions.",
+        "sections": [
+          {
+            "heading": "Receiver architecture and protected angular region",
+            "paragraphs": [
+              "Alice prepares Gaussian-modulated coherent states; Bob measures a quadrature using homodyne detection. The receiver combines a circular collection lens with an angular rejection filter and a surrounding absorbing guard. The model assumes that this arrangement physically protects a receiver-plane safe-zone and prevents Eve from collecting light within it.",
+              "The safe-zone radius is the link distance multiplied by its angular half-width. It differs from the acceptance threshold: the protected radius describes a physical restriction on Eve, while the threshold determines which pointing events contribute to key generation. Enforcing the assumed inaccessible region is an engineering requirement, not a consequence proved by the key-rate calculation."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(11), (20)–(22)"
+          },
+          {
+            "heading": "Coupled pointing loss, turbulence and leakage",
+            "paragraphs": [
+              "Two independent, zero-mean Gaussian angular-error components produce a Rayleigh radial displacement at the receiver plane. Bob’s transmissivity combines a constant system-loss factor, Gamma–Gamma turbulence and a Gaussian-beam aperture-coupling approximation. Pointing error is shared by the Bob and Eve channels; turbulence is applied only to Bob.",
+              "Eve is assigned an ideal receiver that captures all power outside the protected region, without turbulence attenuation. Her modeled transmissivity is one minus the safe-zone power fraction. A wider beam or larger displacement can therefore increase leakage even when some useful light still reaches Bob. These are explicit worst-case geometric assumptions, rather than a measurement of an adversary."
+            ],
+            "source": "Section III; Eqs. (12)–(25)"
+          },
+          {
+            "heading": "Acceptance policy and interpretation of the security metric",
+            "paragraphs": [
+              "Bob retains events whose radial pointing displacement lies below a selected threshold. The analysis combines homodyne mutual information with a simplified pure-loss Holevo-information expression, then integrates over turbulence and the accepted portion of the pointing-error distribution.",
+              "The integrals are acceptance-weighted effective rates: they are not normalized by the probability of retaining a symbol. A rate per retained symbol would require that normalization, and a rate in bits per second would also require a verified operating symbol rate. The text describes reverse reconciliation while using an Alice–Eve information term; the presented expressions should be read as the manuscript’s security model, not as a complete composable security proof."
+            ],
+            "source": "Section II-E; Section IV; Eqs. (8)–(11), (26)–(30)"
+          },
+          {
+            "heading": "Simulation conditions and reported trade-offs",
+            "paragraphs": [
+              "Default parameters include 1550 nm wavelength, system efficiency 0.8, a 5 cm aperture radius, a 15 cm safe-zone radius, modulation variance 5 in shot-noise units, excess-noise parameter 0.1, reconciliation efficiency 0.95 and angular jitter of 50 µrad. The numerical comparisons examine link distances from 500 to 1000 m and aperture radii of 5 and 10 cm.",
+              "Increasing the acceptance threshold retains more events and raises acceptance-weighted mutual information, but the evaluated key-rate expression reaches a peak and then declines as leakage grows. Larger apertures improve the modeled rate and permit a different beam-width and threshold operating point, with a receiver-size cost. Longer links lower the attainable rate and shrink the region of positive modeled security rate. The sub-100 µrad alignment discussion is conditional on these evaluated link settings."
+            ],
+            "source": "Section V; Figs. 2–4"
+          },
+          {
+            "heading": "Engineering use and limits of the evidence",
+            "paragraphs": [
+              "The useful design question is how to choose beam width and acceptance jointly while maintaining an enforceable protected receiver region. Maximizing received information alone can select an operating point with excessive leakage; aperture size, angular control and the permitted physical environment must be assessed together.",
+              "The evidence consists of analytical modeling and numerical results. The manuscript does not report a built rejection filter, a field attack, measured key throughput or finite-key operation. Detector calibration, protocol-specific security under fading, the physical exclusion of an adversary and actual platform motion require separate validation before an operational security claim."
+            ],
+            "source": "Sections II–V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "Examines how auxiliary-light measurements can estimate pointing and polarization errors in a different satellite QKD architecture."
+          },
+          {
+            "slug": "optical-irs-assisted-relay-los-qkd",
+            "reason": "Studies receiver coupling and pointing constraints in a two-hop discrete-variable QKD link."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Places angular capture and pointing-error assumptions within the broader narrow-beam communications literature."
+          }
+        ]
+      }
+    },
+    "city-scale-quantum-timing-wireless-synchronization-quantum-hubs": {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Mazen Hasna",
+        "Rula Ammuri",
+        "Saif Al-Kuwari",
+        "Khalid A. Qaraqe"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Hasna, Mazen",
+        "Ammuri, Rula",
+        "Al-Kuwari, Saif",
+        "Qaraqe, Khalid A."
+      ],
+      "doi": "10.1109/JSAC.2026.3711027",
+      "journalTitle": "IEEE Journal on Selected Areas in Communications",
+      "venue": "IEEE Journal on Selected Areas in Communications, vol. 44, pp. 5388-5403",
+      "volume": "44",
+      "pages": "5388-5403",
+      "publicationDate": "2026-07-07",
+      "abstract": "This paper presents a novel wireless quantum synchronization framework tailored for city-scale deployment using entangled photon pairs and passive corner cube retroreflector (CCR) arrays. A centralized quantum hub, equipped with either a bulk or integrated nonlinear entangled-photon source, emits photon pairs and directs one photon toward a target device while routing its twin to a local reference unit. The target, equipped with a planar CCR array, reflects the incoming photon without active circuitry, enabling secure round-trip quantum measurements for sub-nanosecond synchronization and localization. We develop a comprehensive analytical model that captures key physical-layer phenomena, including Gaussian beam spread, spatial misalignment, atmospheric turbulence, and probabilistic photon generation. A closed-form expression is derived for the single-photon detection probability under Gamma-Gamma fading, and its distribution is used to model photon arrival events and synchronization error. Moreover, we analyze the impact of background photons, SPAD detector jitter, and quantum generation randomness on synchronization accuracy and outage probability. Simulation results confirm the accuracy of the analytical models and reveal key trade-offs among beam waist, CCR array size, and background light. The proposed architecture offers a low-power, infrastructure-free solution for secure timing in next-generation smart cities.",
+      "abstractLabel": "Abstract · published article",
+      "summaryEn": "The paper proposes a central entangled-photon hub that records a local reference photon and the return of its partner from a passive corner-cube array. It derives photon-detection, timing-error and outage models, then validates them against Monte Carlo simulations. Precision depends on collected signal photons, hub-side tracking, background light and detector jitter; the evaluated 500 m line-of-sight link is a physical-layer benchmark rather than a deployed city network.",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author list and technical explanation follow the supplied published article. Its first page states publication on 7 July 2026 and the current-version date of 20 July 2026. The DOI, volume and pages are verified against the publisher metadata; no issue number is supplied.",
+      "image": {
+        "src": "/images/publications/city-scale-quantum-timing.webp",
+        "thumbnail": "/images/publications/city-scale-quantum-timing-thumb.webp",
+        "alt": "Concept illustration of an urban quantum hub exchanging optical signals with passive corner-cube arrays on buildings, a vehicle and a UAV.",
+        "width": 1440,
+        "height": 808,
+        "caption": "Concept illustration supplied for this publication. The visible beams and multiple urban targets visualize the proposed hub-and-CCR architecture. They are not visible single-photon trajectories or evidence of simultaneous city-scale operation; the paper validates a modeled 500 m line-of-sight link through analytical and Monte Carlo comparisons."
+      },
+      "editorial": {
+        "question": "How can a quantum hub obtain precise round-trip timing from a remote target that carries no powered optical receiver?",
+        "answer": "The paper proposes a central entangled-photon hub that records a local reference photon and the return of its partner from a passive corner-cube array. It derives photon-detection, timing-error and outage models, then validates them against Monte Carlo simulations. Precision depends on collected signal photons, hub-side tracking, background light and detector jitter; the evaluated 500 m line-of-sight link is a physical-layer benchmark rather than a deployed city network.",
+        "sections": [
+          {
+            "heading": "Central quantum hub and passive target",
+            "paragraphs": [
+              "An entangled-photon source at the hub sends one member of each pair toward the target while routing its partner to a local reference detector. A planar corner-cube retroreflector array returns intercepted light toward the hub. Single-photon avalanche detectors record polarization bits and arrival times for the reference and returned photons.",
+              "Photon generation, detection, optical steering and processing remain at the hub. The target requires passive reflectors rather than a local photon source, detector or alignment actuator. The source is modeled through effective time-bin rate and pair-generation probability, accommodating bulk SPDC, integrated SPDC or integrated SFWM implementations. “Infrastructure-free” in the original abstract describes the proposed endpoint flexibility; hub optics and a clear optical path are still required."
+            ],
+            "source": "Sections I–II; Figs. 1–2; Eqs. (9)–(16)"
+          },
+          {
+            "heading": "Acquisition, tracking and the moving-target condition",
+            "paragraphs": [
+              "Initial acquisition scans a rectangular grid around a coarse position estimate. After detecting the array, the hub enters closed-loop tracking using returned-photon statistics or an auxiliary beacon. Coarse acquisition, residual steering error and motion during the update interval contribute to the aggregate receiver-plane spatial uncertainty.",
+              "The motion bound is transverse velocity multiplied by the update interval plus half the transverse acceleration multiplied by its square. This displacement must remain small relative to the beam waist and effective CCR capture region. Retroreflection simplifies the return direction after interception, but it does not make an outgoing beam hit a missed target or remove the need for hub-side tracking and re-acquisition."
+            ],
+            "source": "Section II-B; Section IV; Eqs. (1)–(8)"
+          },
+          {
+            "heading": "Photon-level channel and statistical approximations",
+            "paragraphs": [
+              "The channel combines Gaussian beam overlap with individual CCR apertures, diffraction-limited return capture, round-trip atmospheric attenuation, optical coupling loss, Gamma–Gamma turbulence and SPAD detection efficiency. The reception probability is a spatially weighted sum over CCR paths. The model then connects this random probability to Poisson photon counts.",
+              "The conditional reception distribution uses a central-limit Gaussian approximation to the weighted sum of independent fading terms. Its applicability depends on sufficiently many independent, non-dominant CCR contributions; Appendix B relates independence to element separation and turbulence coherence length. Spatial-offset marginalization remains numerical, and a one-axis radial approximation reduces computation. These approximations require checking for the intended array geometry and turbulence conditions."
+            ],
+            "source": "Section III; Propositions 1–2 and 4; Appendices A, B and D"
+          },
+          {
+            "heading": "What the timing estimator measures",
+            "paragraphs": [
+              "The reference and received records contain valid polarization bits and timestamps, with null entries for missing or ambiguous events. The source model retains single-pair intervals; background photons are modeled as random arrivals within each time bin. After sequence alignment, the estimator averages differences between returned and reference timestamps to estimate round-trip propagation delay.",
+              "The paper assumes successful sequence matching for its timing-error analysis. Its variance model combines independent detector jitter, background arrival-time uncertainty and random signal/background counts. An insufficient-detection threshold defines outage. This is a model of hub-side round-trip timing and related ranging; transferring a clock correction into a fully passive remote device requires an additional system mechanism."
+            ],
+            "source": "Sections II-D and IV; Propositions 3–4; Eqs. (28)–(39); Appendix C"
+          },
+          {
+            "heading": "Validation conditions and numerical findings",
+            "paragraphs": [
+              "The main numerical link is 500 m at 1550 nm, with an 8 × 8 CCR array, a 5 cm receive-aperture radius, SPAD efficiency 0.6, detector jitter of 50 ps, a 100 µs acquisition interval and a 1 GHz source-side time-bin rate. The default mean pair number is 0.5 per interval; this rate is not one successfully delivered photon pair in every bin. Monte Carlo validation uses 10,000 spatial-offset realizations and 500,000 fading samples in the stated comparisons.",
+              "Smaller beam waists increase photon density but make low-count events more likely under misalignment. Wider beams improve spatial tolerance while lowering the peak received count, so the best waist changes with spatial uncertainty. Larger CCR arrays improve timing accuracy with diminishing returns. Background contamination becomes more damaging when received signal counts fall; suppressing background further gives little benefit once signal counts dominate.",
+              "The analytical distributions, timing-error trends and outage estimates closely match the reported simulations. The article discusses high reliability and picosecond error under selected 500 m conditions. These are model-dependent numerical results, not measured timing performance for arbitrary urban traffic, weather or link range."
+            ],
+            "source": "Section V; Table III; Figs. 4–8"
+          },
+          {
+            "heading": "Deployment trade-offs and limits of the evidence",
+            "paragraphs": [
+              "Spectral filtering, narrow spatial acceptance and time gating can suppress background photons, but their implementation must be balanced against pointing and angle-of-arrival tolerance. Multi-pair events are mitigated statistically through operation and post-processing; they cannot be identified perfectly when detection efficiency is below unity. Source preparation losses, CCR contamination and optical thermal drift also require engineering attention.",
+              "Complete obstruction is blockage rather than ordinary turbulence fading. Distributed hubs, relays and handover are proposed ways to extend coverage, while 1–5 km links require different aperture, photon-flux and tracking budgets. The paper does not demonstrate a built city network, multi-target handover, an end-to-end remote-clock update or an adversarial security proof. The passive target reduces endpoint power needs; the hub remains an active optical and computing installation."
+            ],
+            "source": "Section VI; Section VII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Provides the broader pointing-error and tracking context cited by this article."
+          },
+          {
+            "slug": "ai-assisted-outdoor-optical-networks-camera-sensing-localization",
+            "reason": "Studies camera-based localization in a different optical network with passive remote reflectors."
+          },
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "Examines a related hub-side estimation challenge for satellite quantum optical links."
+          }
+        ]
+      }
+    },
+    "all-optical-multi-hop-inter-satellite-relaying-m-pam": {
+      "title": "OHL-Assisted All-Optical Regenerative Relaying for Pointing-Impaired M-PAM Inter-Satellite Links",
+      "authors": "M. Ghanbari, M. T. Dabiri, Z. Ali, R. Ammuri, M. Hasna, I. Tavakkolnia, and K. Qaraqe",
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mohammad Taghi Dabiri",
+        "Zain Ali",
+        "Rula Ammuri",
+        "Mazen Hasna",
+        "Iman Tavakkolnia",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Dabiri, Mohammad Taghi",
+        "Ali, Zain",
+        "Ammuri, Rula",
+        "Hasna, Mazen",
+        "Tavakkolnia, Iman",
+        "Qaraqe, Khalid"
+      ],
+      "venue": "IEEE Transactions on Communications · submitted manuscript",
+      "abstract": "Rapid inter-satellite traffic growth in LEO constellations demands spectrally efficient, low-latency optical relaying. While amplify and forward (AF) relays are latency-efficient, they propagate noise; conversely, decode and forward (DF) relays suppress noise but incur significant complexity via O/E/O conversion. This paper proposes an all-optical regenerative relay for M-ary pulse amplitude modulation (M-PAM) multi-hop links under pointing errors. A parallel optical hard-limiter (OHL) bank performs symbol-level discrimination, regenerating signal levels directly in the optical domain. A variable gain EDFA is employed to stabilize power and define the threshold-stable region. By incorporating pointing-induced fading, various noise sources including ASE–ASE and signal–ASE beat noise and implementation-dependent decision noise, we derive closed-form per-hop symbol error rate (SER) expressions. These are extended to end-to-end performance using a Markov transition-matrix model for arbitrary modulation order and hop count. Analysis of beamwidth, pointing accuracy, and threshold scaling demonstrates reliable multi-hop operation, avoiding both AF noise accumulation and DF O/E/O processing overhead. Verified by Monte Carlo simulations and numerical integration, this framework provides a design benchmark for low-latency, pointing-aware all-optical regenerative relaying.",
+      "abstractLabel": "Abstract · supplied preprint",
+      "summaryEn": "Meysam Ghanbari and co-authors propose symbol-level regeneration with a parallel optical hard-limiter bank and gain-stabilizing EDFAs. Each relay selects a fresh M-PAM optical level without an O/E/O data-processing stage, while a Markov model tracks the decision errors that remain across hops. The work validates reliability analytically and numerically; low delay is an architectural objective, with no measured relay-latency benchmark in the supplied preprint.",
+      "externalUrl": "https://arxiv.org/abs/2608.28864",
+      "externalLabel": "Preprint record ↗",
+      "pdf": "https://arxiv.org/pdf/2608.28864v1",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The exact title, complete author order, abstract and technical explanation follow the supplied arXiv:2608.28864v1 preprint dated 28 August 2026. The existing Submitted status and stable website URL are retained; no journal publication date, assigned pages or publisher DOI is claimed.",
+      "image": {
+        "src": "/images/publications/all-optical-satellite-relaying.webp",
+        "thumbnail": "/images/publications/all-optical-satellite-relaying-thumb.webp",
+        "alt": "Concept illustration of a satellite relay with parallel optical processing branches forwarding a laser link across a multi-satellite chain.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this research proposal. The optical branches and satellite chain visualize the proposed regenerative data path; the visible beams, exposed payload and promotional image headline are illustrative. The manuscript presents analytical and numerical reliability results, not a flight-tested relay or measured latency advantage."
+      },
+      "editorial": {
+        "question": "Can a multi-hop satellite link regenerate M-PAM symbols in the optical domain while avoiding the O/E/O forwarding stage of decode-and-forward relays?",
+        "answer": "Meysam Ghanbari and co-authors propose symbol-level regeneration with a parallel optical hard-limiter bank and gain-stabilizing EDFAs. Each relay selects a fresh M-PAM optical level without an O/E/O data-processing stage, while a Markov model tracks the decision errors that remain across hops. The work validates reliability analytically and numerically; low delay is an architectural objective, with no measured relay-latency benchmark in the supplied preprint.",
+        "sections": [
+          {
+            "heading": "Meysam Ghanbari’s proposed regenerative relay",
+            "paragraphs": [
+              "The first-author proposal addresses a concrete trade-off: transparent amplify-and-forward relays repeatedly amplify analog noise, while decode-and-forward relays recover symbols through optical-to-electrical-to-optical processing. The proposed forwarding path instead reshapes the signal into one of a fixed set of admissible optical power levels at each satellite.",
+              "A telescope and optical bandpass filter feed a variable-gain receive EDFA. A splitter sends the stabilized signal into M − 1 parallel optical hard-limiters; ordered thresholds produce a thermometer pattern that selects the regenerated M-PAM level. A transmit EDFA and output filter launch that level toward the next satellite. The analysis models this optical decision and regeneration function rather than demonstrating a complete fabricated payload."
+            ],
+            "source": "Sections I–II; Fig. 1; Eqs. (1)–(5), (37)–(46)"
+          },
+          {
+            "heading": "Why low-delay forwarding is the design motivation",
+            "paragraphs": [
+              "The proposed data path removes the O/E/O symbol-recovery, electrical decoding and buffering stages used by the compared DF architecture. Regeneration also stops the previous hop’s continuous analog noise waveform from being forwarded as in transparent AF. It does not remove propagation time or eliminate errors in the regenerated decisions.",
+              "The supplied preprint evaluates symbol-error probability, not a measured time budget. It gives no hardware latency, power-consumption campaign or end-to-end packet-delay experiment. “All-optical” describes the proposed forwarding path; the assumed channel estimation, frame-level gain updates, acquisition and spacecraft control still need an implementation. Their timing and overhead must be assessed in a prototype."
+            ],
+            "source": "Sections I–II-C; Section IV; Sections VII–VIII"
+          },
+          {
+            "heading": "Pointing-aware gain stabilization and its failure region",
+            "paragraphs": [
+              "Each hop is a vacuum Gaussian-beam link with finite receive aperture and Rayleigh-distributed pointing displacement. Atmospheric turbulence and weather are excluded. Residual angular jitter becomes spatial jitter in proportion to hop distance, and channel gains are assumed independent across hops and approximately constant over one frame.",
+              "With perfect block-wise channel estimation, a clipped inverse-channel receive gain aligns M-PAM means with fixed optical thresholds. Below the gain-limited boundary, the maximum EDFA gain cannot restore the target scale. The outage model collapses the output to the lowest level, producing a reliability floor that extra launch power alone cannot always remove. The upper gain boundary also matters when the minimum amplifier gain prevents target scaling."
+            ],
+            "source": "Section III-A–B; Section IV-A–C; Eqs. (6)–(14), (27)–(36)"
+          },
+          {
+            "heading": "Noise model, closed forms and multi-hop error propagation",
+            "paragraphs": [
+              "The decision statistic includes transmit-side ASE, receive ASE–ASE and signal–ASE beat noise, filtered background radiation and implementation-dependent decision noise. Independent components are combined in a conditional Gaussian approximation. Full-noise numerical integration provides a reference before a two-region closed form separates signal–ASE-dominant and constant-noise operation.",
+              "The compact closed form requires the target scaling to remain feasible throughout the non-outage region and appropriate noise-partition conditions; the paper directs the reader to the general numerical expression when the upper gain-boundary condition fails. It therefore should not be treated as an exact hardware model in every noise regime.",
+              "An M × M transition matrix describes the probability of regenerating each output symbol for each input symbol. Multiplying the hop matrices preserves structured decision-error propagation, including neighboring-level confusion and outage-induced collapse. Under equiprobable source symbols, end-to-end SER is one minus the normalized trace of the total matrix. Regeneration limits analog noise accumulation, while discrete symbol mistakes remain."
+            ],
+            "source": "Sections III-C–E, V and VI; Eqs. (15)–(26), (47)–(107)"
+          },
+          {
+            "heading": "Validation settings and comparison with AF and DF",
+            "paragraphs": [
+              "One-hop validation uses 600 km links at 1550 nm, a 6.75 cm transmitted beam waist and a 5 cm receive-aperture radius. The parameter table evaluates M = 4, 8 and 16, angular jitter from 1 to 4 µrad, transmit-amplifier gain 10, maximum receive gain 1000, optical bandwidth 50 GHz and decision bandwidth 25 GHz. Monte Carlo results, full-noise integration and the two-region approximation closely agree in the reported comparisons.",
+              "For the separate 4-PAM comparison with 500 km hops and a 5 cm launch waist, the proposed relay reaches the 10⁻⁴ SER region near 11 dBm for four hops, with an approximately 5 dB power penalty relative to the modeled DF baseline. AF remains more noise-limited in that comparison. This is a conditional reliability comparison, not evidence that the proposed architecture universally outperforms DF."
+            ],
+            "source": "Section VII; Table I; Figs. 2–4"
+          },
+          {
+            "heading": "Design trade-offs and the next engineering step",
+            "paragraphs": [
+              "Higher PAM order provides more bits per symbol but reduces decision margins. Beamwidth must balance aperture collection against pointing tolerance, and the gain target affects both threshold alignment and outage. The paper distinguishes adding hops of fixed distance from dividing a fixed total distance: the former adds decision stages, while the latter can improve each hop enough to outweigh those extra decisions.",
+              "The next meaningful validation is a calibrated optical implementation of the limiter bank, level selector and regeneration stage, including splitter loss, thresholds, amplifier gain dynamics, noise coefficients and imperfect channel estimation. Relay latency and energy need direct measurement. Route selection, packet scheduling, correlated motion and spacecraft qualification remain outside the supplied physical-layer study."
+            ],
+            "source": "Sections II-C, IV and VII; Figs. 5–8; Section VIII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Provides the broader pointing-error and alignment context cited by this relay study."
+          },
+          {
+            "slug": "advancing-oam-fso-pointing-errors-space-terrestrial-links",
+            "reason": "Studies another optical high-capacity link architecture under spatial misalignment."
+          },
+          {
+            "slug": "integrated-optical-receiver-communication-fine-tracking-inter-satellite",
+            "reason": "Connects the relay’s pointing assumptions to a separate inter-satellite receiver and fine-tracking research direction."
+          }
+        ]
+      }
+    }
+  },
+  "newPapers": [
+    {
+      "authorNames": [
+        "Osamah S. Badarneh",
+        "Hugerles S. Silva",
+        "Meysam Ghanbari",
+        "Yazan H. Al-Badarneh",
+        "Tamer M. Khattab",
+        "Mazen O. Hasna",
+        "Khalid A. Qaraqe"
+      ],
+      "abstract": "In this paper, we investigate the performance of physical-layer security of a pinching-antenna system on a lossless dielectric waveguide. In particular, the system uses a single pinching-antenna to convey confidential information from a base station to a legitimate destination equipped with a single antenna, while an eavesdropper, also equipped with a single antenna, attempts to decode the transmitted information. As such, the performance of the pinching-antenna system is evaluated in terms of average secrecy capacity, strictly positive secrecy capacity, and secrecy outage probability. To this end, accurate mathematical expressions for the aforementioned performance metrics are provided. To validate the analysis, the analytical results are numerically evaluated and further validated through Monte-Carlo simulations. The results demonstrate that secrecy capacity between the base station and the legitimate destination improves when the height of the pinching-antenna placed closer to the destination. Additionally, the performance can be improved when the eavesdropper’s location over a rectangular area increases.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/MENACOMM69507.2026.11532869",
+      "volume": null,
+      "issue": null,
+      "pages": "1-6",
+      "articleNumber": null,
+      "publicationDate": "2026",
+      "journalTitle": null,
+      "externalUrl": "https://doi.org/10.1109/MENACOMM69507.2026.11532869",
+      "image": {
+        "src": "/images/publications/pinching-antenna-secrecy.webp",
+        "thumbnail": "/images/publications/pinching-antenna-secrecy-thumb.webp",
+        "alt": "Concept illustration of a dielectric waveguide, antenna elements, legitimate receiver and eavesdropper.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The analyzed model uses one pinching antenna; the multiple elements and security symbols shown here are illustrative, not evidence of an installed secure network."
+      },
+      "editorial": {
+        "question": "How does the geometry of a pinching-antenna link affect its physical-layer secrecy against a passive eavesdropper?",
+        "answer": "The paper derives average secrecy capacity, the probability of positive secrecy capacity and secrecy outage for a single pinching antenna on a lossless dielectric waveguide. Numerical evaluation and Monte Carlo simulation connect antenna height and receiver-channel conditions to these metrics under the specified wiretap model.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "A base station feeds one pinching antenna on a dielectric waveguide parallel to the x-axis at height h. One single-antenna legitimate destination receives the message; a separate single-antenna eavesdropper attempts to decode it. Receiver locations are uniformly distributed within rectangular areas.",
+              "The model assumes a lossless waveguide, line-of-sight free-space propagation, independent legitimate and eavesdropper channel variables, and additive white Gaussian noise. The tractable SNR distributions are adopted from a prior single-user pinching-antenna result."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(6)"
+          },
+          {
+            "heading": "Secrecy metrics and validation",
+            "paragraphs": [
+              "Instantaneous secrecy capacity is the positive part of the difference between the legitimate and eavesdropper channel capacities. The paper integrates the SNR distributions to obtain average secrecy capacity and the probability that secrecy capacity is strictly positive.",
+              "The average-capacity discussion assumes eavesdropper channel knowledge at the transmitter. The secrecy-outage discussion treats the passive case without that knowledge and evaluates falling below a target secrecy rate. Numerical curves are compared with Monte Carlo simulations at 28 GHz, using the specified geometry and −90 dBm noise power."
+            ],
+            "source": "Section III; Eqs. (7)–(19); Section IV"
+          },
+          {
+            "heading": "Results and engineering interpretation",
+            "paragraphs": [
+              "For Figure 2 with the eavesdropper average SNR fixed at 50 dB, reducing waveguide height from 6 m to 2 m increases modeled average secrecy capacity from about 1.5 to 3 bits/s/Hz at legitimate average SNR 80 dB. These are parameterized simulation results, not a measured secure data rate.",
+              "Increasing legitimate-channel SNR or reducing eavesdropper-channel SNR improves the evaluated secrecy metrics. Under identical channel and region parameters, the manuscript reports probability 0.5 of positive secrecy capacity."
+            ],
+            "source": "Section IV; Figs. 2–5"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "The lossless single-antenna model does not demonstrate a secure installed network, cryptographic protection or resistance to every adversary. Waveguide loss, multiple pinching antennas, channel correlation and practical eavesdropper estimation require separate treatment.",
+              "The supplied manuscript gives inconsistent statements about the direction of the eavesdropper-region-width effect between its Figure 4 discussion and conclusion. That trend is therefore not presented here as a general placement rule. The original abstract remains reproduced below its own heading without editorial correction."
+            ],
+            "source": "Sections III–V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "advancing-oam-fso-pointing-errors-space-terrestrial-links",
+            "reason": "A different physical channel study: pointing-induced mode crosstalk in optical links. It does not validate this paper’s secrecy claims."
+          }
+        ]
+      },
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The abstract and technical explanation follow the supplied arXiv v2 manuscript (30 June 2026), titled “Secrecy Analysis of Pinching-Antenna Systems” inside the PDF. The published MENACOMM title and DOI are verified against the institutional and publisher records.",
+      "summaryEn": "The paper derives average secrecy capacity, the probability of positive secrecy capacity and secrecy outage for a single pinching antenna on a lossless dielectric waveguide. Numerical evaluation and Monte Carlo simulation connect antenna height and receiver-channel conditions to these metrics under the specified wiretap model.",
+      "slug": "secrecy-analysis-pinching-antenna-systems",
+      "title": "Secrecy Analysis of Pinching-Antenna Systems",
+      "authors": "Osamah S. Badarneh, Hugerles S. Silva, Meysam Ghanbari, Yazan H. Al-Badarneh, Tamer M. Khattab, Mazen O. Hasna, Khalid A. Qaraqe",
+      "venue": "2026 6th Middle East and North Africa Communications Conference (MENACOMM)",
+      "type": "Conference",
+      "year": "2026",
+      "status": "Published",
+      "summaryFa": "",
+      "tags": [
+        "Pinching Antennas",
+        "Physical-Layer Security",
+        "Dielectric Waveguide",
+        "Secrecy Outage"
+      ],
+      "pdf": "https://arxiv.org/pdf/2503.18322v2",
+      "citationNames": [
+        "Badarneh, Osamah S.",
+        "Silva, Hugerles S.",
+        "Ghanbari, Meysam",
+        "Al-Badarneh, Yazan H.",
+        "Khattab, Tamer M.",
+        "Hasna, Mazen O.",
+        "Qaraqe, Khalid A."
+      ]
+    },
+    {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Mazen Hasna"
+      ],
+      "abstract": "Orbital Angular Momentum (OAM)-based Free-Space Optical (FSO) communication systems offer immense potential for high-capacity, secure links, but their performance is highly sensitive to pointing errors. This paper provides a comprehensive analysis of OAM systems under pointing inaccuracies for both short-range terrestrial links and long-range inter-satellite communications. For short links, we demonstrate the trade-offs between increasing modulation order and the number of OAM modes, highlighting the potential of low-complexity two-stage detectors to mitigate computational overhead while maintaining robust performance. For inter-satellite links, where severe pointing errors dominate, we propose an innovative asymmetric mode design and optimal beam waist adjustment to enhance robustness against angular misalignments. Simulation results reveal critical insights into the interplay between pointing error intensity, mode selection, and system performance, offering practical guidelines for OAM system design in diverse scenarios. This work bridges the gap between theoretical modeling and real-world implementation, paving the way for reliable OAM-based communication in next-generation terrestrial and space networks.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "doi": "10.1109/JPHOT.2025.3575365",
+      "volume": "17",
+      "issue": "4",
+      "pages": "1-14",
+      "articleNumber": null,
+      "publicationDate": "2025-08",
+      "journalTitle": "IEEE Photonics Journal",
+      "externalUrl": "https://doi.org/10.1109/JPHOT.2025.3575365",
+      "image": {
+        "src": "/images/publications/oam-pointing-crosstalk.webp",
+        "thumbnail": "/images/publications/oam-pointing-crosstalk-thumb.webp",
+        "alt": "Concept illustration of vortex optical beams for terrestrial and inter-satellite links.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this publication. The beam spirals, intensity maps and crosstalk panels are illustrative and are not numerical results or photographs of an orbital experiment."
+      },
+      "editorial": {
+        "question": "How can an OAM optical link preserve data recovery when pointing errors destroy mode orthogonality?",
+        "answer": "The paper computes misalignment-dependent coupling between Laguerre–Gaussian modes rather than treating pointing error as scalar power loss alone. It uses a two-stage detector for small-error short links, and asymmetric mode groups with beam-size selection for the simulated long inter-satellite case.",
+        "sections": [
+          {
+            "heading": "Architecture and channel assumptions",
+            "paragraphs": [
+              "Multiple Laguerre–Gaussian modes carry intensity-modulated M-PAM data on one optical path. A finite receiver aperture and phase-based mode separation feed avalanche photodiodes. The noise model includes received-power-dependent shot noise and thermal noise.",
+              "The study isolates pointing error: turbulence is neglected for the assumed short clear-air links and is absent in the vacuum inter-satellite model. Zero-mean Gaussian transverse displacement shifts the beam relative to the aperture; overlap integrals determine a crosstalk matrix between transmitted and detected modes."
+            ],
+            "source": "Sections II–III; Eqs. (1)–(23)"
+          },
+          {
+            "heading": "Detection and design method",
+            "paragraphs": [
+              "Joint maximum-likelihood detection searches Mᴸ symbol combinations for L modes. When pointing errors are small and the coupling matrix is nearly diagonal, individual-mode detection followed by interference refinement reduces the two-stage search to approximately 2ML metric evaluations. This detector relies on the low-crosstalk regime.",
+              "For the long-link example, symmetric positive and negative mode groups can produce nearly indistinguishable received coefficients. An asymmetric transmitted set, such as {−5, −3, −1, 0, 2, 4}, separates the two grouped channels. Beam-size sweeps examine the trade-off between received power and tolerating angular error. Pilot-based channel estimation is discussed, with a corresponding overhead trade-off."
+            ],
+            "source": "Section IV; Eqs. (24)–(34); Fig. 6"
+          },
+          {
+            "heading": "Simulation findings and engineering interpretation",
+            "paragraphs": [
+              "The manuscript evaluates 100 m terrestrial and 1000 km inter-satellite links at 1550 nm. The short-link comparison keeps total transmitted power at 100 mW while changing mode count and modulation order. In its low-error regime, adding modes can be less damaging to BER than increasing modulation order.",
+              "Wider mode spacing helps the two-stage detector in the studied conditions, while its benefit is not automatic for joint ML detection because received power also changes. On a 1000 km link, 10 µrad angular error corresponds geometrically to about 10 m displacement. Asymmetric mode grouping and beam-size selection must therefore be evaluated separately from millimeter-error short-link detection."
+            ],
+            "source": "Table I; Section V; Figs. 7–13"
+          },
+          {
+            "heading": "Scope and limitations",
+            "paragraphs": [
+              "This is theoretical modeling and simulation, not an orbital demonstration or a measured high-capacity link. Conclusions depend on selected mode sets, aperture size, beam parameters, pointing statistics and channel estimation. The work does not prove unlimited OAM capacity, general immunity to turbulence or a cryptographic security guarantee. The decorative intensity maps in the concept image are not the manuscript’s numerical plots."
+            ],
+            "source": "Sections II–VI"
+          }
+        ],
+        "related": [
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "Studies beamwidth and pointing statistics for an aerial FSO link without OAM mode multiplexing."
+          },
+          {
+            "slug": "ber-mixed-underwater-owc-fso-relaying-pointing-error",
+            "reason": "Uses M-PAM and analytical BER on a mixed relay channel, rather than mode-coupled OAM transmission."
+          }
+        ]
+      },
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract and technical explanation follow the supplied manuscript. Bibliographic details are checked against the publisher’s Crossref record.",
+      "summaryEn": "The paper computes misalignment-dependent coupling between Laguerre–Gaussian modes rather than treating pointing error as scalar power loss alone. It uses a two-stage detector for small-error short links, and asymmetric mode groups with beam-size selection for the simulated long inter-satellite case.",
+      "slug": "advancing-oam-fso-pointing-errors-space-terrestrial-links",
+      "title": "Advancing OAM-Based FSO Systems: Tackling Pointing Errors for Next-Generation Space and Terrestrial Links",
+      "authors": "Mohammad Taghi Dabiri, Meysam Ghanbari, Mazen Hasna",
+      "venue": "IEEE Photonics Journal, vol. 17, no. 4, pp. 1–14",
+      "type": "Journal",
+      "year": "2025",
+      "status": "Published",
+      "summaryFa": "",
+      "tags": [
+        "OAM",
+        "Inter-Satellite FSO",
+        "Pointing Error",
+        "Mode Crosstalk",
+        "M-PAM"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Hasna, Mazen"
+      ]
+    }
+  ]
+}

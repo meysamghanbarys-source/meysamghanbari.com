@@ -5,16 +5,19 @@ import { publications, projects } from '../../data/library';
 import { site } from '../../data/site';
 import { publicationSeoTitle } from '../../data/publication-seo';
 import { publicationSchema, publicationAuthors, publicationDoi, publicationDoiUrl, publicationDate, publicationPdfUrl } from '../../data/publication-schema';
+import { publicationConference } from '../../data/conferences';
 export function getStaticPaths() {
   return publications.map(paper => ({ params: { slug: paper.slug }, props: { paper } }));
 }
 const { paper } = Astro.props;
 const path = `/publications/${paper.slug}/`;
 const relatedProjects = projects.en.filter(project => paper.relatedProjectSlugs?.includes(project.slug));
-const relatedPapers = publications.filter(candidate => candidate.slug !== paper.slug && candidate.tags.some(tag => paper.tags.includes(tag))).slice(0,3);
+const relatedPapers = paper.editorial ? paper.editorial.related.map(related => ({...publications.find(candidate => candidate.slug === related.slug), reason:related.reason})).filter(related => related.title) : publications.filter(candidate => candidate.slug !== paper.slug && candidate.tags.some(tag => paper.tags.includes(tag))).slice(0,3);
 const authors = publicationAuthors(paper);
 const doiUrl = publicationDoiUrl(paper);
 const date = publicationDate(paper);
+const conference = publicationConference(paper);
+const [firstPage,lastPage] = paper.pages?.split(/[-–]/) ?? [];
 const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [];
 ---
 <BaseLayout title={paper.title} seoTitle={publicationSeoTitle(paper.slug,'en')} description={paper.summaryEn} path={path} image={paper.image?.src ?? site.ogImage} imageAlt={paper.image?.alt ?? 'Portrait of Meysam Ghanbari'} ogType="article" breadcrumbNames={['Publications',paper.title]}>
@@ -23,7 +26,11 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
     <meta name="citation_title" content={paper.title} />
     {authors.map(author => <meta name="citation_author" content={author} />)}
     {date && <meta name="citation_publication_date" content={date} />}
-    {paper.type === 'Journal' ? <meta name="citation_journal_title" content={paper.venue.split(',')[0]} /> : <meta name="citation_conference_title" content={paper.venue.split(',')[0]} />}
+    {paper.type === 'Journal' ? <meta name="citation_journal_title" content={paper.journalTitle ?? paper.venue.split(',')[0]} /> : <meta name="citation_conference_title" content={conference?.name ?? paper.venue.split(',')[0]} />}
+    {paper.volume && <meta name="citation_volume" content={paper.volume} />}
+    {paper.issue && <meta name="citation_issue" content={paper.issue} />}
+    {firstPage && <meta name="citation_firstpage" content={firstPage} />}
+    {lastPage && <meta name="citation_lastpage" content={lastPage} />}
     {paper.doi && <meta name="citation_doi" content={publicationDoi(paper)} />}
     {paper.pdf && <meta name="citation_pdf_url" content={publicationPdfUrl(paper)} />}
     <meta name="citation_abstract_html_url" content={`${site.domain}${path}`} />
@@ -34,25 +41,29 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
     <h1>{paper.title}</h1>
     <p class="publication-authors">{paper.authorNames?.join(', ') ?? paper.authors}</p>
     <p class="publication-venue">{paper.venue}</p>
+    {conference && <p class="publication-location">Conference location · {conference.city}, {conference.country}</p>}
     {(doiUrl || paper.pdf || paper.externalUrl || paper.video) && <div class="publication-actions">
-      {paper.externalUrl && <a class="button" href={paper.externalUrl} target="_blank" rel="noreferrer">Publisher record ↗</a>}
+      {paper.externalUrl && <a class="button" href={paper.externalUrl} target="_blank" rel="noreferrer">{paper.externalLabel ?? 'Publisher record ↗'}</a>}
       {doiUrl && <a class="button ghost" href={doiUrl} target="_blank" rel="noreferrer">DOI ↗</a>}
       {paper.pdf && <a class="button ghost" href={paper.pdf} target="_blank" rel="noreferrer">Read PDF ↗</a>}
       {paper.video && <a class="button ghost" href={paper.video} target="_blank" rel="noreferrer">Watch presentation ↗</a>}
+      <a class="button ghost" href={`/publications/${paper.slug}.bib`} download={`${paper.slug}.bib`}>BibTeX ↓</a>
     </div>}
   </div></header>
   <div class="shell publication-shell publication-body">
     <article>
-      {abstractParagraphs.length > 0 && <section class="publication-abstract" aria-labelledby="abstract-heading"><h2 id="abstract-heading">Abstract</h2>{abstractParagraphs.map(paragraph => <p>{paragraph}</p>)}</section>}
+      {abstractParagraphs.length > 0 && <section class="publication-abstract" aria-labelledby="abstract-heading"><h2 id="abstract-heading">Abstract</h2>{paper.abstractLabel && <p class="publication-source-label">{paper.abstractLabel.replace(/^Abstract/,'Original text')}</p>}{abstractParagraphs.map(paragraph => <p>{paragraph}</p>)}</section>}
+      {paper.editorial && <section class="publication-answer" aria-labelledby="question-heading"><p class="publication-kicker">ENGINEERING QUESTION</p><h2 id="question-heading">{paper.editorial.question}</h2><p class="publication-direct-answer">{paper.editorial.answer}</p></section>}
       {paper.image && <figure class="publication-image"><img src={paper.image.src} alt={paper.image.alt} width={paper.image.width} height={paper.image.height} loading="lazy" /><figcaption>{paper.image.caption}</figcaption></figure>}
-      <section class="publication-brief" aria-labelledby="summary-heading"><p class="publication-kicker">EDITORIAL RESEARCH BRIEF</p><h2 id="summary-heading">Research summary</h2><p>{paper.summaryEn}</p>
+      {paper.editorial ? <div class="publication-technical">{paper.editorial.sections.map((section,index) => <section aria-labelledby={`technical-${index}`}><h2 id={`technical-${index}`}>{section.heading}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}<p class="publication-source-label">Manuscript · {section.source}</p></section>)}</div> : <section class="publication-brief" aria-labelledby="summary-heading"><p class="publication-kicker">EDITORIAL RESEARCH BRIEF</p><h2 id="summary-heading">Research summary</h2><p>{paper.summaryEn}</p>
         {paper.problemEn && <><h3>The research problem</h3><p>{paper.problemEn}</p></>}
         {paper.ideaEn && <><h3>The approach</h3><p>{paper.ideaEn}</p></>}
         {paper.relevanceEn && <><h3>Engineering relevance</h3><p>{paper.relevanceEn}</p></>}
         <p class="publication-note">This editorial brief is separate from the original manuscript. The publication status above describes the research record.</p>
-      </section>
+      </section>}
+      {paper.editorial && <section class="publication-record" aria-labelledby="record-heading"><h2 id="record-heading">Publication record</h2><dl><dt>Authors</dt><dd>{authors.join(', ')}</dd><dt>Venue</dt><dd>{paper.journalTitle ?? conference?.name ?? paper.venue}</dd>{conference && <><dt>Location</dt><dd>{conference.city}, {conference.country}</dd></>}<dt>Status</dt><dd>{paper.status}</dd><dt>Year</dt><dd>{paper.year}</dd>{date && date !== paper.year && <><dt>Publication date</dt><dd>{date}</dd></>}{paper.volume && <><dt>Volume</dt><dd>{paper.volume}</dd></>}{paper.issue && <><dt>Issue</dt><dd>{paper.issue}</dd></>}{paper.pages && <><dt>Pages</dt><dd>{paper.pages}</dd></>}{paper.articleNumber && <><dt>Article number</dt><dd>{paper.articleNumber}</dd></>}{paper.doi && <><dt>DOI</dt><dd><a href={doiUrl}>{publicationDoi(paper)}</a></dd></>}</dl><a class="publication-export" href={`/publications/${paper.slug}.bib`} download={`${paper.slug}.bib`}>Download BibTeX citation ↓</a><p class="publication-note">{paper.sourceNote} The technical explanation is editorial and separate from the original abstract. Research note updated {paper.editorialUpdated}.</p></section>}
       {relatedProjects.length > 0 && <section class="publication-related"><h2>Related projects</h2>{relatedProjects.map(project => <a href={`${project.href.replace(/\/$/,'')}/`}><span>{project.category}</span><strong>{project.title} →</strong></a>)}</section>}
-      {relatedPapers.length > 0 && <section class="publication-related"><h2>Related publications</h2>{relatedPapers.map(related => <a href={`/publications/${related.slug}/`}><span>{related.year} · {related.status}</span><strong>{related.title} →</strong></a>)}</section>}
+      {relatedPapers.length > 0 && <section class="publication-related"><h2>Related publications</h2>{relatedPapers.map(related => <a href={`/publications/${related.slug}/`}><span>{related.year} · {related.status}</span><strong>{related.title} →</strong>{'reason' in related && <p>{related.reason}</p>}</a>)}</section>}
     </article>
     <aside class="publication-sidebar"><div><h2>Research topics</h2><ul>{paper.tags.map(tag => <li>{tag}</li>)}</ul></div><div><h2>Discuss this research</h2><p>For a research collaboration or a related industrial R&D question, contact Meysam Ghanbari.</p><a href="/contact/">Start a conversation →</a></div></aside>
   </div>
@@ -65,10 +76,22 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
 .publication-header h1 { max-width:1020px; font-size:clamp(29px,3.3vw,44px); line-height:1.15; letter-spacing:-.035em; margin:0 0 19px; text-wrap:balance; }
 .publication-authors { color:#d0dce9; font-size:16px; line-height:1.6; margin:0 0 8px; }
 .publication-venue { color:#a7c0d7; font-size:14px; line-height:1.55; margin:0; }
+.publication-location { color:#c4d9ea; font-size:13px; margin:10px 0 0; }
 .publication-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:23px; }
 .publication-actions .button { min-height:44px; font-size:12px; padding:0 17px; }
 .publication-body { display:grid; grid-template-columns:minmax(0,740px) minmax(0,240px); gap:70px; padding-block:42px 68px; }
 .publication-body article > section { margin-bottom:39px; }
+.publication-technical > section { margin-bottom:39px; }
+.publication-answer { padding:24px 26px 10px; border-left:3px solid #82dff4; background:#0c1c2d; border-radius:0 5px 5px 0; }
+.publication-answer h2 { font-size:clamp(23px,2.3vw,28px); line-height:1.3; }
+.publication-body .publication-direct-answer { color:#dcebf4; }
+.publication-body p.publication-source-label { color:#a7bfd4; font-size:12px; line-height:1.6; }
+.publication-record dl { display:grid; grid-template-columns:125px minmax(0,1fr); gap:11px 18px; font-size:14px; line-height:1.7; }
+.publication-record dt { color:#9bb6ce; }
+.publication-record dd { margin:0; color:#d0e0ee; overflow-wrap:anywhere; }
+.publication-record a { color:#9de2f2; }
+.publication-export { display:inline-flex; min-height:44px; align-items:center; font-size:14px; }
+.publication-related p { margin:8px 0 0; font-size:13px; line-height:1.6; }
 .publication-body h2 { font-size:26px; line-height:1.2; letter-spacing:-.02em; margin:0 0 18px; }
 .publication-body h3 { font-size:20px; margin:25px 0 11px; }
 .publication-body p { color:#bfcddd; font-size:16px; line-height:1.8; margin:0 0 18px; }

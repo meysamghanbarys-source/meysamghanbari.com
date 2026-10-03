@@ -1,5 +1,6 @@
 import type { Publication } from './library';
 import { site } from './site';
+import { publicationConference } from './conferences';
 
 // Explicit names supplied with a paper take precedence; legacy initials remain unchanged.
 // “et al.” is not an author identity and must never become a Person in structured data.
@@ -14,12 +15,19 @@ export const publicationPdfUrl = (paper: Publication) => paper.pdf ? new URL(pap
 
 export const publicationSchema = (paper: Publication, _lang: 'en' | 'fa' = 'en') => {
   const url = `${site.domain}/publications/${paper.slug}/`;
+  const conference = publicationConference(paper);
+  const [firstPage, lastPage] = paper.pages?.split(/[-–]/) ?? [];
+  const periodical = { '@type':'Periodical', name:paper.journalTitle ?? paper.venue.split(',')[0] };
+  const volume = paper.volume ? { '@type':'PublicationVolume', volumeNumber:paper.volume, isPartOf:periodical } : periodical;
   return {
     '@context': 'https://schema.org', '@type': 'ScholarlyArticle', '@id': `${url}#article`,
     headline: paper.title, description: paper.summaryEn, abstract: paper.abstract,
     inLanguage: 'en', author: publicationAuthors(paper).map(name => ({ '@type': 'Person', name })),
     datePublished: publicationDate(paper),
-    isPartOf: paper.status === 'Submitted' ? undefined : { '@type': paper.type === 'Journal' ? 'Periodical' : 'CreativeWork', name: paper.venue },
+    isPartOf: paper.status === 'Submitted' ? undefined : paper.type === 'Journal' ? (paper.issue ? { '@type':'PublicationIssue', issueNumber:paper.issue, isPartOf:volume } : volume) : { '@type':'CreativeWork', name: conference?.name ?? paper.venue,
+      about: conference ? { '@type':'Event', name:conference.name, url:conference.url, location:{ '@type':'Place', name:`${conference.city}, ${conference.country}`, address:{ '@type':'PostalAddress', addressLocality:conference.city, addressCountry:conference.countryCode } } } : undefined },
+    pagination: paper.pages, pageStart: firstPage, pageEnd: lastPage,
+    keywords: paper.tags.join(', '),
     creativeWorkStatus: paper.status, mainEntityOfPage: url, url, about: paper.tags,
     identifier: publicationDoi(paper), sameAs: paper.externalUrl || publicationDoiUrl(paper),
     image: paper.image ? new URL(paper.image.src, site.domain).href : undefined,

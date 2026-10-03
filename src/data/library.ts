@@ -115,17 +115,35 @@ export const projects: { en: Project[]; fa: Array<{ title: string; tag: string; 
   ]
 };
 
+import publicationContent from './publication-content.json';
+
 export type Publication = {
   slug: string;
   title: string;
   authors: string;
   /** Full names in the exact order of the supplied manuscript. */
   authorNames?: string[];
+  /** Publisher-supplied family, given form for citation export. */
+  citationNames?: string[];
   /** Original, complete abstract supplied with the paper; never an editorial paraphrase. */
   abstract?: string;
   /** Actual publication date, when known. A conference year is not a publication date. */
   publicationDate?: string;
-  image?: { src: string; alt: string; width: number; height: number; caption: string };
+  image?: { src: string; thumbnail?: string; alt: string; width: number; height: number; caption: string };
+  abstractLabel?: string;
+  journalTitle?: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  articleNumber?: string;
+  sourceNote?: string;
+  editorialUpdated?: string;
+  editorial?: {
+    question: string;
+    answer: string;
+    sections: Array<{ heading: string; paragraphs: string[]; source: string }>;
+    related: Array<{ slug: string; reason: string }>;
+  };
   venue: string;
   type: 'Journal' | 'Conference';
   year: string;
@@ -140,11 +158,12 @@ export type Publication = {
   relatedProjectSlugs?: string[];
   doi?: string;
   externalUrl?: string;
+  externalLabel?: string;
   pdf?: string;
   video?: string;
 };
 
-export const publications: Publication[] = [
+const publicationRecords: Publication[] = [
   {
     slug: 'all-optical-multi-hop-inter-satellite-relaying-m-pam',
     title: 'All-Optical Multi-Hop Inter-Satellite Relaying for M-PAM Systems: Closed-Form Performance Analysis and Regenerative Design',
@@ -415,6 +434,11 @@ export const publications: Publication[] = [
     relevanceEn: 'The analysis clarifies a reliability constraint for aerial support of cross-medium optical communication.'
   }
 ];
+
+// Stable slugs are updated in place; manuscripts without an existing record are appended once.
+const contentUpdates = publicationContent.updates as Record<string, Partial<Publication>>;
+export const publications: Publication[] = [...publicationRecords, ...publicationContent.newPapers as Publication[]]
+  .map(paper => ({ ...paper, ...contentUpdates[paper.slug] }));
 
 export const videos: Array<{
   title: string;
