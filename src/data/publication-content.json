@@ -867,6 +867,103 @@
           }
         ]
       }
+    },
+    "cv-quantum-communications-angular-rejection-filtering": {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Rula Ammuri",
+        "Saif Al-Kuwari",
+        "Mazen Hasna",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Ammuri, Rula",
+        "Al-Kuwari, Saif",
+        "Hasna, Mazen",
+        "Qaraqe, Khalid A."
+      ],
+      "doi": "10.1109/ICUFN69619.2026.11628813",
+      "venue": "IEEE ICUFN, Milan, Italy, pp. 593-598",
+      "pages": "593-598",
+      "publicationDate": "2026-07",
+      "abstract": "Continuous-variable quantum key distribution (CV-QKD) over free-space optical links is a promising approach for secure communication, but its performance is limited by turbulence, pointing errors, and angular leakage that can be exploited by an eavesdropper. To mitigate this, we consider an angular rejection filter that defines a safe-zone at the receiver and blocks signals from outside the desired cone. A system and channel model is developed including turbulence, misalignment, and safe-zone effects, and information-theoretic metrics are derived to evaluate security. Simulation results show that the safe-zone significantly reduces information leakage and that careful tuning of beam waist, angular threshold, and aperture size is essential for maximizing the secret key rate. Larger apertures improve performance but increase receiver size, while longer links require sub-100 µrad alignment accuracy. These results highlight safe-zone enforcement and parameter optimization as effective strategies for practical and secure CV-QKD.",
+      "abstractLabel": "Abstract · supplied manuscript",
+      "summaryEn": "The study combines a physically protected angular safe-zone with a pointing-based acceptance threshold. It models how beam width, receiver aperture and angular jitter divide optical power between Bob and an idealized eavesdropper, then evaluates a security-rate trade-off. The reported benefit is conditional on the protected-zone assumption and the paper’s simplified channel and security expressions.",
+      "externalUrl": "https://ieeexplore.ieee.org/document/11628813/",
+      "pdf": "https://arxiv.org/pdf/2512.18097v1",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author order and technical explanation follow the supplied arXiv v1 manuscript dated 19 December 2025. The conference DOI, pages and July 2026 publication month are verified against the publisher metadata. The formal citation includes the publisher’s middle initial for Khalid A. Qaraqe; the manuscript author display is retained.",
+      "image": {
+        "src": "/images/publications/cv-qkd-angular-safe-zone.webp",
+        "thumbnail": "/images/publications/cv-qkd-angular-safe-zone-thumb.webp",
+        "alt": "Concept illustration of a ground-to-UAV quantum optical link, a receiver lens with an absorbing guard ring and light outside the protected zone.",
+        "width": 1440,
+        "height": 810,
+        "caption": "Concept illustration supplied for this publication. The ground-to-UAV scene and lens with an absorbing guard visualize the modeled safe-zone; the visible beams and potential eavesdropper are illustrative. This image is not evidence of a working filter, a physical attack or a measured quantum-key-distribution experiment."
+      },
+      "editorial": {
+        "question": "Can angular rejection and pointing-based acceptance reduce information leakage in a free-space continuous-variable quantum link?",
+        "answer": "The study combines a physically protected angular safe-zone with a pointing-based acceptance threshold. It models how beam width, receiver aperture and angular jitter divide optical power between Bob and an idealized eavesdropper, then evaluates a security-rate trade-off. The reported benefit is conditional on the protected-zone assumption and the paper’s simplified channel and security expressions.",
+        "sections": [
+          {
+            "heading": "Receiver architecture and protected angular region",
+            "paragraphs": [
+              "Alice prepares Gaussian-modulated coherent states; Bob measures a quadrature using homodyne detection. The receiver combines a circular collection lens with an angular rejection filter and a surrounding absorbing guard. The model assumes that this arrangement physically protects a receiver-plane safe-zone and prevents Eve from collecting light within it.",
+              "The safe-zone radius is the link distance multiplied by its angular half-width. It differs from the acceptance threshold: the protected radius describes a physical restriction on Eve, while the threshold determines which pointing events contribute to key generation. Enforcing the assumed inaccessible region is an engineering requirement, not a consequence proved by the key-rate calculation."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(11), (20)–(22)"
+          },
+          {
+            "heading": "Coupled pointing loss, turbulence and leakage",
+            "paragraphs": [
+              "Two independent, zero-mean Gaussian angular-error components produce a Rayleigh radial displacement at the receiver plane. Bob’s transmissivity combines a constant system-loss factor, Gamma–Gamma turbulence and a Gaussian-beam aperture-coupling approximation. Pointing error is shared by the Bob and Eve channels; turbulence is applied only to Bob.",
+              "Eve is assigned an ideal receiver that captures all power outside the protected region, without turbulence attenuation. Her modeled transmissivity is one minus the safe-zone power fraction. A wider beam or larger displacement can therefore increase leakage even when some useful light still reaches Bob. These are explicit worst-case geometric assumptions, rather than a measurement of an adversary."
+            ],
+            "source": "Section III; Eqs. (12)–(25)"
+          },
+          {
+            "heading": "Acceptance policy and interpretation of the security metric",
+            "paragraphs": [
+              "Bob retains events whose radial pointing displacement lies below a selected threshold. The analysis combines homodyne mutual information with a simplified pure-loss Holevo-information expression, then integrates over turbulence and the accepted portion of the pointing-error distribution.",
+              "The integrals are acceptance-weighted effective rates: they are not normalized by the probability of retaining a symbol. A rate per retained symbol would require that normalization, and a rate in bits per second would also require a verified operating symbol rate. The text describes reverse reconciliation while using an Alice–Eve information term; the presented expressions should be read as the manuscript’s security model, not as a complete composable security proof."
+            ],
+            "source": "Section II-E; Section IV; Eqs. (8)–(11), (26)–(30)"
+          },
+          {
+            "heading": "Simulation conditions and reported trade-offs",
+            "paragraphs": [
+              "Default parameters include 1550 nm wavelength, system efficiency 0.8, a 5 cm aperture radius, a 15 cm safe-zone radius, modulation variance 5 in shot-noise units, excess-noise parameter 0.1, reconciliation efficiency 0.95 and angular jitter of 50 µrad. The numerical comparisons examine link distances from 500 to 1000 m and aperture radii of 5 and 10 cm.",
+              "Increasing the acceptance threshold retains more events and raises acceptance-weighted mutual information, but the evaluated key-rate expression reaches a peak and then declines as leakage grows. Larger apertures improve the modeled rate and permit a different beam-width and threshold operating point, with a receiver-size cost. Longer links lower the attainable rate and shrink the region of positive modeled security rate. The sub-100 µrad alignment discussion is conditional on these evaluated link settings."
+            ],
+            "source": "Section V; Figs. 2–4"
+          },
+          {
+            "heading": "Engineering use and limits of the evidence",
+            "paragraphs": [
+              "The useful design question is how to choose beam width and acceptance jointly while maintaining an enforceable protected receiver region. Maximizing received information alone can select an operating point with excessive leakage; aperture size, angular control and the permitted physical environment must be assessed together.",
+              "The evidence consists of analytical modeling and numerical results. The manuscript does not report a built rejection filter, a field attack, measured key throughput or finite-key operation. Detector calibration, protocol-specific security under fading, the physical exclusion of an adversary and actual platform motion require separate validation before an operational security claim."
+            ],
+            "source": "Sections II–V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "Examines how auxiliary-light measurements can estimate pointing and polarization errors in a different satellite QKD architecture."
+          },
+          {
+            "slug": "optical-irs-assisted-relay-los-qkd",
+            "reason": "Studies receiver coupling and pointing constraints in a two-hop discrete-variable QKD link."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Places angular capture and pointing-error assumptions within the broader narrow-beam communications literature."
+          }
+        ]
+      }
     }
   },
   "newPapers": [
