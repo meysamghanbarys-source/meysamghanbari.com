@@ -12,6 +12,8 @@ Future Systems starts with engineering reading paths to existing technical recor
 
 ## Publication updates
 
+The library uses compact rows with search, type/status/topic filters and progressive pagination. All records remain available when JavaScript is disabled.
+
 Records live in `src/data/library.ts`. Retain the stable slug and confirmed status. Website summaries are editorial briefs, separate from the original abstract.
 
 When a manuscript is supplied:
