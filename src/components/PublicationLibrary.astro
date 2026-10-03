@@ -1,24 +1,28 @@
 ---
 import { publications } from '../data/library';
+import { publicationConference } from '../data/conferences';
 const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
+const years = [...new Set(publications.map(paper => paper.year))].sort().reverse();
+const hasVisuals = publications.some(paper => paper.image);
 ---
 <section class="section section-tight"><div class="shell" data-publication-library>
   <div class="library-tools" hidden data-library-tools>
     <label class="library-search">Search publications<input type="search" name="search" placeholder="Title, author, venue or keyword" autocomplete="off" data-library-search /></label>
     <label>Type<select data-library-type><option value="">All types</option><option>Journal</option><option>Conference</option></select></label>
     <label>Status<select data-library-status><option value="">All statuses</option><option>Published</option><option>Accepted</option><option>Submitted</option></select></label>
+    <label>Year<select data-library-year><option value="">All years</option>{years.map(year => <option>{year}</option>)}</select></label>
     <label>Topic<select data-library-topic><option value="">All topics</option>{topics.map(topic => <option>{topic}</option>)}</select></label>
     <button type="button" data-library-clear>Clear filters</button>
   </div>
   <p class="library-count" role="status" aria-live="polite" aria-atomic="true" data-library-count>{publications.length} publications · {publications.filter(p => p.type === 'Journal').length} journal papers · {publications.filter(p => p.type === 'Conference').length} conference papers</p>
-  <div class="library-records">{publications.map((paper,index) => <article class="library-record" data-library-record data-type={paper.type} data-status={paper.status} data-topics={JSON.stringify(paper.tags)} data-search={`${paper.title} ${paper.authors} ${paper.authorNames?.join(' ') ?? ''} ${paper.venue} ${paper.tags.join(' ')}`.toLowerCase()}>
-    <span class="library-record-number">{String(index+1).padStart(2,'0')}</span>
-    <div><div class="library-record-meta"><span>{paper.type} · {paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span></div><h2><a href={`/publications/${paper.slug}/`}>{paper.title}</a></h2><p>{paper.authorNames?.join(', ') ?? paper.authors}</p><p>{paper.venue}</p><ul>{paper.tags.slice(0,4).map(tag => <li>{tag}</li>)}</ul></div>
+  <div class:list={['library-records',{'has-visuals':hasVisuals}]}>{publications.map((paper,index) => { const conference=publicationConference(paper); const number=String(index+1).padStart(2,'0'); return <article class="library-record" data-library-record data-type={paper.type} data-status={paper.status} data-year={paper.year} data-topics={JSON.stringify(paper.tags)} data-search={`${paper.title} ${paper.authors} ${paper.authorNames?.join(' ') ?? ''} ${paper.venue} ${conference?.city ?? ''} ${conference?.country ?? ''} ${paper.tags.join(' ')}`.toLowerCase()}>
+    <div class="library-visual-rail"><span class="library-record-number">{number}</span>{paper.image && <a class="library-thumbnail" href={`/publications/${paper.slug}/`} tabindex="-1" aria-hidden="true"><img src={paper.image.thumbnail ?? paper.image.src} alt="" width={paper.image.width} height={paper.image.height} loading="lazy" decoding="async" /></a>}</div>
+    <div class="library-record-content"><div class="library-record-meta"><span class="library-mobile-number">{number}</span><span>{paper.type} · {paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span></div><h2><a href={`/publications/${paper.slug}/`}>{paper.title}</a></h2><p>{conference?.shortName ?? paper.venue}</p>{conference && <p class="library-location">{conference.city}, {conference.country}</p>}<ul>{paper.tags.slice(0,4).map(tag => <li>{tag}</li>)}</ul></div>
     <a class="library-record-link" href={`/publications/${paper.slug}/`} aria-label={`Read ${paper.title}`}><span aria-hidden="true">↗</span></a>
-  </article>)}</div>
+  </article>})}</div>
   <p class="library-no-results" hidden data-library-empty>No publications match these filters. Try a broader search or clear the filters.</p>
   <nav class="library-pagination" aria-label="Publication pages" hidden data-library-pages><button type="button" data-library-previous>← Previous</button><span data-library-page></span><button type="button" data-library-next>Next →</button></nav>
-  <noscript><p class="library-count">All publications are listed above. Browser search can help locate a title, author or topic.</p></noscript>
+  <noscript><p class="library-count">All publications are listed above. Browser search can help locate a title, venue or topic. Complete author lists appear on each publication page.</p></noscript>
 </div></section>
 <script>
   const library = document.querySelector<HTMLElement>('[data-publication-library]');
@@ -28,6 +32,7 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
     const type = library.querySelector<HTMLSelectElement>('[data-library-type]')!;
     const status = library.querySelector<HTMLSelectElement>('[data-library-status]')!;
     const topic = library.querySelector<HTMLSelectElement>('[data-library-topic]')!;
+    const year = library.querySelector<HTMLSelectElement>('[data-library-year]')!;
     const count = library.querySelector<HTMLElement>('[data-library-count]')!;
     const pagination = library.querySelector<HTMLElement>('[data-library-pages]')!;
     const previous = library.querySelector<HTMLButtonElement>('[data-library-previous]')!;
@@ -37,7 +42,7 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
     const pageSize = 20;
     function render() {
       const query = search.value.trim().toLowerCase();
-      const matches = records.filter(record => (!query || query.split(/\s+/).every(word => record.dataset.search!.includes(word))) && (!type.value || record.dataset.type === type.value) && (!status.value || record.dataset.status === status.value) && (!topic.value || JSON.parse(record.dataset.topics!).includes(topic.value)));
+      const matches = records.filter(record => (!query || query.split(/\s+/).every(word => record.dataset.search!.includes(word))) && (!type.value || record.dataset.type === type.value) && (!status.value || record.dataset.status === status.value) && (!year.value || record.dataset.year === year.value) && (!topic.value || JSON.parse(record.dataset.topics!).includes(topic.value)));
       const pages = Math.max(1,Math.ceil(matches.length/pageSize));
       page = Math.min(page,pages);
       const visible = new Set(matches.slice((page-1)*pageSize,page*pageSize));
@@ -49,8 +54,8 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
       pageLabel.textContent = `Page ${page} of ${pages}`;
     }
     search.addEventListener('input',() => { page=1; render(); });
-    [type,status,topic].forEach(control => control.addEventListener('change',() => { page=1; render(); }));
-    library.querySelector('[data-library-clear]')!.addEventListener('click',() => { search.value=''; type.value=''; status.value=''; topic.value=''; page=1; render(); search.focus(); });
+    [type,status,topic,year].forEach(control => control.addEventListener('change',() => { page=1; render(); }));
+    library.querySelector('[data-library-clear]')!.addEventListener('click',() => { search.value=''; type.value=''; status.value=''; topic.value=''; year.value=''; page=1; render(); search.focus(); });
     previous.addEventListener('click',() => { page--; render(); library!.scrollIntoView({block:'start'}); });
     next.addEventListener('click',() => { page++; render(); library!.scrollIntoView({block:'start'}); });
     library.querySelector<HTMLElement>('[data-library-tools]')!.hidden=false;
@@ -59,7 +64,7 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
 </script>
 <style>
 [data-publication-library] { scroll-margin-top:96px; }
-.library-tools { display:grid; grid-template-columns:minmax(240px,2fr) repeat(3,minmax(125px,1fr)) auto; gap:14px; align-items:end; margin-bottom:24px; }
+.library-tools { display:grid; grid-template-columns:minmax(210px,2fr) repeat(4,minmax(110px,1fr)) auto; gap:12px; align-items:end; margin-bottom:24px; }
 .library-tools[hidden], .library-record[hidden], .library-pagination[hidden], .library-no-results[hidden] { display:none; }
 .library-tools label { display:flex; flex-direction:column; gap:8px; font-size:12px; font-weight:600; color:#becddd; }
 .library-tools input, .library-tools select { width:100%; min-width:0; min-height:44px; padding:10px 12px; font:inherit; font-weight:400; background:#0c1929; color:#e3edf7; border:1px solid #465b72; border-radius:5px; }
@@ -68,6 +73,13 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
 .library-count { font-size:12px; color:#a9bdd3; margin:0 0 22px; }
 .library-records { border-top:1px solid #40556a; }
 .library-record { display:grid; grid-template-columns:40px minmax(0,1fr) 44px; gap:18px; padding:25px 0; border-bottom:1px solid #2e435b; }
+.has-visuals .library-record { grid-template-columns:100px minmax(0,1fr) 44px; }
+.library-visual-rail { display:flex; flex-direction:column; align-items:flex-start; gap:17px; }
+.library-thumbnail { display:flex; width:84px; height:84px; align-items:center; justify-content:center; }
+.library-thumbnail img { display:block; width:84px; height:84px; object-fit:contain; border-radius:3px; }
+.library-mobile-number { display:none; }
+.library-record-content { min-width:0; }
+.library-location { color:#c2d4e4; }
 .library-record-number { font-size:13px; color:#9eb2c9; padding-top:5px; }
 .library-record-meta { display:flex; flex-wrap:wrap; gap:13px; align-items:center; font-size:11px; color:#adbed3; }
 .library-record h2 { margin:12px 0 9px; font-size:22px; line-height:1.3; letter-spacing:-.02em; }
@@ -79,5 +91,5 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
 .library-pagination button:disabled { opacity:.45; cursor:default; }
 .library-no-results { padding:30px 0; color:#b8c9dd; font-size:15px; }
 @media(max-width:1000px) { .library-tools { grid-template-columns:repeat(3,minmax(0,1fr)); } .library-search { grid-column:1 / 3; } .library-tools button { grid-column:3; grid-row:1; } }
-@media(max-width:600px) { .library-tools { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; } .library-search { grid-column:1 / -1; } .library-tools button { grid-column:2; grid-row:auto; } .library-record { grid-template-columns:minmax(0,1fr) 38px; gap:10px; padding:22px 0; } .library-record-number { display:none; } .library-record h2 { font-size:19px; } .library-record-link { width:38px; } .library-pagination { gap:12px; } }
+@media(max-width:600px) { .library-tools { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; } .library-search { grid-column:1 / -1; } .library-tools button { grid-column:2; grid-row:auto; } .library-record, .has-visuals .library-record { grid-template-columns:minmax(0,1fr) 38px; gap:10px; padding:22px 0; } .library-visual-rail { display:none; } .library-mobile-number { display:inline; color:#9eb4ca; } .library-record h2 { font-size:19px; } .library-record-link { width:38px; } .library-pagination { gap:12px; } }
 </style>

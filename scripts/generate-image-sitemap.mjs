@@ -38,3 +38,18 @@ for (const file of pages) {
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${entries.join('\n')}\n</urlset>\n`;
 await writeFile(new URL('image-sitemap.xml', output), xml);
 console.log(`Image sitemap generated for ${entries.length} pages.`);
+
+// Track actual research-note revisions, rather than reporting every build as a content update.
+const publicationContent = JSON.parse(await readFile(new URL('../src/data/publication-content.json', import.meta.url), 'utf8'));
+const revisions = new Map([
+  ...Object.entries(publicationContent.updates).map(([slug,paper]) => [slug,paper.editorialUpdated]),
+  ...publicationContent.newPapers.map(paper => [paper.slug,paper.editorialUpdated])
+].filter(([,date]) => date));
+const sitemapPath = new URL('sitemap-0.xml', output);
+let sitemapXml = await readFile(sitemapPath,'utf8');
+sitemapXml = sitemapXml.replace(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g, (entry,url,tail) => {
+  const slug = url.match(/\/publications\/([^/]+)\/?$/)?.[1];
+  const date = revisions.get(slug);
+  return date ? `<url><loc>${url}</loc>${tail.replace(/<lastmod>[^<]*<\/lastmod>/g,'')}<lastmod>${date}</lastmod></url>` : entry;
+});
+await writeFile(sitemapPath,sitemapXml);

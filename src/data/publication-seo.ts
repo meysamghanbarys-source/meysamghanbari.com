@@ -1,4 +1,6 @@
 const publicationTitles: Record<string, [string, string]> = {
+  'secrecy-analysis-pinching-antenna-systems': ['Pinching-Antenna Secrecy Analysis | Meysam Ghanbari', 'Pinching-Antenna Secrecy Analysis | Meysam Ghanbari'],
+  'advancing-oam-fso-pointing-errors-space-terrestrial-links': ['OAM Optical Links and Pointing Errors | Meysam Ghanbari', 'OAM Optical Links and Pointing Errors | Meysam Ghanbari'],
   'all-optical-multi-hop-inter-satellite-relaying-m-pam': ['All-Optical Inter-Satellite Relaying | Meysam Ghanbari', 'رله تمام‌نوری بین‌ماهواره‌ای | میثم قنبری'],
   'future-communications-narrow-beams-pointing-errors-alignment-limits': ['Narrow Beams and Pointing Errors: Survey | Meysam Ghanbari', 'پرتوهای باریک و خطای نشانه‌روی | میثم قنبری'],
   'city-scale-quantum-timing-wireless-synchronization-quantum-hubs': ['City-Scale Quantum Timing and Hubs | Meysam Ghanbari', 'زمان‌بندی کوانتومی در مقیاس شهر | میثم قنبری'],
