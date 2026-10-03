@@ -1,37 +1,60 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
-import { insights, insightDomains } from '../../data/insights';
-
-const featured = [insights[0], insights[9], insights[11]];
+import { insights } from '../../data/insights';
+import { engineeringPaths } from '../../data/future-systems';
+const featuredEssays = [insights[9], insights[10], insights[0]];
 const collectionSchema = {
-  '@context': 'https://schema.org', '@type': 'CollectionPage',
-  name: 'Future Systems — Insights by Meysam Ghanbari',
-  url: `${site.domain}/insights`,
-  description: 'An organized body of ideas on AI, governance, civilization, longevity, human enhancement, technology and the long-term future.',
-  author: { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name },
-  hasPart: insights.map((item) => ({ '@type': 'Article', name: item.title, url: `${site.domain}/insights/${item.slug}` }))
+  '@context':'https://schema.org', '@type':'CollectionPage', name:'Future Systems', url:`${site.domain}/insights/`,
+  description:'Engineering reading paths for space, optical and quantum networks, with a separate collection on intelligence, governance and civilization.',
+  author:{ '@type':'Person', '@id':`${site.domain}/#person`, name:site.name },
+  hasPart:engineeringPaths.map(item => ({ '@type':'CreativeWork', name:item.title, url:`${site.domain}${item.href}` }))
 };
 ---
-
-<BaseLayout title="Future Systems — Insights" description="Future Systems by Meysam Ghanbari: rigorous essays on AI governance, superintelligence, future institutions, civilization, longevity and human enhancement." path="/insights" image="/images/insights/meysam-ghanbari-future-systems-governance.webp" imageAlt="Meysam Ghanbari in the Future Systems editorial environment" languagePath="/fa/insights">
+<BaseLayout title="Future Systems" description="Explore engineering perspectives on space, optical and quantum networks, followed by Meysam Ghanbari’s essays on intelligence, governance and civilization." path="/insights/" image="/images/records/deep-space-optical-communications-photorealistic.webp" imageAlt="Concept illustration of a deep-space optical communications link">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(collectionSchema)}></script>
-  <section class="future-hub-hero">
-    <img class="future-hub-bg" src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="" width="1672" height="941" aria-hidden="true" />
-    <div class="future-hub-overlay" aria-hidden="true"></div>
-    <div class="shell future-hub-grid">
-      <div><p class="eyebrow">MEYSAM GHANBARI · INTELLECTUAL ECOSYSTEM</p><span class="future-systems-mark">FUTURE / SYSTEMS</span><h1>Ideas for civilizations intelligent enough to design their future.</h1><p class="hub-lede">Future Systems is an organized body of essays by Meysam Ghanbari exploring intelligence, governance, technology, longevity, human enhancement and the long-term survival and expansion of civilization.</p><div class="hero-actions"><a class="button" href="#latest-insights">Explore the collection</a><a class="button ghost" href="/insights/intelligence-governance">Enter the first domain</a></div></div>
-      <figure><img src="/images/insights/meysam-ghanbari-future-systems-governance.webp" alt="Meysam Ghanbari exploring intelligence, governance and future civilization" width="1672" height="941" loading="eager" /><figcaption><strong>Meysam Ghanbari</strong><span>Researcher · Systems Thinker · Future Technologist</span></figcaption></figure>
-    </div>
-  </section>
-
-  <section class="future-manifesto"><div class="shell future-manifesto-grid"><div><p class="eyebrow">THE PREMISE</p><h2>Government, technology and civilization are systems. Systems can be examined—and redesigned.</h2></div><div><p>These Insights do not present contested political conclusions as scientific facts. They separate evidence, interpretation, values and unresolved questions.</p><p>The recurring challenge is simple to state and difficult to solve: <strong>if society becomes an optimization problem, who defines the objective function?</strong></p></div></div></section>
-
-  <section class="section future-domains"><div class="shell"><div class="section-heading"><div><p class="eyebrow">INTELLECTUAL MAP</p><h2>Seven domains. One expanding system.</h2></div><p>Domains organize the ideas. Insights are the publishing format.</p></div><div class="future-domain-grid">{insightDomains.map((item, index) => item.state === 'active' ? <a class="future-domain-card active" href={`/insights/${item.slug}`}><span>0{index + 1}</span><small>ACTIVE DOMAIN</small><h3>{item.title}</h3><p>{item.description}</p><b>Explore domain →</b></a> : <article class="future-domain-card"><span>0{index + 1}</span><small>FRAMEWORK READY</small><h3>{item.title}</h3><p>{item.description}</p></article>)}</div></div></section>
-
-  <section class="section future-featured"><div class="shell"><div class="section-heading"><div><p class="eyebrow">FEATURED IDEAS</p><h2>Three questions at civilization scale.</h2></div></div><div class="future-feature-grid">{featured.map((item, index) => <a class={`future-feature-item feature-${index + 1}`} href={`/insights/${item.slug}`}><img src={item.portrait} alt={item.portraitAlt} width="1672" height="941" loading={index === 0 ? 'eager' : 'lazy'} /><div><span>INSIGHT {item.number}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><b>Read the argument →</b></div></a>)}</div></div></section>
-
-  <section id="latest-insights" class="section future-library"><div class="shell"><div class="section-heading"><div><p class="eyebrow">CURRENT COLLECTION · 2026</p><h2>Intelligence, Governance & Civilization</h2></div><a class="text-link" href="/insights/intelligence-governance">View domain →</a></div><div class="future-card-grid">{insights.map((item) => <a class={`future-card theme-${item.theme}`} href={`/insights/${item.slug}`}><span>{item.number} · {item.readTime}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><div class="future-card-tags"><i>{item.primaryKeyword}</i><i>{item.keywords[0]}</i></div><b>Read Insight →</b></a>)}</div></div></section>
-
-  <section class="future-bridge"><div class="shell future-bridge-grid"><div><p class="eyebrow">RESEARCH × FUTURE SYSTEMS</p><h2>Built beside an active deep-tech research portfolio.</h2><p>Future Systems complements—rather than replaces—Meysam Ghanbari’s formal work in optical communications, satellite systems, AI-assisted communications and emerging network technologies.</p></div><div><a href="/research"><span>RESEARCH</span><strong>Explore the technical portfolio</strong></a><a href="/projects"><span>PROJECTS</span><strong>View engineered systems</strong></a><a href="/contact"><span>COLLABORATE</span><strong>Start a serious discussion</strong></a></div></div></section>
+  <section class="systems-hero"><div class="shell systems-hero-grid"><div><p class="systems-kicker">FUTURE SYSTEMS · MEYSAM GHANBARI</p><h1>Engineering the next connection.</h1><p>How do future networks connect across space, recover information from narrow optical beams and coordinate quantum infrastructure?</p><p class="systems-intro">Explore these questions through Meysam Ghanbari’s research portfolio and a source-backed observatory of optical communication capabilities.</p><a class="button" href="#engineering-paths">Explore engineering paths →</a></div><figure><img src="/images/records/deep-space-optical-communications-photorealistic.webp" alt="Concept illustration of an optical link between spacecraft and Earth" width="1672" height="941" loading="eager" /><figcaption>Concept illustration · Space optical communications</figcaption></figure></div></section>
+  <section id="engineering-paths" class="systems-section"><div class="shell"><div class="systems-heading"><div><p class="systems-kicker">TECHNICAL READING PATHS</p><h2>Space. Optical. Quantum.</h2></div><p>Each path leads to an existing research brief, project or technical reference. Publication status and demonstrated results remain visible in their original records.</p></div><div class="systems-paths">{engineeringPaths.map((item,index) => <a href={item.href}><span class="systems-path-number">0{index+1}</span><div><p class="systems-kicker">{item.category}</p><h3>{item.title}</h3><p>{item.description}</p><strong>{item.label} →</strong></div></a>)}</div></div></section>
+  <section class="systems-evidence"><div class="shell"><div><p class="systems-kicker">AN EVIDENCE-LED VIEW</p><h2>What has been demonstrated?<br />What remains a target?</h2><p>The Optical Record Observatory keeps experimental demonstrations, operational systems and announced targets distinct, with source links and engineering context.</p></div><a class="button ghost" href="/research/optical-communications-records/">Open the observatory ↗</a></div></section>
+  <section id="civilization" class="systems-section systems-civilization"><div class="shell"><div class="systems-heading"><div><p class="systems-kicker">BEYOND COMMUNICATIONS</p><h2>Intelligence, Governance<br />& Civilization</h2></div><p>A separate collection of {insights.length} essays explores institutions, human progress and the long-term future. These essays present perspectives, values and open questions alongside factual sources.</p></div><div class="systems-essays">{featuredEssays.map(item => <a href={`/insights/${item.slug}/`}><span>{item.number} · {item.readTime}</span><h3>{item.cardTitle}</h3><p>{item.excerpt}</p><strong>Read the essay →</strong></a>)}</div><a class="systems-collection-link" href="/insights/intelligence-governance/">Explore the complete civilization collection →</a></div></section>
+  <section class="systems-footer"><div class="shell"><h2>Bring a technical question.</h2><p>For research collaboration, industrial R&D and technical discussion, contact Meysam Ghanbari.</p><a class="button" href="/contact/">Start a conversation ↗</a></div></section>
 </BaseLayout>
+<style>
+.systems-kicker { font-size:11px; color:#87dff4; letter-spacing:.14em; font-weight:750; text-transform:uppercase; margin:0; }
+.systems-hero { padding:74px 0; background:radial-gradient(ellipse at 85% 0,#16374d88,transparent 65%),#050b13; border-bottom:1px solid var(--line); }
+.systems-hero-grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:65px; align-items:center; }
+.systems-hero h1 { font-size:clamp(38px,4.5vw,62px); line-height:1.04; letter-spacing:-.045em; margin:18px 0 22px; }
+.systems-hero p:not(.systems-kicker) { color:#becbdd; line-height:1.65; font-size:19px; margin:0 0 20px; }
+.systems-hero p.systems-intro { font-size:15px; color:#aabdd3; }
+.systems-hero figure { margin:0; border:1px solid #34475b; border-radius:4px; overflow:hidden; }
+.systems-hero img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+.systems-hero figcaption { padding:13px 16px; color:#aabdd3; font-size:11px; background:#0a1422; }
+.systems-section { padding:76px 0; scroll-margin-top:95px; }
+.systems-heading { display:flex; justify-content:space-between; gap:55px; align-items:end; margin-bottom:34px; }
+.systems-heading h2 { margin:14px 0 0; font-size:clamp(29px,3.5vw,45px); line-height:1.12; letter-spacing:-.035em; }
+.systems-heading > p { max-width:440px; margin:0; color:#b7c6d9; font-size:15px; line-height:1.65; }
+.systems-paths { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.systems-paths > a { display:flex; gap:23px; padding:30px; background:#0a1524; border:1px solid #34475b; border-radius:4px; }
+.systems-paths > a:hover { border-color:#6eafbf; }
+.systems-path-number { font-size:24px; color:#7f9db9; font-weight:500; }
+.systems-paths h3 { font-size:26px; letter-spacing:-.03em; line-height:1.15; margin:14px 0; }
+.systems-paths p:not(.systems-kicker) { font-size:14px; color:#b8c8db; line-height:1.65; }
+.systems-paths strong, .systems-essays strong { display:inline-block; padding-top:10px; color:#98dff1; font-size:12px; font-weight:600; }
+.systems-evidence { padding:55px 0; background:#0b2031; border-block:1px solid var(--line); }
+.systems-evidence .shell { display:flex; align-items:center; justify-content:space-between; gap:50px; }
+.systems-evidence h2 { font-size:32px; letter-spacing:-.03em; line-height:1.16; margin:15px 0; }
+.systems-evidence p:not(.systems-kicker) { max-width:660px; color:#bccbdc; line-height:1.65; font-size:15px; }
+.systems-evidence .button { flex:none; }
+.systems-civilization { background:#070f1b; border-bottom:1px solid var(--line); }
+.systems-essays { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:25px; }
+.systems-essays > a { border-top:1px solid #4a5061; padding:24px 0; }
+.systems-essays > a > span { color:#c2b8de; font-size:11px; }
+.systems-essays h3 { font-size:23px; line-height:1.2; margin:15px 0; }
+.systems-essays p { color:#b3c2d6; line-height:1.65; font-size:14px; }
+.systems-collection-link { display:inline-flex; align-items:center; min-height:44px; color:#b9c7df; font-size:13px; margin-top:15px; }
+.systems-footer { padding:60px 0; text-align:center; }
+.systems-footer h2 { font-size:32px; letter-spacing:-.03em; margin:0 0 15px; }
+.systems-footer p { color:#b9c8dc; margin-bottom:25px; }
+@media(max-width:900px) { .systems-hero-grid { gap:30px; } .systems-paths > a { padding:23px; gap:15px; } .systems-heading { flex-direction:column; align-items:start; gap:20px; } .systems-evidence .shell { flex-direction:column; align-items:start; gap:18px; } }
+@media(max-width:600px) { .systems-hero { padding:42px 0; } .systems-hero-grid, .systems-paths, .systems-essays { grid-template-columns:1fr; } .systems-hero img { aspect-ratio:16/9; } .systems-hero p:not(.systems-kicker) { font-size:17px; } .systems-section { padding:50px 0; } .systems-paths h3 { font-size:24px; } .systems-path-number { font-size:19px; } .systems-hero h1 { font-size:40px; } }
+</style>

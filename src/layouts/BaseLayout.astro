@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import { nav, site } from '../data/site';
+import '../styles/brand.css';
+import { site } from '../data/site';
 
 interface Props {
   title: string;
@@ -16,88 +17,34 @@ interface Props {
   seoTitle?: string;
   robots?: string;
 }
-
-const {
-  title,
-  description,
-  lang = 'en',
-  path = '/',
-  image = site.ogImage,
-  imageAlt = `${site.name} — ${site.role.en}`,
-  ogType = 'website',
-  alternateAvailable = true,
-  languagePath,
-  breadcrumbNames,
-  seoTitle,
-  robots = 'index,follow,max-image-preview:large'
-} = Astro.props;
-
-const isFa = lang === 'fa';
-const dir = isFa ? 'rtl' : 'ltr';
-const canonicalPath = path.startsWith('/') ? path : `/${path}`;
-const normalizedPath = canonicalPath === '/' ? '/' : `${canonicalPath.replace(/\/+$/, '')}/`;
+const { title, description, path = '/', image = site.ogImage,
+  imageAlt = `${site.name} — advanced communications research`, ogType = 'website',
+  breadcrumbNames, seoTitle, robots = 'index,follow,max-image-preview:large' } = Astro.props;
+const normalizedPath = path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}/`;
 const canonical = `${site.domain}${normalizedPath}`;
-const alternatePath = languagePath ?? (isFa
-  ? (normalizedPath === '/fa/' ? '/' : normalizedPath.replace(/^\/fa/, ''))
-  : (normalizedPath === '/' ? '/fa/' : `/fa${normalizedPath}`));
-const normalizedAlternate = alternatePath === '/' ? '/' : `${alternatePath.replace(/\/+$/, '')}/`;
-const alternate = `${site.domain}${normalizedAlternate}`;
-const englishUrl = isFa ? alternate : canonical;
-const pageTitle = seoTitle ?? (title === site.name
-  ? (isFa ? 'میثم قنبری | پژوهشگر مخابرات نوری و ماهواره‌ای' : `${site.name} | Optical & Satellite Communications Researcher`)
-  : `${title} | ${isFa ? site.alternateName : site.name}`);
+const pageTitle = seoTitle ?? (title === site.name ? `${site.name} | Space, Optical & Quantum Networks` : `${title} | ${site.name}`);
 const cleanedDescription = description.replace(/\s+/g, ' ').trim();
-const firstSentence = cleanedDescription.match(/^.{70,155}?[.!؟](?=\s|$)/u)?.[0];
-const pageDescription = cleanedDescription.length <= 160 ? cleanedDescription :
-  firstSentence ?? `${cleanedDescription.slice(0, 156).replace(/\s+\S*$/, '')}…`;
-const items = isFa ? nav.fa : nav.en;
-const homeHref = isFa ? '/fa/' : '/';
-const contactHref = isFa ? '/fa/contact/' : '/contact/';
-const currentSection = canonicalPath.replace(/^\/fa\/?/, '/').split('/').filter(Boolean)[0] ?? 'home';
-const breadcrumbParts = canonicalPath.split('/').filter(Boolean).filter((part) => part !== 'fa');
-const breadcrumbs = [
-  { '@type': 'ListItem', position: 1, name: isFa ? 'خانه' : 'Home', item: isFa ? `${site.domain}/fa/` : `${site.domain}/` },
-  ...breadcrumbParts.map((part, index) => ({
-    '@type': 'ListItem',
-    position: index + 2,
-    name: breadcrumbNames?.[index] ?? part.replace(/-/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()),
-    item: `${site.domain}${isFa ? '/fa' : ''}/${breadcrumbParts.slice(0, index + 1).join('/')}/`
-  }))
-];
-
+const pageDescription = cleanedDescription.length <= 160 ? cleanedDescription : `${cleanedDescription.slice(0, 156).replace(/\s+\S*$/, '')}…`;
+const currentSection = normalizedPath.split('/').filter(Boolean)[0] ?? 'home';
+const primary = [['publications', 'Publications'], ['videos', 'Talks & Video'], ['upcoming', 'Upcoming'], ['insights', 'Future Systems'], ['about', 'About']];
+const technology = [['research', 'Research'], ['projects', 'Projects']];
+const parts = normalizedPath.split('/').filter(Boolean);
 const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${site.domain}/#website`,
-      url: `${site.domain}/`,
-      name: site.name,
-      alternateName: site.alternateName
-    },
-    {
-      '@type': 'Person',
-      '@id': `${site.domain}/#person`,
-      name: site.name,
-      alternateName: site.alternateName,
-      url: `${site.domain}/`,
-      image: `${site.domain}${site.heroImage}`,
-      description: isFa ? site.role.fa : site.role.en,
-      jobTitle: site.role.en,
-      email: site.contactEmail,
-      knowsAbout: site.knowsAbout,
-      sameAs: Object.values(site.socialLinks).filter(Boolean)
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: breadcrumbs
-    }
+  '@context': 'https://schema.org', '@graph': [
+    { '@type': 'WebSite', '@id': `${site.domain}/#website`, url: `${site.domain}/`, name: site.name, inLanguage: 'en' },
+    { '@type': 'Person', '@id': `${site.domain}/#person`, name: site.name, url: `${site.domain}/`,
+      image: `${site.domain}${site.heroImage}`, description: site.role.en, jobTitle: site.role.en,
+      email: site.contactEmail, knowsAbout: site.knowsAbout, sameAs: Object.values(site.socialLinks).filter(Boolean) },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.domain}/` },
+      ...parts.map((part, index) => ({ '@type': 'ListItem', position: index + 2,
+        name: breadcrumbNames?.[index] ?? (index === 0 ? [...technology, ...primary, ['contact', 'Contact'], ['media', 'Media & Press']].find(([id]) => id === part)?.[1] : undefined) ?? part.replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase()),
+        item: `${site.domain}/${parts.slice(0, index + 1).join('/')}/` })) ] }
   ]
 };
 ---
-
 <!doctype html>
-<html lang={lang} dir={dir}>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,94 +53,72 @@ const structuredData = {
     <meta name="description" content={pageDescription} />
     <meta name="author" content={site.name} />
     <meta name="robots" content={robots} />
-    {robots !== 'noindex,follow' && <link rel="canonical" href={canonical} />}
-    {robots !== 'noindex,follow' && alternateAvailable && <link rel="alternate" hreflang={isFa ? 'en' : 'fa'} href={alternate} />}
-    {robots !== 'noindex,follow' && <link rel="alternate" hreflang={isFa ? 'fa' : 'en'} href={canonical} />}
-    {robots !== 'noindex,follow' && alternateAvailable && <link rel="alternate" hreflang="x-default" href={englishUrl} />}
+    {!robots.startsWith('noindex') && <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:locale" content={isFa ? 'fa_IR' : 'en_US'} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={`${site.domain}${image}`} />
     <meta property="og:image:alt" content={imageAlt} />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={`${site.domain}${image}`} />
-
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content">{isFa ? 'رفتن به محتوای اصلی' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
-      <div class="shell header-inner">
-        <a class="brand" href={homeHref} aria-label={isFa ? 'صفحه اصلی میثم قنبری' : `${site.name} home`}>
-          <span class="brand-mark">MG</span>
-          <span class="brand-name">{site.name}</span>
-        </a>
-
-        <nav class="desktop-nav" aria-label={isFa ? 'پیمایش اصلی' : 'Primary navigation'}>
-          {items.filter(([id]) => id !== 'contact').map(([id, label]) => (
-            <a href={isFa ? `/fa/${id}/` : `/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
-          ))}
+      <div class="shell brand-header">
+        <a class="brand" href="/" aria-label={`${site.name} home`}><span class="brand-mark">MG</span><span class="brand-name">{site.name}</span></a>
+        <nav class="brand-desktop-nav" aria-label="Primary navigation">
+          <details class="brand-disclosure" data-nav-disclosure>
+            <summary class:list={{ 'current-group': ['research', 'projects'].includes(currentSection) }}>Technology <span aria-hidden="true">⌄</span></summary>
+            <div class="brand-submenu">{technology.map(([id, label]) => <a href={`/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>)}</div>
+          </details>
+          {primary.map(([id, label]) => <a href={`/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>)}
         </nav>
-
-        <div class="header-actions">
-          <a class="language-link" href={normalizedAlternate}>{isFa ? 'EN' : 'FA'}</a>
-          <a class="button small" href={contactHref}>{isFa ? 'ارتباط' : 'Contact'}</a>
-        </div>
-
-        <details class="mobile-nav">
-          <summary aria-label={isFa ? 'بازکردن منو' : 'Open navigation'}>☰</summary>
-          <div class="mobile-panel">
-            {items.map(([id, label]) => (
-              <a href={isFa ? `/fa/${id}/` : `/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>
-            ))}
-            <a href={normalizedAlternate}>{isFa ? 'English' : 'فارسی'}</a>
-          </div>
+        <a class="button brand-contact" href="/contact/">Contact</a>
+        <details class="brand-mobile-nav" data-nav-disclosure>
+          <summary aria-label="Open navigation"><span aria-hidden="true">☰</span></summary>
+          <nav class="brand-mobile-panel" aria-label="Mobile navigation">
+            <details class="brand-mobile-technology" data-nav-disclosure><summary>Technology <span aria-hidden="true">⌄</span></summary><div>{technology.map(([id, label]) => <a href={`/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>)}</div></details>
+            {primary.map(([id, label]) => <a href={`/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>)}
+            <a href="/contact/">Contact</a>
+          </nav>
         </details>
       </div>
     </header>
-
-    <main id="main-content">
-      <slot />
-    </main>
-
+    <main id="main-content"><slot /></main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div>
-          <a class="brand footer-brand" href={homeHref}>
-            <span class="brand-mark">MG</span>
-            <span class="brand-name">{site.name}</span>
-          </a>
-          <p>{isFa ? site.role.fa : site.role.en}</p>
-        </div>
-        <div>
-          <strong>{isFa ? 'تمرکز' : 'Research focus'}</strong>
-          <p>OISL · FSO · Receiver Design · PAT · NTN · Quantum · AI</p>
-        </div>
-        <div>
-          <strong>{isFa ? 'ارتباط پژوهشی' : 'Research enquiries'}</strong>
-          <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
-          {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">{isFa ? 'پروفایل ORCID' : 'ORCID profile'} ↗</a></p>}
-          {site.socialLinks.scholar && <p><a href={site.socialLinks.scholar} target="_blank" rel="me noreferrer">{isFa ? 'پروفایل Google Scholar' : 'Google Scholar profile'} ↗</a></p>}
-          {site.socialLinks.linkedin && <p><a href={site.socialLinks.linkedin} target="_blank" rel="me noreferrer">{isFa ? 'پروفایل LinkedIn' : 'LinkedIn profile'} ↗</a></p>}
+        <div><a class="brand footer-brand" href="/"><span class="brand-mark">MG</span><span class="brand-name">{site.name}</span></a><p>Advanced Communications for Space, Optical and Quantum Networks</p></div>
+        <div><strong>Technology</strong><p>Space & NTN networks · Optical systems · Quantum communications</p><p><a href="/research/">Research</a> · <a href="/projects/">Projects</a></p></div>
+        <div><strong>Research & industry enquiries</strong><p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
+          {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">ORCID profile ↗</a></p>}
+          {site.socialLinks.scholar && <p><a href={site.socialLinks.scholar} target="_blank" rel="me noreferrer">Google Scholar profile ↗</a></p>}
+          {site.socialLinks.linkedin && <p><a href={site.socialLinks.linkedin} target="_blank" rel="me noreferrer">LinkedIn profile ↗</a></p>}
         </div>
       </div>
-      <nav class="shell footer-nav" aria-label={isFa ? 'پیمایش پایین صفحه' : 'Footer navigation'}>
-        {items.map(([id, label]) => <a href={isFa ? `/fa/${id}/` : `/${id}/`}>{label}</a>)}
-      </nav>
-      <div class="shell footer-bottom">
-        <span>© {new Date().getFullYear()} {site.name}</span>
-        <span>{isFa ? 'وب‌سایت رسمی پژوهشی' : 'Official research website'}</span>
-      </div>
+      <nav class="shell footer-nav" aria-label="Footer navigation">{primary.map(([id, label]) => <a href={`/${id}/`}>{label}</a>)}<a href="/media/">Media & Press</a><a href="/contact/">Contact</a></nav>
+      <div class="shell footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><span>Official website</span></div>
     </footer>
-    <!-- deployment marker: linkedin-profile-2026-10-02 -->
+    <script>
+      const disclosures = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-nav-disclosure]'));
+      document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        const open = disclosures.filter(item => item.open && item.contains(document.activeElement));
+        const target = open.at(-1) ?? disclosures.find(item => item.open);
+        if (target) { target.open = false; target.querySelector('summary')?.focus(); event.preventDefault(); }
+      });
+      document.addEventListener('click', event => {
+        for (const item of disclosures) if (item.open && !item.contains(event.target as Node)) item.open = false;
+      });
+    </script>
+    <!-- deployment marker: brand-os-2026-10 -->
   </body>
 </html>

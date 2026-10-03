@@ -119,6 +119,13 @@ export type Publication = {
   slug: string;
   title: string;
   authors: string;
+  /** Full names in the exact order of the supplied manuscript. */
+  authorNames?: string[];
+  /** Original, complete abstract supplied with the paper; never an editorial paraphrase. */
+  abstract?: string;
+  /** Actual publication date, when known. A conference year is not a publication date. */
+  publicationDate?: string;
+  image?: { src: string; alt: string; width: number; height: number; caption: string };
   venue: string;
   type: 'Journal' | 'Conference';
   year: string;

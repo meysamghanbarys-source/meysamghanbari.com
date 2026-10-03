@@ -1,94 +1,92 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { publications } from '../../data/library';
-import { projects } from '../../data/library';
+import { publications, projects } from '../../data/library';
 import { site } from '../../data/site';
 import { publicationSeoTitle } from '../../data/publication-seo';
-import { publicationSchema } from '../../data/publication-schema';
-
+import { publicationSchema, publicationAuthors, publicationDoi, publicationDoiUrl, publicationDate, publicationPdfUrl } from '../../data/publication-schema';
 export function getStaticPaths() {
-  return publications.map((paper) => ({ params: { slug: paper.slug }, props: { paper } }));
+  return publications.map(paper => ({ params: { slug: paper.slug }, props: { paper } }));
 }
-
 const { paper } = Astro.props;
-const path = `/publications/${paper.slug}`;
-const relatedProjects = projects.en.filter((project) => paper.relatedProjectSlugs?.includes(project.slug));
-const relatedPapers = publications
-  .filter((candidate) => candidate.slug !== paper.slug && candidate.tags.some((tag) => paper.tags.includes(tag)))
-  .slice(0, 3);
-const articleSchema = publicationSchema(paper, 'en');
+const path = `/publications/${paper.slug}/`;
+const relatedProjects = projects.en.filter(project => paper.relatedProjectSlugs?.includes(project.slug));
+const relatedPapers = publications.filter(candidate => candidate.slug !== paper.slug && candidate.tags.some(tag => paper.tags.includes(tag))).slice(0,3);
+const authors = publicationAuthors(paper);
+const doiUrl = publicationDoiUrl(paper);
+const date = publicationDate(paper);
+const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [];
 ---
-
-<BaseLayout title={paper.title} seoTitle={publicationSeoTitle(paper.slug, 'en')} description={paper.summaryEn} lang="en" path={path} image={paper.relatedProjectSlugs?.length ? '/images/profile/meysam-ghanbari-space-communications-researcher.webp' : site.ogImage}>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
-  <section class="paper-hero paper-hero-product">
-    <div class="space-grid-bg" aria-hidden="true"></div>
-    <div class="shell paper-shell">
-      <a class="back-link" href="/publications">← Publications</a>
-      <div class="paper-meta-line">
-        <span>{paper.type}</span><span>{paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
-      </div>
-      <h1>{paper.title}</h1>
-      <p class="paper-authors">{paper.authors}</p>
-      <p class="paper-venue">{paper.venue}</p>
-      <div class="paper-actions">
-        {paper.doi && <a class="button" href={paper.doi} target="_blank" rel="noreferrer">DOI</a>}
-        {paper.pdf && <a class="button ghost" href={paper.pdf} target="_blank" rel="noreferrer">PDF</a>}
-        {paper.video && <a class="button ghost" href={paper.video} target="_blank" rel="noreferrer">Video</a>}
-        {paper.externalUrl && <a class="button ghost" href={paper.externalUrl} target="_blank" rel="noreferrer">Publisher record</a>}
-      </div>
-      <div class="paper-signal-line" aria-label="Research topics">{paper.tags.map((tag) => <span>{tag}</span>)}</div>
-    </div>
-  </section>
-
-  <section class="section paper-body-section">
-    <div class="shell paper-content-grid">
-      <article class="paper-main">
-        <p class="eyebrow">RESEARCH BRIEF</p>
-        <h2>Research overview</h2>
-        <p class="paper-summary">{paper.summaryEn}</p>
-
-        <h2>Research problem</h2>
-        <p>{paper.problemEn ?? `This publication addresses a research problem within ${paper.tags.slice(0, 3).join(', ')}. The website summary is intentionally limited to the verified publication record.`}</p>
-
-        <h2>Core idea</h2>
-        <p>{paper.ideaEn ?? paper.summaryEn}</p>
-
-        <div class="paper-architecture-block">
-          <p class="eyebrow">SYSTEM / ARCHITECTURE</p>
-          <div>{paper.tags.map((tag, index) => <span><small>0{index + 1}</small><strong>{tag}</strong></span>)}</div>
-        </div>
-
-        <h2>Why it matters</h2>
-        <p>{paper.relevanceEn ?? 'The publication contributes to a wider research program in advanced optical, satellite, quantum or intelligent communication systems. Engineering claims are kept within the scope of the verified record.'}</p>
-
-        <div class="evidence-note"><strong>Results & evidence</strong><p>Numerical claims and detailed results are not reproduced here unless they are available in the verified public paper. Use the publisher, DOI or PDF link above when available for the complete technical record.</p></div>
-
-        <h2>Publication record</h2>
-        <dl class="paper-record">
-          <div><dt>Authors</dt><dd>{paper.authors}</dd></div>
-          <div><dt>Venue</dt><dd>{paper.venue}</dd></div>
-          <div><dt>Year</dt><dd>{paper.year}</dd></div>
-          <div><dt>Status</dt><dd>{paper.status}</dd></div>
-        </dl>
-
-        {relatedProjects.length > 0 && <><h2>Related projects</h2><div class="related-records">{relatedProjects.map((project) => <a href={project.href}><span>{project.number} · {project.category}</span><strong>{project.title}</strong><small>Explore project ↗</small></a>)}</div></>}
-
-        {relatedPapers.length > 0 && <><h2>Related research</h2><div class="related-records">{relatedPapers.map((related) => <a href={`/publications/${related.slug}`}><span>{related.year} · {related.status}</span><strong>{related.title}</strong><small>{related.venue} ↗</small></a>)}</div></>}
-      </article>
-
-      <aside class="paper-sidebar">
-        <div class="side-card">
-          <p class="eyebrow">KEYWORDS</p>
-          <div class="tag-cloud">{paper.tags.map((tag) => <span>{tag}</span>)}</div>
-        </div>
-        <div class="side-card">
-          <p class="eyebrow">RELATED ENQUIRIES</p>
-          <p>For technical discussion, research collaboration or a related industrial R&D problem, contact Meysam Ghanbari.</p>
-          <a class="text-link" href="/contact">Discuss this research →</a>
-        </div>
-        <div class="side-card"><p class="eyebrow">BEHIND THE RESEARCH</p><p>This page is an original editorial explanation of the public research record. It does not replace the peer-reviewed or submitted manuscript.</p></div>
-      </aside>
-    </div>
-  </section>
+<BaseLayout title={paper.title} seoTitle={publicationSeoTitle(paper.slug,'en')} description={paper.summaryEn} path={path} image={paper.image?.src ?? site.ogImage} imageAlt={paper.image?.alt ?? 'Portrait of Meysam Ghanbari'} ogType="article" breadcrumbNames={['Publications',paper.title]}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(publicationSchema(paper))}></script>
+    <meta name="citation_title" content={paper.title} />
+    {authors.map(author => <meta name="citation_author" content={author} />)}
+    {date && <meta name="citation_publication_date" content={date} />}
+    {paper.type === 'Journal' ? <meta name="citation_journal_title" content={paper.venue.split(',')[0]} /> : <meta name="citation_conference_title" content={paper.venue.split(',')[0]} />}
+    {paper.doi && <meta name="citation_doi" content={publicationDoi(paper)} />}
+    {paper.pdf && <meta name="citation_pdf_url" content={publicationPdfUrl(paper)} />}
+    <meta name="citation_abstract_html_url" content={`${site.domain}${path}`} />
+  </Fragment>
+  <header class="publication-header"><div class="shell publication-shell">
+    <a class="publication-back" href="/publications/">← Publications</a>
+    <div class="publication-meta"><span>{paper.type} · {paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span></div>
+    <h1>{paper.title}</h1>
+    <p class="publication-authors">{paper.authorNames?.join(', ') ?? paper.authors}</p>
+    <p class="publication-venue">{paper.venue}</p>
+    {(doiUrl || paper.pdf || paper.externalUrl || paper.video) && <div class="publication-actions">
+      {paper.externalUrl && <a class="button" href={paper.externalUrl} target="_blank" rel="noreferrer">Publisher record ↗</a>}
+      {doiUrl && <a class="button ghost" href={doiUrl} target="_blank" rel="noreferrer">DOI ↗</a>}
+      {paper.pdf && <a class="button ghost" href={paper.pdf} target="_blank" rel="noreferrer">Read PDF ↗</a>}
+      {paper.video && <a class="button ghost" href={paper.video} target="_blank" rel="noreferrer">Watch presentation ↗</a>}
+    </div>}
+  </div></header>
+  <div class="shell publication-shell publication-body">
+    <article>
+      {abstractParagraphs.length > 0 && <section class="publication-abstract" aria-labelledby="abstract-heading"><h2 id="abstract-heading">Abstract</h2>{abstractParagraphs.map(paragraph => <p>{paragraph}</p>)}</section>}
+      {paper.image && <figure class="publication-image"><img src={paper.image.src} alt={paper.image.alt} width={paper.image.width} height={paper.image.height} loading="lazy" /><figcaption>{paper.image.caption}</figcaption></figure>}
+      <section class="publication-brief" aria-labelledby="summary-heading"><p class="publication-kicker">EDITORIAL RESEARCH BRIEF</p><h2 id="summary-heading">Research summary</h2><p>{paper.summaryEn}</p>
+        {paper.problemEn && <><h3>The research problem</h3><p>{paper.problemEn}</p></>}
+        {paper.ideaEn && <><h3>The approach</h3><p>{paper.ideaEn}</p></>}
+        {paper.relevanceEn && <><h3>Engineering relevance</h3><p>{paper.relevanceEn}</p></>}
+        <p class="publication-note">This editorial brief is separate from the original manuscript. The publication status above describes the research record.</p>
+      </section>
+      {relatedProjects.length > 0 && <section class="publication-related"><h2>Related projects</h2>{relatedProjects.map(project => <a href={`${project.href.replace(/\/$/,'')}/`}><span>{project.category}</span><strong>{project.title} →</strong></a>)}</section>}
+      {relatedPapers.length > 0 && <section class="publication-related"><h2>Related publications</h2>{relatedPapers.map(related => <a href={`/publications/${related.slug}/`}><span>{related.year} · {related.status}</span><strong>{related.title} →</strong></a>)}</section>}
+    </article>
+    <aside class="publication-sidebar"><div><h2>Research topics</h2><ul>{paper.tags.map(tag => <li>{tag}</li>)}</ul></div><div><h2>Discuss this research</h2><p>For a research collaboration or a related industrial R&D question, contact Meysam Ghanbari.</p><a href="/contact/">Start a conversation →</a></div></aside>
+  </div>
 </BaseLayout>
+<style>
+.publication-shell { --shell:1080px; }
+.publication-header { padding:35px 0 39px; background:radial-gradient(ellipse at 90% 0,#12364c70,transparent 65%),#07111e; border-bottom:1px solid var(--line); }
+.publication-back { display:inline-flex; align-items:center; min-height:44px; color:#a9c1d7; font-size:13px; }
+.publication-meta { display:flex; flex-wrap:wrap; align-items:center; gap:14px; color:#b4c7db; font-size:12px; margin:14px 0; }
+.publication-header h1 { max-width:1020px; font-size:clamp(29px,3.3vw,44px); line-height:1.15; letter-spacing:-.035em; margin:0 0 19px; text-wrap:balance; }
+.publication-authors { color:#d0dce9; font-size:16px; line-height:1.6; margin:0 0 8px; }
+.publication-venue { color:#a7c0d7; font-size:14px; line-height:1.55; margin:0; }
+.publication-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:23px; }
+.publication-actions .button { min-height:44px; font-size:12px; padding:0 17px; }
+.publication-body { display:grid; grid-template-columns:minmax(0,740px) minmax(0,240px); gap:70px; padding-block:42px 68px; }
+.publication-body article > section { margin-bottom:39px; }
+.publication-body h2 { font-size:26px; line-height:1.2; letter-spacing:-.02em; margin:0 0 18px; }
+.publication-body h3 { font-size:20px; margin:25px 0 11px; }
+.publication-body p { color:#bfcddd; font-size:16px; line-height:1.8; margin:0 0 18px; }
+.publication-abstract { padding-bottom:25px; border-bottom:1px solid var(--line); }
+.publication-abstract p { color:#d4dfeb; white-space:pre-line; }
+.publication-body p.publication-kicker { color:#87dff4; font-size:10px; font-weight:750; letter-spacing:.13em; margin-bottom:12px; }
+.publication-body p.publication-note { font-size:12px; line-height:1.65; color:#a2b6cd; padding:16px 0 0; border-top:1px solid var(--line); margin-top:24px; }
+.publication-image { margin:0 0 34px; }
+.publication-image img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:4px; }
+.publication-image figcaption { color:#a5b9cf; font-size:12px; margin-top:10px; }
+.publication-sidebar > div { padding:22px 0; border-top:1px solid #40536a; margin-bottom:20px; }
+.publication-sidebar h2 { font-size:15px; margin:0 0 17px; }
+.publication-sidebar ul { list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:8px; }
+.publication-sidebar li { font-size:11px; color:#c1d5e8; padding:7px 9px; border:1px solid #30465c; border-radius:4px; }
+.publication-sidebar p { font-size:13px; line-height:1.65; }
+.publication-sidebar a { color:#8fe0f1; display:inline-flex; align-items:center; min-height:44px; font-size:12px; }
+.publication-related a { display:block; padding:16px 0; border-bottom:1px solid #2c4055; }
+.publication-related span { display:block; color:#a6bbd1; font-size:11px; margin-bottom:6px; }
+.publication-related strong { color:#d1e4f3; font-size:15px; line-height:1.5; }
+@media(max-width:850px) { .publication-body { gap:35px; grid-template-columns:minmax(0,1fr) 200px; } }
+@media(max-width:650px) { .publication-body { grid-template-columns:1fr; gap:20px; padding-top:30px; } .publication-header { padding:20px 0 29px; } .publication-header h1 { font-size:29px; } .publication-authors { font-size:14px; } .publication-body p { font-size:15px; } .publication-sidebar { display:grid; grid-template-columns:1fr; } }
+</style>

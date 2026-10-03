@@ -15,8 +15,8 @@ export const nav = {
     ['research', 'Research'],
     ['projects', 'Projects'],
     ['publications', 'Publications'],
-    ['videos', 'Videos & Talks'],
-    ['insights', 'Insights'],
+    ['videos', 'Talks & Video'],
+    ['insights', 'Future Systems'],
     ['upcoming', 'Upcoming'],
     ['media', 'Media'],
     ['about', 'About'],
@@ -40,12 +40,12 @@ export const site = {
   name: 'Meysam Ghanbari',
   alternateName: 'میثم قنبری',
   role: {
-    en: 'Researcher in Optical, Satellite & Advanced Communication Systems',
+    en: 'Researcher in Space, Optical & Quantum Communications',
     fa: 'پژوهشگر سامانه‌های مخابرات نوری، ماهواره‌ای و پیشرفته'
   },
   contactEmail: 'meysamghanbarys@gmail.com',
-  heroImage: '/images/profile/meysam-ghanbari-space-communications-researcher.webp',
-  ogImage: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp',
+  heroImage: '/images/profile/meysam-ghanbari-formal-portrait.webp',
+  ogImage: '/images/profile/meysam-ghanbari-formal-portrait.webp',
   socialLinks: {
     scholar: 'https://scholar.google.com/citations?user=U6s7sawAAAAJ&hl=en',
     orcid: 'https://orcid.org/0009-0000-6072-4199',
@@ -139,7 +139,7 @@ export const site = {
         intro: 'A complete research library covering published, accepted and submitted journal and conference work.',
       },
       videos: {
-        title: 'Videos & Talks',
+        title: 'Talks & Video',
         kicker: 'RESEARCH COMMUNICATION',
         intro: 'Research presentations, technical explainers, interviews and public speaking appearances.',
       },
