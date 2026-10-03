@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationLibrary from '../components/PublicationLibrary.astro';
 import { sectionIds, site } from '../data/site';
 import { projects, publications, videos, insights, upcoming, media } from '../data/library';
 import { researchDomainLinks } from '../data/research-domains';
@@ -165,43 +166,7 @@ const visual = sectionVisuals[section];
     </section>
   )}
 
-  {section === 'publications' && (
-    <section class="section section-tight">
-      <div class="shell">
-        <div class="publication-group">
-          <div class="group-heading"><span>JOURNALS</span><strong>{journals.length}</strong></div>
-          <div class="publication-card-grid">
-            {journals.map((paper, index) => (
-              <a class="publication-card" href={`/publications/${paper.slug}`}>
-                <div class="publication-card-head"><span>J{String(index + 1).padStart(2, '0')}</span><span>{paper.year} · {paper.venue}</span></div>
-                <span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
-                <h2>{paper.title}</h2>
-                <p>{paper.summaryEn}</p>
-                <div class="tag-cloud">{paper.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}</div>
-                <span class="project-explore">Explore research <b>↗</b></span>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div class="publication-group">
-          <div class="group-heading"><span>CONFERENCES</span><strong>{conferences.length}</strong></div>
-          <div class="publication-card-grid">
-            {conferences.map((paper, index) => (
-              <a class="publication-card" href={`/publications/${paper.slug}`}>
-                <div class="publication-card-head"><span>C{String(index + 1).padStart(2, '0')}</span><span>{paper.year} · {paper.venue}</span></div>
-                <span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span>
-                <h2>{paper.title}</h2>
-                <p>{paper.summaryEn}</p>
-                <div class="tag-cloud">{paper.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}</div>
-                <span class="project-explore">Explore research <b>↗</b></span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
+  {section === 'publications' && <PublicationLibrary />}
 
   {section === 'videos' && (
     <section class="section section-tight">

@@ -1,70 +1,129 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
-import { projects, publications, upcoming } from '../data/library';
-import { insights } from '../data/insights';
-import { insightsFa } from '../data/insights-fa';
-
-const { lang = 'en' } = Astro.props;
-const fa = lang === 'fa';
-const prefix = fa ? '/fa' : '';
-const arrow = fa ? '←' : '→';
-const featuredProjects = fa ? projects.fa.slice(0, 3) : projects.en.slice(0, 3);
-const featuredPapers = publications.filter((paper) => paper.featured).slice(0, 2);
-const selectedInsights = fa ? insightsFa.slice(0, 2) : insights.slice(0, 2);
-const activity = [
-  ...(upcoming[0] ? [{ title: upcoming[0].paperTitle, detail: fa ? `${upcoming[0].conference} · ${upcoming[0].locationFa}` : `${upcoming[0].conference} · ${upcoming[0].location}`, status: fa ? 'برنامه‌ریزی‌شده' : 'Scheduled', year: '2027', href: `${prefix}/upcoming/` }] : []),
-  ...publications.filter((paper) => paper.status === 'Published').slice(0, 2).map((paper) => ({ title: paper.title, detail: paper.venue, status: fa ? 'منتشرشده' : 'Published', year: paper.year, href: `${prefix}/publications/${paper.slug}/` }))
+import { publications, projects, upcoming } from '../data/library';
+import { engineeringPaths } from '../data/future-systems';
+const today = new Date().toISOString().slice(0, 10);
+const event = upcoming.find(item => item.endDate >= today);
+const quantumPaper = publications.find(item => item.slug === 'city-scale-quantum-timing-wireless-synchronization-quantum-hubs')!;
+const selectedPapers = [publications[1], quantumPaper, publications[0]];
+const spotlight = [
+  ...(event ? [{ id:'upcoming-vtc', kind:'Upcoming', title:'IEEE VTC 2027-Spring', detail:`${event.date} · ${event.location}`, href:'/upcoming/', action:'View presentation', expires:event.endDate }] : []),
+  { id:quantumPaper.slug, kind:'Publication · Published', title:'Toward City-Scale Quantum Timing', detail:'Wireless synchronization via quantum hubs · IEEE JSAC', href:`/publications/${quantumPaper.slug}/`, action:'Read the research', expires:undefined },
+  { id:'optical-record-observatory', kind:'Technical resource', title:'Optical Record Observatory', detail:'Demonstrated capabilities, operational links and future targets.', href:'/research/optical-communications-records/', action:'Explore the evidence', expires:undefined }
 ];
-const c = fa ? {
-  eyebrow: 'پژوهش / مخابرات نوری / سامانه‌های فضایی', role: 'مخابرات نوری، ماهواره‌ای و سامانه‌های ارتباطی پیشرفته',
-  pitch: 'میثم قنبری معماری گیرنده‌ها و لینک‌های نوری را برای ارتباط میان ماهواره‌ها، سکوهای هوایی و شبکه‌های آینده بررسی می‌کند.',
-  research: 'بررسی پژوهش‌ها', contact: 'گفت‌وگو دربارهٔ یک مسئله',
-  domains: 'حوزه‌های پژوهش', domainsTitle: 'از پرتو و گیرنده تا شبکهٔ فضایی.', domainsText: 'یک برنامهٔ پژوهشی پیوسته، از رفتار لینک نوری تا معماری سامانه و شبکه.',
-  focus: ['لینک‌های نوری بین‌ماهواره‌ای', 'گیرنده‌ها و رهگیری دقیق', 'شبکه‌های غیرزمینی و HAPS'],
-  focusDetail: ['مسیرهای نوری پرظرفیت و رله‌های فضایی', 'آشکارسازی، حساسیت و هم‌ترازی پرتو', 'اتصال سکوهای هوایی و ماهواره‌ای'],
-  allDomains: 'مشاهدهٔ همهٔ حوزه‌ها',
-  work: 'پروژهٔ شاخص', workTitle: 'مهندسی یک لینک نوری قابل اتکا.', workText: 'طراحی گیرنده، هم‌ترازی پرتو و مدل‌سازی عملکرد در محیط‌هایی که تغییرات کوچک مسیر، ارتباط را تحت تأثیر قرار می‌دهد.', workLink: 'کاوش در پروژه‌ها',
-  activity: 'آخرین فعالیت‌ها', activityTitle: 'پژوهش در جریان.', activityLink: 'همهٔ رویدادها',
-  papers: 'کتابخانهٔ پژوهش', papersTitle: 'از مسئله تا مقاله.', papersLink: 'همهٔ مقالات',
-  future: 'Future Systems / دیدگاه‌ها', futureTitle: 'پرسش‌هایی فراتر از سامانهٔ امروز.', futureText: 'جستارهای میثم قنبری دربارهٔ هوش، حکمرانی، فناوری و آیندهٔ تمدن؛ در کنار پژوهش رسمی مخابراتی.', futureLink: 'ورود به دیدگاه‌ها',
-  profile: 'پژوهشگر / مهندس', profileTitle: 'کار در مرز نظریه و سامانه.', profileText: 'فعالیت میثم قنبری مدل‌سازی تحلیلی، طراحی گیرنده و معماری ارتباطات نوری و ماهواره‌ای را به هم پیوند می‌دهد.', profileLink: 'دربارهٔ میثم قنبری', mediaLink: 'رسانه و ارائه‌ها',
-  cta: 'همکاری پژوهشی و فنی', ctaTitle: 'یک مسئلهٔ دشوار ارتباطی دارید؟', ctaText: 'برای همکاری پژوهشی، تحقیق‌وتوسعهٔ صنعتی، مشاورهٔ فنی یا ارائهٔ علمی با میثم قنبری در ارتباط باشید.', ctaLink: 'شروع گفت‌وگو', insightLabel: 'دیدگاه'
-} : {
-  eyebrow: 'RESEARCH / OPTICS / SPACE SYSTEMS', role: 'Optical, Satellite & Advanced Communication Systems',
-  pitch: 'Meysam Ghanbari investigates optical links and receiver architectures that connect satellites, aerial platforms and future networks.',
-  research: 'Explore the research', contact: 'Discuss a research problem',
-  domains: 'RESEARCH DOMAINS', domainsTitle: 'From the optical beam to the space network.', domainsText: 'A connected research program spanning link behavior, receiver architecture and network scale.',
-  focus: ['Inter-satellite optical links', 'Receivers & precision tracking', 'NTN and HAPS networks'],
-  focusDetail: ['High-capacity crosslinks and optical relays', 'Detection, sensitivity and beam alignment', 'Connecting aerial and orbital platforms'],
-  allDomains: 'Explore all research domains',
-  work: 'SELECTED TECHNOLOGY', workTitle: 'Engineering an optical link that holds.', workText: 'Receiver design, beam alignment and performance modeling for environments where small changes in geometry can reshape a communication link.', workLink: 'Explore projects',
-  activity: 'RECENT ACTIVITY', activityTitle: 'Research in motion.', activityLink: 'View upcoming activity',
-  papers: 'RESEARCH LIBRARY', papersTitle: 'From the problem to the paper.', papersLink: 'Open the publication library',
-  future: 'FUTURE SYSTEMS / INSIGHTS', futureTitle: 'Questions beyond today’s systems.', futureText: 'Meysam Ghanbari’s essays on intelligence, governance, technology and civilization sit alongside his formal communications research.', futureLink: 'Enter Future Systems',
-  profile: 'RESEARCHER / ENGINEER', profileTitle: 'Working between theory and systems.', profileText: 'Ghanbari’s work connects analytical modeling, receiver design and optical and satellite communication architecture.', profileLink: 'About Meysam Ghanbari', mediaLink: 'Media & talks',
-  cta: 'RESEARCH & TECHNICAL COLLABORATION', ctaTitle: 'Have a difficult communications problem?', ctaText: 'Discuss research collaboration, industrial R&D, technical consultation or a scientific presentation with Meysam Ghanbari.', ctaLink: 'Start a conversation', insightLabel: 'Insight'
-};
 ---
+<BaseLayout title={site.name} description="Meysam Ghanbari researches advanced communications for space, optical and quantum networks. Explore publications, technical systems and collaboration." path="/" image={site.heroImage} imageAlt="Portrait of Meysam Ghanbari">
+  <section class="brand-hero">
+    <div class="shell brand-hero-grid">
+      <div class="brand-hero-copy">
+        <p class="brand-kicker">SPACE · OPTICAL · QUANTUM</p>
+        <p class="brand-identity">Meysam Ghanbari</p>
+        <h1>Advanced Communications for Space, Optical and Quantum Networks</h1>
+        <p class="brand-lede">Meysam Ghanbari studies the architectures, physical limits and engineering choices that connect future space, optical and quantum networks.</p>
+        <div class="brand-actions"><a class="button" href="/contact/">Discuss a collaboration <span aria-hidden="true">↗</span></a><a class="button ghost" href="/research/">Explore technology</a></div>
+        <p class="brand-hero-note">Research · Industry R&D · Technical speaking</p>
+      </div>
+      <figure class="brand-portrait">
+        <img src={site.heroImage} alt="Portrait of Meysam Ghanbari" width="1024" height="1536" loading="eager" fetchpriority="high" />
+        <figcaption><span>MEYSAM GHANBARI</span><strong>Communications researcher</strong></figcaption>
+      </figure>
+    </div>
+  </section>
 
-<BaseLayout title={site.name} description={fa ? 'میثم قنبری در زمینهٔ مخابرات نوری و ماهواره‌ای، لینک‌های بین‌ماهواره‌ای، گیرنده‌های پیشرفته و شبکه‌های آینده پژوهش می‌کند.' : 'Meysam Ghanbari researches optical and satellite communications, inter-satellite links, advanced receivers and future networks.'} lang={lang} path={fa ? '/fa/' : '/'} image="/images/profile/meysam-ghanbari-formal-portrait.webp" imageAlt={fa ? 'پرترهٔ میثم قنبری، پژوهشگر مخابرات نوری و ماهواره‌ای' : 'Portrait of Meysam Ghanbari, optical and satellite communications researcher'}>
-  <section class="hq-hero"><div class="hq-hero-backdrop" aria-hidden="true"></div><div class="shell hq-hero-grid">
-    <div class="hq-intro"><p class="eyebrow">{c.eyebrow}</p><h1>{fa ? site.alternateName : site.name}</h1><p class="hq-role">{c.role}</p></div>
-    <figure class="hq-portrait"><img src="/images/profile/meysam-ghanbari-formal-portrait.webp" alt={fa ? 'پرترهٔ رسمی میثم قنبری' : 'Formal portrait of Meysam Ghanbari'} width="1024" height="1536" loading="eager" fetchpriority="high" /><figcaption><span>MEYSAM GHANBARI</span><span>OPTICS · SPACE · SYSTEMS</span></figcaption></figure>
-    <div class="hq-hero-body"><p>{c.pitch}</p><div class="hq-actions"><a class="button" href={`${prefix}/research/`}>{c.research} <span aria-hidden="true">{arrow}</span></a><a class="hq-underlink" href={`${prefix}/contact/`}>{c.contact} <span aria-hidden="true">{arrow}</span></a></div></div>
-  </div><div class="shell hq-hero-bottom"><span>01 / {fa ? 'پژوهش' : 'RESEARCH'}</span><span>OISL&nbsp; / &nbsp;FSO&nbsp; / &nbsp;NTN</span></div></section>
+  <section class="brand-spotlight" aria-labelledby="spotlight-title">
+    <div class="shell"><div class="brand-section-label"><h2 id="spotlight-title">In focus</h2><span>Research, events & technical perspectives</span></div>
+      <div class="brand-spotlight-grid">{spotlight.map(item => <a class="brand-spotlight-card" href={item.href} data-spotlight-id={item.id} data-expires={item.expires}><span class="brand-kicker">{item.kind}</span><h3>{item.title}</h3><p>{item.detail}</p><strong>{item.action} <span aria-hidden="true">→</span></strong></a>)}</div>
+    </div>
+  </section>
 
-  <section class="hq-section hq-domains" id="research-domains"><div class="shell"><div class="hq-heading"><div><p class="eyebrow">02 / {c.domains}</p><h2>{c.domainsTitle}</h2></div><p>{c.domainsText}</p></div><div class="hq-domain-list">{c.focus.map((title, i) => <a href={`${prefix}/research/`}><span>0{i + 1}</span><div><h3>{title}</h3><p>{c.focusDetail[i]}</p></div><b aria-hidden="true">{arrow}</b></a>)}</div><a class="hq-section-link" href={`${prefix}/research/`}>{c.allDomains} <span aria-hidden="true">{arrow}</span></a></div></section>
+  <section class="brand-section"><div class="shell">
+    <div class="brand-section-heading"><div><p class="brand-kicker">THE TECHNOLOGY</p><h2>From a physical link<br />to a connected system.</h2></div><p>The portfolio connects communication theory with network architecture, optical hardware constraints and emerging quantum infrastructure.</p></div>
+    <div class="brand-domain-grid">
+      <a href="/research/"><span class="brand-number">01 / SPACE</span><h3>Space & NTN networks</h3><p>Satellite crosslinks, aerial platforms and communication architectures across non-terrestrial networks.</p><strong>Explore research →</strong></a>
+      <a href="/projects/"><span class="brand-number">02 / OPTICAL</span><h3>Optical communication systems</h3><p>Free-space optical links, regenerative relays, receiver architecture and the alignment limits of narrow beams.</p><strong>Explore projects →</strong></a>
+      <a href={`/publications/${quantumPaper.slug}/`}><span class="brand-number">03 / QUANTUM</span><h3>Quantum networks & timing</h3><p>Quantum hubs, synchronization, satellite QKD and the communication layers of quantum infrastructure.</p><strong>Explore a publication →</strong></a>
+    </div>
+  </div></section>
 
-  <section class="hq-section hq-work"><div class="shell hq-work-grid"><figure><img src="/images/records/optical-precision-tracking-photorealistic.webp" alt={fa ? 'نمای مفهومی واقع‌گرایانهٔ ترمینال مخابرات نوری و رهگیری پرتو' : 'Conceptual photorealistic view of an optical communication terminal tracking a beam'} width="1672" height="941" loading="lazy" /><figcaption>OPTICAL LINK SYSTEMS / VISUAL INTERPRETATION</figcaption></figure><div class="hq-work-copy"><p class="eyebrow">03 / {c.work}</p><h2>{c.workTitle}</h2><p>{c.workText}</p><div class="hq-project-links">{featuredProjects.map((project, i) => <a href={project.href}><span>0{i + 1}</span><strong>{project.title}</strong><b aria-hidden="true">{arrow}</b></a>)}</div><a class="hq-section-link" href={`${prefix}/projects/`}>{c.workLink} <span aria-hidden="true">{arrow}</span></a></div></div></section>
+  <section class="brand-section brand-section-tinted"><div class="shell">
+    <div class="brand-section-heading"><div><p class="brand-kicker">PUBLICATIONS</p><h2>Research, on the record.</h2></div><a class="brand-text-link" href="/publications/">View all {publications.length} publications →</a></div>
+    <div class="brand-publication-list">{selectedPapers.map(paper => <a href={`/publications/${paper.slug}/`}><div class="brand-paper-meta"><span>{paper.type} · {paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span></div><h3>{paper.title}</h3><p>{paper.venue}</p><span class="brand-paper-arrow" aria-hidden="true">↗</span></a>)}</div>
+  </div></section>
 
-  <section class="hq-section hq-activity"><div class="shell"><div class="hq-heading"><div><p class="eyebrow">04 / {c.activity}</p><h2>{c.activityTitle}</h2></div><a class="hq-section-link" href={`${prefix}/upcoming/`}>{c.activityLink} <span aria-hidden="true">{arrow}</span></a></div><div class="hq-activity-grid">{activity.map((item) => <a href={item.href}><div><span>{item.year}</span><span>{item.status}</span></div><h3>{item.title}</h3><p>{item.detail}</p><b aria-hidden="true">{arrow}</b></a>)}</div></div></section>
+  <section class="brand-section"><div class="shell">
+    <div class="brand-section-heading"><div><p class="brand-kicker">FUTURE SYSTEMS</p><h2>Engineering the next connection.</h2></div><p>Reading paths through existing technical research and source-backed records, from space optical networks to quantum timing.</p></div>
+    <div class="brand-path-grid">{engineeringPaths.slice(0,2).map(item => <a href={item.href}><figure><img src={item.image} alt={item.imageAlt} width="1672" height="941" loading="lazy" /><figcaption>Concept illustration</figcaption></figure><div><span class="brand-kicker">{item.category}</span><h3>{item.title}</h3><p>{item.description}</p><strong>{item.label} →</strong></div></a>)}</div>
+    <a class="brand-text-link brand-more" href="/insights/">Explore Future Systems →</a>
+  </div></section>
 
-  <section class="hq-section hq-papers"><div class="shell"><div class="hq-heading"><div><p class="eyebrow">05 / {c.papers}</p><h2>{c.papersTitle}</h2></div><a class="hq-section-link" href={`${prefix}/publications/`}>{c.papersLink} <span aria-hidden="true">{arrow}</span></a></div><div class="hq-paper-list">{featuredPapers.map((paper, i) => <a href={`${prefix}/publications/${paper.slug}/`}><span>0{i + 1}</span><div><small>{paper.year} / {paper.status} / {paper.venue}</small><h3>{paper.title}</h3><p>{fa ? paper.summaryFa : paper.summaryEn}</p></div><b aria-hidden="true">{arrow}</b></a>)}</div></div></section>
-
-  <section class="hq-section hq-future"><div class="shell hq-future-grid"><div class="hq-future-copy"><p class="eyebrow">06 / {c.future}</p><h2>{c.futureTitle}</h2><p>{c.futureText}</p><a class="button ghost" href={`${prefix}/insights/`}>{c.futureLink} <span aria-hidden="true">{arrow}</span></a></div><div class="hq-insight-list">{selectedInsights.map((item, i) => <a href={`${prefix}/insights/${item.slug}/`}><img src={item.conceptImage} alt={item.conceptAlt} width="1672" height="941" loading="lazy" /><div><small>{c.insightLabel} / 0{i + 1}</small><h3>{item.cardTitle}</h3><span>{arrow}</span></div></a>)}</div></div></section>
-
-  <section class="hq-section hq-profile"><div class="shell hq-profile-grid"><div><p class="eyebrow">07 / {c.profile}</p><h2>{c.profileTitle}</h2><p>{c.profileText}</p><div class="hq-profile-links"><a href={`${prefix}/about/`}>{c.profileLink} {arrow}</a><a href={`${prefix}/media/`}>{c.mediaLink} {arrow}</a></div></div><img src="/images/media/meysam-ghanbari-research-presentation.webp" alt={fa ? 'میثم قنبری در محیط ارائهٔ پژوهشی' : 'Meysam Ghanbari in a research presentation setting'} width="1672" height="941" loading="lazy" /></div></section>
-
-  <section class="hq-section hq-contact"><div class="shell hq-contact-grid"><div><p class="eyebrow">08 / {c.cta}</p><h2>{c.ctaTitle}</h2><p>{c.ctaText}</p></div><a class="button" href={`${prefix}/contact/`}>{c.ctaLink} <span aria-hidden="true">{arrow}</span></a></div></section>
+  <section class="brand-collaboration"><div class="shell"><div><p class="brand-kicker">CONNECT THE IDEAS</p><h2>A research question.<br />An engineering challenge.<br />A useful conversation.</h2><p>For research collaboration, industrial R&D and technical speaking enquiries, contact Meysam Ghanbari.</p></div><a class="button" href="/contact/">Start a conversation ↗</a></div></section>
+  <script>
+    // Prevent a past event from remaining in the homepage spotlight between deployments.
+    const today = new Date().toISOString().slice(0, 10);
+    document.querySelectorAll<HTMLElement>('[data-expires]').forEach(card => {
+      if (card.dataset.expires && card.dataset.expires < today) card.remove();
+    });
+  </script>
 </BaseLayout>
+<style>
+.brand-hero { padding:58px 0 54px; position:relative; overflow:hidden; background:radial-gradient(ellipse at 75% 20%,#13314a88,transparent 62%),#050b13; border-bottom:1px solid var(--line); }
+.brand-hero-grid { display:grid; grid-template-columns:minmax(0,1fr) 326px; align-items:center; gap:76px; }
+.brand-kicker { margin:0; color:#83dff5; font-size:11px; font-weight:750; letter-spacing:.15em; text-transform:uppercase; }
+.brand-identity { font-size:23px; margin:19px 0 12px; font-weight:600; color:#d6e0ec; }
+.brand-hero h1 { max-width:730px; margin:0; font-size:clamp(35px,4.05vw,57px); line-height:1.08; letter-spacing:-.045em; text-wrap:balance; }
+.brand-lede { max-width:610px; color:#b8c6d8; font-size:17px; line-height:1.65; margin:23px 0 25px; }
+.brand-actions { display:flex; flex-wrap:wrap; gap:12px; }
+.brand-hero-note { color:#a0b1c6; font-size:12px; margin:19px 0 0; }
+.brand-portrait { margin:0; position:relative; border:1px solid #4b607655; border-radius:5px; overflow:hidden; background:#152232; }
+.brand-portrait img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center 24%; display:block; }
+.brand-portrait figcaption { position:absolute; bottom:0; left:0; right:0; padding:52px 22px 20px; background:linear-gradient(transparent,#040b14ed); }
+.brand-portrait span { color:#ccdfef; display:block; font-size:10px; letter-spacing:.15em; margin-bottom:5px; }
+.brand-portrait strong { font-size:15px; font-weight:500; }
+.brand-spotlight { padding:26px 0 38px; background:#081320; border-bottom:1px solid var(--line); }
+.brand-section-label { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:18px; }
+.brand-section-label h2 { font-size:17px; margin:0; letter-spacing:-.01em; }
+.brand-section-label > span { font-size:12px; color:#aabbd0; }
+.brand-spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:13px; }
+.brand-spotlight-card { padding:23px; border:1px solid #324256; border-radius:4px; display:flex; flex-direction:column; min-width:0; background:#0a1727; }
+.brand-spotlight-card:hover { border-color:#6fbdcf; background:#0c1e31; }
+.brand-spotlight-card h3 { font-size:21px; line-height:1.2; margin:12px 0 10px; letter-spacing:-.025em; }
+.brand-spotlight-card p { color:#b1c1d3; font-size:13px; line-height:1.55; margin:0 0 20px; }
+.brand-spotlight-card strong { color:#9be3f5; margin-top:auto; font-size:12px; font-weight:600; }
+.brand-section { padding:80px 0; }
+.brand-section-tinted { background:#08111e; border-block:1px solid var(--line); }
+.brand-section-heading { display:flex; justify-content:space-between; align-items:end; gap:50px; margin-bottom:32px; }
+.brand-section-heading h2 { margin:12px 0 0; font-size:clamp(29px,3.4vw,44px); line-height:1.12; letter-spacing:-.035em; }
+.brand-section-heading > p { max-width:430px; color:#b5c3d5; margin:0; line-height:1.65; font-size:15px; }
+.brand-domain-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+.brand-domain-grid > a { padding:28px 0 20px; border-top:1px solid #435267; }
+.brand-number { font-size:11px; color:#85cfe3; letter-spacing:.1em; }
+.brand-domain-grid h3 { font-size:24px; line-height:1.2; margin:19px 0 13px; letter-spacing:-.03em; }
+.brand-domain-grid p { color:#b5c3d5; line-height:1.65; font-size:14px; }
+.brand-domain-grid strong, .brand-path-grid strong, .brand-text-link { display:inline-flex; align-items:center; min-height:44px; color:#9be3f5; font-size:13px; font-weight:650; }
+.brand-publication-list { border-top:1px solid #435267; }
+.brand-publication-list > a { display:block; position:relative; padding:26px 50px 26px 0; border-bottom:1px solid #2c3e53; }
+.brand-publication-list > a:hover h3 { color:#a1e9f8; }
+.brand-paper-meta { display:flex; align-items:center; flex-wrap:wrap; gap:13px; font-size:11px; color:#b3c3d7; }
+.brand-publication-list h3 { max-width:1000px; font-size:22px; line-height:1.35; letter-spacing:-.015em; margin:12px 0 8px; }
+.brand-publication-list p { color:#acbfd5; font-size:13px; margin:0; }
+.brand-paper-arrow { position:absolute; right:8px; top:50%; color:#91ddeb; font-size:25px; }
+.brand-path-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.brand-path-grid > a { border:1px solid #324256; border-radius:4px; overflow:hidden; background:#0a1523; }
+.brand-path-grid figure { margin:0; position:relative; }
+.brand-path-grid img { display:block; width:100%; aspect-ratio:2.1; object-fit:cover; }
+.brand-path-grid figcaption { position:absolute; bottom:8px; right:10px; background:#02070bd9; color:#cbd6e4; padding:4px 7px; font-size:10px; }
+.brand-path-grid > a > div { padding:25px; }
+.brand-path-grid h3 { font-size:26px; letter-spacing:-.025em; margin:12px 0; }
+.brand-path-grid p { color:#b5c3d5; font-size:14px; line-height:1.65; }
+.brand-more { margin-top:22px; }
+.brand-collaboration { padding:72px 0; border-top:1px solid var(--line); background:linear-gradient(110deg,#102d42,#081521); }
+.brand-collaboration .shell { display:flex; justify-content:space-between; align-items:center; gap:45px; }
+.brand-collaboration h2 { font-size:clamp(29px,3.3vw,44px); letter-spacing:-.035em; line-height:1.16; margin:16px 0; }
+.brand-collaboration p:not(.brand-kicker) { color:#bbcadc; max-width:570px; font-size:15px; line-height:1.6; }
+.brand-collaboration .button { flex:none; }
+@media(max-width:1000px) { .brand-hero-grid { grid-template-columns:minmax(0,1fr) 275px; gap:36px; } .brand-hero h1 { font-size:44px; } }
+@media(max-width:760px) { .brand-hero { padding:35px 0; } .brand-hero-grid { grid-template-columns:minmax(0,1fr) 190px; gap:24px; } .brand-hero h1 { font-size:34px; } .brand-identity { font-size:19px; } .brand-lede { font-size:15px; } .brand-portrait figcaption { padding:30px 14px 14px; } .brand-portrait strong { font-size:12px; } .brand-domain-grid { grid-template-columns:1fr; gap:0; } .brand-section-heading { flex-direction:column; align-items:start; gap:20px; } .brand-section { padding:52px 0; } .brand-collaboration .shell { flex-direction:column; align-items:start; gap:20px; } }
+@media(max-width:560px) { .brand-hero-grid { grid-template-columns:1fr; gap:28px; } .brand-hero h1 { font-size:36px; } .brand-portrait { width:min(100%,300px); justify-self:center; } .brand-portrait img { aspect-ratio:4/4.5; } .brand-section-label { align-items:start; flex-direction:column; gap:7px; } .brand-path-grid { grid-template-columns:1fr; } .brand-spotlight-grid { grid-template-columns:1fr; } .brand-publication-list h3 { font-size:19px; } }
+@media(max-width:360px) { .brand-hero h1 { font-size:32px; } .brand-actions { flex-direction:column; } }
+</style>
