@@ -11,7 +11,7 @@ const topics = [...new Set(publications.flatMap(paper => paper.tags))].sort();
     <button type="button" data-library-clear>Clear filters</button>
   </div>
   <p class="library-count" role="status" aria-live="polite" aria-atomic="true" data-library-count>{publications.length} publications · {publications.filter(p => p.type === 'Journal').length} journal papers · {publications.filter(p => p.type === 'Conference').length} conference papers</p>
-  <div class="library-records">{publications.map((paper,index) => <article class="library-record" data-library-record data-type={paper.type} data-status={paper.status} data-topics={JSON.stringify(paper.tags)} data-search={`${paper.title} ${paper.authors} ${paper.venue} ${paper.tags.join(' ')}`.toLowerCase()}>
+  <div class="library-records">{publications.map((paper,index) => <article class="library-record" data-library-record data-type={paper.type} data-status={paper.status} data-topics={JSON.stringify(paper.tags)} data-search={`${paper.title} ${paper.authors} ${paper.authorNames?.join(' ') ?? ''} ${paper.venue} ${paper.tags.join(' ')}`.toLowerCase()}>
     <span class="library-record-number">{String(index+1).padStart(2,'0')}</span>
     <div><div class="library-record-meta"><span>{paper.type} · {paper.year}</span><span class={`status-pill status-${paper.status.toLowerCase()}`}>{paper.status}</span></div><h2><a href={`/publications/${paper.slug}/`}>{paper.title}</a></h2><p>{paper.authorNames?.join(', ') ?? paper.authors}</p><p>{paper.venue}</p><ul>{paper.tags.slice(0,4).map(tag => <li>{tag}</li>)}</ul></div>
     <a class="library-record-link" href={`/publications/${paper.slug}/`} aria-label={`Read ${paper.title}`}><span aria-hidden="true">↗</span></a>
