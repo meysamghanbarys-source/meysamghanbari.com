@@ -1,4 +1,13 @@
 /* Brand OS navigation. Components use separate classes to avoid legacy layout overrides. */
+.page-hero-publications .page-hero-shell { grid-template-columns:minmax(0, 1fr) minmax(360px, 520px); }
+.page-hero-publications .publication-hero-portrait { margin:0; width:100%; max-width:520px; }
+.page-hero-publications .publication-hero-portrait img { height:auto; aspect-ratio:16 / 9; object-fit:contain; object-position:center; }
+.publication-portrait-caption { display:grid; gap:6px; padding:14px 16px; }
+.publication-portrait-caption p { margin:0; color:#adbed0; font-size:11px; line-height:1.5; }
+@media (max-width:1150px) {
+  .page-hero-publications .page-hero-shell { grid-template-columns:1fr; }
+}
+
 :where(a, button, summary, input, textarea, select):focus-visible { outline: 2px solid #7fe4ff; outline-offset: 5px; }
 .site-header .brand-header { display:grid; grid-template-columns:auto minmax(0, 1fr) auto; align-items:center; gap:24px; min-height:76px; }
 .brand-desktop-nav { justify-self:center; display:flex; align-items:center; gap:18px; white-space:nowrap; font-size:13px; color:#bbc8d9; }

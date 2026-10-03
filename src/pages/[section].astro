@@ -4,6 +4,7 @@ import PublicationLibrary from '../components/PublicationLibrary.astro';
 import { sectionIds, site } from '../data/site';
 import { projects, publications, videos, insights, upcoming, media } from '../data/library';
 import { researchDomainLinks } from '../data/research-domains';
+import { serializeJsonLd } from '../data/json-ld';
 
 export function getStaticPaths() {
   return sectionIds.filter((section) => section !== 'insights').map((section) => ({ params: { section }, props: { section } }));
@@ -53,10 +54,44 @@ const eventSchema = upcomingEvent ? {
   }
 } : null;
 
+const publicationPortrait = {
+  image: '/images/media/meysam-ghanbari-space-communications-publications.webp',
+  alt: 'AI-generated editorial portrait of Meysam Ghanbari with a conceptual Earth, satellite and research-document backdrop',
+  label: 'Space, optical & quantum research',
+  caption: 'AI-generated editorial portrait',
+  width: 1200,
+  height: 675
+};
+const publicationImageSchema = {
+  '@type': 'ImageObject', '@id': `${site.domain}/publications/#editorial-portrait`,
+  contentUrl: `${site.domain}${publicationPortrait.image}`,
+  url: `${site.domain}${publicationPortrait.image}`,
+  name: 'Meysam Ghanbari — communications research editorial portrait',
+  description: publicationPortrait.alt, caption: publicationPortrait.caption,
+  encodingFormat: 'image/webp', width: publicationPortrait.width, height: publicationPortrait.height,
+  about: { '@id': `${site.domain}/#person` }
+};
+const publicationCollectionSchema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage',
+  '@id': `${site.domain}/publications/#collection`, url: `${site.domain}/publications/`,
+  name: 'Meysam Ghanbari — Satellite, Optical and Quantum Communications Publications',
+  description: site.sections.en.publications.intro, inLanguage: 'en',
+  isPartOf: { '@id': `${site.domain}/#website` }, about: { '@id': `${site.domain}/#person` },
+  primaryImageOfPage: publicationImageSchema,
+  mainEntity: {
+    '@type': 'ItemList', name: 'Journal and conference publications',
+    numberOfItems: publications.length,
+    itemListElement: publications.map((paper, index) => ({
+      '@type': 'ListItem', position: index + 1,
+      name: paper.title, url: `${site.domain}/publications/${paper.slug}/`
+    }))
+  }
+};
+
 const sectionVisuals = {
   research: { image: '/images/records/deep-space-optical-communications-photorealistic.webp', label: 'Optical links across space', width: 1672, height: 941 },
   projects: { image: '/images/records/optical-precision-tracking-photorealistic.webp', label: 'Optical terminal engineering', width: 1672, height: 941 },
-  publications: { image: '/images/media/meysam-ghanbari-research-workspace.webp', label: 'Research and publication library', width: 1672, height: 941 },
+  publications: publicationPortrait,
   videos: { image: '/images/media/meysam-ghanbari-research-presentation.webp', label: 'Presentations and talks', width: 1672, height: 941 },
   insights: { image: '/images/profile/meysam-ghanbari-satellite-optical-communications.webp', label: 'Technical perspectives', width: 1122, height: 1402 },
   upcoming: { image: upcomingEvent?.image ?? '/images/media/meysam-ghanbari-research-presentation.webp', label: 'IEEE VTC 2027-Spring · Hamburg', width: 1280, height: 720 },
@@ -73,10 +108,19 @@ const visual = sectionVisuals[section];
   description={section === 'upcoming' && upcomingEvent ? `Meysam Ghanbari is scheduled to present inter-HAPS optical receiver research at IEEE VTC 2027-Spring in Hamburg, Germany.` : data.intro}
   lang="en"
   path={path}
-  image={section === 'upcoming' && upcomingEvent ? upcomingEvent.image : undefined}
-  imageAlt={section === 'upcoming' && upcomingEvent ? upcomingEvent.imageAlt : undefined}
+  seoTitle={section === 'publications' ? 'Satellite, Optical & Quantum Communications Publications | Meysam Ghanbari' : undefined}
+  image={section === 'publications' ? publicationPortrait.image : section === 'upcoming' && upcomingEvent ? upcomingEvent.image : undefined}
+  imageAlt={section === 'publications' ? publicationPortrait.alt : section === 'upcoming' && upcomingEvent ? upcomingEvent.imageAlt : undefined}
 >
-  {section === 'upcoming' && eventSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(eventSchema)}></script>}
+  <Fragment slot="head">
+    {section === 'upcoming' && eventSchema && <script type="application/ld+json" set:html={JSON.stringify(eventSchema)}></script>}
+    {section === 'publications' && <>
+      <script type="application/ld+json" set:html={serializeJsonLd(publicationCollectionSchema)}></script>
+      <meta property="og:image:width" content={String(publicationPortrait.width)} />
+      <meta property="og:image:height" content={String(publicationPortrait.height)} />
+      <meta name="twitter:image:alt" content={publicationPortrait.alt} />
+    </>}
+  </Fragment>
   
 <section class={`page-hero page-hero-space page-hero-${section}`}>
   <div class="space-grid-bg" aria-hidden="true"></div>
@@ -88,13 +132,23 @@ const visual = sectionVisuals[section];
       <h1>{data.title}</h1>
       <p class="page-intro">{data.intro}</p>
     </div>
-    <div class="page-hero-sidecard">
+    {section === 'publications' ? <figure class="page-hero-sidecard publication-hero-portrait">
+      <img src={publicationPortrait.image}
+        srcset="/images/media/meysam-ghanbari-space-communications-publications-640.webp 640w, /images/media/meysam-ghanbari-space-communications-publications-960.webp 960w, /images/media/meysam-ghanbari-space-communications-publications.webp 1200w"
+        sizes="(max-width: 600px) calc(100vw - 40px), 520px"
+        alt={publicationPortrait.alt} width={publicationPortrait.width} height={publicationPortrait.height}
+        loading="eager" fetchpriority="high" aria-describedby="publication-portrait-caption" />
+      <figcaption class="publication-portrait-caption" id="publication-portrait-caption">
+        <span>{publicationPortrait.label}</span>
+        <p>{publicationPortrait.caption}</p>
+      </figcaption>
+    </figure> : <div class="page-hero-sidecard">
       <img src={visual.image} alt={visual.label} width={visual.width} height={visual.height} loading="eager" />
       <div>
         <span>{visual.label}</span>
         <small>{site.name}</small>
       </div>
-    </div>
+    </div>}
   </div>
 </section>
 

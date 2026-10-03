@@ -49,7 +49,7 @@ const sitemapPath = new URL('sitemap-0.xml', output);
 let sitemapXml = await readFile(sitemapPath,'utf8');
 sitemapXml = sitemapXml.replace(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g, (entry,url,tail) => {
   const slug = url.match(/\/publications\/([^/]+)\/?$/)?.[1];
-  const date = revisions.get(slug);
+  const date = url === `${domain}/publications/` ? '2026-10-03' : revisions.get(slug);
   return date ? `<url><loc>${url}</loc>${tail.replace(/<lastmod>[^<]*<\/lastmod>/g,'')}<lastmod>${date}</lastmod></url>` : entry;
 });
 await writeFile(sitemapPath,sitemapXml);

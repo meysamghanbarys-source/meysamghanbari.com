@@ -136,7 +136,7 @@ export const site = {
       publications: {
         title: 'Publications',
         kicker: 'JOURNAL & CONFERENCE RESEARCH',
-        intro: 'A complete research library covering published, accepted and submitted journal and conference work.',
+        intro: 'Explore Meysam Ghanbari’s publications in satellite, optical and quantum communications, with original abstracts, technical insights and citations.',
       },
       videos: {
         title: 'Talks & Video',
