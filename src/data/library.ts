@@ -158,6 +158,7 @@ export type Publication = {
   relatedProjectSlugs?: string[];
   doi?: string;
   externalUrl?: string;
+  externalLabel?: string;
   pdf?: string;
   video?: string;
 };

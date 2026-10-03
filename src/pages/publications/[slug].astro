@@ -43,7 +43,7 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
     <p class="publication-venue">{paper.venue}</p>
     {conference && <p class="publication-location">Conference location · {conference.city}, {conference.country}</p>}
     {(doiUrl || paper.pdf || paper.externalUrl || paper.video) && <div class="publication-actions">
-      {paper.externalUrl && <a class="button" href={paper.externalUrl} target="_blank" rel="noreferrer">Publisher record ↗</a>}
+      {paper.externalUrl && <a class="button" href={paper.externalUrl} target="_blank" rel="noreferrer">{paper.externalLabel ?? 'Publisher record ↗'}</a>}
       {doiUrl && <a class="button ghost" href={doiUrl} target="_blank" rel="noreferrer">DOI ↗</a>}
       {paper.pdf && <a class="button ghost" href={paper.pdf} target="_blank" rel="noreferrer">Read PDF ↗</a>}
       {paper.video && <a class="button ghost" href={paper.video} target="_blank" rel="noreferrer">Watch presentation ↗</a>}

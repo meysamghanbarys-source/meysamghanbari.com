@@ -964,6 +964,220 @@
           }
         ]
       }
+    },
+    "city-scale-quantum-timing-wireless-synchronization-quantum-hubs": {
+      "authorNames": [
+        "Mohammad Taghi Dabiri",
+        "Meysam Ghanbari",
+        "Mazen Hasna",
+        "Rula Ammuri",
+        "Saif Al-Kuwari",
+        "Khalid A. Qaraqe"
+      ],
+      "citationNames": [
+        "Dabiri, Mohammad Taghi",
+        "Ghanbari, Meysam",
+        "Hasna, Mazen",
+        "Ammuri, Rula",
+        "Al-Kuwari, Saif",
+        "Qaraqe, Khalid A."
+      ],
+      "doi": "10.1109/JSAC.2026.3711027",
+      "journalTitle": "IEEE Journal on Selected Areas in Communications",
+      "venue": "IEEE Journal on Selected Areas in Communications, vol. 44, pp. 5388-5403",
+      "volume": "44",
+      "pages": "5388-5403",
+      "publicationDate": "2026-07-07",
+      "abstract": "This paper presents a novel wireless quantum synchronization framework tailored for city-scale deployment using entangled photon pairs and passive corner cube retroreflector (CCR) arrays. A centralized quantum hub, equipped with either a bulk or integrated nonlinear entangled-photon source, emits photon pairs and directs one photon toward a target device while routing its twin to a local reference unit. The target, equipped with a planar CCR array, reflects the incoming photon without active circuitry, enabling secure round-trip quantum measurements for sub-nanosecond synchronization and localization. We develop a comprehensive analytical model that captures key physical-layer phenomena, including Gaussian beam spread, spatial misalignment, atmospheric turbulence, and probabilistic photon generation. A closed-form expression is derived for the single-photon detection probability under Gamma-Gamma fading, and its distribution is used to model photon arrival events and synchronization error. Moreover, we analyze the impact of background photons, SPAD detector jitter, and quantum generation randomness on synchronization accuracy and outage probability. Simulation results confirm the accuracy of the analytical models and reveal key trade-offs among beam waist, CCR array size, and background light. The proposed architecture offers a low-power, infrastructure-free solution for secure timing in next-generation smart cities.",
+      "abstractLabel": "Abstract · published article",
+      "summaryEn": "The paper proposes a central entangled-photon hub that records a local reference photon and the return of its partner from a passive corner-cube array. It derives photon-detection, timing-error and outage models, then validates them against Monte Carlo simulations. Precision depends on collected signal photons, hub-side tracking, background light and detector jitter; the evaluated 500 m line-of-sight link is a physical-layer benchmark rather than a deployed city network.",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The original abstract, author list and technical explanation follow the supplied published article. Its first page states publication on 7 July 2026 and the current-version date of 20 July 2026. The DOI, volume and pages are verified against the publisher metadata; no issue number is supplied.",
+      "image": {
+        "src": "/images/publications/city-scale-quantum-timing.webp",
+        "thumbnail": "/images/publications/city-scale-quantum-timing-thumb.webp",
+        "alt": "Concept illustration of an urban quantum hub exchanging optical signals with passive corner-cube arrays on buildings, a vehicle and a UAV.",
+        "width": 1440,
+        "height": 808,
+        "caption": "Concept illustration supplied for this publication. The visible beams and multiple urban targets visualize the proposed hub-and-CCR architecture. They are not visible single-photon trajectories or evidence of simultaneous city-scale operation; the paper validates a modeled 500 m line-of-sight link through analytical and Monte Carlo comparisons."
+      },
+      "editorial": {
+        "question": "How can a quantum hub obtain precise round-trip timing from a remote target that carries no powered optical receiver?",
+        "answer": "The paper proposes a central entangled-photon hub that records a local reference photon and the return of its partner from a passive corner-cube array. It derives photon-detection, timing-error and outage models, then validates them against Monte Carlo simulations. Precision depends on collected signal photons, hub-side tracking, background light and detector jitter; the evaluated 500 m line-of-sight link is a physical-layer benchmark rather than a deployed city network.",
+        "sections": [
+          {
+            "heading": "Central quantum hub and passive target",
+            "paragraphs": [
+              "An entangled-photon source at the hub sends one member of each pair toward the target while routing its partner to a local reference detector. A planar corner-cube retroreflector array returns intercepted light toward the hub. Single-photon avalanche detectors record polarization bits and arrival times for the reference and returned photons.",
+              "Photon generation, detection, optical steering and processing remain at the hub. The target requires passive reflectors rather than a local photon source, detector or alignment actuator. The source is modeled through effective time-bin rate and pair-generation probability, accommodating bulk SPDC, integrated SPDC or integrated SFWM implementations. “Infrastructure-free” in the original abstract describes the proposed endpoint flexibility; hub optics and a clear optical path are still required."
+            ],
+            "source": "Sections I–II; Figs. 1–2; Eqs. (9)–(16)"
+          },
+          {
+            "heading": "Acquisition, tracking and the moving-target condition",
+            "paragraphs": [
+              "Initial acquisition scans a rectangular grid around a coarse position estimate. After detecting the array, the hub enters closed-loop tracking using returned-photon statistics or an auxiliary beacon. Coarse acquisition, residual steering error and motion during the update interval contribute to the aggregate receiver-plane spatial uncertainty.",
+              "The motion bound is transverse velocity multiplied by the update interval plus half the transverse acceleration multiplied by its square. This displacement must remain small relative to the beam waist and effective CCR capture region. Retroreflection simplifies the return direction after interception, but it does not make an outgoing beam hit a missed target or remove the need for hub-side tracking and re-acquisition."
+            ],
+            "source": "Section II-B; Section IV; Eqs. (1)–(8)"
+          },
+          {
+            "heading": "Photon-level channel and statistical approximations",
+            "paragraphs": [
+              "The channel combines Gaussian beam overlap with individual CCR apertures, diffraction-limited return capture, round-trip atmospheric attenuation, optical coupling loss, Gamma–Gamma turbulence and SPAD detection efficiency. The reception probability is a spatially weighted sum over CCR paths. The model then connects this random probability to Poisson photon counts.",
+              "The conditional reception distribution uses a central-limit Gaussian approximation to the weighted sum of independent fading terms. Its applicability depends on sufficiently many independent, non-dominant CCR contributions; Appendix B relates independence to element separation and turbulence coherence length. Spatial-offset marginalization remains numerical, and a one-axis radial approximation reduces computation. These approximations require checking for the intended array geometry and turbulence conditions."
+            ],
+            "source": "Section III; Propositions 1–2 and 4; Appendices A, B and D"
+          },
+          {
+            "heading": "What the timing estimator measures",
+            "paragraphs": [
+              "The reference and received records contain valid polarization bits and timestamps, with null entries for missing or ambiguous events. The source model retains single-pair intervals; background photons are modeled as random arrivals within each time bin. After sequence alignment, the estimator averages differences between returned and reference timestamps to estimate round-trip propagation delay.",
+              "The paper assumes successful sequence matching for its timing-error analysis. Its variance model combines independent detector jitter, background arrival-time uncertainty and random signal/background counts. An insufficient-detection threshold defines outage. This is a model of hub-side round-trip timing and related ranging; transferring a clock correction into a fully passive remote device requires an additional system mechanism."
+            ],
+            "source": "Sections II-D and IV; Propositions 3–4; Eqs. (28)–(39); Appendix C"
+          },
+          {
+            "heading": "Validation conditions and numerical findings",
+            "paragraphs": [
+              "The main numerical link is 500 m at 1550 nm, with an 8 × 8 CCR array, a 5 cm receive-aperture radius, SPAD efficiency 0.6, detector jitter of 50 ps, a 100 µs acquisition interval and a 1 GHz source-side time-bin rate. The default mean pair number is 0.5 per interval; this rate is not one successfully delivered photon pair in every bin. Monte Carlo validation uses 10,000 spatial-offset realizations and 500,000 fading samples in the stated comparisons.",
+              "Smaller beam waists increase photon density but make low-count events more likely under misalignment. Wider beams improve spatial tolerance while lowering the peak received count, so the best waist changes with spatial uncertainty. Larger CCR arrays improve timing accuracy with diminishing returns. Background contamination becomes more damaging when received signal counts fall; suppressing background further gives little benefit once signal counts dominate.",
+              "The analytical distributions, timing-error trends and outage estimates closely match the reported simulations. The article discusses high reliability and picosecond error under selected 500 m conditions. These are model-dependent numerical results, not measured timing performance for arbitrary urban traffic, weather or link range."
+            ],
+            "source": "Section V; Table III; Figs. 4–8"
+          },
+          {
+            "heading": "Deployment trade-offs and limits of the evidence",
+            "paragraphs": [
+              "Spectral filtering, narrow spatial acceptance and time gating can suppress background photons, but their implementation must be balanced against pointing and angle-of-arrival tolerance. Multi-pair events are mitigated statistically through operation and post-processing; they cannot be identified perfectly when detection efficiency is below unity. Source preparation losses, CCR contamination and optical thermal drift also require engineering attention.",
+              "Complete obstruction is blockage rather than ordinary turbulence fading. Distributed hubs, relays and handover are proposed ways to extend coverage, while 1–5 km links require different aperture, photon-flux and tracking budgets. The paper does not demonstrate a built city network, multi-target handover, an end-to-end remote-clock update or an adversarial security proof. The passive target reduces endpoint power needs; the hub remains an active optical and computing installation."
+            ],
+            "source": "Section VI; Section VII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Provides the broader pointing-error and tracking context cited by this article."
+          },
+          {
+            "slug": "ai-assisted-outdoor-optical-networks-camera-sensing-localization",
+            "reason": "Studies camera-based localization in a different optical network with passive remote reflectors."
+          },
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "Examines a related hub-side estimation challenge for satellite quantum optical links."
+          }
+        ]
+      }
+    },
+    "all-optical-multi-hop-inter-satellite-relaying-m-pam": {
+      "title": "OHL-Assisted All-Optical Regenerative Relaying for Pointing-Impaired M-PAM Inter-Satellite Links",
+      "authors": "M. Ghanbari, M. T. Dabiri, Z. Ali, R. Ammuri, M. Hasna, I. Tavakkolnia, and K. Qaraqe",
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mohammad Taghi Dabiri",
+        "Zain Ali",
+        "Rula Ammuri",
+        "Mazen Hasna",
+        "Iman Tavakkolnia",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Dabiri, Mohammad Taghi",
+        "Ali, Zain",
+        "Ammuri, Rula",
+        "Hasna, Mazen",
+        "Tavakkolnia, Iman",
+        "Qaraqe, Khalid"
+      ],
+      "venue": "IEEE Transactions on Communications · submitted manuscript",
+      "abstract": "Rapid inter-satellite traffic growth in LEO constellations demands spectrally efficient, low-latency optical relaying. While amplify and forward (AF) relays are latency-efficient, they propagate noise; conversely, decode and forward (DF) relays suppress noise but incur significant complexity via O/E/O conversion. This paper proposes an all-optical regenerative relay for M-ary pulse amplitude modulation (M-PAM) multi-hop links under pointing errors. A parallel optical hard-limiter (OHL) bank performs symbol-level discrimination, regenerating signal levels directly in the optical domain. A variable gain EDFA is employed to stabilize power and define the threshold-stable region. By incorporating pointing-induced fading, various noise sources including ASE–ASE and signal–ASE beat noise and implementation-dependent decision noise, we derive closed-form per-hop symbol error rate (SER) expressions. These are extended to end-to-end performance using a Markov transition-matrix model for arbitrary modulation order and hop count. Analysis of beamwidth, pointing accuracy, and threshold scaling demonstrates reliable multi-hop operation, avoiding both AF noise accumulation and DF O/E/O processing overhead. Verified by Monte Carlo simulations and numerical integration, this framework provides a design benchmark for low-latency, pointing-aware all-optical regenerative relaying.",
+      "abstractLabel": "Abstract · supplied preprint",
+      "summaryEn": "Meysam Ghanbari and co-authors propose symbol-level regeneration with a parallel optical hard-limiter bank and gain-stabilizing EDFAs. Each relay selects a fresh M-PAM optical level without an O/E/O data-processing stage, while a Markov model tracks the decision errors that remain across hops. The work validates reliability analytically and numerically; low delay is an architectural objective, with no measured relay-latency benchmark in the supplied preprint.",
+      "externalUrl": "https://arxiv.org/abs/2608.28864",
+      "externalLabel": "Preprint record ↗",
+      "pdf": "https://arxiv.org/pdf/2608.28864v1",
+      "editorialUpdated": "2026-10-03",
+      "sourceNote": "The exact title, complete author order, abstract and technical explanation follow the supplied arXiv:2608.28864v1 preprint dated 28 August 2026. The existing Submitted status and stable website URL are retained; no journal publication date, assigned pages or publisher DOI is claimed.",
+      "image": {
+        "src": "/images/publications/all-optical-satellite-relaying.webp",
+        "thumbnail": "/images/publications/all-optical-satellite-relaying-thumb.webp",
+        "alt": "Concept illustration of a satellite relay with parallel optical processing branches forwarding a laser link across a multi-satellite chain.",
+        "width": 1440,
+        "height": 960,
+        "caption": "Concept illustration supplied for this research proposal. The optical branches and satellite chain visualize the proposed regenerative data path; the visible beams, exposed payload and promotional image headline are illustrative. The manuscript presents analytical and numerical reliability results, not a flight-tested relay or measured latency advantage."
+      },
+      "editorial": {
+        "question": "Can a multi-hop satellite link regenerate M-PAM symbols in the optical domain while avoiding the O/E/O forwarding stage of decode-and-forward relays?",
+        "answer": "Meysam Ghanbari and co-authors propose symbol-level regeneration with a parallel optical hard-limiter bank and gain-stabilizing EDFAs. Each relay selects a fresh M-PAM optical level without an O/E/O data-processing stage, while a Markov model tracks the decision errors that remain across hops. The work validates reliability analytically and numerically; low delay is an architectural objective, with no measured relay-latency benchmark in the supplied preprint.",
+        "sections": [
+          {
+            "heading": "Meysam Ghanbari’s proposed regenerative relay",
+            "paragraphs": [
+              "The first-author proposal addresses a concrete trade-off: transparent amplify-and-forward relays repeatedly amplify analog noise, while decode-and-forward relays recover symbols through optical-to-electrical-to-optical processing. The proposed forwarding path instead reshapes the signal into one of a fixed set of admissible optical power levels at each satellite.",
+              "A telescope and optical bandpass filter feed a variable-gain receive EDFA. A splitter sends the stabilized signal into M − 1 parallel optical hard-limiters; ordered thresholds produce a thermometer pattern that selects the regenerated M-PAM level. A transmit EDFA and output filter launch that level toward the next satellite. The analysis models this optical decision and regeneration function rather than demonstrating a complete fabricated payload."
+            ],
+            "source": "Sections I–II; Fig. 1; Eqs. (1)–(5), (37)–(46)"
+          },
+          {
+            "heading": "Why low-delay forwarding is the design motivation",
+            "paragraphs": [
+              "The proposed data path removes the O/E/O symbol-recovery, electrical decoding and buffering stages used by the compared DF architecture. Regeneration also stops the previous hop’s continuous analog noise waveform from being forwarded as in transparent AF. It does not remove propagation time or eliminate errors in the regenerated decisions.",
+              "The supplied preprint evaluates symbol-error probability, not a measured time budget. It gives no hardware latency, power-consumption campaign or end-to-end packet-delay experiment. “All-optical” describes the proposed forwarding path; the assumed channel estimation, frame-level gain updates, acquisition and spacecraft control still need an implementation. Their timing and overhead must be assessed in a prototype."
+            ],
+            "source": "Sections I–II-C; Section IV; Sections VII–VIII"
+          },
+          {
+            "heading": "Pointing-aware gain stabilization and its failure region",
+            "paragraphs": [
+              "Each hop is a vacuum Gaussian-beam link with finite receive aperture and Rayleigh-distributed pointing displacement. Atmospheric turbulence and weather are excluded. Residual angular jitter becomes spatial jitter in proportion to hop distance, and channel gains are assumed independent across hops and approximately constant over one frame.",
+              "With perfect block-wise channel estimation, a clipped inverse-channel receive gain aligns M-PAM means with fixed optical thresholds. Below the gain-limited boundary, the maximum EDFA gain cannot restore the target scale. The outage model collapses the output to the lowest level, producing a reliability floor that extra launch power alone cannot always remove. The upper gain boundary also matters when the minimum amplifier gain prevents target scaling."
+            ],
+            "source": "Section III-A–B; Section IV-A–C; Eqs. (6)–(14), (27)–(36)"
+          },
+          {
+            "heading": "Noise model, closed forms and multi-hop error propagation",
+            "paragraphs": [
+              "The decision statistic includes transmit-side ASE, receive ASE–ASE and signal–ASE beat noise, filtered background radiation and implementation-dependent decision noise. Independent components are combined in a conditional Gaussian approximation. Full-noise numerical integration provides a reference before a two-region closed form separates signal–ASE-dominant and constant-noise operation.",
+              "The compact closed form requires the target scaling to remain feasible throughout the non-outage region and appropriate noise-partition conditions; the paper directs the reader to the general numerical expression when the upper gain-boundary condition fails. It therefore should not be treated as an exact hardware model in every noise regime.",
+              "An M × M transition matrix describes the probability of regenerating each output symbol for each input symbol. Multiplying the hop matrices preserves structured decision-error propagation, including neighboring-level confusion and outage-induced collapse. Under equiprobable source symbols, end-to-end SER is one minus the normalized trace of the total matrix. Regeneration limits analog noise accumulation, while discrete symbol mistakes remain."
+            ],
+            "source": "Sections III-C–E, V and VI; Eqs. (15)–(26), (47)–(107)"
+          },
+          {
+            "heading": "Validation settings and comparison with AF and DF",
+            "paragraphs": [
+              "One-hop validation uses 600 km links at 1550 nm, a 6.75 cm transmitted beam waist and a 5 cm receive-aperture radius. The parameter table evaluates M = 4, 8 and 16, angular jitter from 1 to 4 µrad, transmit-amplifier gain 10, maximum receive gain 1000, optical bandwidth 50 GHz and decision bandwidth 25 GHz. Monte Carlo results, full-noise integration and the two-region approximation closely agree in the reported comparisons.",
+              "For the separate 4-PAM comparison with 500 km hops and a 5 cm launch waist, the proposed relay reaches the 10⁻⁴ SER region near 11 dBm for four hops, with an approximately 5 dB power penalty relative to the modeled DF baseline. AF remains more noise-limited in that comparison. This is a conditional reliability comparison, not evidence that the proposed architecture universally outperforms DF."
+            ],
+            "source": "Section VII; Table I; Figs. 2–4"
+          },
+          {
+            "heading": "Design trade-offs and the next engineering step",
+            "paragraphs": [
+              "Higher PAM order provides more bits per symbol but reduces decision margins. Beamwidth must balance aperture collection against pointing tolerance, and the gain target affects both threshold alignment and outage. The paper distinguishes adding hops of fixed distance from dividing a fixed total distance: the former adds decision stages, while the latter can improve each hop enough to outweigh those extra decisions.",
+              "The next meaningful validation is a calibrated optical implementation of the limiter bank, level selector and regeneration stage, including splitter loss, thresholds, amplifier gain dynamics, noise coefficients and imperfect channel estimation. Relay latency and energy need direct measurement. Route selection, packet scheduling, correlated motion and spacecraft qualification remain outside the supplied physical-layer study."
+            ],
+            "source": "Sections II-C, IV and VII; Figs. 5–8; Section VIII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Provides the broader pointing-error and alignment context cited by this relay study."
+          },
+          {
+            "slug": "advancing-oam-fso-pointing-errors-space-terrestrial-links",
+            "reason": "Studies another optical high-capacity link architecture under spatial misalignment."
+          },
+          {
+            "slug": "integrated-optical-receiver-communication-fine-tracking-inter-satellite",
+            "reason": "Connects the relay’s pointing assumptions to a separate inter-satellite receiver and fine-tracking research direction."
+          }
+        ]
+      }
     }
   },
   "newPapers": [
