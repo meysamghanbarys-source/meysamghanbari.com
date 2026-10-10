@@ -131,6 +131,7 @@ export type Publication = {
   publicationDate?: string;
   preprintId?: string;
   image?: { src: string; thumbnail?: string; alt: string; width: number; height: number; caption: string };
+  comparisonImage?: { src: string; alt: string; width: number; height: number; caption: string };
   abstractLabel?: string;
   journalTitle?: string;
   volume?: string;
@@ -470,6 +471,7 @@ export const upcoming: Array<{
   presentationEnd?: string;
   presentationSlot?: string;
   paperLinkLabel?: string;
+  additionalPapers?: Array<{ title: string; researchUrl: string; question: string; description: string }>;
   title: string;
   titleFa: string;
   date: string;
@@ -534,6 +536,19 @@ export const upcoming: Array<{
     tags: ['Multi-Aperture FSO', 'Learning-Free Estimation', 'Angle of Arrival', 'Pointing Error']
   },
   {
+    slug: 'dtiso-2026', shortName: 'DTISO 2026', city: 'Barcelona', countryCode: 'ES', imageWidth: 1440, imageHeight: 811,
+    title: 'Meysam Ghanbari at DTISO 2026', titleFa: '', date: '17–20 November 2026', startDate: '2026-11-17', endDate: '2026-11-20',
+    location: 'Barcelona, Spain', locationFa: '', venue: 'Novotel Barcelona City', type: 'Forthcoming research presentation', typeFa: '', status: 'Scheduled',
+    question: 'What if a satellite could read data from light without reserving a separate share of its power for communication?', questionFa: '',
+    description: 'Meysam Ghanbari will present a constant-power Stokes-orthogonal satellite-link architecture. Polarization carries the information, while the same matched converter branches recover AC data signals and DC harvested energy, avoiding an explicit optical information–energy allocation ratio.', descriptionFa: '',
+    conference: 'International Conference on Digital Transformation and Intelligent SOciety (DTISO 2026)', conferenceUrl: 'https://dtis-conference.org/2026/authors.php',
+    programNote: 'Meysam Ghanbari has confirmed this forthcoming presentation in Barcelona. Official conference dates are 17–20 November 2026 at Novotel Barcelona City. An individual presentation slot and session have not yet been recorded.',
+    image: '/images/publications/stokes-orthogonal-satellite-information-energy-proposed.webp', imageAlt: 'Concept illustration of Stokes-orthogonal satellite information transfer and optical energy harvesting with matched polarization branches',
+    paperTitle: 'Information in Polarization, Energy from Optical Power: Stokes-Orthogonal Inter-Satellite Links', paperUrl: 'https://arxiv.org/abs/2609.25986', paperLinkLabel: 'arXiv manuscript ↗',
+    researchUrl: '/publications/power-neutral-information-energy-transfer-inter-satellite-fso-stokes', projectUrl: '/projects/power-neutral-information-energy-transfer',
+    tags: ['Inter-Satellite FSO', 'Stokes Signaling', 'Polarization', 'Energy Harvesting']
+  },
+  {
     slug: 'commnet-2026',
     shortName: 'CommNet 2026',
     title: 'Meysam Ghanbari at CommNet 2026',
@@ -582,22 +597,30 @@ export const upcoming: Array<{
     location: 'Hamburg, Germany',
     locationFa: 'هامبورگ، آلمان',
     venue: 'Grand Elysée Hotel Hamburg',
-    type: 'Scheduled research presentation',
+    type: 'Two forthcoming research presentations',
     typeFa: 'ارائه پژوهشی برنامه‌ریزی‌شده',
     status: 'Scheduled',
-    question: 'How can an inter-HAPS optical receiver remain reliable when one detector branch saturates while another falls below its sensitivity threshold?',
+    question: 'How can an optical receiver survive both too much light and too little signal?',
     questionFa: 'چگونه یک گیرنده نوری بین‌ـHAPS می‌تواند زمانی که یک شاخه اشباع می‌شود و شاخه‌ای دیگر پایین‌تر از آستانه حساسیت قرار می‌گیرد، همچنان قابل‌اعتماد بماند؟',
-    description: 'At IEEE VTC 2027-Spring in Hamburg, Meysam Ghanbari is scheduled to present a progressively attenuated multi-branch receiver developed to address this challenge. The architecture is designed to preserve a usable, nonsaturated optical detection path across changing received-power conditions.',
+    description: 'Meysam Ghanbari will present an accepted paper on spatially separated apertures with progressively stronger fixed attenuation. The receiver selects the highest-SNR branch that remains linear, balancing short-range saturation against weak signals at longer distances. The manuscript reports numerical analysis and Monte Carlo validation.',
     descriptionFa: 'میثم قنبری در IEEE VTC 2027-Spring در هامبورگ، راهکار گیرنده چندشاخه با تضعیف تدریجی را برای پاسخ به این مسئله ارائه خواهد کرد. این معماری برای حفظ یک مسیر آشکارسازی نوری قابل‌استفاده و غیراشباع در شرایط تغییر توان دریافتی طراحی شده است.',
     conference: 'The 2027 IEEE 105th Vehicular Technology Conference',
     conferenceUrl: 'https://events.vtsociety.org/vtc2027-spring/',
     image: '/images/events/vtc2027-spring-hamburg-official-conference.jpg',
     imageAlt: 'Official IEEE VTC 2027-Spring conference visual showing Hamburg, Germany, and the 20–23 June 2027 dates',
     paperTitle: 'Progressively Attenuated Multi-Branch Reception for Inter-HAPS Optical Links',
-    paperUrl: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=U6s7sawAAAAJ&sortby=pubdate&citation_for_view=U6s7sawAAAAJ:MXK_kJrjxJIC',
+    paperUrl: 'https://arxiv.org/abs/2609.13603',
+    paperLinkLabel: 'arXiv manuscript ↗',
+    programNote: 'Meysam Ghanbari has confirmed both forthcoming presentations. The inter-HAPS paper retains its Accepted status, and the integrated receiver manuscript retains its Submitted status. The conference runs 20–23 June 2027; individual presentation slots and sessions have not yet been recorded.',
     researchUrl: '/publications/progressively-attenuated-multi-branch-reception-inter-haps',
     projectUrl: '/projects/inter-haps-multi-branch-optical-reception',
-    tags: ['Inter-HAPS', 'Optical Wireless', 'Multi-Branch Receiver', 'FSO']
+    additionalPapers: [{
+      title: 'Integrated Optical Receiver for Communication and Fine Tracking in Inter-Satellite Links',
+      researchUrl: '/publications/integrated-optical-receiver-communication-fine-tracking-inter-satellite',
+      question: 'Can one compact optical receiver recover data and keep a satellite laser beam aligned?',
+      description: 'Meysam Ghanbari will also present a receiver concept that places a central data lens and an annular four-segment tracker on one shared, intentionally defocused plane. Joint geometry design balances data-power collection and angular accuracy without conventional data/tracking beam-splitter branches.'
+    }],
+    tags: ['Inter-HAPS', 'Inter-Satellite Links', 'Integrated Receiver', 'Fine Tracking', 'FSO']
   }
 ];
 

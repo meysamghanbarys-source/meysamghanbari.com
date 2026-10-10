@@ -11,6 +11,7 @@ const { item } = Astro.props;
     <p class="event-answer">{item.description}</p>
     {item.presentationSlot && <p class="event-slot">Draft program · {item.presentationSlot}</p>}
     <div class="event-paper"><span>PRESENTATION BY MEYSAM GHANBARI</span><h3><a href={`${item.researchUrl}/`}>{item.paperTitle}</a></h3></div>
+    {item.additionalPapers?.map(paper => <div class="event-additional"><p class="eyebrow">SECOND PRESENTATION</p><h3><a href={`${paper.researchUrl}/`}>{paper.question}</a></h3><p>{paper.description}</p><a class="text-link" href={`${paper.researchUrl}/`}>{paper.title} →</a></div>)}
     <div class="tag-cloud event-tags">{item.tags.map(tag => <span>{tag}</span>)}</div>
     <div class="event-actions"><a class="button" href={`/events/${item.slug}/`}>Presentation details →</a><a class="button ghost" href={item.conferenceUrl} target="_blank" rel="noreferrer">Official conference ↗</a><a class="text-link" href={`${item.researchUrl}/`}>Read the research →</a></div>
   </div>
@@ -24,6 +25,10 @@ const { item } = Astro.props;
 .event-card h2 a:hover { color:var(--accent); }
 .event-card .event-paper h3 { font-size:19px; line-height:1.4; }
 .event-card .event-answer { font-size:15px; line-height:1.75; }
+.event-card .event-additional { border-top:1px solid var(--line); margin-top:25px; padding-top:24px; }
+.event-card .event-additional h3 { font-size:23px; line-height:1.3; }
+.event-card .event-additional p { font-size:14px; line-height:1.7; }
+.event-card .event-additional .text-link { font-size:13px; line-height:1.7; }
 .event-card .event-slot { color:#a8ddea; font-size:13px; line-height:1.7; }
 .status-planned { color:#f2d294; border-color:#cfa45e; background:#30271a; }
 .event-card .upcoming-feature-visual { display:flex; flex-direction:column; justify-content:center; min-height:0; padding:26px; background:#07111e; }

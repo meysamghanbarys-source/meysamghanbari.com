@@ -13,7 +13,7 @@ const { paper } = Astro.props;
 const path = `/publications/${paper.slug}/`;
 const relatedProjects = projects.en.filter(project => paper.relatedProjectSlugs?.includes(project.slug));
 const relatedPapers = paper.editorial ? paper.editorial.related.map(related => ({...publications.find(candidate => candidate.slug === related.slug), reason:related.reason})).filter(related => related.title) : publications.filter(candidate => candidate.slug !== paper.slug && candidate.tags.some(tag => paper.tags.includes(tag))).slice(0,3);
-const appearances = upcoming.filter(event => event.researchUrl === `/publications/${paper.slug}`);
+const appearances = upcoming.filter(event => event.researchUrl === `/publications/${paper.slug}` || event.additionalPapers?.some(item => item.researchUrl === `/publications/${paper.slug}`));
 const authors = publicationAuthors(paper);
 const doiUrl = publicationDoiUrl(paper);
 const date = publicationDate(paper);
@@ -56,6 +56,7 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
       {abstractParagraphs.length > 0 && <section class="publication-abstract" aria-labelledby="abstract-heading"><h2 id="abstract-heading">Abstract</h2>{paper.abstractLabel && <p class="publication-source-label">{paper.abstractLabel.replace(/^Abstract/,'Original text')}</p>}{abstractParagraphs.map(paragraph => <p>{paragraph}</p>)}</section>}
       {paper.editorial && <section class="publication-answer" aria-labelledby="question-heading"><p class="publication-kicker">ENGINEERING QUESTION</p><h2 id="question-heading">{paper.editorial.question}</h2><p class="publication-direct-answer">{paper.editorial.answer}</p></section>}
       {paper.image && <figure class="publication-image"><img src={paper.image.src} alt={paper.image.alt} width={paper.image.width} height={paper.image.height} loading="lazy" /><figcaption>{paper.image.caption}</figcaption></figure>}
+      {paper.comparisonImage && <section class="publication-comparison"><h2>Conventional power-splitting baseline</h2><figure class="publication-image"><img src={paper.comparisonImage.src} alt={paper.comparisonImage.alt} width={paper.comparisonImage.width} height={paper.comparisonImage.height} loading="lazy" /><figcaption>{paper.comparisonImage.caption}</figcaption></figure></section>}
       {paper.editorial ? <div class="publication-technical">{paper.editorial.sections.map((section,index) => <section aria-labelledby={`technical-${index}`}><h2 id={`technical-${index}`}>{section.heading}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}<p class="publication-source-label">Manuscript · {section.source}</p></section>)}</div> : <section class="publication-brief" aria-labelledby="summary-heading"><p class="publication-kicker">EDITORIAL RESEARCH BRIEF</p><h2 id="summary-heading">Research summary</h2><p>{paper.summaryEn}</p>
         {paper.problemEn && <><h3>The research problem</h3><p>{paper.problemEn}</p></>}
         {paper.ideaEn && <><h3>The approach</h3><p>{paper.ideaEn}</p></>}

@@ -3,6 +3,7 @@ import type { Publication } from './library';
 export type Conference = { name: string; shortName: string; city: string; country: string; countryCode: string; url: string };
 // Locations checked 3 October 2026 against organizer or institutional records.
 const conferences: Record<string, Conference> = {
+  'DTISO-2026': { name:'International Conference on Digital Transformation and Intelligent SOciety (DTISO 2026)', shortName:'DTISO 2026', city:'Barcelona', country:'Spain', countryCode:'ES', url:'https://dtis-conference.org/2026/authors.php' },
   'ICFT-2026': { name:'International Conference on Future Technologies (ICFT 2026)', shortName:'ICFT 2026', city:'Amman', country:'Jordan', countryCode:'JO', url:'https://icft.gju.edu.jo/' },
   'COMMNET-2026': { name:'The 9th International Conference on Advanced Communication Technologies and Networking (CommNet 2026)', shortName:'CommNet 2026', city:'Rabat', country:'Morocco', countryCode:'MA', url:'https://www.commnet-conf.org/' },
   'VTC-2027': { name:'2027 IEEE Vehicular Technology Conference (VTC2027-Spring)', shortName:'IEEE VTC 2027-Spring', city:'Hamburg', country:'Germany', countryCode:'DE', url:'https://events.vtsociety.org/vtc2027-spring/' },
@@ -18,6 +19,6 @@ const conferences: Record<string, Conference> = {
 };
 export function publicationConference(paper: Publication): Conference | undefined {
   if (paper.type !== 'Conference') return undefined;
-  const acronym = paper.venue.match(/\b(VTC|ICC|WCNC|ICMLCN|ICUFN|ICETES|ICEE|WASOWC|MENACOMM|ICFT|COMMNET)\b/i)?.[1]?.toUpperCase();
+  const acronym = paper.venue.match(/\b(VTC|ICC|WCNC|ICMLCN|ICUFN|ICETES|ICEE|WASOWC|MENACOMM|ICFT|COMMNET|DTISO)\b/i)?.[1]?.toUpperCase();
   return acronym ? conferences[`${acronym}-${paper.year}`] : undefined;
 }

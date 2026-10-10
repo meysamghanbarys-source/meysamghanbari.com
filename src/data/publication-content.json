@@ -1178,6 +1178,317 @@
           }
         ]
       }
+    },
+    "progressively-attenuated-multi-branch-reception-inter-haps": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Betul Beidas",
+        "Wasiu O. Popoola",
+        "Mazen O. Hasna",
+        "Khalid A. Qaraqe",
+        "Mohammed Elamassie"
+      ],
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Beidas, Betul",
+        "Popoola, Wasiu O.",
+        "Hasna, Mazen O.",
+        "Qaraqe, Khalid A.",
+        "Elamassie, Mohammed"
+      ],
+      "authors": "Meysam Ghanbari, Betul Beidas, Wasiu O. Popoola, Mazen O. Hasna, Khalid A. Qaraqe, Mohammed Elamassie",
+      "status": "Accepted",
+      "summaryEn": "A spatial multi-aperture optical receiver uses progressively stronger fixed attenuation and saturation-aware branch selection to balance excess light at short inter-HAPS distances against weak signals at longer separations.",
+      "abstract": "Inter-HAPS optical links can experience receiver saturation at short separations and become signal-to-noise-ratio (SNR) limited at longer distances. This work proposes a saturation-aware spatial multi-branch intensity-modulation/direct-detection receiver using nonoverlapping apertures with progressive attenuation and selection of the nonsaturated branch with the highest instantaneous SNR. A Gaussian-beam model with finite-aperture pointing loss and common two-dimensional pointing jitter yields closed-form branch-level expressions for saturation, insufficient-SNR, usability, and outage probabilities. Results show that additional branches suppress short-range saturation outage, shift the minimum-outage point toward shorter separations, and enable progressive attenuation to control the saturation–SNR tradeoff. Monte Carlo simulations closely match the analytical results. Overall, the proposed architecture provides a low-complexity approach to extending the usable dynamic range of inter-HAPS optical receivers.",
+      "abstractLabel": "Abstract · supplied arXiv v1 manuscript (11 September 2026)",
+      "externalUrl": "https://arxiv.org/abs/2609.13603",
+      "externalLabel": "arXiv manuscript ↗",
+      "pdf": "https://arxiv.org/pdf/2609.13603v1",
+      "preprintId": "2609.13603",
+      "editorialUpdated": "2026-10-10",
+      "sourceNote": "The abstract, full author order, architecture and numerical results follow the supplied arXiv:2609.13603v1 manuscript dated 11 September 2026. Accepted status and Meysam Ghanbari’s forthcoming IEEE VTC 2027-Spring presentation in Hamburg are confirmed by the author. Conference dates are 20–23 June 2027; an individual session time and proceedings DOI are not yet recorded.",
+      "image": {
+        "src": "/images/publications/inter-haps-saturation-aware-optical-reception.webp",
+        "thumbnail": "/images/publications/inter-haps-saturation-aware-optical-reception-thumb.webp",
+        "alt": "Concept illustration of two high-altitude platform airships connected by a red optical beam above a stratospheric cloud deck.",
+        "width": 1440,
+        "height": 720,
+        "caption": "Concept illustration supplied for this publication and adapted to depict the inter-HAPS link. The formal receiver uses separate nonoverlapping apertures with branch-specific attenuation; its architecture and numerical results are defined in the manuscript."
+      },
+      "editorial": {
+        "question": "How can an optical receiver survive both too much light and too little signal?",
+        "answer": "At short inter-HAPS distances, strong received light can saturate a detector. At longer distances, beam spreading and pointing error can leave too little signal. This receiver gives separate apertures progressively stronger fixed attenuation, then selects the highest-SNR branch that remains linear. In the reported 50 km comparison, five branches reduce simulated outage from approximately 0.92 for one aperture to 0.11.",
+        "sections": [
+          {
+            "heading": "Give each aperture a different operating range",
+            "paragraphs": [
+              "The receiver is a spatial array of separate, nonoverlapping circular collection apertures. Each aperture feeds its own attenuator and identical photodetector/front end, followed by DC blocking. The configurations studied contain one to five apertures: a centered aperture, a pair, a three-aperture line, a four-aperture square, and a center with four surrounding apertures.",
+              "Branch 1 has unit transmission. Each subsequent branch has progressively stronger fixed attenuation, following αₖ = ρᵏ⁻¹ for 0 < ρ < 1. Strongly attenuated branches provide headroom when optical loading is high; lightly attenuated branches preserve sensitivity as received power falls. The architecture uses spatial collection rather than splitting one collected beam, and does not require continuously adjusted attenuation or detector-mode switching."
+            ],
+            "source": "Sections I–II; Fig. 1; Eqs. (1)–(9)"
+          },
+          {
+            "heading": "Select the best branch that remains linear",
+            "paragraphs": [
+              "Saturation depends on the peak optical load reaching the photodetector or analog front end, including desired DC bias, modulation and background light. Removing DC after photodetection does not undo detector saturation, and the background shot-noise fluctuations remain after DC blocking.",
+              "For every common two-dimensional pointing realization, the receiver first excludes saturated branches and then selects the remaining branch with the greatest instantaneous electrical SNR. Spatial coupling differs between apertures, so selecting by attenuation coefficient alone is insufficient. Operation is valid only when the selected branch also meets the minimum SNR; otherwise the model distinguishes all-branches-saturated outage from insufficient-SNR outage."
+            ],
+            "source": "Sections II-B–III; Eqs. (10)–(16)"
+          },
+          {
+            "heading": "Keep the shared pointing error in the outage model",
+            "paragraphs": [
+              "A Gaussian beam, finite-aperture coupling and Gaussian angular jitter determine each aperture’s collected signal. A usable branch must avoid a high-coupling saturation region while remaining within a sufficiently strong-coupling SNR region. The paper derives closed-form marginal saturation, insufficient-SNR, usability and outage probabilities using the Rician displacement distribution and Marcum-Q function.",
+              "Every aperture experiences the same random beam-center displacement, so its pointing gain is correlated with the other branches. System outage is therefore evaluated over the joint two-dimensional pointing plane. Multiplying individual branch outage probabilities would lose this dependence; the full-system expression is a joint probability integral, rather than the branch-level closed form."
+            ],
+            "source": "Section III-A–C; Eqs. (17)–(30)"
+          },
+          {
+            "heading": "What the numerical comparisons show",
+            "paragraphs": [
+              "The numerical baseline uses 1550 nm light, a 0.021 m beam waist, 4 W DC bias, a 0.2 W signal scale, optical efficiency 0.5, 0.10 m aperture radius and 0.45 m center spacing. Detector responsivity is 0.85 A/W, background power 50 nW, electrical noise bandwidth 10 GHz, per-axis pointing-jitter standard deviation 10 µrad, and minimum SNR 25 dB. Figures 2–3 use a 5 mA saturation threshold; Monte Carlo comparisons use 200000 common pointing realizations.",
+              "In the reported distance comparison at 50 km, total outage falls from approximately 0.92 with one aperture to 0.11 with five branches. At 100 km, the reported total outage is approximately 1.46 × 10⁻⁵, 1.27 × 10⁻⁵ and 9.53 × 10⁻⁶ for three, four and five branches respectively. More branches shift the minimum-outage region toward shorter separation; at longer distances, reduced coupling increasingly makes SNR the limiting factor.",
+              "For the four-aperture square, reducing the progression factor strengthens attenuation in the later branches and moves the saturation-to-reliable-operation transition toward shorter distances. The distance–attenuation sweep reports a minimum outage of approximately 3.7 × 10⁻⁶ under the modeled conditions.",
+              "A separate branch-usability comparison uses four branches, ρ = 0.6 and a tighter 2 mA saturation threshold. At 50 km, usability rises from about 0.15 for Branch 1 to 0.89 for Branch 4. At 300 km, the ordering reverses: the reported usable probabilities are approximately 0.953, 0.933, 0.905 and 0.865 for Branches 1–4. Analytical and Monte Carlo branch-usability curves agree with maximum absolute error below 1.9 × 10⁻³."
+            ],
+            "source": "Section IV; Figs. 2–4"
+          },
+          {
+            "heading": "Engineering relevance and model boundaries",
+            "paragraphs": [
+              "The contribution is a low-complexity receiver strategy for widening optical dynamic range across changing inter-HAPS distances. The analysis and simulation identify complementary operating regions for fixed attenuation levels; they do not establish a universal attenuation setting or a measured communications-throughput gain.",
+              "The adopted clear-air stratospheric model omits turbulence-induced scintillation and uses a background-shot-noise-limited baseline. Thermal noise, dark-current noise, desired-signal shot noise, relative-intensity noise, quantization noise and amplifier noise are excluded. The reported results are numerical, without a demonstrated airborne receiver or field deployment."
+            ],
+            "source": "Sections II-A–B and V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "optimal-beamwidth-uav-to-hap-fso-pointing-inaccuracies",
+            "reason": "A complementary aerial optical-link study that optimizes beamwidth under pointing inaccuracies."
+          },
+          {
+            "slug": "learning-free-hierarchical-joint-estimation-multi-aperture-fso",
+            "reason": "Studies multi-aperture receiver estimation, with a distinct channel model and estimation objective."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Places receiver dynamic range within the broader pointing and alignment challenges of narrow-beam communications."
+          }
+        ]
+      }
+    },
+    "integrated-optical-receiver-communication-fine-tracking-inter-satellite": {
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mohammad Taghi Dabiri",
+        "Akram Alomainy",
+        "Qammer H. Abbasi",
+        "Mazen O. Hasna",
+        "Khalid A. Qaraqe"
+      ],
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Dabiri, Mohammad Taghi",
+        "Alomainy, Akram",
+        "Abbasi, Qammer H.",
+        "Hasna, Mazen O.",
+        "Qaraqe, Khalid A."
+      ],
+      "authors": "Meysam Ghanbari, Mohammad Taghi Dabiri, Akram Alomainy, Qammer H. Abbasi, Mazen O. Hasna, Khalid A. Qaraqe",
+      "summaryEn": "A compact receiver concept places a central data lens and annular four-segment tracker on one intentionally defocused plane, jointly optimizing data-power collection and fine-tracking range for inter-satellite optical links.",
+      "abstract": "Inter-satellite optical links demand high-precision fine tracking while preserving sufficient received power for data communication, yet these functions are often treated separately at the receiver. This paper proposes a dual-function optical receiver that integrates data reception and fine tracking on a shared, intentionally defocused receiver plane. The architecture combines a central data lens with an annular four-segment tracking detector, creating a fundamental tradeoff between data-power collection and angular-estimation capability. A scalar Fresnel wave-optical model is developed together with nonlinear two-dimensional calibration and a noise-aware worst-case angular-accuracy framework. The receiver geometry is then jointly optimized to maximize the guaranteed fine-tracking range subject to a minimum data-power constraint. Results demonstrate that appropriate co-design of the central aperture and defocus substantially enlarges the usable fine-tracking region while maintaining the required communication-path power. The proposed framework provides a receiver-level benchmark for analyzing and designing integrated communication-and-tracking architectures in future optical inter-satellite terminals.",
+      "abstractLabel": "Abstract · supplied arXiv v1 manuscript (22 September 2026)",
+      "externalUrl": "https://arxiv.org/abs/2609.25971",
+      "externalLabel": "arXiv manuscript ↗",
+      "pdf": "https://arxiv.org/pdf/2609.25971v1",
+      "preprintId": "2609.25971",
+      "editorialUpdated": "2026-10-10",
+      "sourceNote": "The abstract, full author order, optical model and numerical results follow the supplied arXiv:2609.25971v1 manuscript dated 22 September 2026. Meysam Ghanbari has confirmed that he will present the work at IEEE VTC 2027-Spring in Hamburg, 20–23 June 2027. The existing Submitted manuscript status is retained; an individual session slot, proceedings record and DOI are not yet recorded.",
+      "image": {
+        "src": "/images/publications/integrated-optical-receiver-space-links.webp",
+        "thumbnail": "/images/publications/integrated-optical-receiver-space-links-thumb.webp",
+        "alt": "Concept illustration of two satellites linked optically above Earth and an integrated receiver with a central data lens surrounded by a four-segment tracking annulus.",
+        "width": 1440,
+        "height": 720,
+        "caption": "Concept illustration supplied for this publication and adapted to show shared-plane reception and tracking. The rendering is illustrative; the exact geometry, quadrant convention and numerical evidence are defined in the manuscript."
+      },
+      "editorial": {
+        "question": "Can one compact optical receiver recover data and keep a satellite laser beam aligned?",
+        "answer": "The proposed receiver combines a central data-collection lens with a surrounding four-segment tracker on one intentionally defocused plane, removing the conventional receiver-side data/tracking beam-splitter branches. At −40 dBm incident power, the numerical design retains 25.60% of receiver-plane power for the central data path and supports a 0.65 mrad fine-tracking radius under a 10 µrad angular-error requirement. Compactness is an architectural motivation; the paper does not report a measured terminal mass or package-volume reduction.",
+        "sections": [
+          {
+            "heading": "Share a receiver plane for data and tracking",
+            "paragraphs": [
+              "A primary receiver lens directs the incoming field onto a plane placed slightly before its nominal focus. A central circular data lens collects communication-path power, while four annular tracking segments surround it. A radial guard gap separates the central lens from the tracker, and a cross-shaped inactive gap separates the four segments.",
+              "The architecture integrates the two functions without conventional receiver-side beam-splitter branches. A larger central lens captures more data power but reduces the active tracking annulus. Intentional defocus spreads the optical field across the plane, changing both tracking sensitivity and central collection. The design therefore treats communication power and fine tracking as coupled optical requirements."
+            ],
+            "source": "Sections I–II; Fig. 1; Eqs. (1)–(6)"
+          },
+          {
+            "heading": "Calibrate the full two-dimensional response",
+            "paragraphs": [
+              "A scalar paraxial Fresnel model propagates a tilted, locally planar input wavefront through the primary lens. Optical power is integrated over the central data aperture, active tracking segments, inactive gaps and space outside the receiver, preserving the modeled power balance.",
+              "Normalized differences of the four tracking-segment powers provide horizontal and vertical tracking signals. A sampled two-dimensional forward map and interpolated nonlinear inverse estimate the residual angle of arrival. The method retains cross-axis coupling and restricts calibration to unique, locally invertible, nonfolding response regions. Numerical interpolation error is evaluated separately from detector-noise error."
+            ],
+            "source": "Sections II–III; Eqs. (6)–(9)"
+          },
+          {
+            "heading": "Design for the least favorable pointing direction",
+            "paragraphs": [
+              "The tracking-channel noise model includes signal, background and dark-current shot noise together with input-referred thermal-current noise. Each noisy normalized measurement passes through the nonlinear inverse calibration. Accuracy is measured as the radial two-axis angular RMSE, rather than one component or one favorable angular cut.",
+              "The usable tracking radius is the largest continuous centered angular disk for which the worst azimuthal RMSE stays within 10 µrad at every smaller radius and the calibration remains valid. It is not the full geometric field of view or the entire angle sweep used to characterize the receiver.",
+              "The central-lens diameter and defocus are jointly optimized at −40 dBm incident power. The central path must collect at least 25% of receiver-plane optical power at zero residual angle. This on-axis constraint does not guarantee the same data-power fraction at every off-axis point in the tracking disk."
+            ],
+            "source": "Sections IV–V; Eqs. (10)–(19)"
+          },
+          {
+            "heading": "Numerical geometry and operating conditions",
+            "paragraphs": [
+              "The simulations use 1550 nm light, a 60 mm-diameter primary lens with an 80 mm focal length, and a 1 mm-diameter tracking annulus. The radial guard gap is 20 µm and the cross-shaped gap is 30 µm; primary-lens transmission is 0.95. Tracking detectors have 0.9 A/W responsivity, 1 nA dark current, 0.5 nA background current, 1 pA/√Hz input-referred current-noise density and 20 kHz noise bandwidth.",
+              "The selected central-lens diameter is 170 µm and defocus is 0.450 mm, placing the shared receiver plane at 79.550 mm behind the primary lens. At −40 dBm (100 nW) incident power, the central data-power fraction is 25.5951%, on-axis angular RMSE is 9.176 µrad, and full-chain verification gives a 0.650 mrad continuous worst-case tracking radius. The coarser discrete optimization search gives 0.610 mrad; these are distinct evaluations of the selected geometry.",
+              "With the same geometry, the reported tracking radius grows to 1.12 mrad at −35 dBm and 1.33 mrad at −30 dBm, with on-axis RMSE values of 2.91 and 0.93 µrad. At −45 dBm, the on-axis RMSE is already 28.56 µrad, so there is no usable radius meeting the 10 µrad requirement.",
+              "The calibration study also shows why wide angular coverage alone is insufficient. Representative noiseless inversion errors increase from 0.048 µrad near the center to 32.0 and 290.9 µrad at larger offsets as the normalized response approaches saturation and loses local sensitivity."
+            ],
+            "source": "Sections V–VI; Figs. 2–4"
+          },
+          {
+            "heading": "What compact integration establishes",
+            "paragraphs": [
+              "The contribution is an integrated receiver architecture and a receiver-level co-design benchmark. Sharing a plane and avoiding separate beam-splitter branches can simplify the optical arrangement, but a realized terminal still needs mechanical packaging, detector electronics, calibration and steering control. The paper does not quantify a hardware mass or volume saving.",
+              "The analysis starts after coarse acquisition. Transmitter-to-receiver propagation and coarse-pointing dynamics are excluded, and the input is specified by incident receiver power and residual angle of arrival. The study uses an ideal thin primary lens, uniform pupil illumination, scalar paraxial propagation and equivalent Gaussian current noise. It establishes numerical angular accuracy and power collection, rather than a built receiver, an on-orbit demonstration or a measured data-rate improvement."
+            ],
+            "source": "Sections II and VII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "receiver-side-physics-informed-residual-digital-twin-predictive-fine-tracking-oisl",
+            "reason": "Studies delay-aware predictive control; the integrated receiver paper instead focuses on optical geometry and angle estimation."
+          },
+          {
+            "slug": "progressively-attenuated-multi-branch-reception-inter-haps",
+            "reason": "The other forthcoming VTC presentation studies a spatial receiver with fixed attenuation for inter-HAPS dynamic range."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Explains the wider pointing and alignment constraints that motivate integrated satellite optical receivers."
+          }
+        ]
+      }
+    },
+    "power-neutral-information-energy-transfer-inter-satellite-fso-stokes": {
+      "title": "Information in Polarization, Energy from Optical Power: Stokes-Orthogonal Inter-Satellite Links",
+      "authors": "Meysam Ghanbari, Mohammad Taghi Dabiri, Mazen O. Hasna, Khalid A. Qaraqe",
+      "authorNames": [
+        "Meysam Ghanbari",
+        "Mohammad Taghi Dabiri",
+        "Mazen O. Hasna",
+        "Khalid A. Qaraqe"
+      ],
+      "citationNames": [
+        "Ghanbari, Meysam",
+        "Dabiri, Mohammad Taghi",
+        "Hasna, Mazen O.",
+        "Qaraqe, Khalid A."
+      ],
+      "venue": "DTISO 2026 · forthcoming presentation, Barcelona, Spain",
+      "year": "2026",
+      "summaryEn": "Constant-power Stokes-orthogonal signaling conveys data in polarization while matched photonic converters harvest energy from the same optical branches, avoiding an explicit information–energy power-allocation ratio.",
+      "tags": [
+        "Inter-Satellite FSO",
+        "Stokes Signaling",
+        "Polarization Modulation",
+        "Energy Harvesting",
+        "Power Neutrality"
+      ],
+      "abstract": "Joint information and energy transfer over inter-satellite free-space optical links is commonly based on explicit resource splitting, which couples communication reliability and energy delivery. This paper proposes a constant-total-power Stokes-orthogonal architecture that conveys information through polarization while preserving the received optical power for photovoltaic conversion. Complementary polarization branches support balanced information detection through their ac components, while their dc components drive matched multi-junction photonic power converters. The developed framework jointly characterizes pointing-impaired propagation, bit-error rate, outage, and nonlinear harvested power. The analysis establishes that the two information symbols only exchange the branch powers, leaving the unordered input-power pair unchanged; hence, the total harvested energy remains symbol invariant even under nonlinear conversion, without an explicit information–energy power split or linear-efficiency approximation. Numerical results confirm the analytical model, with the closed-form BER approximation remaining within 0.43% of the exact evaluation over the examined pointing conditions. Compared with ideal lossless power splitting, the proposed architecture avoids the conventional BER–harvested-power tradeoff and provides an analytical baseline for power-neutral joint information and energy transfer in inter-satellite optical links.",
+      "abstractLabel": "Abstract · supplied arXiv v1 manuscript (22 September 2026)",
+      "externalUrl": "https://arxiv.org/abs/2609.25986",
+      "externalLabel": "arXiv manuscript ↗",
+      "pdf": "https://arxiv.org/pdf/2609.25986v1",
+      "preprintId": "2609.25986",
+      "editorialUpdated": "2026-10-10",
+      "sourceNote": "The exact title, abstract, author order and technical explanation follow the supplied arXiv:2609.25986v1 manuscript dated 22 September 2026. Meysam Ghanbari has confirmed a forthcoming presentation at DTISO 2026 in Barcelona, 17–20 November 2026. This source updates the earlier power-neutral/Stokes research entry while retaining its existing URL. An individual session slot and proceedings DOI are not yet recorded.",
+      "image": {
+        "src": "/images/publications/stokes-orthogonal-satellite-information-energy-proposed.webp",
+        "thumbnail": "/images/publications/stokes-orthogonal-satellite-information-energy-proposed-thumb.webp",
+        "alt": "Concept illustration of the proposed Stokes-orthogonal satellite link: polarization-separated PPC branches provide balanced AC information detection and combined DC energy harvesting.",
+        "width": 1440,
+        "height": 811,
+        "caption": "Concept illustration supplied for this publication: the proposed polarization-based receiver. The optical and electrical paths are schematic; the formal architecture and converter assumptions are defined in manuscript Fig. 1."
+      },
+      "comparisonImage": {
+        "src": "/images/publications/satellite-information-energy-conventional-splitting.webp",
+        "alt": "Concept illustration of a conventional satellite optical receiver dividing received power between an information detector and a separate photovoltaic energy-harvesting path.",
+        "width": 1440,
+        "height": 811,
+        "caption": "Conventional power-splitting baseline supplied for comparison. An allocation factor reserves separate optical fractions for information detection and energy harvesting; the manuscript benchmarks ideal lossless splitting."
+      },
+      "editorial": {
+        "question": "What if a satellite could read data from light without reserving a separate share of its power for communication?",
+        "answer": "The proposed link carries binary information in polarization while keeping total launched optical power constant. A polarizing beam splitter feeds two matched photonic power converters: their differential AC currents recover data, while their DC outputs supply harvested energy. With matched nonlinear converter responses, changing the symbol exchanges the two branch powers and leaves their summed harvested output unchanged. This removes an explicit optical information–energy allocation ratio; optical losses, conversion inefficiency and receiver-electronics power still matter.",
+        "sections": [
+          {
+            "heading": "Move information into polarization",
+            "paragraphs": [
+              "A conventional optical power splitter sends one fraction of received light to an information detector and the remainder to a photovoltaic converter. Increasing the information share generally improves detection while reducing the harvesting share. The proposed architecture uses a constant-power, binary Stokes-orthogonal alphabet instead: the two symbols change the polarization state, while the total launched power stays fixed.",
+              "Following receiver-side polarization compensation, a polarizing beam splitter separates complementary horizontal and vertical powers. Both branches are photoconverting devices. Their balanced AC difference carries information, and DC extraction supplies energy harvesting. The polarizing beam splitter separates polarization states; it does not reserve one optical branch exclusively for data and another exclusively for energy."
+            ],
+            "source": "Sections I–II and IV-A; Fig. 1; Eqs. (1)–(2), (10)–(15)"
+          },
+          {
+            "heading": "Why nonlinear harvesting remains symbol invariant",
+            "paragraphs": [
+              "For a fixed received power and polarization contrast, the two symbols exchange the high and low branch inputs. If both converters and maximum-power-point controllers have the same transfer function g, their combined output is g(cP) + g(ℓP) for either symbol. This symmetry holds for a nonlinear g; it does not require a constant conversion efficiency.",
+              "The result is conditional on received optical power. It does not make harvested energy independent of pointing loss or polarization contrast, and it does not mean that the complete spacecraft link consumes zero energy. Unequal converter responses can restore symbol dependence, which the paper expresses as a difference of incremental branch responses.",
+              "Energy-extraction timescale also matters. A controller following the individual branch levels uses the quasi-static sum g(cP) + g(ℓP). For fast balanced signaling relative to extraction dynamics, each converter sees average input P/2 and the output is 2g(P/2). The paper distinguishes these regimes rather than treating them as equivalent for nonlinear converters."
+            ],
+            "source": "Section VI-B–C; Eqs. (36)–(39)"
+          },
+          {
+            "heading": "Keep pointing, detector noise and conversion in the model",
+            "paragraphs": [
+              "The vacuum link includes Gaussian diffraction, finite circular-aperture collection and residual Gaussian pointing jitter. Exact aperture coupling provides the numerical reference, while an equivalent-beam approximation supports tractable fading averages. The collection law already includes geometric loss, so an additional inverse-square or aperture-area factor would count it twice.",
+              "Balanced detection retains signal-dependent shot noise and a nonzero floor from background, dark current, thermal and amplifier terms. Under equal symbol priors and matched Gaussian-noise branches, the zero-threshold decision is maximum likelihood even after averaging over unknown channel gain. A normalized noisy current ratio is not assumed to be automatically optimal.",
+              "Average BER is evaluated with one-dimensional integrals for both aperture models. The thermal-dominated and shot-dominated closed forms have stated validity conditions and do not replace the full integral outside those regimes. Nonlinear maximum-power-point harvesting uses an ideal multi-junction single-diode model expressed with the principal Lambert-W function."
+            ],
+            "source": "Sections III–VI-A; Eqs. (3)–(35)"
+          },
+          {
+            "heading": "What the numerical comparison supports",
+            "paragraphs": [
+              "The declared baseline uses 1530 nm light, 100 km range, 2 W launch power, a 25 mm transmitter beam radius, a 100 mm receive-aperture radius, 2 µrad per-axis pointing jitter and a 20 dB polarization extinction ratio. Transmitter, receiver and PBS efficiencies are 0.80, 0.80 and 0.95. The detector model uses 1 GHz bandwidth, 293.15 K temperature, a 25 Ω load and 30 nA dark current per branch; background and amplifier noise remain model parameters.",
+              "The BER power sweep separately uses 6, 8 and 10 µrad per-axis jitter. A BER near 10⁻² is reached at approximately 13, 17 and 23 dBm launch power respectively, illustrating the stronger-power requirement under larger pointing fluctuations. The manuscript reports that its closed-form BER approximation stays within 0.43% of the exact evaluation over the examined conditions; this is a tested approximation result, rather than a universal error bound.",
+              "At the separate 36 dBm comparison point and 8 µrad per-axis jitter, the proposed scheme reports about 2.31 mW average harvested power at BER 1.6 × 10⁻⁵. An ideal power-splitting benchmark point is about 1.81 mW at BER 1.7 × 10⁻⁴. At 10 µrad, the reported comparison is approximately 1.87 mW at BER 5.8 × 10⁻⁴ versus 1.46 mW at BER 2.7 × 10⁻³. These are numerical operating points under the same declared comparison conditions.",
+              "Pointing still reduces both collected energy and communication reliability. For example, at 30 dBm launch power, the harvested-power map falls from about 0.870 mW at 1 µrad per-axis jitter to 0.271 mW at 14 µrad. Avoiding the explicit allocation ratio does not remove this physical sensitivity."
+            ],
+            "source": "Section VII; Figs. 2–4"
+          },
+          {
+            "heading": "Requirements for a physical implementation",
+            "paragraphs": [
+              "The symmetric baseline assumes tracked polarization compensation, matched converters and suitable AC/DC extraction. Time-varying uncompensated polarization, polarization-dependent loss and branch mismatch require additional treatment. The Gaussian shot-noise approximation also needs enough detected photoelectrons; a photon-starved receiver should use a joint Poisson model.",
+              "The photovoltaic model is calibrated to a representative literature maximum-power point and uses declared four-junction assumptions. A specific device needs measured spectral response and converter/controller characterization. The paper establishes an analytical and numerical baseline, without demonstrating this inter-satellite architecture in flight or proving net electrical power neutrality for all terminal electronics."
+            ],
+            "source": "Sections II-A–B, IV-B, VI and VIII"
+          }
+        ],
+        "related": [
+          {
+            "slug": "integrated-optical-receiver-communication-fine-tracking-inter-satellite",
+            "reason": "A different integration strategy that shares optical geometry between data reception and fine tracking."
+          },
+          {
+            "slug": "joint-tracking-polarization-alignment-satellite-qkd",
+            "reason": "Examines tracking and polarization alignment in satellite quantum links, rather than optical energy harvesting."
+          },
+          {
+            "slug": "all-optical-multi-hop-inter-satellite-relaying-m-pam",
+            "reason": "A complementary satellite optical architecture study focused on regenerative relaying."
+          }
+        ]
+      }
     }
   },
   "newPapers": [

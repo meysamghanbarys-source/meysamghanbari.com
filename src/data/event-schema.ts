@@ -15,5 +15,5 @@ export const eventSchema = (event: Appearance) => ({
   location: { '@type':'Place', name:event.venue, address:{ '@type':'PostalAddress', addressLocality:event.city, addressCountry:event.countryCode } },
   organizer: event.organizer ? { '@type':'Organization', name:event.organizer, url:event.conferenceUrl } : undefined,
   performer: { '@type':'Person', '@id':`${site.domain}/#person`, name:site.name, url:site.domain },
-  about: { '@type':'ScholarlyArticle', name:event.paperTitle, url:`${site.domain}${event.researchUrl}/` }
+  about: [{ '@type':'ScholarlyArticle', name:event.paperTitle, url:`${site.domain}${event.researchUrl}/` }, ...(event.additionalPapers ?? []).map(paper => ({ '@type':'ScholarlyArticle', name:paper.title, url:`${site.domain}${paper.researchUrl}/` }))]
 });

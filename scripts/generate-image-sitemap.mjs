@@ -49,7 +49,7 @@ const sitemapPath = new URL('sitemap-0.xml', output);
 let sitemapXml = await readFile(sitemapPath,'utf8');
 sitemapXml = sitemapXml.replace(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g, (entry,url,tail) => {
   const slug = url.match(/\/publications\/([^/]+)\/?$/)?.[1];
-  const editorialDates = new Map([['/','2026-10-10'],['/publications/','2026-10-10'],['/upcoming/','2026-10-10'],['/events/icft-2026/','2026-10-10'],['/events/commnet-2026/','2026-10-10'],['/events/vtc2027-spring/','2026-10-10']]);
+  const editorialDates = new Map([['/','2026-10-10'],['/publications/','2026-10-10'],['/upcoming/','2026-10-10'],['/events/icft-2026/','2026-10-10'],['/events/commnet-2026/','2026-10-10'],['/events/dtiso-2026/','2026-10-10'],['/events/vtc2027-spring/','2026-10-10']]);
   const date = editorialDates.get(url.replace(domain,'')) ?? revisions.get(slug);
   return date ? `<url><loc>${url}</loc>${tail.replace(/<lastmod>[^<]*<\/lastmod>/g,'')}<lastmod>${date}</lastmod></url>` : entry;
 });
