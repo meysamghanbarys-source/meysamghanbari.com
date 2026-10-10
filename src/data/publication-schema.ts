@@ -24,7 +24,7 @@ export const publicationSchema = (paper: Publication, _lang: 'en' | 'fa' = 'en')
     headline: paper.title, description: paper.summaryEn, abstract: paper.abstract,
     inLanguage: 'en', author: publicationAuthors(paper).map(name => ({ '@type': 'Person', name })),
     datePublished: publicationDate(paper),
-    isPartOf: paper.status === 'Submitted' ? undefined : paper.type === 'Journal' ? (paper.issue ? { '@type':'PublicationIssue', issueNumber:paper.issue, isPartOf:volume } : volume) : { '@type':'CreativeWork', name: conference?.name ?? paper.venue,
+    isPartOf: ['Submitted','Preprint'].includes(paper.status) ? undefined : paper.type === 'Journal' ? (paper.issue ? { '@type':'PublicationIssue', issueNumber:paper.issue, isPartOf:volume } : volume) : { '@type':'CreativeWork', name: conference?.name ?? paper.venue,
       about: conference ? { '@type':'Event', name:conference.name, url:conference.url, location:{ '@type':'Place', name:`${conference.city}, ${conference.country}`, address:{ '@type':'PostalAddress', addressLocality:conference.city, addressCountry:conference.countryCode } } } : undefined },
     pagination: paper.pages, pageStart: firstPage, pageEnd: lastPage,
     keywords: paper.tags.join(', '),

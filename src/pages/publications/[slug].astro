@@ -1,7 +1,7 @@
 ---
 import { serializeJsonLd } from '../../data/json-ld';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { publications, projects } from '../../data/library';
+import { publications, projects, upcoming } from '../../data/library';
 import { site } from '../../data/site';
 import { publicationSeoTitle } from '../../data/publication-seo';
 import { publicationSchema, publicationAuthors, publicationDoi, publicationDoiUrl, publicationDate, publicationPdfUrl } from '../../data/publication-schema';
@@ -13,6 +13,7 @@ const { paper } = Astro.props;
 const path = `/publications/${paper.slug}/`;
 const relatedProjects = projects.en.filter(project => paper.relatedProjectSlugs?.includes(project.slug));
 const relatedPapers = paper.editorial ? paper.editorial.related.map(related => ({...publications.find(candidate => candidate.slug === related.slug), reason:related.reason})).filter(related => related.title) : publications.filter(candidate => candidate.slug !== paper.slug && candidate.tags.some(tag => paper.tags.includes(tag))).slice(0,3);
+const appearances = upcoming.filter(event => event.researchUrl === `/publications/${paper.slug}`);
 const authors = publicationAuthors(paper);
 const doiUrl = publicationDoiUrl(paper);
 const date = publicationDate(paper);
@@ -26,7 +27,7 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
     <meta name="citation_title" content={paper.title} />
     {authors.map(author => <meta name="citation_author" content={author} />)}
     {date && <meta name="citation_publication_date" content={date} />}
-    {paper.type === 'Journal' ? <meta name="citation_journal_title" content={paper.journalTitle ?? paper.venue.split(',')[0]} /> : <meta name="citation_conference_title" content={conference?.name ?? paper.venue.split(',')[0]} />}
+    {paper.status === 'Preprint' ? <meta name="citation_publisher" content="arXiv" /> : paper.type === 'Journal' ? <meta name="citation_journal_title" content={paper.journalTitle ?? paper.venue.split(',')[0]} /> : <meta name="citation_conference_title" content={conference?.name ?? paper.venue.split(',')[0]} />}
     {paper.volume && <meta name="citation_volume" content={paper.volume} />}
     {paper.issue && <meta name="citation_issue" content={paper.issue} />}
     {firstPage && <meta name="citation_firstpage" content={firstPage} />}
@@ -61,7 +62,8 @@ const abstractParagraphs = paper.abstract?.split(/\n\s*\n/).filter(Boolean) ?? [
         {paper.relevanceEn && <><h3>Engineering relevance</h3><p>{paper.relevanceEn}</p></>}
         <p class="publication-note">This editorial brief is separate from the original manuscript. The publication status above describes the research record.</p>
       </section>}
-      {paper.editorial && <section class="publication-record" aria-labelledby="record-heading"><h2 id="record-heading">Publication record</h2><dl><dt>Authors</dt><dd>{authors.join(', ')}</dd><dt>Venue</dt><dd>{paper.journalTitle ?? conference?.name ?? paper.venue}</dd>{conference && <><dt>Location</dt><dd>{conference.city}, {conference.country}</dd></>}<dt>Status</dt><dd>{paper.status}</dd><dt>Year</dt><dd>{paper.year}</dd>{date && date !== paper.year && <><dt>Publication date</dt><dd>{date}</dd></>}{paper.volume && <><dt>Volume</dt><dd>{paper.volume}</dd></>}{paper.issue && <><dt>Issue</dt><dd>{paper.issue}</dd></>}{paper.pages && <><dt>Pages</dt><dd>{paper.pages}</dd></>}{paper.articleNumber && <><dt>Article number</dt><dd>{paper.articleNumber}</dd></>}{paper.doi && <><dt>DOI</dt><dd><a href={doiUrl}>{publicationDoi(paper)}</a></dd></>}</dl><a class="publication-export" href={`/publications/${paper.slug}.bib`} download={`${paper.slug}.bib`}>Download BibTeX citation ↓</a><p class="publication-note">{paper.sourceNote} The technical explanation is editorial and separate from the original abstract. Research note updated {paper.editorialUpdated}.</p></section>}
+      {paper.editorial && <section class="publication-record" aria-labelledby="record-heading"><h2 id="record-heading">Publication record</h2><dl><dt>Authors</dt><dd>{authors.join(', ')}</dd><dt>{paper.status === 'Preprint' ? 'Planned presentation' : 'Venue'}</dt><dd>{paper.journalTitle ?? conference?.name ?? paper.venue}</dd>{conference && <><dt>Location</dt><dd>{conference.city}, {conference.country}</dd></>}<dt>Status</dt><dd>{paper.status}</dd><dt>Year</dt><dd>{paper.year}</dd>{date && date !== paper.year && <><dt>{paper.status === 'Preprint' ? 'Preprint date' : 'Publication date'}</dt><dd>{date}</dd></>}{paper.volume && <><dt>Volume</dt><dd>{paper.volume}</dd></>}{paper.issue && <><dt>Issue</dt><dd>{paper.issue}</dd></>}{paper.pages && <><dt>Pages</dt><dd>{paper.pages}</dd></>}{paper.articleNumber && <><dt>Article number</dt><dd>{paper.articleNumber}</dd></>}{paper.doi && <><dt>DOI</dt><dd><a href={doiUrl}>{publicationDoi(paper)}</a></dd></>}</dl><a class="publication-export" href={`/publications/${paper.slug}.bib`} download={`${paper.slug}.bib`}>Download BibTeX citation ↓</a><p class="publication-note">{paper.sourceNote} The technical explanation is editorial and separate from the original abstract. Research note updated {paper.editorialUpdated}.</p></section>}
+      {appearances.length > 0 && <section class="publication-related"><h2>Upcoming presentation</h2>{appearances.map(event => <a href={`/events/${event.slug}/`}><span>{event.status} · Presenter: Meysam Ghanbari</span><strong>{event.shortName} · {event.location} →</strong><p>{event.date}{event.presentationSlot && ` · Draft slot: ${event.presentationSlot}`}</p></a>)}</section>}
       {relatedProjects.length > 0 && <section class="publication-related"><h2>Related projects</h2>{relatedProjects.map(project => <a href={`${project.href.replace(/\/$/,'')}/`}><span>{project.category}</span><strong>{project.title} →</strong></a>)}</section>}
       {relatedPapers.length > 0 && <section class="publication-related"><h2>Related publications</h2>{relatedPapers.map(related => <a href={`/publications/${related.slug}/`}><span>{related.year} · {related.status}</span><strong>{related.title} →</strong>{'reason' in related && <p>{related.reason}</p>}</a>)}</section>}
     </article>

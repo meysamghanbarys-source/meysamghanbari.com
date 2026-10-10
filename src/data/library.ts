@@ -129,6 +129,7 @@ export type Publication = {
   abstract?: string;
   /** Actual publication date, when known. A conference year is not a publication date. */
   publicationDate?: string;
+  preprintId?: string;
   image?: { src: string; thumbnail?: string; alt: string; width: number; height: number; caption: string };
   abstractLabel?: string;
   journalTitle?: string;
@@ -147,7 +148,7 @@ export type Publication = {
   venue: string;
   type: 'Journal' | 'Conference';
   year: string;
-  status: 'Published' | 'Accepted' | 'Submitted';
+  status: 'Published' | 'Accepted' | 'Submitted' | 'Preprint';
   summaryEn: string;
   summaryFa: string;
   tags: string[];
@@ -438,7 +439,8 @@ const publicationRecords: Publication[] = [
 // Stable slugs are updated in place; manuscripts without an existing record are appended once.
 const contentUpdates = publicationContent.updates as Record<string, Partial<Publication>>;
 export const publications: Publication[] = [...publicationRecords, ...publicationContent.newPapers as Publication[]]
-  .map(paper => ({ ...paper, ...contentUpdates[paper.slug] }));
+  .map(paper => ({ ...paper, ...contentUpdates[paper.slug] }))
+  .sort((a, b) => Number(b.year) - Number(a.year) || (b.editorialUpdated ?? '').localeCompare(a.editorialUpdated ?? ''));
 
 export const videos: Array<{
   title: string;
@@ -455,6 +457,19 @@ export const insights: Array<{
 }> = [];
 
 export const upcoming: Array<{
+  slug: string;
+  shortName: string;
+  city: string;
+  countryCode: string;
+  organizer?: string;
+  imageWidth: number;
+  imageHeight: number;
+  programUrl?: string;
+  programNote?: string;
+  presentationStart?: string;
+  presentationEnd?: string;
+  presentationSlot?: string;
+  paperLinkLabel?: string;
   title: string;
   titleFa: string;
   date: string;
@@ -477,10 +492,88 @@ export const upcoming: Array<{
   paperTitle: string;
   paperUrl: string;
   researchUrl: string;
-  projectUrl: string;
+  projectUrl?: string;
   tags: string[];
 }> = [
   {
+    slug: 'icft-2026',
+    shortName: 'ICFT 2026',
+    title: 'Meysam Ghanbari at ICFT 2026',
+    titleFa: '',
+    date: '18–22 October 2026',
+    startDate: '2026-10-18',
+    endDate: '2026-10-22',
+    city: 'Amman',
+    countryCode: 'JO',
+    organizer: 'German Jordanian University',
+    location: 'Amman, Jordan',
+    locationFa: '',
+    venue: 'German Jordanian University · Main / Madaba Campus',
+    type: 'Scheduled research presentation · draft program',
+    typeFa: '',
+    status: 'Scheduled',
+    question: 'Can an optical receiver separate arrival angle, pointing error, jitter and turbulence without training a neural network?',
+    questionFa: '',
+    description: 'Meysam Ghanbari will present a learning-free, three-stage estimator that uses quadrant imbalance and the lens-array power profile to separate these coupled effects. The Monte Carlo study shows robust arrival-angle estimation while exposing turbulence-induced limits in pointing and jitter recovery.',
+    descriptionFa: '',
+    conference: 'International Conference on Future Technologies (ICFT 2026)',
+    conferenceUrl: 'https://icft.gju.edu.jo/',
+    programUrl: 'https://icft.gju.edu.jo/template/ICFT2026_Program_Booklet.pdf',
+    presentationStart: '2026-10-19T16:45:00+03:00',
+    presentationEnd: '2026-10-19T17:00:00+03:00',
+    presentationSlot: 'Monday, 19 October · 16:45–17:00 · Room H103 · Amman time (UTC+3)',
+    programNote: 'The draft program lists accepted paper #179 in Session 5: 5G/6G Networks, Free-Space Optics & Field Measurements. The slot is provisional. The conference website lists 18–22 October; the draft booklet covers 18–21 October.',
+    image: '/images/publications/learning-free-multi-aperture-fso-estimation.webp',
+    imageWidth: 1440,
+    imageHeight: 720,
+    imageAlt: 'Concept infographic of the multi-aperture FSO receiver and learning-free estimation stages studied in Meysam Ghanbari’s ICFT 2026 presentation',
+    paperTitle: 'Learning-Free Hierarchical Joint Estimation of AoA, Pointing Error, Receiver Jitter, and Turbulence in Multi-Aperture FSO Systems',
+    paperUrl: 'https://arxiv.org/abs/2609.13605',
+    paperLinkLabel: 'arXiv preprint ↗',
+    researchUrl: '/publications/learning-free-hierarchical-joint-estimation-multi-aperture-fso',
+    tags: ['Multi-Aperture FSO', 'Learning-Free Estimation', 'Angle of Arrival', 'Pointing Error']
+  },
+  {
+    slug: 'commnet-2026',
+    shortName: 'CommNet 2026',
+    title: 'Meysam Ghanbari at CommNet 2026',
+    titleFa: '',
+    date: '14–16 December 2026',
+    startDate: '2026-12-14',
+    endDate: '2026-12-16',
+    city: 'Rabat',
+    countryCode: 'MA',
+    location: 'Rabat, Morocco',
+    locationFa: '',
+    venue: 'ENSIAS, Mohammed V University',
+    type: 'Planned research presentation',
+    typeFa: '',
+    status: 'Planned',
+    question: 'What if a satellite optical receiver could predict where the beam will be when its steering command takes effect?',
+    questionFa: '',
+    description: 'Meysam Ghanbari plans to present PIR-Twin, a receiver-side digital twin that predicts line-of-sight motion at the future steering-command actuation time. In the nominal 1000 km numerical scenario at 2 ms actuator delay, pointing RMS decreases from 2.12 µrad with reactive tracking to 1.82 µrad with residual-enhanced prediction.',
+    descriptionFa: '',
+    conference: 'The 9th International Conference on Advanced Communication Technologies and Networking (CommNet 2026)',
+    conferenceUrl: 'https://www.commnet-conf.org/',
+    programNote: 'Meysam Ghanbari has confirmed plans to present this work. Conference dates and the Rabat venue are verified against the official website. A paper acceptance and an exact presentation day, time or session have not yet been verified.',
+    image: '/images/publications/predictive-optical-link-pir-twin.webp',
+    imageWidth: 1440,
+    imageHeight: 720,
+    imageAlt: 'Concept illustration of satellite optical reception and PIR-Twin predictive fine tracking for Meysam Ghanbari’s planned CommNet 2026 presentation',
+    paperTitle: 'Receiver-Side Physics-Informed Residual Digital Twin for Predictive Fine Tracking in Inter-Satellite Optical Links',
+    paperUrl: 'https://arxiv.org/abs/2609.25975',
+    paperLinkLabel: 'arXiv preprint ↗',
+    researchUrl: '/publications/receiver-side-physics-informed-residual-digital-twin-predictive-fine-tracking-oisl',
+    tags: ['Inter-Satellite Optical Links', 'Digital Twin', 'Predictive Fine Tracking', 'Actuator Delay']
+  },
+  {
+    slug: 'vtc2027-spring',
+    shortName: 'IEEE VTC 2027-Spring',
+    city: 'Hamburg',
+    countryCode: 'DE',
+    organizer: 'IEEE Vehicular Technology Society',
+    imageWidth: 1280,
+    imageHeight: 720,
     title: 'Meysam Ghanbari at IEEE VTC 2027-Spring',
     titleFa: 'ارائه میثم قنبری در IEEE VTC 2027-Spring',
     date: '20–23 June 2027',

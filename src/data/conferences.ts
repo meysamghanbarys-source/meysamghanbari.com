@@ -3,6 +3,8 @@ import type { Publication } from './library';
 export type Conference = { name: string; shortName: string; city: string; country: string; countryCode: string; url: string };
 // Locations checked 3 October 2026 against organizer or institutional records.
 const conferences: Record<string, Conference> = {
+  'ICFT-2026': { name:'International Conference on Future Technologies (ICFT 2026)', shortName:'ICFT 2026', city:'Amman', country:'Jordan', countryCode:'JO', url:'https://icft.gju.edu.jo/' },
+  'COMMNET-2026': { name:'The 9th International Conference on Advanced Communication Technologies and Networking (CommNet 2026)', shortName:'CommNet 2026', city:'Rabat', country:'Morocco', countryCode:'MA', url:'https://www.commnet-conf.org/' },
   'VTC-2027': { name:'2027 IEEE Vehicular Technology Conference (VTC2027-Spring)', shortName:'IEEE VTC 2027-Spring', city:'Hamburg', country:'Germany', countryCode:'DE', url:'https://events.vtsociety.org/vtc2027-spring/' },
   'ICC-2027': { name:'2027 IEEE International Conference on Communications (ICC)', shortName:'IEEE ICC 2027', city:'Washington, D.C.', country:'United States', countryCode:'US', url:'https://www.comsoc.org/conferences-events/ieee-international-conference-communications-2027' },
   'ICC-2026': { name:'2026 IEEE International Conference on Communications (ICC)', shortName:'IEEE ICC 2026', city:'Glasgow', country:'United Kingdom', countryCode:'GB', url:'https://www.comsoc.org/conferences-events/portfolio-conferences-events/conferences-events-history' },
@@ -16,6 +18,6 @@ const conferences: Record<string, Conference> = {
 };
 export function publicationConference(paper: Publication): Conference | undefined {
   if (paper.type !== 'Conference') return undefined;
-  const acronym = paper.venue.match(/\b(VTC|ICC|WCNC|ICMLCN|ICUFN|ICETES|ICEE|WASOWC|MENACOMM)\b/)?.[1];
+  const acronym = paper.venue.match(/\b(VTC|ICC|WCNC|ICMLCN|ICUFN|ICETES|ICEE|WASOWC|MENACOMM|ICFT|COMMNET)\b/i)?.[1]?.toUpperCase();
   return acronym ? conferences[`${acronym}-${paper.year}`] : undefined;
 }

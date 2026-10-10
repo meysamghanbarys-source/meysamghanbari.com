@@ -6,10 +6,14 @@ import { engineeringPaths } from '../data/future-systems';
 const today = new Date().toISOString().slice(0, 10);
 const event = upcoming.find(item => item.endDate >= today);
 const quantumPaper = publications.find(item => item.slug === 'city-scale-quantum-timing-wireless-synchronization-quantum-hubs')!;
-const selectedPapers = [publications[1], quantumPaper, publications[0]];
+const latestPaper = publications.find(item => item.slug === 'learning-free-hierarchical-joint-estimation-multi-aperture-fso')!;
+const relayPaper = publications.find(item => item.slug === 'all-optical-multi-hop-inter-satellite-relaying-m-pam')!;
+const predictivePaper = publications.find(item => item.slug === 'receiver-side-physics-informed-residual-digital-twin-predictive-fine-tracking-oisl')!;
+const selectedPapers = [latestPaper, predictivePaper, relayPaper];
 const spotlight = [
-  ...(event ? [{ id:'upcoming-vtc', kind:'Upcoming', title:'IEEE VTC 2027-Spring', detail:`${event.date} · ${event.location}`, href:'/upcoming/', action:'View presentation', expires:event.endDate }] : []),
-  { id:quantumPaper.slug, kind:'Publication · Published', title:'Toward City-Scale Quantum Timing', detail:'Wireless synchronization via quantum hubs · IEEE JSAC', href:`/publications/${quantumPaper.slug}/`, action:'Read the research', expires:undefined },
+  ...(event ? [{ id:event.slug, kind:'Upcoming', title:event.shortName, detail:`${event.date} · ${event.location}`, href:`/events/${event.slug}/`, action:'View presentation', expires:event.endDate }] : []),
+  { id:latestPaper.slug, kind:'Publication · Accepted', title:'Learning-Free FSO Joint Estimation', detail:'Arrival angle, pointing, jitter and turbulence · ICFT 2026', href:`/publications/${latestPaper.slug}/`, action:'Read the research', expires:undefined },
+  { id:predictivePaper.slug, kind:'Planned · CommNet 2026', title:'Predict the Beam Before Steering', detail:'PIR-Twin fine tracking · 14–16 December · Rabat, Morocco', href:'/events/commnet-2026/', action:'View presentation', expires:'2026-12-16' },
   { id:'optical-record-observatory', kind:'Technical resource', title:'Optical Record Observatory', detail:'Demonstrated capabilities, operational links and future targets.', href:'/research/optical-communications-records/', action:'Explore the evidence', expires:undefined }
 ];
 ---

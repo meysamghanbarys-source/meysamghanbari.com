@@ -1375,6 +1375,206 @@
         "Ghanbari, Meysam",
         "Hasna, Mazen"
       ]
+    },
+    {
+      "slug": "learning-free-hierarchical-joint-estimation-multi-aperture-fso",
+      "title": "Learning-Free Hierarchical Joint Estimation of AoA, Pointing Error, Receiver Jitter, and Turbulence in Multi-Aperture FSO Systems",
+      "authors": "Mahtab Dashtebozorgi, Meysam Ghanbari, Rula Ammuri, Mazen Hasna, Khalid Qaraqe",
+      "authorNames": [
+        "Mahtab Dashtebozorgi",
+        "Meysam Ghanbari",
+        "Rula Ammuri",
+        "Mazen Hasna",
+        "Khalid Qaraqe"
+      ],
+      "citationNames": [
+        "Dashtebozorgi, Mahtab",
+        "Ghanbari, Meysam",
+        "Ammuri, Rula",
+        "Hasna, Mazen",
+        "Qaraqe, Khalid"
+      ],
+      "venue": "International Conference on Future Technologies (ICFT 2026), Amman, Jordan",
+      "type": "Conference",
+      "year": "2026",
+      "status": "Accepted",
+      "summaryEn": "A learning-free, three-stage estimator separates arrival angle, pointing error, receiver jitter and turbulence in multi-aperture FSO links, with Monte Carlo validation and explicit error-floor analysis.",
+      "summaryFa": "",
+      "tags": [
+        "Multi-Aperture FSO",
+        "Angle of Arrival",
+        "Pointing Error",
+        "Learning-Free Estimation",
+        "Atmospheric Turbulence"
+      ],
+      "abstract": "This paper proposes a learning-free hierarchical estimator for jointly recovering the angle of arrival (AoA), transmitter pointing error, receiver-induced jitter, and per-aperture turbulence coefficients in a multi-aperture free-space optical system. The proposed method exploits the distinct spatial signatures contained in quad-photodetector measurements. First, normalized quadrant imbalance ratios provide an approximate closed-form AoA estimate. Next, AoA-compensated lens powers are transformed into a log-linear regression model for non-iterative pointing-error estimation. Finally, receiver jitter and turbulence coefficients are directly reconstructed after compensating for the estimated angular losses. The method requires neither neural-network training nor exhaustive multidimensional search and has computational complexity linear in the number of lenses. Monte Carlo results demonstrate robust AoA estimation under Gamma–Gamma turbulence, reveal turbulence-induced error floors in OLS-based pointing and jitter estimation, and show improved turbulence reconstruction with larger arrays and explicit pointing compensation.",
+      "abstractLabel": "Abstract · supplied arXiv v1 manuscript (11 September 2026)",
+      "externalUrl": "https://arxiv.org/abs/2609.13605",
+      "externalLabel": "arXiv preprint ↗",
+      "pdf": "https://arxiv.org/pdf/2609.13605v1",
+      "editorialUpdated": "2026-10-10",
+      "sourceNote": "The abstract, author order and technical explanation follow the supplied arXiv:2609.13605v1 manuscript dated 11 September 2026. ICFT 2026 lists this work as accepted paper #179 in its draft technical program. The planned presenter is Meysam Ghanbari, as confirmed by him. Conference-proceedings publication and a DOI are not yet verified.",
+      "image": {
+        "src": "/images/publications/learning-free-multi-aperture-fso-estimation.webp",
+        "thumbnail": "/images/publications/learning-free-multi-aperture-fso-estimation-thumb.webp",
+        "alt": "Concept infographic of a free-space optical transmitter, multi-aperture receiver and three stages for arrival-angle, pointing-error, jitter and turbulence estimation.",
+        "width": 1440,
+        "height": 720,
+        "caption": "Concept illustration supplied for this publication, showing the receiver and estimation stages. Exact equations and detector-quadrant conventions are defined in the manuscript."
+      },
+      "editorial": {
+        "question": "Can an optical receiver separate arrival angle, pointing error, jitter and turbulence without training a neural network?",
+        "answer": "The study uses two spatial signatures: quadrant imbalance within each detector reveals the angle of arrival, while the power profile across the lens array supports log-linear pointing estimation. Angular compensation then enables receiver-jitter and turbulence reconstruction. The three-stage estimator needs no training and scales linearly with lens count, although unknown aperture turbulence still limits pointing and jitter accuracy.",
+        "sections": [
+          {
+            "heading": "Two spatial signatures, four coupled effects",
+            "paragraphs": [
+              "Each small lens focuses the incident optical beam onto its own quad-photodetector. The relative powers of its four quadrants carry arrival-angle information; the total powers across the lens array carry the spatial footprint of transmitter pointing error. Atmospheric turbulence multiplies the signal within each aperture.",
+              "The model treats arrival angle as the sum of transmitter pointing error and receiver jitter. It assumes a Gaussian beam, small angles and apertures small relative to the beam waist, independent Gamma–Gamma gains for sufficiently separated lenses, additive Gaussian noise, and parameters constant during a measurement block."
+            ],
+            "source": "Section II; Fig. 1; Eqs. (1)–(15)"
+          },
+          {
+            "heading": "An interpretable three-stage estimator",
+            "paragraphs": [
+              "First, normalized horizontal and vertical quadrant-imbalance ratios suppress factors common to the four quadrants, including aperture turbulence. An inverse-error-function relation yields approximate arrival-angle estimates, combined using received-power weights. This approximation requires negligible detector truncation and a displaced spot that remains within the detector support.",
+              "Second, arrival-angle compensation recovers a lens-wise power sequence. Its logarithm becomes a spatial linear regression whose slopes determine transmitter pointing error. At least three non-collinear lens centers are required for a full-rank regression. Third, the receiver-jitter vector is reconstructed as arrival angle minus pointing error, and each turbulence coefficient is recovered after angular-loss compensation.",
+              "Clipping, positive-power floors and denominator regularization stabilize weak branches. Angular results use ordinary least squares (OLS); the turbulence-reconstruction comparison uses received-power-weighted least squares (WLS). Lens-wise processing is O(Nlens), with only a fixed 3 × 3 matrix inversion."
+            ],
+            "source": "Section III; Eqs. (16)–(39)"
+          },
+          {
+            "heading": "What the simulations show",
+            "paragraphs": [
+              "The default Monte Carlo model uses a 1 km link, 0.15 m beam waist, 1 cm lens radius, 5 cm focal length, 20 µm focal-spot radius and 200 µm detector side length, with 8000 realizations. The angular comparison uses a 6 × 6 array with 4 cm lens spacing, 20 µrad transmitter-pointing standard deviation and 10 µrad receiver-jitter standard deviation. SNR is normalized separately for each realization using the average squared noise-free quadrant output.",
+              "At 40 dB SNR with deterministic aperture gains, the two-dimensional vector RMSEs are 0.44 µrad for arrival angle, 0.27 µrad for pointing and 0.52 µrad for receiver jitter. With Gamma–Gamma turbulence (α = β = 10), they become 0.48, 17.93 and 17.94 µrad, respectively. Thus, robust arrival-angle estimation does not imply equally accurate pointing or jitter estimates.",
+              "The noiseless OLS comparison still has a 17.92 µrad pointing and jitter floor under unknown turbulence; an oracle supplied with the true turbulence coefficients removes that coupling. Figure 3 compares 16-, 25- and 36-lens WLS arrays. Larger arrays and explicit pointing compensation reduce turbulence-reconstruction NMSE at moderate and high SNR, relative to a 36-lens baseline that omits pointing compensation."
+            ],
+            "source": "Section IV; Table I; Figs. 2–3; Eqs. (40)–(43)"
+          },
+          {
+            "heading": "Engineering relevance and limits",
+            "paragraphs": [
+              "The framework provides an interpretable alternative when training data, retraining and multidimensional search are undesirable. It also makes the separation problem visible: increasing SNR alone cannot remove the disturbance that independent aperture turbulence introduces into the pointing regression.",
+              "These are analytical and Monte Carlo findings for the stated multi-aperture FSO model. They do not establish measured terminal latency, a hardware demonstration, spacecraft operation or unrestricted recovery under strong turbulence. Detector truncation, calibration error, correlated aperture fading and changing channel conditions need additional evaluation."
+            ],
+            "source": "Sections II–V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "hierarchical-deep-learning-turbulence-pointing-error-multi-aperture-fso",
+            "reason": "The earlier hierarchical learning approach uses the same multi-aperture spatial signatures; this paper replaces training with explicit estimation stages."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "Places the receiver’s estimation problem within the wider engineering limits of narrow-beam alignment."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "receiver-side-physics-informed-residual-digital-twin-predictive-fine-tracking-oisl",
+      "title": "Receiver-Side Physics-Informed Residual Digital Twin for Predictive Fine Tracking in Inter-Satellite Optical Links",
+      "authors": "Mahtab Dashtebozorgi, Meysam Ghanbari, Rula Ammuri, Mazen O. Hasna, Khalid A. Qaraqe",
+      "authorNames": [
+        "Mahtab Dashtebozorgi",
+        "Meysam Ghanbari",
+        "Rula Ammuri",
+        "Mazen O. Hasna",
+        "Khalid A. Qaraqe"
+      ],
+      "citationNames": [
+        "Dashtebozorgi, Mahtab",
+        "Ghanbari, Meysam",
+        "Ammuri, Rula",
+        "Hasna, Mazen O.",
+        "Qaraqe, Khalid A."
+      ],
+      "venue": "arXiv preprint · planned presentation at CommNet 2026, Rabat, Morocco",
+      "type": "Conference",
+      "year": "2026",
+      "status": "Preprint",
+      "publicationDate": "2026-09-22",
+      "summaryEn": "A receiver-side physics-informed residual digital twin predicts beam alignment at steering-command actuation time, reducing simulated pointing RMS from 2.12 to 1.82 µrad at 2 ms delay.",
+      "summaryFa": "",
+      "tags": [
+        "Inter-Satellite Optical Links",
+        "Digital Twin",
+        "Predictive Fine Tracking",
+        "Extended Kalman Filter",
+        "Actuator Delay"
+      ],
+      "abstract": "Fine tracking in inter-satellite optical links must compensate residual line-of-sight (LOS) motion despite sensor noise, vibration, model mismatch, and actuator latency. This paper develops a receiver-side physics-informed residual digital twin (PIR-Twin) that combines a nominal LOS transition, Gaussian optics, a nonlinear quadrant-photodetector observation, and extended Kalman filter synchronization. A normalized autoregressive ridge model learns the transition mismatch from independent calibration estimates, while the known delayed fine-steering-mirror correction remains separate from the physical LOS dynamics. The synchronized twin predicts the LOS at the command-actuation instant and enables proactive fine tracking. A controlled evaluation compares open-loop, reactive, nominal-predictive, and PIR-Twin operation using disjoint tuning, calibration, and test realizations. Under the nominal scenario, PIR-Twin reduces RMS pointing error by 14.1% relative to reactive tracking and also improves actuation-time prediction accuracy. Extended robustness tests show that the proposed method retains the lowest mean pointing error over a broad actuator-delay range and under increased time-varying LOS-motion amplitudes without residual-model retraining. The results demonstrate that correcting systematic short-horizon model mismatch, rather than relying on nominal extrapolation alone, is the key mechanism enabling effective predictive fine tracking.",
+      "abstractLabel": "Abstract · supplied arXiv v1 manuscript (22 September 2026)",
+      "externalUrl": "https://arxiv.org/abs/2609.25975",
+      "externalLabel": "arXiv preprint ↗",
+      "pdf": "https://arxiv.org/pdf/2609.25975v1",
+      "preprintId": "2609.25975",
+      "editorialUpdated": "2026-10-10",
+      "sourceNote": "The abstract, author order and technical results follow the supplied arXiv:2609.25975v1 manuscript dated 22 September 2026. Meysam Ghanbari has confirmed plans to present this work at CommNet 2026 in Rabat, Morocco. A conference acceptance, session slot, proceedings publication and DOI have not been verified.",
+      "image": {
+        "src": "/images/publications/predictive-optical-link-pir-twin.webp",
+        "thumbnail": "/images/publications/predictive-optical-link-pir-twin-thumb.webp",
+        "alt": "Concept illustration of two satellites connected by an optical beam, with a receiver cutaway and digital-twin, Kalman-filter and delayed steering-control blocks.",
+        "width": 1440,
+        "height": 720,
+        "caption": "Concept illustration supplied for this publication. The satellites, receiver hardware and small graphical traces are illustrative; validation in the paper is numerical, and the formal control architecture is defined in its system model."
+      },
+      "editorial": {
+        "question": "What if a satellite optical receiver could predict where the beam will be when its steering command takes effect?",
+        "answer": "PIR-Twin forecasts the line of sight at the actuator’s future application time, combining a nominal physical model with a learned correction for short-horizon mismatch. In the simulated 1000 km link at 2 ms actuator delay, mean pointing RMS falls from 2.12 µrad with reactive tracking to 1.82 µrad. The gain comes from correcting prediction error, while the steering mirror’s delayed optical correction stays separate from spacecraft motion.",
+        "sections": [
+          {
+            "heading": "Track the beam at actuation time",
+            "paragraphs": [
+              "After coarse acquisition and point-ahead compensation, a receiver must suppress residual line-of-sight motion within its fine-tracking range. Sensor noise, vibration and actuator latency mean that an accurate estimate of the beam’s current angle may already be out of date when a steering correction takes effect.",
+              "The architecture combines quadrant-photodetector sensing, an extended Kalman filter (EKF), nominal LOS dynamics, a residual predictor and a delayed fine-steering-mirror (FSM) command queue. The EKF estimates uncompensated LOS motion using the known correction currently applied to the optics. An FSM command changes the optical pointing geometry; it does not accelerate the spacecraft or enter the physical LOS transition."
+            ],
+            "source": "Sections I–II; Fig. 1; Eqs. (1)–(14)"
+          },
+          {
+            "heading": "Learn the mismatch and preserve the physical model",
+            "paragraphs": [
+              "A constant-angular-rate model supplies the nominal transition. A normalized autoregressive ridge regressor learns only its residual mismatch, using consecutive synchronized EKF posterior estimates from separate calibration traces. It does not receive the true simulated state during fitting.",
+              "The predictor rolls the nominal transition and a bounded learned residual forward over the command delay. Pending commands remain known optical offsets. The same nominal EKF, gain, actuator authority and measurement noise are retained across reactive, nominal-predictive and PIR-Twin modes, isolating the contribution of improved forecasting.",
+              "Tuning uses a separate 2 s trace. Four independent 5 s calibration traces yield 18000 valid transition samples after discarding the initial 0.5 s of each trace. The learned weights are fixed before testing on ten unseen 2 s realizations."
+            ],
+            "source": "Section III; Eqs. (15)–(34); Section IV-A"
+          },
+          {
+            "heading": "Controlled simulation results",
+            "paragraphs": [
+              "The model uses a 1000 km link at 1550 nm, a 30 mm beam waist and a 16.45 µrad Gaussian half-angle, with a 100 mm receive aperture. Fine tracking operates at 1 kHz, nominally with a 2 ms delay and ±50 µrad per-axis correction authority. The independently generated LOS trajectories include bias, drift, vibration and randomized low-frequency tones.",
+              "At the nominal 2 ms delay, Table I reports mean two-axis pointing RMS of 25.7 ± 0.6 µrad open loop, 2.12 ± 0.08 µrad reactive, 2.11 ± 0.08 µrad nominal predictive, and 1.82 ± 0.11 µrad PIR-Twin. The reported ± values are sample standard deviations across ten test seeds. The manuscript reports a 14.1% improvement over reactive tracking from its unrounded results.",
+              "Actuation-time prediction RMSE falls from 1.95 ± 0.01 µrad for reactive tracking to 1.62 ± 0.05 µrad for PIR-Twin. Its equivalent Gaussian angular penalty falls from 0.125 to 0.088 dB, with similar applied-command amplitudes. This optical-quality proxy is not a measured received-power or communications-throughput result."
+            ],
+            "source": "Section IV-A–C; Table I; Eqs. (35)–(41)"
+          },
+          {
+            "heading": "Robustness and boundaries",
+            "paragraphs": [
+              "The fixed residual model has the lowest mean pointing error across the tested 1–12 ms delays and 1×, 1.5× and 2× time-varying LOS-motion amplitudes. At 12 ms under nominal motion, pointing RMS is 12.56 µrad for nominal prediction, 6.33 µrad reactive and 5.94 µrad PIR-Twin. The stronger-motion tests increase the reported 2 ms improvement over reactive tracking to 20.7% and 23.7%, without retraining.",
+              "These are controlled numerical results. The QPD observation assumes sufficiently large detector area, negligible quadrant gaps and fixed normalized measurement covariance. The actuator is represented by an effective fixed delay and finite angular authority. The work does not demonstrate on-orbit hardware, field robustness to every disturbance, or end-to-end data-rate gains."
+            ],
+            "source": "Section II-B; Section IV-D; Fig. 2; Section V"
+          }
+        ],
+        "related": [
+          {
+            "slug": "learning-free-hierarchical-joint-estimation-multi-aperture-fso",
+            "reason": "A complementary receiver estimation study that separates angular and turbulence effects without a trained predictor; its model and validation are distinct."
+          },
+          {
+            "slug": "integrated-optical-receiver-communication-fine-tracking-inter-satellite",
+            "reason": "Explores optical receiver architecture for combined communication and fine tracking."
+          },
+          {
+            "slug": "future-communications-narrow-beams-pointing-errors-alignment-limits",
+            "reason": "A broader survey of the alignment constraints that motivate delay-aware fine tracking."
+          }
+        ]
+      }
     }
   ]
 }

@@ -50,9 +50,12 @@ for slug,paper in papers.items():
     require(all(n in bib for n in paper['citationNames']), f'{slug}: incomplete citation author order')
     if paper.get('doi'):
         require(paper['doi'] in bib, f'{slug}: citation DOI absent')
-    if article['creativeWorkStatus'] == 'Submitted':
-        require(bib.startswith('@unpublished{') and 'note = {Submitted}' in bib, f'{slug}: submitted work represented as published')
-        require('isPartOf' not in article, f'{slug}: submitted manuscript assigned to a published journal issue')
+    if article['creativeWorkStatus'] in ['Submitted','Preprint']:
+        require(bib.startswith('@unpublished{') and f"note = {{{article['creativeWorkStatus']}}}" in bib, f'{slug}: unpublished work represented as published')
+        require('isPartOf' not in article, f'{slug}: unpublished manuscript assigned to published proceedings or a journal issue')
+    if article['creativeWorkStatus'] == 'Preprint':
+        require('citation_conference_title' not in page.metas, f'{slug}: future presentation represented as conference publication')
+        require('archivePrefix = {arXiv}' in bib and paper['preprintId'] in bib, f'{slug}: preprint identifier absent from citation')
     require('Concept illustration supplied' in body, f'{slug}: concept image not identified')
     require(f'https://meysamghanbari.com/publications/{slug}/' in (ROOT/'dist/sitemap-0.xml').read_text(), f'{slug}: sitemap missing')
     if slug in ['meteorological-conditions-performance-optimization-miso-fso','ber-mixed-underwater-owc-fso-relaying-pointing-error','outage-uav-mixed-underwater-fso-pointing-errors','optical-irs-assisted-relay-los-qkd','secrecy-analysis-pinching-antenna-systems']:

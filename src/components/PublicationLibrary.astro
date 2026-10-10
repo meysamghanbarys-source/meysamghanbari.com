@@ -9,7 +9,7 @@ const hasVisuals = publications.some(paper => paper.image);
   <div class="library-tools" hidden data-library-tools>
     <label class="library-search">Search publications<input type="search" name="search" placeholder="Title, author, venue or keyword" autocomplete="off" data-library-search /></label>
     <label>Type<select data-library-type><option value="">All types</option><option>Journal</option><option>Conference</option></select></label>
-    <label>Status<select data-library-status><option value="">All statuses</option><option>Published</option><option>Accepted</option><option>Submitted</option></select></label>
+    <label>Status<select data-library-status><option value="">All statuses</option><option>Published</option><option>Accepted</option><option>Submitted</option><option>Preprint</option></select></label>
     <label>Year<select data-library-year><option value="">All years</option>{years.map(year => <option>{year}</option>)}</select></label>
     <label>Topic<select data-library-topic><option value="">All topics</option>{topics.map(topic => <option>{topic}</option>)}</select></label>
     <button type="button" data-library-clear>Clear filters</button>
@@ -92,4 +92,8 @@ const hasVisuals = publications.some(paper => paper.image);
 .library-no-results { padding:30px 0; color:#b8c9dd; font-size:15px; }
 @media(max-width:1000px) { .library-tools { grid-template-columns:repeat(3,minmax(0,1fr)); } .library-search { grid-column:1 / 3; } .library-tools button { grid-column:3; grid-row:1; } }
 @media(max-width:600px) { .library-tools { grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; } .library-search { grid-column:1 / -1; } .library-tools button { grid-column:2; grid-row:auto; } .library-record, .has-visuals .library-record { grid-template-columns:minmax(0,1fr) 38px; gap:10px; padding:22px 0; } .library-visual-rail { display:none; } .library-mobile-number { display:inline; color:#9eb4ca; } .library-record h2 { font-size:19px; } .library-record-link { width:38px; } .library-pagination { gap:12px; } }
+</style>
+
+<style>
+.status-preprint { color:#d5ceff; border-color:#8171be; background:#211d35; }
 </style>

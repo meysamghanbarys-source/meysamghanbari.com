@@ -1,4 +1,6 @@
 const publicationTitles: Record<string, [string, string]> = {
+  'receiver-side-physics-informed-residual-digital-twin-predictive-fine-tracking-oisl': ['PIR-Twin: Predictive Optical Fine Tracking | Meysam Ghanbari', 'PIR-Twin: Predictive Optical Fine Tracking | Meysam Ghanbari'],
+  'learning-free-hierarchical-joint-estimation-multi-aperture-fso': ['Learning-Free FSO Joint Estimation | Meysam Ghanbari', 'Learning-Free FSO Joint Estimation | Meysam Ghanbari'],
   'secrecy-analysis-pinching-antenna-systems': ['Pinching-Antenna Secrecy Analysis | Meysam Ghanbari', 'Pinching-Antenna Secrecy Analysis | Meysam Ghanbari'],
   'advancing-oam-fso-pointing-errors-space-terrestrial-links': ['OAM Optical Links and Pointing Errors | Meysam Ghanbari', 'OAM Optical Links and Pointing Errors | Meysam Ghanbari'],
   'all-optical-multi-hop-inter-satellite-relaying-m-pam': ['All-Optical Inter-Satellite Relaying | Meysam Ghanbari', 'رله تمام‌نوری بین‌ماهواره‌ای | میثم قنبری'],
