@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventImageCredit from '../../components/EventImageCredit.astro';
 import { upcoming } from '../../data/library';
 import { eventSchema } from '../../data/event-schema';
 import { serializeJsonLd } from '../../data/json-ld';
@@ -12,14 +13,15 @@ const { event } = Astro.props;
   <script slot="head" type="application/ld+json" set:html={serializeJsonLd(eventSchema(event))}></script>
   <section class="appearance-header"><div class="shell">
     <a class="appearance-back" href="/upcoming/">← Upcoming appearances</a>
-    <p class="eyebrow">{event.status} · {event.shortName} · {event.location}</p>
+    <p class="eyebrow">{event.status} · FORTHCOMING INTERNATIONAL PRESENTATION</p>
+    <p class="appearance-destination"><strong>{event.country}</strong><span>{event.city}</span></p>
     <h1>{event.title}</h1>
     <p class="appearance-date">{event.date} · {event.venue}</p>
   </div></section>
   <div class="shell appearance-body">
     <article>
+      <figure><img src={event.image} srcset={event.imageSmall ? `${event.imageSmall} 640w, ${event.image} ${event.imageWidth}w` : undefined} sizes="(max-width: 750px) calc(100vw - 40px), 740px" alt={event.imageAlt} width={event.imageWidth} height={event.imageHeight} loading="eager" fetchpriority="high" /><figcaption>{event.imageCaption}<EventImageCredit event={event} /></figcaption></figure>
       <section class="appearance-question"><p class="eyebrow">THE RESEARCH QUESTION</p><h2>{event.question}</h2><p>{event.description}</p></section>
-      <figure><img src={event.image} alt={event.imageAlt} width={event.imageWidth} height={event.imageHeight} loading="lazy" /><figcaption>{event.image.startsWith('/images/publications/') ? 'Concept illustration for the research presentation; the formal model and numerical evidence are explained on the publication page.' : event.imageAlt}</figcaption></figure>
       <section><h2>{event.additionalPapers?.length ? 'Presentation papers' : 'Presentation paper'}</h2><h3><a href={`${event.researchUrl}/`}>{event.paperTitle}</a></h3><p>Meysam Ghanbari is the planned presenter of this coauthored research. The publication page provides the complete author list, original abstract, method, results and limitations.</p><a class="button" href={`${event.researchUrl}/`}>Read the research →</a></section>
       {event.additionalPapers?.map(paper => <section class="appearance-question"><p class="eyebrow">SECOND RESEARCH PRESENTATION</p><h2>{paper.question}</h2><p>{paper.description}</p><h3><a href={`${paper.researchUrl}/`}>{paper.title}</a></h3><a class="button" href={`${paper.researchUrl}/`}>Read the receiver research →</a></section>)}
       {event.programNote && <section><h2>Program and schedule</h2>{event.presentationSlot && <p class="appearance-slot">{event.presentationSlot}</p>}<p>{event.programNote}</p>{event.programUrl && <a class="button ghost" href={event.programUrl} target="_blank" rel="noreferrer">Official draft program ↗</a>}</section>}
@@ -33,6 +35,9 @@ const { event } = Astro.props;
 .appearance-back { display:inline-flex; min-height:44px; align-items:center; color:#aac6dc; font-size:13px; margin-bottom:20px; }
 .appearance-header h1 { font-size:clamp(33px,4vw,53px); line-height:1.15; letter-spacing:-.035em; margin:15px 0; }
 .appearance-date { color:#b9cfdf; font-size:15px; line-height:1.7; }
+.appearance-destination { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:baseline; margin:20px 0; }
+.appearance-destination strong { font-size:clamp(34px,4vw,52px); letter-spacing:-.03em; line-height:1.1; color:#93e4f5; }
+.appearance-destination span { font-size:25px; color:#c2d5e5; }
 .appearance-body { --shell:1080px; display:grid; grid-template-columns:minmax(0,740px) minmax(0,260px); gap:60px; padding-block:45px 70px; }
 .appearance-body article > section { margin-bottom:40px; }
 .appearance-body h2 { font-size:27px; line-height:1.3; margin:0 0 18px; letter-spacing:-.02em; }

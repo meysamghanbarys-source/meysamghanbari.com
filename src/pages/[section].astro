@@ -78,7 +78,7 @@ const visual = sectionVisuals[section];
   description={section === 'upcoming' && upcomingEvent ? `Upcoming research presentations by Meysam Ghanbari: ${upcoming.map(event => `${event.shortName} in ${event.location}`).join('; ')}. Explore the research questions and official event details.` : data.intro}
   lang="en"
   path={path}
-  seoTitle={section === 'publications' ? 'Satellite, Optical & Quantum Communications Publications | Meysam Ghanbari' : undefined}
+  seoTitle={section === 'publications' ? 'Satellite, Optical & Quantum Communications Publications | Meysam Ghanbari' : section === 'upcoming' ? 'Upcoming International Research Presentations | Meysam Ghanbari' : undefined}
   image={section === 'publications' ? publicationPortrait.image : section === 'upcoming' && upcomingEvent ? upcomingEvent.image : undefined}
   imageAlt={section === 'publications' ? publicationPortrait.alt : section === 'upcoming' && upcomingEvent ? upcomingEvent.imageAlt : undefined}
 >
@@ -92,7 +92,19 @@ const visual = sectionVisuals[section];
     </>}
   </Fragment>
   
-<section class={`page-hero page-hero-space page-hero-${section}`}>
+{section === 'upcoming' ? <section class="international-hero">
+  <div class="shell">
+    <p class="eyebrow">INTERNATIONAL RESEARCH APPEARANCES</p>
+    <h1>Upcoming<br />international appearances</h1>
+    <p class="international-intro">Meysam Ghanbari’s forthcoming conference presentations bring space and optical communications research to international audiences in Jordan, Spain, Morocco and Germany.</p>
+    <nav class="destination-index" aria-label="Upcoming conference destinations">
+      {upcoming.map((event,index) => <a href={`#${event.slug}`} class:list={['destination-tile', { 'destination-poster': event.imageKind === 'official-conference' }]}>
+        <img src={event.imageSmall ?? event.image} alt={event.imageAlt} width={event.imageWidth} height={event.imageHeight} loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+        <div><strong>{event.country}</strong><span>{event.city} · {event.shortName}</span><small>{event.date}</small></div>
+      </a>)}
+    </nav>
+  </div>
+</section> : <section class={`page-hero page-hero-space page-hero-${section}`}>
   <div class="space-grid-bg" aria-hidden="true"></div>
   <div class="page-hero-backdrop" style={`background-image:url('${visual.image}')`}></div>
   <div class="page-hero-orbit" aria-hidden="true"></div>
@@ -119,7 +131,7 @@ const visual = sectionVisuals[section];
       </div>
     </div>}
   </div>
-</section>
+</section>}
 
   {section === 'research' && (
     <section class="section section-tight">
@@ -371,6 +383,22 @@ const visual = sectionVisuals[section];
 </BaseLayout>
 
 <style>
+.international-hero { padding:55px 0 48px; border-bottom:1px solid var(--line); background:radial-gradient(ellipse at 80% 0,#12384c70,transparent 70%),#07111e; }
+.international-hero h1 { max-width:1000px; font-size:clamp(34px,4.5vw,64px); line-height:1.08; letter-spacing:-.04em; margin:18px 0 24px; }
+.international-intro { max-width:820px; color:#c1d2e1; font-size:17px; line-height:1.8; margin:0 0 34px; }
+.destination-index { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.destination-tile { min-width:0; border:1px solid #284358; border-radius:4px; overflow:hidden; background:#0b1a2a; transition:border-color .2s ease; }
+.destination-tile:hover,.destination-tile:focus-visible { border-color:#90deef; }
+.destination-tile img { display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
+.destination-poster img { object-fit:contain; background:#07111e; }
+.destination-tile div { padding:18px 16px; }
+.destination-tile strong,.destination-tile span,.destination-tile small { display:block; }
+.destination-tile strong { font-size:25px; letter-spacing:-.02em; line-height:1.2; }
+.destination-tile span { margin-top:9px; color:#c2d5e5; font-size:11px; line-height:1.6; }
+.destination-tile small { margin-top:7px; color:#99bfd0; font-size:10px; line-height:1.6; }
+@media(max-width:900px) { .destination-index { grid-template-columns:repeat(2,minmax(0,1fr)); } .international-hero { padding-top:36px; } }
+@media(max-width:380px) { .destination-index { gap:10px; } .destination-tile div { padding:14px 10px; } .destination-tile strong { font-size:21px; } }
+
 .page-hero-upcoming .page-hero-sidecard img { object-fit:contain; height:auto; width:100%; }
 .upcoming-list { display:grid; gap:28px; }
 </style>

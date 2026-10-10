@@ -462,6 +462,12 @@ export const upcoming: Array<{
   shortName: string;
   city: string;
   countryCode: string;
+  country: string;
+  imageSmall?: string;
+  imageKind: 'destination' | 'official-conference';
+  imageCaption: string;
+  imageCredit?: { creator: string; sourceUrl: string; license: string; licenseUrl: string };
+  cardDescription: string;
   organizer?: string;
   imageWidth: number;
   imageHeight: number;
@@ -471,7 +477,7 @@ export const upcoming: Array<{
   presentationEnd?: string;
   presentationSlot?: string;
   paperLinkLabel?: string;
-  additionalPapers?: Array<{ title: string; researchUrl: string; question: string; description: string }>;
+  additionalPapers?: Array<{ title: string; researchUrl: string; question: string; description: string; cardDescription?: string }>;
   title: string;
   titleFa: string;
   date: string;
@@ -500,13 +506,17 @@ export const upcoming: Array<{
   {
     slug: 'icft-2026',
     shortName: 'ICFT 2026',
-    title: 'Meysam Ghanbari at ICFT 2026',
+    title: 'Meysam Ghanbari at ICFT 2026 in Amman, Jordan',
     titleFa: '',
     date: '18–22 October 2026',
     startDate: '2026-10-18',
     endDate: '2026-10-22',
     city: 'Amman',
-    countryCode: 'JO',
+    countryCode: 'JO', country: 'Jordan',
+    imageKind: 'destination', imageCaption: 'Amman, Jordan · host city of ICFT 2026.',
+    imageSmall: '/images/events/icft-2026-amman-jordan-cityscape-640.webp',
+    imageCredit: { creator: 'Daniel Case', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Amman_cityscape_and_skyline_from_Citadel_Hill.jpg', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/' },
+    cardDescription: 'A learning-free, three-stage estimator uses quadrant imbalance and the lens-array power profile to separate these coupled effects in a multi-aperture free-space optical receiver.',
     organizer: 'German Jordanian University',
     location: 'Amman, Jordan',
     locationFa: '',
@@ -525,10 +535,9 @@ export const upcoming: Array<{
     presentationEnd: '2026-10-19T17:00:00+03:00',
     presentationSlot: 'Monday, 19 October · 16:45–17:00 · Room H103 · Amman time (UTC+3)',
     programNote: 'The draft program lists accepted paper #179 in Session 5: 5G/6G Networks, Free-Space Optics & Field Measurements. The slot is provisional. The conference website lists 18–22 October; the draft booklet covers 18–21 October.',
-    image: '/images/publications/learning-free-multi-aperture-fso-estimation.webp',
-    imageWidth: 1440,
-    imageHeight: 720,
-    imageAlt: 'Concept infographic of the multi-aperture FSO receiver and learning-free estimation stages studied in Meysam Ghanbari’s ICFT 2026 presentation',
+    image: '/images/events/icft-2026-amman-jordan-cityscape.webp',
+    imageWidth: 1440, imageHeight: 839,
+    imageAlt: 'Amman cityscape viewed from Citadel Hill in Jordan, the host city of ICFT 2026',
     paperTitle: 'Learning-Free Hierarchical Joint Estimation of AoA, Pointing Error, Receiver Jitter, and Turbulence in Multi-Aperture FSO Systems',
     paperUrl: 'https://arxiv.org/abs/2609.13605',
     paperLinkLabel: 'arXiv preprint ↗',
@@ -536,14 +545,18 @@ export const upcoming: Array<{
     tags: ['Multi-Aperture FSO', 'Learning-Free Estimation', 'Angle of Arrival', 'Pointing Error']
   },
   {
-    slug: 'dtiso-2026', shortName: 'DTISO 2026', city: 'Barcelona', countryCode: 'ES', imageWidth: 1440, imageHeight: 811,
-    title: 'Meysam Ghanbari at DTISO 2026', titleFa: '', date: '17–20 November 2026', startDate: '2026-11-17', endDate: '2026-11-20',
+    slug: 'dtiso-2026', shortName: 'DTISO 2026', city: 'Barcelona', countryCode: 'ES', country: 'Spain', imageWidth: 1440, imageHeight: 664,
+    imageKind: 'destination', imageCaption: 'Barcelona, Spain · host city of DTISO 2026.',
+    imageSmall: '/images/events/dtiso-2026-barcelona-spain-skyline-640.webp',
+    imageCredit: { creator: 'SGDWN', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Barcelona_Skyline.jpg', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/' },
+    cardDescription: 'Polarization carries the information, while matched converter branches recover AC data signals and DC harvested energy from the same optical power.',
+    title: 'Meysam Ghanbari at DTISO 2026 in Barcelona, Spain', titleFa: '', date: '17–20 November 2026', startDate: '2026-11-17', endDate: '2026-11-20',
     location: 'Barcelona, Spain', locationFa: '', venue: 'Novotel Barcelona City', type: 'Forthcoming research presentation', typeFa: '', status: 'Scheduled',
     question: 'What if a satellite could read data from light without reserving a separate share of its power for communication?', questionFa: '',
     description: 'Meysam Ghanbari will present a constant-power Stokes-orthogonal satellite-link architecture. Polarization carries the information, while the same matched converter branches recover AC data signals and DC harvested energy, avoiding an explicit optical information–energy allocation ratio.', descriptionFa: '',
     conference: 'International Conference on Digital Transformation and Intelligent SOciety (DTISO 2026)', conferenceUrl: 'https://dtis-conference.org/2026/authors.php',
     programNote: 'Meysam Ghanbari has confirmed this forthcoming presentation in Barcelona. Official conference dates are 17–20 November 2026 at Novotel Barcelona City. An individual presentation slot and session have not yet been recorded.',
-    image: '/images/publications/stokes-orthogonal-satellite-information-energy-proposed.webp', imageAlt: 'Concept illustration of Stokes-orthogonal satellite information transfer and optical energy harvesting with matched polarization branches',
+    image: '/images/events/dtiso-2026-barcelona-spain-skyline.webp', imageAlt: 'Barcelona skyline viewed from Poble Espanyol in Spain, the host city of DTISO 2026',
     paperTitle: 'Information in Polarization, Energy from Optical Power: Stokes-Orthogonal Inter-Satellite Links', paperUrl: 'https://arxiv.org/abs/2609.25986', paperLinkLabel: 'arXiv manuscript ↗',
     researchUrl: '/publications/power-neutral-information-energy-transfer-inter-satellite-fso-stokes', projectUrl: '/projects/power-neutral-information-energy-transfer',
     tags: ['Inter-Satellite FSO', 'Stokes Signaling', 'Polarization', 'Energy Harvesting']
@@ -551,13 +564,17 @@ export const upcoming: Array<{
   {
     slug: 'commnet-2026',
     shortName: 'CommNet 2026',
-    title: 'Meysam Ghanbari at CommNet 2026',
+    title: 'Meysam Ghanbari at CommNet 2026 in Rabat, Morocco',
     titleFa: '',
     date: '14–16 December 2026',
     startDate: '2026-12-14',
     endDate: '2026-12-16',
     city: 'Rabat',
-    countryCode: 'MA',
+    countryCode: 'MA', country: 'Morocco',
+    imageKind: 'destination', imageCaption: 'Kasbah of the Udayas in Rabat, Morocco · host city of CommNet 2026.',
+    imageSmall: '/images/events/commnet-2026-rabat-morocco-kasbah-640.webp',
+    imageCredit: { creator: 'P. Hughes', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Morocco_-_Kasbah_of_the_Udayas.jpg', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/' },
+    cardDescription: 'PIR-Twin predicts line-of-sight motion at the future steering-command actuation time, helping optical receivers account for control delay.',
     location: 'Rabat, Morocco',
     locationFa: '',
     venue: 'ENSIAS, Mohammed V University',
@@ -571,10 +588,9 @@ export const upcoming: Array<{
     conference: 'The 9th International Conference on Advanced Communication Technologies and Networking (CommNet 2026)',
     conferenceUrl: 'https://www.commnet-conf.org/',
     programNote: 'Meysam Ghanbari has confirmed plans to present this work. Conference dates and the Rabat venue are verified against the official website. A paper acceptance and an exact presentation day, time or session have not yet been verified.',
-    image: '/images/publications/predictive-optical-link-pir-twin.webp',
-    imageWidth: 1440,
-    imageHeight: 720,
-    imageAlt: 'Concept illustration of satellite optical reception and PIR-Twin predictive fine tracking for Meysam Ghanbari’s planned CommNet 2026 presentation',
+    image: '/images/events/commnet-2026-rabat-morocco-kasbah.webp',
+    imageWidth: 1440, imageHeight: 984,
+    imageAlt: 'Kasbah of the Udayas in Rabat, Morocco, the host city of CommNet 2026',
     paperTitle: 'Receiver-Side Physics-Informed Residual Digital Twin for Predictive Fine Tracking in Inter-Satellite Optical Links',
     paperUrl: 'https://arxiv.org/abs/2609.25975',
     paperLinkLabel: 'arXiv preprint ↗',
@@ -585,11 +601,13 @@ export const upcoming: Array<{
     slug: 'vtc2027-spring',
     shortName: 'IEEE VTC 2027-Spring',
     city: 'Hamburg',
-    countryCode: 'DE',
+    countryCode: 'DE', country: 'Germany',
+    imageKind: 'official-conference', imageCaption: 'Official IEEE VTC 2027-Spring conference visual · Hamburg, Germany.',
+    cardDescription: 'Spatially separated apertures with progressively stronger fixed attenuation let the receiver select a linear branch across a changing optical power range.',
     organizer: 'IEEE Vehicular Technology Society',
     imageWidth: 1280,
     imageHeight: 720,
-    title: 'Meysam Ghanbari at IEEE VTC 2027-Spring',
+    title: 'Meysam Ghanbari at IEEE VTC 2027-Spring in Hamburg, Germany',
     titleFa: 'ارائه میثم قنبری در IEEE VTC 2027-Spring',
     date: '20–23 June 2027',
     startDate: '2027-06-20',
@@ -618,6 +636,7 @@ export const upcoming: Array<{
       title: 'Integrated Optical Receiver for Communication and Fine Tracking in Inter-Satellite Links',
       researchUrl: '/publications/integrated-optical-receiver-communication-fine-tracking-inter-satellite',
       question: 'Can one compact optical receiver recover data and keep a satellite laser beam aligned?',
+      cardDescription: 'A central data lens and an annular tracker share one intentionally defocused receiver plane.',
       description: 'Meysam Ghanbari will also present a receiver concept that places a central data lens and an annular four-segment tracker on one shared, intentionally defocused plane. Joint geometry design balances data-power collection and angular accuracy without conventional data/tracking beam-splitter branches.'
     }],
     tags: ['Inter-HAPS', 'Inter-Satellite Links', 'Integrated Receiver', 'Fine Tracking', 'FSO']

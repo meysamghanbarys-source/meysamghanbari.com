@@ -1,0 +1,13 @@
+---
+import type { upcoming } from '../data/library';
+interface Props { event: (typeof upcoming)[number]; }
+const { event } = Astro.props;
+---
+<p class="event-image-credit">
+  {event.imageCredit ? <><a href={event.imageCredit.sourceUrl} target="_blank" rel="noreferrer">Photo: {event.imageCredit.creator}</a> · <a href={event.imageCredit.licenseUrl} target="_blank" rel="noreferrer">{event.imageCredit.license}</a> · Resized / WebP</> : <a href={event.conferenceUrl} target="_blank" rel="noreferrer">Official conference visual ↗</a>}
+</p>
+<style>
+.event-image-credit { margin:12px 0 0; font-size:11px; line-height:1.7; color:#a9bdce; }
+.event-image-credit a { text-decoration:underline; text-underline-offset:3px; }
+.event-image-credit a:hover { color:var(--accent); }
+</style>
