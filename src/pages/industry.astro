@@ -40,6 +40,10 @@ const sample = '/downloads/optical-crosslink-margin-review-sample.pdf';
           <summary>Inputs and calculation</summary>
           <p>The aligned link has 3 dB of margin. The transmitted Gaussian beam has a 40 µrad 1/e² intensity half-angle. The model assumes a small receive aperture and independent, zero-mean Gaussian transmit pointing errors of equal standard deviation on both axes.</p>
           <p>With per-axis jitter <i>σ</i> in µrad, the lower first percentile of remaining margin in dB is <strong>3 − 0.05<i>σ</i>²</strong>. The example covers one direction at one operating point after acquisition.</p>
+          <table aria-label="Worked example values at 99% coverage">
+            <thead><tr><th scope="col">Jitter per axis</th><th scope="col">Remaining margin</th></tr></thead>
+            <tbody><tr><th scope="row">6 µrad</th><td>+1.20 dB</td></tr><tr><th scope="row">9 µrad</th><td>−1.05 dB</td></tr></tbody>
+          </table>
         </details>
         <a class="sample-link" href={sample} download>Download the sample report <span>(PDF, 4 pages)</span><span aria-hidden="true">↓</span></a>
       </section>
@@ -124,6 +128,9 @@ const sample = '/downloads/optical-crosslink-margin-review-sample.pdf';
   .example-model { margin-top: 15px; border-block: 1px solid var(--line); }
   .example-model summary { min-height: 44px; padding-block: 10px; cursor: pointer; color: #c9e0ed; font-size: 14px; }
   .example-model p { margin: 0 0 13px; color: #bed0de; font-size: 14px; }
+  .example-model table { width: 100%; margin: 0 0 15px; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .example-model th, .example-model td { padding: 6px 3px; text-align: left; border-top: 1px solid var(--line); }
+  .example-model th[scope="row"] { font-weight: 500; }
   .sample-link, .review-link { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 5px; min-height: 44px; color: #9be3f5; font-size: 14px; font-weight: 650; }
   .sample-link { margin-top: 5px; }
   .sample-link span:first-child { font-size: 12px; font-weight: 500; }
