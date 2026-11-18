@@ -29,7 +29,7 @@ const cleanedDescription = description.replace(/\s+/g, ' ').trim();
 const pageDescription = cleanedDescription.length <= 160 ? cleanedDescription : `${cleanedDescription.slice(0, 156).replace(/\s+\S*$/, '')}…`;
 const currentSection = normalizedPath.split('/').filter(Boolean)[0] ?? 'home';
 const primary = [['publications', 'Publications'], ['videos', 'Talks & Video'], ['upcoming', 'Upcoming'], ['insights', 'Future Systems'], ['about', 'About']];
-const technology = [['research', 'Research'], ['projects', 'Projects'], ['satellite-applications', 'Satellite Applications Atlas']];
+const technology = [['research', 'Research'], ['projects', 'Projects'], ['satellite-applications', 'Satellite Applications Atlas'], ['industry', 'Industry Consulting']];
 const parts = normalizedPath.split('/').filter(Boolean);
 const structuredData = {
   '@context': 'https://schema.org', '@graph': [

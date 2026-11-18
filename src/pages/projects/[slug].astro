@@ -50,7 +50,10 @@ const projectSchema = {
         <section><p class="eyebrow">02 · THE IDEA</p><h2>System concept</h2><p>{project.idea}</p></section>
         <section><p class="eyebrow">03 · TECHNICAL APPROACH</p><h2>How the research is structured</h2><div class="method-grid">{project.approach.map((item, index) => <div><span>0{index + 1}</span><strong>{item}</strong></div>)}</div></section>
         <section><p class="eyebrow">04 · KEY CONTRIBUTIONS</p><h2>What the research contributes</h2><ul class="contribution-list">{project.contributions.map((item) => <li>{item}</li>)}</ul></section>
-        <section><p class="eyebrow">05 · WHY IT MATTERS</p><h2>Engineering relevance</h2><p>{project.relevance}</p></section>
+        <section>
+          <p class="eyebrow">05 · WHY IT MATTERS</p><h2>Engineering relevance</h2><p>{project.relevance}</p>
+          {project.slug === 'integrated-optical-receiver-oisl' && <a class="text-link" href="/industry/">Discuss a similar link requirement <span aria-hidden="true">→</span></a>}
+        </section>
 
         {relatedPublications.length > 0 && (
           <section><p class="eyebrow">RELATED PUBLICATION</p><h2>Research record</h2><div class="related-records">{relatedPublications.map((paper) => <a href={`/publications/${paper.slug}`}><span>{paper.year} · {paper.status}</span><strong>{paper.title}</strong><small>{paper.venue} ↗</small></a>)}</div></section>

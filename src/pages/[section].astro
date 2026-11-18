@@ -353,31 +353,57 @@ const visual = sectionVisuals[section];
           {site.socialLinks.linkedin && <a class="direct-email" href={site.socialLinks.linkedin} target="_blank" rel="me noreferrer"><small>PROFESSIONAL PROFILE</small><strong>LinkedIn</strong><span>↗</span></a>}
         </div>
 
-        <form class="enquiry-form" data-enquiry-form data-email={site.contactEmail}>
-          <div class="form-head"><span>STRUCTURED ENQUIRY</span><small>All fields except organization are required</small></div>
+        <form id="enquiry" class="enquiry-form" data-enquiry-form data-email={site.contactEmail} action={`mailto:${site.contactEmail}`} method="post" enctype="text/plain">
+          <div class="form-head">
+            <span data-general-copy>STRUCTURED ENQUIRY</span><span data-offer-copy>Optical Crosslink Margin Review</span>
+            <small data-general-copy>All fields except organization are required</small><small data-offer-copy>All four fields are required</small>
+          </div>
           <label>Name<input type="text" name="name" autocomplete="name" required /></label>
-          <label>Email<input type="email" name="email" autocomplete="email" required /></label>
-          <label>Organization / University<input type="text" name="organization" autocomplete="organization" /></label>
-          <label>Area of Interest<input type="text" name="area" placeholder="e.g. inter-satellite optical links" required /></label>
-          <label>Type of Request
+          <label><span data-general-copy>Email</span><span data-offer-copy>Work email</span><input type="email" name="email" autocomplete="email" required /></label>
+          <label><span data-general-copy>Organization / University</span><span data-offer-copy>Organization</span><input type="text" name="organization" autocomplete="organization" /></label>
+          <label data-general-copy>Area of Interest<input type="text" name="area" placeholder="e.g. inter-satellite optical links" required /></label>
+          <label data-general-copy>Type of Request
             <select name="requestType" required>
               <option value="">Select a request type</option>
               <option>Research Collaboration</option><option>Technical Consultation</option><option>Project Guidance</option><option>Industrial R&D</option><option>Visiting Research</option><option>Speaking / Presentation</option><option>Other</option>
             </select>
           </label>
-          <label>Message<textarea name="message" rows="6" required></textarea></label>
+          <label><span data-general-copy>Message</span><span data-offer-copy>What decision does your team need to make, and by when?</span><textarea name="message" rows="6" required></textarea></label>
+          <p class="enquiry-hint" data-offer-copy>A short, non-confidential summary is enough for the first enquiry.</p>
           <button class="button" type="submit">Prepare enquiry email</button>
-          <p class="form-note">This opens the visitor’s email application with the structured message prepared for review before sending.</p>
+          <button class="copy-address" type="button" data-offer-copy data-copy-address>Copy email address</button>
+          <p class="form-note">Your email app will open a draft for you to review and send.</p>
+          <p class="copy-status" role="status" data-copy-status></p>
         </form>
       </div>
       <script>
         const form = document.querySelector<HTMLFormElement>('[data-enquiry-form]');
+        if (form && new URLSearchParams(window.location.search).get('offer') === 'crosslink-margin') {
+          form.dataset.offer = 'crosslink-margin';
+          const area = form.elements.namedItem('area') as HTMLInputElement;
+          const type = form.elements.namedItem('requestType') as HTMLSelectElement;
+          const organization = form.elements.namedItem('organization') as HTMLInputElement;
+          area.value = 'Optical Crosslink Margin Review';
+          type.value = 'Industrial R&D';
+          organization.required = true;
+          form.querySelector('[data-copy-address]')?.addEventListener('click', async () => {
+            const address = form.dataset.email!;
+            const status = form.querySelector<HTMLElement>('[data-copy-status]')!;
+            try {
+              await navigator.clipboard.writeText(address);
+              status.textContent = 'Email address copied.';
+            } catch {
+              status.textContent = `Copy this address: ${address}`;
+            }
+          });
+        }
         form?.addEventListener('submit', (event) => {
           event.preventDefault();
           const data = new FormData(form);
           const recipient = form.getAttribute('data-email');
           const subject = `${data.get('requestType')} enquiry — ${data.get('area')}`;
-          const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nOrganization / University: ${data.get('organization') || 'Not provided'}\nArea of Interest: ${data.get('area')}\nType of Request: ${data.get('requestType')}\n\nMessage:\n${data.get('message')}`;
+          const organizationLabel = form.dataset.offer ? 'Organization' : 'Organization / University';
+          const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n${organizationLabel}: ${data.get('organization') || 'Not provided'}\nArea of Interest: ${data.get('area')}\nType of Request: ${data.get('requestType')}\n\nMessage:\n${data.get('message')}`;
           window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
       </script>
@@ -386,6 +412,13 @@ const visual = sectionVisuals[section];
 </BaseLayout>
 
 <style>
+#enquiry { scroll-margin-top: 92px; }
+.enquiry-form:not([data-offer]) [data-offer-copy], .enquiry-form[data-offer] [data-general-copy] { display: none; }
+.form-head span[data-offer-copy] { font-size: 15px; line-height: 1.4; letter-spacing: 0; }
+.enquiry-hint { margin: -5px 0 16px; font-size: 13px; color: var(--muted); }
+.copy-address { min-height: 44px; border: 0; padding: 0 10px; color: var(--accent); background: transparent; font: inherit; font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.copy-status { margin: 6px 0 0; color: var(--text); font-size: 13px; overflow-wrap: anywhere; }
+.copy-status:empty { margin: 0; }
 .international-hero { position:relative; isolation:isolate; padding:55px 0 48px; border-bottom:1px solid var(--line); background:#07111e; }
 .international-portrait-background { position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
 .international-portrait-background img { position:absolute; top:-55px; right:max(0px,calc((100% - 1440px)/2)); width:min(100%,780px); max-width:none; height:auto; opacity:.94; }

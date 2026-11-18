@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const enquiry = '/contact/?offer=crosslink-margin#enquiry';
+const chart = '/images/industry/crosslink-margin-jitter.png';
+const sample = '/downloads/optical-crosslink-margin-review-sample.pdf';
+---
+
+<BaseLayout
+  title="Optical Crosslink Margin Review"
+  description="Meysam Ghanbari reviews how pointing jitter affects the margin of an optical inter-satellite link. Explore a worked example and discuss a terminal decision."
+  path="/industry/"
+  image={chart}
+  imageAlt="Remaining optical link margin versus residual pointing jitter for a synthetic spacecraft crosslink"
+  breadcrumbNames={['Industry Consulting']}
+>
+  <section class="review-hero">
+    <div class="shell review-hero-grid">
+      <div class="review-intro">
+        <p class="eyebrow">Industry consulting</p>
+        <h1>Optical Crosslink<br />Margin Review</h1>
+        <p class="review-lead">Can the spacecraft point its laser accurately enough to maintain the required data rate?</p>
+        <p class="review-description">Meysam Ghanbari reviews the link budget and residual pointing jitter to identify how much margin remains and what the engineering team should verify before choosing a terminal.</p>
+        <div class="review-actions">
+          <a class="button" href={enquiry}>Discuss a Crosslink Review</a>
+          <a class="button ghost" href="#worked-example">View a Worked Example</a>
+        </div>
+      </div>
+
+      <section id="worked-example" class="example" aria-labelledby="example-title" tabindex="-1">
+        <div class="example-heading">
+          <p class="eyebrow">Worked example · Synthetic data</p>
+          <h2 id="example-title">How much jitter can this link tolerate?</h2>
+        </div>
+        <figure>
+          <img src={chart} width="1140" height="660" alt="At 6 microradians of jitter per axis, the remaining margin is +1.20 dB. At 9 microradians it is −1.05 dB. The dashed line marks zero margin." />
+          <figcaption><strong>7.75 µrad per axis</strong> is the break-even jitter for keeping power above the receiver threshold in 99% of acquired samples.</figcaption>
+        </figure>
+        <details class="example-model">
+          <summary>Inputs and calculation</summary>
+          <p>The aligned link has 3 dB of margin. The transmitted Gaussian beam has a 40 µrad 1/e² intensity half-angle. The model assumes a small receive aperture and independent, zero-mean Gaussian transmit pointing errors of equal standard deviation on both axes.</p>
+          <p>With per-axis jitter <i>σ</i> in µrad, the lower first percentile of remaining margin in dB is <strong>3 − 0.05<i>σ</i>²</strong>. The example covers one direction at one operating point after acquisition.</p>
+        </details>
+        <a class="sample-link" href={sample} download>Download the sample report <span>(PDF, 4 pages)</span><span aria-hidden="true">↓</span></a>
+      </section>
+    </div>
+  </section>
+
+  <section class="review-brief" aria-label="Review deliverables and inputs">
+    <div class="shell brief-grid">
+      <div>
+        <h2>What your team receives</h2>
+        <dl class="deliverables">
+          <div><dt>A decision report (4–6 pages)</dt><dd>How much margin remains, which assumption matters most, and what to measure before selecting a terminal.</dd></div>
+          <div><dt>A link-budget spreadsheet</dt><dd>A CSV listing the assumptions, units and loss terms so the engineering team can trace each figure.</dd></div>
+          <div><dt>Two decision charts</dt><dd>Remaining margin and the probability of falling below the receiver threshold as pointing jitter changes.</dd></div>
+          <div><dt>A 30-minute technical readout</dt><dd>A walkthrough of the result, its limits and the next verification step with Meysam.</dd></div>
+        </dl>
+      </div>
+      <div class="review-scope">
+        <h2>What the review needs</h2>
+        <p>The review covers <strong>one link, in one direction, at one operating point.</strong> The engineering team supplies the following inputs.</p>
+        <ul>
+          <li>Link range, transmit power, optical losses, beam divergence and its angle convention.</li>
+          <li>Receive aperture and receiver sensitivity at the required data rate, with its test conditions.</li>
+          <li>Residual pointing jitter on each axis, the measurement bandwidth and the target link availability after acquisition.</li>
+        </ul>
+        <div class="review-timing">
+          <h3>Timing and fee</h3>
+          <p>Allow an estimated 2–3 weeks after the inputs are available. Meysam confirms the scope, fee and delivery date in a written proposal.</p>
+        </div>
+        <a class="review-link" href={enquiry}>Discuss your link requirement <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="review-research">
+    <div class="shell research-grid">
+      <h2>Related research</h2>
+      <div class="research-records">
+        <a href="/publications/integrated-optical-receiver-communication-fine-tracking-inter-satellite/">
+          <strong>Integrated optical receiver for communication and fine tracking <span aria-hidden="true">→</span></strong>
+          <span>How beam alignment changes the optical power available for data detection and tracking.</span>
+        </a>
+        <a href="/publications/receiver-side-physics-informed-residual-digital-twin-predictive-fine-tracking-oisl/">
+          <strong>Predictive fine tracking in inter-satellite optical links <span aria-hidden="true">→</span></strong>
+          <span>A simulation study of residual pointing error when steering commands take time to act.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .review-hero {
+    padding-block: clamp(48px, 6vw, 88px);
+    border-bottom: 1px solid var(--line);
+    background: radial-gradient(ellipse at 83% 32%, #102b3e 0%, transparent 56%), #07111d;
+  }
+  .review-hero-grid, .brief-grid, .research-grid { display: grid; align-items: start; gap: clamp(32px, 5vw, 76px); }
+  .review-hero-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+  .review-intro, .example, .brief-grid > div, .research-records { min-width: 0; }
+  .eyebrow { margin: 0; color: var(--accent); }
+  h1 { margin: 16px 0 24px; font-size: clamp(42px, 4.7vw, 70px); line-height: 1.04; letter-spacing: -.048em; }
+  .review-lead { max-width: 32em; margin: 0; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.46; color: #edf4fa; }
+  .review-description, .brief-grid p, .deliverables dd, .review-scope li { color: #b8c9d9; }
+  .review-description { margin: 14px 0 0; max-width: 51ch; font-size: 16px; line-height: 1.65; }
+  .review-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+  .review-actions a { padding-inline: 17px; }
+  .example {
+    padding: clamp(16px, 2vw, 27px);
+    background: #0b1b2b;
+    border: 1px solid #2b495c;
+    border-radius: 4px 25px 4px 4px;
+    scroll-margin-top: 94px;
+  }
+  .example:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .example .eyebrow { font-size: 10px; }
+  .example h2 { margin: 7px 0 14px; font-size: clamp(21px, 1.8vw, 27px); line-height: 1.24; letter-spacing: -.025em; }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; height: auto; }
+  figcaption { margin-top: 12px; color: #c0d3e0; font-size: 14px; line-height: 1.55; }
+  figcaption strong { color: #f0f8fa; }
+  .example-model { margin-top: 15px; border-block: 1px solid var(--line); }
+  .example-model summary { min-height: 44px; padding-block: 10px; cursor: pointer; color: #c9e0ed; font-size: 14px; }
+  .example-model p { margin: 0 0 13px; color: #bed0de; font-size: 14px; }
+  .sample-link, .review-link { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 5px; min-height: 44px; color: #9be3f5; font-size: 14px; font-weight: 650; }
+  .sample-link { margin-top: 5px; }
+  .sample-link span:first-child { font-size: 12px; font-weight: 500; }
+  a:is(.sample-link, .review-link, .research-records a):hover { text-decoration: underline; text-underline-offset: 4px; }
+  .review-brief, .review-research { padding-block: clamp(42px, 5vw, 74px); }
+  .brief-grid { grid-template-columns: 1.05fr .95fr; }
+  .brief-grid h2, .research-grid h2 { margin: 0 0 20px; font-size: clamp(27px, 2.8vw, 37px); letter-spacing: -.035em; line-height: 1.18; }
+  .deliverables { margin: 0; }
+  .deliverables > div { padding: 13px 0; border-top: 1px solid var(--line); }
+  .deliverables dt, .review-timing h3 { color: var(--text); font-size: 16px; font-weight: 700; }
+  .deliverables dd { margin: 3px 0 0; }
+  .brief-grid p, .deliverables dd, .review-scope li { font-size: 15px; line-height: 1.62; }
+  .review-scope p { margin: 0; }
+  .review-scope strong { color: #e1edf5; }
+  .review-scope ul { padding-left: 20px; margin: 12px 0 18px; }
+  .review-scope li { padding-left: 3px; margin-bottom: 7px; }
+  .review-scope li::marker { color: #82d8ef; }
+  .review-timing { border-top: 1px solid var(--line); padding-top: 15px; }
+  .review-timing h3 { margin: 0 0 4px; }
+  .review-link { margin-top: 5px; }
+  .review-research { background: #0a1724; border-block: 1px solid var(--line); }
+  .research-grid { grid-template-columns: .7fr 1.3fr; }
+  .research-records a { display: grid; gap: 4px; padding-block: 15px; border-top: 1px solid var(--line); }
+  .research-records strong { color: #b3e5f3; font-size: 16px; }
+  .research-records a > span { font-size: 14px; line-height: 1.6; color: var(--muted); }
+  @media (max-width: 860px) {
+    .review-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .review-description { max-width: 63ch; }
+    .example { width: min(100%, 610px); }
+  }
+  @media (max-width: 680px) {
+    .brief-grid, .research-grid { grid-template-columns: 1fr; }
+    .research-grid { gap: 0; }
+    .review-hero { padding-top: 38px; }
+  }
+  @media (max-width: 420px) {
+    .review-actions { display: grid; }
+    .review-actions a { text-align: center; }
+  }
+</style>
