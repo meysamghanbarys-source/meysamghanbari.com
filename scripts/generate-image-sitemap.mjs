@@ -46,11 +46,23 @@ const revisions = new Map([
   ...publicationContent.newPapers.map(paper => [paper.slug,paper.editorialUpdated])
 ].filter(([,date]) => date));
 const sitemapPath = new URL('sitemap-0.xml', output);
+const atlasDirectory = new URL('../src/data/atlas/articles/', import.meta.url);
+const atlasDates = new Map();
+for (const file of await readdir(atlasDirectory)) {
+  if (!file.endsWith('.json')) continue;
+  const article = JSON.parse(await readFile(new URL(file, atlasDirectory), 'utf8'));
+  const root = '/satellite-applications/';
+  const category = root + article.industry + '/';
+  for (const path of [root, category, category + article.slug + '/']) {
+    if (!atlasDates.has(path) || atlasDates.get(path) < article.reviewed) atlasDates.set(path, article.reviewed);
+  }
+}
 let sitemapXml = await readFile(sitemapPath,'utf8');
 sitemapXml = sitemapXml.replace(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g, (entry,url,tail) => {
   const slug = url.match(/\/publications\/([^/]+)\/?$/)?.[1];
-  const editorialDates = new Map([['/','2026-10-10'],['/publications/','2026-10-10'],['/upcoming/','2026-10-10'],['/events/icft-2026/','2026-10-10'],['/events/commnet-2026/','2026-10-10'],['/events/dtiso-2026/','2026-10-10'],['/events/vtc2027-spring/','2026-10-10']]);
-  const date = editorialDates.get(url.replace(domain,'')) ?? revisions.get(slug);
+  const editorialDates = new Map([['/','2026-11-18'],['/satellite-applications/orbits/','2026-11-18'],['/publications/','2026-10-10'],['/upcoming/','2026-10-10'],['/events/icft-2026/','2026-10-10'],['/events/commnet-2026/','2026-10-10'],['/events/dtiso-2026/','2026-10-10'],['/events/vtc2027-spring/','2026-10-10']]);
+  const path = url.replace(domain,'');
+  const date = atlasDates.get(path) ?? editorialDates.get(path) ?? revisions.get(slug);
   return date ? `<url><loc>${url}</loc>${tail.replace(/<lastmod>[^<]*<\/lastmod>/g,'')}<lastmod>${date}</lastmod></url>` : entry;
 });
 await writeFile(sitemapPath,sitemapXml);

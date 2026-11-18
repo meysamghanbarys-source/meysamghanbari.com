@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Directory from '../../components/atlas/Directory.astro';
+import IndustryTree from '../../components/atlas/IndustryTree.astro';
+import {articles} from '../../data/atlas/catalog';
+import {root,articleUrl} from '../../data/atlas/taxonomy';
+import {site} from '../../data/site';
+import {serializeJsonLd} from '../../data/json-ld';
+import '../../styles/atlas.css';
+const latest=articles[0];
+const description='Explore civilian satellite applications by industry, orbit and technology. Compare sensors, operating limits and the cost of existing services or dedicated missions.';
+const schema={'@context':'https://schema.org','@type':'CollectionPage',name:'Satellite Applications Atlas',url:site.domain+root,description,hasPart:articles.slice(0,12).map(a=>({'@type':'TechArticle',headline:a.title,url:site.domain+articleUrl(a)}))};
+---
+<BaseLayout title="Satellite Applications Atlas" description={description} path={root} image={latest.images.hero.files.at(-1)!.src} imageAlt={latest.images.hero.alt}>
+ <script slot="head" type="application/ld+json" set:html={serializeJsonLd(schema)}></script>
+ <div class="atlas"><section class="atlas-hero"><div class="shell">
+   <div class="atlas-hero-art" aria-hidden="true"></div>
+   <div class="atlas-hero-copy"><nav class="atlas-crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li>Technology</li></ol></nav>
+   <h1>Satellite<br />Applications Atlas</h1><p>Find a satellite application for an industrial problem. Compare the sensors, orbits and costs behind the decision.</p>
+   <div class="atlas-actions"><a class="atlas-primary" href="#applications">Explore applications <span aria-hidden="true">↓</span></a><a class="atlas-link" href="#industries">Browse industries <span aria-hidden="true">→</span></a></div></div>
+ </div></section>
+ <nav class="atlas-strip" aria-label="Atlas shortcuts"><div class="shell"><a href={articleUrl(latest)}>Latest application <span aria-hidden="true">↗</span></a><a href={root+'orbits/'}>Compare satellite orbits <span aria-hidden="true">→</span></a></div></nav>
+ <Directory /><IndustryTree />
+ </div>
+</BaseLayout>

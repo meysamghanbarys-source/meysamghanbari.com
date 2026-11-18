@@ -1,0 +1,5 @@
+---
+const {value}:{value:string}=Astro.props;
+const parts=value.split(/(\[\d+\])/g);
+---
+{parts.map(part=>/^\[\d+\]$/.test(part)?<sup class="atlas-ref"><a href={'#source-'+part.slice(1,-1)} aria-label={'Source '+part.slice(1,-1)}>{part.slice(1,-1)}</a></sup>:part)}

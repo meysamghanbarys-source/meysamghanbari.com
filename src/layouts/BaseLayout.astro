@@ -15,12 +15,13 @@ interface Props {
   alternateAvailable?: boolean;
   languagePath?: string;
   breadcrumbNames?: string[];
+  breadcrumbTrail?: { name:string; href:string }[];
   seoTitle?: string;
   robots?: string;
 }
 const { title, description, path = '/', image = site.ogImage,
   imageAlt = `${site.name} — advanced communications research`, ogType = 'website',
-  breadcrumbNames, seoTitle, robots = 'index,follow,max-image-preview:large' } = Astro.props;
+  breadcrumbNames, breadcrumbTrail, seoTitle, robots = 'index,follow,max-image-preview:large' } = Astro.props;
 const normalizedPath = path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}/`;
 const canonical = `${site.domain}${normalizedPath}`;
 const pageTitle = seoTitle ?? (title === site.name ? `${site.name} | Space, Optical & Quantum Networks` : `${title} | ${site.name}`);
@@ -28,7 +29,7 @@ const cleanedDescription = description.replace(/\s+/g, ' ').trim();
 const pageDescription = cleanedDescription.length <= 160 ? cleanedDescription : `${cleanedDescription.slice(0, 156).replace(/\s+\S*$/, '')}…`;
 const currentSection = normalizedPath.split('/').filter(Boolean)[0] ?? 'home';
 const primary = [['publications', 'Publications'], ['videos', 'Talks & Video'], ['upcoming', 'Upcoming'], ['insights', 'Future Systems'], ['about', 'About']];
-const technology = [['research', 'Research'], ['projects', 'Projects']];
+const technology = [['research', 'Research'], ['projects', 'Projects'], ['satellite-applications', 'Satellite Applications Atlas']];
 const parts = normalizedPath.split('/').filter(Boolean);
 const structuredData = {
   '@context': 'https://schema.org', '@graph': [
@@ -38,9 +39,9 @@ const structuredData = {
       email: site.contactEmail, knowsAbout: site.knowsAbout, sameAs: Object.values(site.socialLinks).filter(Boolean) },
     { '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.domain}/` },
-      ...parts.map((part, index) => ({ '@type': 'ListItem', position: index + 2,
+      ...(breadcrumbTrail ? breadcrumbTrail.map((crumb,index)=>({ '@type':'ListItem',position:index+2,name:crumb.name,item:new URL(crumb.href,site.domain).href })) : parts.map((part, index) => ({ '@type': 'ListItem', position: index + 2,
         name: breadcrumbNames?.[index] ?? (index === 0 ? [...technology, ...primary, ['contact', 'Contact'], ['media', 'Media & Press']].find(([id]) => id === part)?.[1] : undefined) ?? part.replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase()),
-        item: `${site.domain}/${parts.slice(0, index + 1).join('/')}/` })) ] }
+        item: `${site.domain}/${parts.slice(0, index + 1).join('/')}/` }))) ] }
   ]
 };
 ---
@@ -75,10 +76,10 @@ const structuredData = {
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="shell brand-header">
-        <a class="brand" href="/" aria-label={`${site.name} home`}><span class="brand-mark">MG</span><span class="brand-name">{site.name}</span></a>
+        <a class="brand" href="/" aria-label={`MG ${site.name} home`}><span class="brand-mark">MG</span><span class="brand-name">{site.name}</span></a>
         <nav class="brand-desktop-nav" aria-label="Primary navigation">
           <details class="brand-disclosure" data-nav-disclosure>
-            <summary class:list={{ 'current-group': ['research', 'projects'].includes(currentSection) }}>Technology <span aria-hidden="true">⌄</span></summary>
+            <summary class:list={{ 'current-group': technology.some(([id]) => id === currentSection) }}>Technology <span aria-hidden="true">⌄</span></summary>
             <div class="brand-submenu">{technology.map(([id, label]) => <a href={`/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>)}</div>
           </details>
           {primary.map(([id, label]) => <a href={`/${id}/`} aria-current={currentSection === id ? 'page' : undefined}>{label}</a>)}
@@ -98,7 +99,7 @@ const structuredData = {
     <footer class="site-footer">
       <div class="shell footer-grid">
         <div><a class="brand footer-brand" href="/"><span class="brand-mark">MG</span><span class="brand-name">{site.name}</span></a><p>Advanced Communications for Space, Optical and Quantum Networks</p></div>
-        <div><strong>Technology</strong><p>Space & NTN networks · Optical systems · Quantum communications</p><p><a href="/research/">Research</a> · <a href="/projects/">Projects</a></p></div>
+        <div><strong>Technology</strong><p>Space & NTN networks · Optical systems · Quantum communications</p><p><a href="/research/">Research</a> · <a href="/projects/">Projects</a> · <a href="/satellite-applications/">Applications Atlas</a></p></div>
         <div><strong>Research & industry enquiries</strong><p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
           {site.socialLinks.orcid && <p><a href={site.socialLinks.orcid} target="_blank" rel="me noreferrer">ORCID profile ↗</a></p>}
           {site.socialLinks.scholar && <p><a href={site.socialLinks.scholar} target="_blank" rel="me noreferrer">Google Scholar profile ↗</a></p>}

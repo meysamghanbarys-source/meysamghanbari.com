@@ -1,0 +1,9 @@
+---
+import type {Summary} from '../../data/atlas/catalog';
+import {dateLabel} from '../../data/atlas/taxonomy';
+const {item,latest=false}:{item:Summary;latest?:boolean}=Astro.props;
+---
+<article class="atlas-card"><a href={item.url}>
+  <div class="atlas-card-image"><img src={item.img} width="480" height="360" loading="lazy" alt="" /></div>
+  <div class="atlas-card-copy"><span class="atlas-label">{latest?'Latest application · ':''}{item.industryName}</span><h3>{item.title}</h3><p>{item.dek}</p><span class="atlas-card-foot"><span>{item.orbits.join(' / ')} · <time datetime={item.date}>{dateLabel(item.date)}</time></span><span aria-hidden="true">↗</span></span></div>
+</a><a class="atlas-card-credit" href={item.url+'#observation-credit'}>Image credit</a></article>

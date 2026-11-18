@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Crumbs from '../../../components/atlas/Crumbs.astro';
+import {articles} from '../../../data/atlas/catalog';
+import {industries,industryUrl,root,articleUrl,familyId} from '../../../data/atlas/taxonomy';
+import '../../../styles/atlas.css';
+export function getStaticPaths(){return industries.filter(i=>articles.some(a=>a.industry===i.id)).map(industry=>({params:{industry:industry.id},props:{industry}}));}
+const {industry}=Astro.props;
+const list=articles.filter(a=>a.industry===industry.id);
+const families=[...new Set(list.map(a=>a.family))];
+const trail=[{name:'Satellite Applications Atlas',href:root},{name:industry.name,href:industryUrl(industry.id)}];
+---
+<BaseLayout title={industry.name+' satellite applications'} description={industry.summary} path={industryUrl(industry.id)} breadcrumbTrail={trail}><div class="atlas">
+ <div class="atlas-simple-hero"><div class="shell"><Crumbs items={[{name:'Home',href:'/'},trail[0],{name:industry.name}]} /><h1>{industry.name}</h1><p>{industry.summary}</p></div></div>
+ <section class="atlas-block"><div class="shell atlas-split"><div class="atlas-section-intro"><h2>Application families</h2><p>{list.length} published {list.length===1?'application':'applications'}</p><a class="atlas-text-link" href={root+'#industries'}>All industries →</a></div><div class="atlas-industry-groups">{families.map(f=>{
+  const entries=list.filter(a=>a.family===f);
+  return <details open={families.length===1} id={familyId(f)}><summary><h3>{f}</h3><span class="atlas-count">{entries.length}</span><span class="atlas-plus" aria-hidden="true"></span></summary><ul>{entries.slice(0,4).map(a=><li><a href={articleUrl(a)}>{a.title} <span aria-hidden="true">↗</span></a><p>{a.dek}</p></li>)}</ul>{entries.length>4&&<details class="atlas-family-more"><summary>Show {entries.length-4} more applications</summary><ul>{entries.slice(4).map(a=><li><a href={articleUrl(a)}>{a.title} →</a></li>)}</ul></details>}</details>
+ })}</div></div></section>
+ </div></BaseLayout>

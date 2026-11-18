@@ -1,0 +1,7 @@
+---
+import {articles} from '../../data/atlas/catalog';
+import {industries,industryUrl,articleUrl,familyId} from '../../data/atlas/taxonomy';
+const groups=industries.map(industry=>({...industry,items:articles.filter(a=>a.industry===industry.id)})).sort((a,b)=>Number(!!b.items.length)-Number(!!a.items.length));
+---
+<section class="atlas-block" id="industries" aria-labelledby="industries-title"><div class="shell atlas-split"><div class="atlas-section-intro"><h2 id="industries-title">Browse industries</h2><p>Open an industry to explore its application families. Counts include published guides.</p></div>
+<div class="atlas-tree">{groups.map(g=><details><summary><span>{g.name}</span><span class="atlas-count">{g.items.length}<span class="sr-only"> published {g.items.length===1?'application':'applications'}</span></span><span class="atlas-plus" aria-hidden="true"></span></summary><div class="atlas-branch"><p>{g.summary}</p>{g.items.length>0 ? <><ul>{[...new Set(g.items.map(a=>a.family))].map(family=>{const items=g.items.filter(a=>a.family===family);return <li><a class="atlas-family" href={industryUrl(g.id)+'#'+familyId(family)}>{family}</a><ul>{items.slice(0,3).map(a=><li><a href={articleUrl(a)}>{a.title}</a></li>)}</ul></li>})}</ul><a class="atlas-text-link" href={industryUrl(g.id)}>View {g.name} →</a></>:<p class="atlas-tree-scope">{g.families.join(' · ')}</p>}</div></details>)}</div></div></section>

@@ -1,0 +1,466 @@
+{
+  "scope": "civilian",
+  "id": "atlas-001",
+  "slug": "offshore-oil-spill-detection",
+  "title": "Offshore Oil Spill Detection and Monitoring Using Satellites",
+  "dek": "A radar image can show an offshore response team where to investigate a suspected slick. The value lies in how quickly the team can verify it and decide where to send a vessel or aircraft.",
+  "industry": "maritime-coastal",
+  "family": "Marine pollution",
+  "tags": [
+    "oil spill",
+    "slick detection",
+    "offshore energy",
+    "marine pollution",
+    "environmental monitoring",
+    "coastal response",
+    "SAR",
+    "radar"
+  ],
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Synthetic-aperture radar",
+    "Optical imaging"
+  ],
+  "type": "Monitoring",
+  "published": "2026-11-18",
+  "reviewed": "2026-11-18",
+  "glance": [
+    {
+      "label": "Operational question",
+      "value": "Which part of a large sea area should responders inspect first?"
+    },
+    {
+      "label": "Who uses it",
+      "value": "Offshore operators, port authorities and marine spill-response teams. [2] [18] [19]"
+    },
+    {
+      "label": "What arrives",
+      "value": "A time-stamped map of possible surface oil, with its outline and a confidence assessment. [2] [4]"
+    },
+    {
+      "label": "Best starting point",
+      "value": "Existing low Earth orbit (LEO) radar imagery and an analyst who can interpret it. [1] [2] [3]"
+    },
+    {
+      "label": "Maturity",
+      "value": "Operational public and commercial monitoring services. [2] [19]"
+    },
+    {
+      "label": "Market examples",
+      "value": "Qatari offshore fields, the Norwegian shelf, U.S. Gulf waters and the Chinese coast. [4] [7] [17] [18]"
+    }
+  ],
+  "problem": [
+    "An offshore spill is a release of oil into marine waters. Oil reaching the surface can spread into a thin, irregular slick. When a platform or passing ship reports a sheen, the duty manager needs to know where it extends, which shoreline could be exposed and where a verification crew should go. A vessel can inspect the oil directly, but only along its route. A satellite pass can put many kilometres of surrounding sea into one observation. [1] [2] [4]",
+    "Consider a port operator receiving a report offshore after sunset. The useful purchase is an observation covering the reported position and nearby waters, delivered while a crew can still act. A sharper picture of the wrong patch, or a precise outline delivered after the slick has moved, has little operational value. [1] [2]"
+  ],
+  "workflow": [
+    {
+      "title": "Plan the pass",
+      "text": "Mark the search area, the reported time and the decision deadline. Check which wide-area radar scenes are already scheduled and whether an additional acquisition can arrive in time. [2] [3]"
+    },
+    {
+      "title": "Measure surface roughness",
+      "text": "Synthetic-aperture radar (SAR) sends microwave pulses sideways toward the sea. Wind-driven ripples scatter some energy back. A surface film can damp the ripples, reduce the echo and leave a dark shape in the image, even at night or beneath clouds. [1]"
+    },
+    {
+      "title": "Build a map on the ground",
+      "text": "The spacecraft stores and transmits measurements. Ground processors combine radar echoes into an image, calibrate their brightness and locate each pixel geographically so the outline can be plotted against the coast and infrastructure. [3] [20]"
+    },
+    {
+      "title": "Screen competing explanations",
+      "text": "An analyst examines the shape and surrounding wind and sea conditions. Vessel position reports from the Automatic Identification System (AIS), platform locations and another image can guide an investigation. Proximity alone cannot establish responsibility. [1] [2]"
+    },
+    {
+      "title": "Verify and act",
+      "text": "The response desk receives the acquisition time, mapped area and confidence. It can direct an aircraft or vessel to check, collect a sample where appropriate, and order another pass to follow the observed spread. Field feedback closes the alert. [1] [2] [4]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Radar and spacecraft",
+      "text": "Copernicus Sentinel-1 provides a documented reference. Its C-band radar operates at 5.405 GHz and uses a 12.3 m antenna. The instrument draws about 3.87 kW in dual-polarisation Interferometric Wide Swath mode. A smaller mission needs its own sensitivity and swath assessment. [3]"
+    },
+    {
+      "title": "Storage, pointing and downlink",
+      "text": "The spacecraft bus points the antenna, supplies power, removes heat and stores observations between ground contacts. Sentinel-1 documents X-band payload downlink with two 260 Mbit/s channels. Ask a supplier how much of the orbit it can use for imaging and when the next downlink is available. [3]"
+    },
+    {
+      "title": "Ground service and optical follow-up",
+      "text": "A data buyer needs access to processed scenes, a mapping workstation or service, and an analyst on duty. In daylight, optical imagery can add an independent view. NASA’s 2010 Terra observation shows oil appearing bright in one part of the same scene and dark in another as sunlight reflects differently. [4] [5] [19]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Recommended",
+      "geometry": "Sentinel-1 flies at about 693 km. Each spacecraft repeats its ground track every 12 days. [3]",
+      "performance": "Its wide mode images a 250 km swath at nominal 5 × 20 m single-look resolution. Latitude, viewing direction, operating mode, tasking and constellation size determine usable revisit. [3]",
+      "decision": "Ask for the next usable acquisition and the delivery time separately. Verify actual scenes over the operating area before agreeing to a response deadline. [2] [3]"
+    },
+    {
+      "orbit": "MEO",
+      "status": "Technically possible",
+      "geometry": "A German Aerospace Center study examined a radar concept at about 6,000 km, with more of Earth in view. [6]",
+      "performance": "A longer radar path weakens the return. Antenna size, transmit power and acceptable resolution must be traded against wider coverage. The study models performance for candidate designs. [6]",
+      "decision": "Choose an existing LEO service for a pilot. The MEO study provides neither a bookable oil-alert service nor a measured delivery time. [6]"
+    },
+    {
+      "orbit": "GEO",
+      "status": "Limited",
+      "geometry": "At 35,786 km above the equator, a geostationary spacecraft sees the same region throughout the day. [8]",
+      "performance": "Researchers used the GOCI-II ocean-colour instrument to study two coastal spills in China. Its regional observations have 250 m sampling and an hourly daylight cadence. Clouds, illumination and narrow slicks limit interpretation. [5] [7]",
+      "decision": "Use regional optical views as supplementary evidence where available. The hourly sampling interval describes observations, not the time an operator will receive an interpreted alert. [7]"
+    }
+  ],
+  "costs": [
+    {
+      "model": "Existing data",
+      "headline": "$0 imagery licence",
+      "unit": "Scheduled Copernicus Sentinel observations · reviewed 2026",
+      "detail": "Start with the open Sentinel archive to test coverage and interpretation. Budget for staff, processing, storage, mapping and verification. A managed alert contract adds analyst availability, response times and delivery integration. Request a quote for the named area and hours of cover. [2] [9] [19] [22]"
+    },
+    {
+      "model": "Purchased observations",
+      "headline": "$1,094–$2,188",
+      "unit": "USD per 100 × 150 km ScanSAR scene · 2025 price list, rounded",
+      "detail": "Apollo Mapping listed TerraSAR-X at $1,093.75 for archive older than one month and $2,187.50 for recent archive or new tasking. Four older scenes plus four tasked scenes would total $13,125 for imagery alone at those rates. For a small follow-up area, SkyWatch’s June 2026 Capella stripmap listing gives $4.64/km² archive or $13.85/km² tasked, with a 100 km² minimum ($464 or $1,385). Confirm availability, licence and price for the order. [10] [11]"
+    },
+    {
+      "model": "Hosted radar payload",
+      "headline": "Host price by quotation",
+      "unit": "Instrument development is a separate cost",
+      "detail": "An Australian 2021 feasibility study modelled an 85 kg, 4 kW radar instrument at A$17 million, about US$12.8 million at the 2021 average exchange rate. This was an engineering estimate for that instrument. A host must also accommodate the antenna, power pulses, heat, pointing and downlink. No comparable public all-in hosting tariff was identified. [3] [12] [13]"
+    },
+    {
+      "model": "Dedicated mission",
+      "headline": "About $35.7 million",
+      "unit": "Greek radar programme planning budget · USD at the 2024 average rate",
+      "detail": "Greece’s ministry budgeted €33 million for its radar space segment, including launch, ground service and operations. At the 2024 average exchange rate this is about US$35.7 million. The signed 2024 agreement covers two ICEYE radar spacecraft, their launches and access to imagery. The planning budget gives the scale of a programme. The sources do not disclose a final per-spacecraft price. NASA separately cites a Transporter launch starting at US$350,000 for about 50 kg. Obtain itemised quotes for spacecraft, integration, testing, ground service, licensing, analysis and replacement. [13] [14] [15] [16]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Qatar",
+      "iso": "QA",
+      "latitude": 26.1,
+      "longitude": 52.0,
+      "reason": "Al Shaheen lies about 80 km northeast of Ras Laffan. An offshore operator could trial a watch around its fields and marine approaches, then measure how quickly its own crews can validate alerts. This is a potential use. [17]"
+    },
+    {
+      "country": "Norway",
+      "iso": "NO",
+      "latitude": 60.4,
+      "longitude": 3.1,
+      "reason": "There is a documented buying precedent. In 2016 the Norwegian Clean Seas Association for Operating Companies expanded its agreement with KSAT for satellite monitoring of petroleum activity on the Norwegian shelf. [18]"
+    },
+    {
+      "country": "United States",
+      "iso": "US",
+      "latitude": 29.0,
+      "longitude": -90.0,
+      "reason": "NOAA maps suspected oil in U.S. waters, including the Gulf, and distributes maps, geographic data files and a written report. Gulf operators can use that package as a model for the information their response desks need. [4]"
+    },
+    {
+      "country": "China",
+      "iso": "CN",
+      "latitude": 32.0,
+      "longitude": 121.3,
+      "reason": "Two documented coastal cases helped researchers evaluate geostationary optical observations. Coastal operators can test whether these regional images add useful daylight updates between radar passes. [7]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Copernicus Sentinel-1",
+      "status": "Operational radar mission",
+      "text": "Download geolocated radar products from the Copernicus Data Space. Check the acquisition plan first. In open ocean the mission’s wave mode samples small areas, so a potential orbital pass may yield no wide image of the site. [3] [22]"
+    },
+    {
+      "name": "EMSA CleanSeaNet",
+      "status": "Operational public service",
+      "text": "Participating coastal states receive interpreted detections. EMSA describes alerts usually reaching users within 20 minutes of overpass. The interval starts at acquisition. A release between passes must first wait for imaging. [2] [21]"
+    },
+    {
+      "name": "KSAT Oil Spill Detection Service",
+      "status": "Commercial monitoring",
+      "text": "KSAT combines radar imagery, automated screening and a staffed analyst service. A commercial buyer can request routine coverage and emergency support and compare the proposed service with an imagery-only purchase. [19]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "Sea state can hide a spill",
+      "text": "Very calm water can appear dark over a wide area. Strong wind can erase useful contrast. EMSA flags reduced detection below about 2–3 m/s and above about 15 m/s. Conditions vary with the scene and sensor. [1]"
+    },
+    {
+      "title": "A dark outline has several explanations",
+      "text": "Biological films and some current patterns also damp small waves. A radar outline alone cannot establish the chemical identity, thickness or released volume. Multiplying its area by an assumed film thickness can give a misleading response estimate. [1] [20]"
+    },
+    {
+      "title": "An image goes out of date",
+      "text": "Preserve the observation time when forwarding the alert. In cloud or darkness a visible-light image may offer no usable second look. A patrol arriving hours later may encounter a different footprint. [2] [4] [5]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Define the decision",
+      "text": "Choose one field or port approach, identify the person who receives alerts and agree on the latest useful delivery time. Specify the smallest feature and the sea conditions the pilot is expected to assess."
+    },
+    {
+      "title": "Replay real cases",
+      "text": "Review archive scenes alongside timestamped patrol or incident records. Include uneventful days and look-alike features. Give analysts the images before sharing the field outcome to reduce hindsight bias. [4] [20]"
+    },
+    {
+      "title": "Test a live watch",
+      "text": "Track the share of planned area actually imaged, hours until the next usable pass, and median and 90th-percentile time from acquisition to a reviewed alert. Count false alarms per reviewed area and known confirmed incidents missed. Record unverified alerts separately."
+    },
+    {
+      "title": "Price an operational service",
+      "text": "Compare the cost per usable observation and per verified response decision, including patrol call-outs. Consider reserved tasking or a hosted or owned mission only if measured coverage gaps persist and the value of closing them justifies the cost."
+    }
+  ],
+  "conclusion": [
+    "An offshore operator or port with a response crew and a wide area to cover can test this service immediately using existing observations. A worthwhile pilot shows that a mapped, time-stamped alert changes where a crew goes, arrives before the decision deadline and remains useful after false alarms and missed passes are counted."
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "title": "How does SAR detection work?",
+      "publisher": "European Maritime Safety Agency",
+      "url": "https://emsa.europa.eu/earth-observation-products/how-does-sar-detection-work/items.html",
+      "date": "n.d."
+    },
+    {
+      "id": 2,
+      "title": "CleanSeaNet service",
+      "publisher": "European Maritime Safety Agency",
+      "url": "https://www.emsa.europa.eu/csn-menu.html",
+      "date": "n.d."
+    },
+    {
+      "id": 3,
+      "title": "Sentinel-1 mission, instrument and observation modes",
+      "publisher": "Copernicus SentiWiki",
+      "url": "https://sentiwiki.copernicus.eu/web/s1-mission",
+      "date": "n.d."
+    },
+    {
+      "id": 4,
+      "title": "NESDIS Suspected Oil: Marine Pollution Surveillance Reports",
+      "publisher": "NOAA InPort / Satellite Analysis Branch",
+      "url": "https://www.fisheries.noaa.gov/inport/item/52380",
+      "date": "2018"
+    },
+    {
+      "id": 5,
+      "title": "Oil Slick in the Gulf of Mexico",
+      "publisher": "NASA Earth Observatory",
+      "url": "https://science.nasa.gov/earth/earth-observatory/oil-slick-in-the-gulf-of-mexico-44070/",
+      "date": "24 May 2010"
+    },
+    {
+      "id": 6,
+      "title": "Mission Considerations for Future MEO SAR Systems",
+      "publisher": "J. Matar and M. Rodriguez-Cassola, German Aerospace Center",
+      "url": "https://elib.dlr.de/119335/1/EUSAR_2018.pdf",
+      "date": "2018"
+    },
+    {
+      "id": 7,
+      "title": "Oil spill detection and potential for thickness estimation by combining ultraviolet and optical remote sensing",
+      "publisher": "S. Sun and L. Chen, International Ocean Colour Science Meeting, poster 75, p. 77",
+      "url": "https://iocs.ioccg.org/wp-content/uploads/2025/11/IOCS-2025-Book-of-Poster-Abstracts.pdf#page=77",
+      "date": "2025"
+    },
+    {
+      "id": 8,
+      "title": "Types of orbits",
+      "publisher": "European Space Agency",
+      "url": "https://www.esa.int/articles/about-us/directorates/space-transportation/types-of-orbits",
+      "date": "n.d."
+    },
+    {
+      "id": 9,
+      "title": "Copernicus Sentinel data licence, revision 1",
+      "publisher": "European Union / Copernicus",
+      "url": "https://cds.climate.copernicus.eu/licences/ec-sentinel",
+      "date": "n.d."
+    },
+    {
+      "id": 10,
+      "title": "Capella Space catalogue and indicative archive and tasking prices",
+      "publisher": "SkyWatch",
+      "url": "https://skywatch.com/geospatial-data-providers/capella-space/",
+      "date": "June 2026"
+    },
+    {
+      "id": 11,
+      "title": "SAR imagery price list, page 9 and pricing notes",
+      "publisher": "Apollo Mapping",
+      "url": "https://apollomapping.com/image_downloads/Apollo_Mapping_Imagery_Price_List-2025.pdf",
+      "date": "8 July 2025"
+    },
+    {
+      "id": 12,
+      "title": "Australian Bureau of Meteorology Pre-Phase A Mission Study, section 12.2.5",
+      "publisher": "UNSW Canberra Space",
+      "url": "https://www.unsw.edu.au/content/dam/pdfs/unsw-canberra/space/2023-04-research/2023-04-Australian_Bureau_of_Meteorology_Pre-Phase_A_Mission_Study_Report_0.pdf",
+      "date": "15 October 2021"
+    },
+    {
+      "id": 13,
+      "title": "G.5A annual foreign exchange rates, including 2021 and 2024",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "url": "https://www.federalreserve.gov/releases/g5a/20250106/",
+      "date": "6 January 2025"
+    },
+    {
+      "id": 14,
+      "title": "Contract for the Greek SAR space segment",
+      "publisher": "ICEYE",
+      "url": "https://www.iceye.com/newsroom/press-releases/iceye-to-deliver-sar-satellites-and-data-to-greeces-national-satellite-space-project-in-collaboration-with-the-european-space-agency",
+      "date": "8 September 2024"
+    },
+    {
+      "id": 15,
+      "title": "National SmallSat Programme, Axis 1.2 radar space segment and budget",
+      "publisher": "Hellenic Republic, Ministry of Digital Governance",
+      "url": "https://mindigital.gr/wp-content/uploads/2024/01/National_SmallSat_Programme_DEC2023.pdf",
+      "date": "December 2023 programme brief"
+    },
+    {
+      "id": 16,
+      "title": "Small Spacecraft Technology, section 10.3.2 on rideshare launches",
+      "publisher": "NASA Small Spacecraft Systems Virtual Institute",
+      "url": "https://www.nasa.gov/smallsat-institute/sst-soa/integration-launch-and-deployment/",
+      "date": "18 May 2026"
+    },
+    {
+      "id": 17,
+      "title": "About Al Shaheen Field",
+      "publisher": "North Oil Company",
+      "url": "https://www.noc.qa/en/Our_Operations/About-Al-Shaheen-Field",
+      "date": "n.d."
+    },
+    {
+      "id": 18,
+      "title": "Increased use of satellite monitoring on the Norwegian Shelf",
+      "publisher": "Kongsberg Satellite Services",
+      "url": "https://www.ksat.no/news/news-archive/2016/increased-use-of-satellite-monitoring-on-the-norwegian-shelf/",
+      "date": "5 October 2016"
+    },
+    {
+      "id": 19,
+      "title": "Oil Spill Detection Service",
+      "publisher": "Kongsberg Satellite Services",
+      "url": "https://www.ksat.no/earth-observation/environmental-monitoring/oil-spill-detection-service/",
+      "date": "n.d."
+    },
+    {
+      "id": 20,
+      "title": "Dataset of oil slicks, look-alikes and remarkable SAR signatures obtained from Sentinel-1 data in the Eastern Mediterranean Sea",
+      "publisher": "Earth System Science Data",
+      "url": "https://essd.copernicus.org/articles/17/6807/2025/",
+      "date": "4 December 2025"
+    },
+    {
+      "id": 21,
+      "title": "What information does CleanSeaNet provide?",
+      "publisher": "European Maritime Safety Agency",
+      "url": "https://www.emsa.europa.eu/technical-assistance-to-member-states/305-detection-of-oil-pollution-at-sea-by-satellites/2215-what-is-cleanseanet-and-what-information-does-the-cleanseanet-provide.html",
+      "date": "n.d."
+    },
+    {
+      "id": 22,
+      "title": "Copernicus Data Space Ecosystem and data access",
+      "publisher": "Copernicus",
+      "url": "https://dataspace.copernicus.eu/",
+      "date": "n.d."
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Oil Slick in the Gulf of Mexico",
+      "alt": "Silvery swirls of oil extend southeast of the branching Mississippi Delta into darker Gulf waters.",
+      "caption": "Sunlight catches the Deepwater Horizon slick off the Mississippi Delta on 24 May 2010. The bright curl and its darker extensions are visible in this optical observation from NASA’s Terra satellite.",
+      "credit": "Jeff Schmaltz, NASA MODIS Rapid Response Team",
+      "source": "https://science.nasa.gov/earth/earth-observatory/oil-slick-in-the-gulf-of-mexico-44070/",
+      "rights": "NASA image use",
+      "rightsUrl": "https://science.nasa.gov/earth/faq/",
+      "files": [
+        {
+          "src": "/images/atlas/gulf-modis-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/gulf-modis-800.webp",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "src": "/images/atlas/gulf-modis-1440.webp",
+          "width": 1440,
+          "height": 1080
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Oil spill spread",
+      "alt": "An oval encloses a narrow, winding dark slick north of Corsica. A separate broad dark patch lies southeast of it near a small island.",
+      "caption": "In this 9 October 2018 radar scene, ESA’s oval marks the oil slick from a ship collision north of Corsica. The broad dark area southeast of it is calm water. Both features returned little radar energy.",
+      "credit": "Contains modified Copernicus Sentinel data (2018), processed by ESA. Still frame extracted and resized from “Oil spill spread.”",
+      "source": "https://commons.wikimedia.org/wiki/File:Oil_spill_spread_ESA401131.gif",
+      "rights": "CC BY-SA 3.0 IGO",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "files": [
+        {
+          "src": "/images/atlas/corsica-sar-480.webp",
+          "width": 480,
+          "height": 387
+        },
+        {
+          "src": "/images/atlas/corsica-sar-800.webp",
+          "width": 800,
+          "height": 644
+        },
+        {
+          "src": "/images/atlas/corsica-sar-1280.webp",
+          "width": 1280,
+          "height": 1031
+        }
+      ]
+    },
+    "hardware": {
+      "title": "Sentinel-1D satellite being lowered onto Ariane 6 launch adaptor",
+      "alt": "A gold-wrapped Sentinel-1D hangs from a yellow lifting frame above its launch adapter. Technicians below give a sense of the spacecraft’s size.",
+      "caption": "Sentinel-1D is lowered toward its launch adapter in Kourou before its November 2025 launch. The radar antenna and solar arrays travel folded against the spacecraft and open in orbit.",
+      "credit": "ESA–M. Pédoussaut (archive credit). Image-file credit: ESA–CNES–Arianespace–ArianeGroup / Optique vidéo du CSG, S. Martin. Cropped and resized.",
+      "source": "https://commons.wikimedia.org/wiki/File:Sentinel-1D_satellite_being_lowered_onto_Ariane_6_launch_adaptor_ESA514281.jpg",
+      "rights": "CC BY-SA 3.0 IGO",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "files": [
+        {
+          "src": "/images/atlas/sentinel-1d-hardware-480.webp",
+          "width": 480,
+          "height": 600
+        },
+        {
+          "src": "/images/atlas/sentinel-1d-hardware-800.webp",
+          "width": 800,
+          "height": 1000
+        },
+        {
+          "src": "/images/atlas/sentinel-1d-hardware-1280.webp",
+          "width": 1280,
+          "height": 1600
+        }
+      ]
+    }
+  },
+  "imageComparison": [
+    "Optical · Terra MODIS",
+    "Radar · Sentinel-1"
+  ]
+}

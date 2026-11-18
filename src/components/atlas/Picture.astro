@@ -1,0 +1,9 @@
+---
+import type {AtlasImage} from '../../data/atlas/catalog';
+const {image,eager=false}:{image:AtlasImage;eager?:boolean}=Astro.props;
+const last=image.files.at(-1)!;
+---
+<figure class="atlas-picture">
+  <a class="atlas-image-link" href={last.src} aria-label={'Open full-size image of '+image.title}><img src={image.files[1]?.src ?? last.src} srcset={image.files.map(f=>f.src+' '+f.width+'w').join(', ')} sizes={eager?'(min-width:1000px) 550px, (min-width:700px) 45vw, 96vw':'(min-width:900px) 770px, 94vw'} width={last.width} height={last.height} alt={image.alt} loading={eager?'eager':'lazy'} fetchpriority={eager?'high':'auto'} /></a>
+  <figcaption id={eager?'observation-credit':undefined}>{image.caption} <span><a href={image.source}>{image.credit}</a> · <a href={image.rightsUrl}>{image.rights}</a></span></figcaption>
+</figure>

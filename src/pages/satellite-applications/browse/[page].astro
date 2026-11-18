@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Directory from '../../../components/atlas/Directory.astro';
+import Crumbs from '../../../components/atlas/Crumbs.astro';
+import {summaries} from '../../../data/atlas/catalog';
+import {pageSize,pageUrl,root} from '../../../data/atlas/taxonomy';
+import '../../../styles/atlas.css';
+export function getStaticPaths(){return Array.from({length:Math.max(0,Math.ceil(summaries.length/pageSize)-1)},(_,i)=>({params:{page:String(i+2)}}));}
+const page=Number(Astro.params.page);
+const trail=[{name:'Satellite Applications Atlas',href:root},{name:'Applications · page '+page,href:pageUrl(page)}];
+---
+<BaseLayout title={'Satellite applications · page '+page} description={'Browse published satellite applications on page '+page+' of the Satellite Applications Atlas.'} path={pageUrl(page)} breadcrumbTrail={trail}><div class="atlas"><div class="shell atlas-small-header"><Crumbs items={[{name:'Home',href:'/'},trail[0],{name:'Page '+page}]} /><h1>Satellite applications</h1></div><Directory page={page}/></div></BaseLayout>

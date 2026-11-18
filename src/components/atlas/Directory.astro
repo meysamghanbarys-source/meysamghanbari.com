@@ -1,0 +1,25 @@
+---
+import Card from './Card.astro';
+import {summaries} from '../../data/atlas/catalog';
+import {industries,pageSize,pageUrl,root} from '../../data/atlas/taxonomy';
+const {page=1}:{page?:number}=Astro.props;
+const items=summaries.slice((page-1)*pageSize,page*pageSize);
+const pages=Math.ceil(summaries.length/pageSize);
+const facets=[['industry','Industry',industries.map(i=>[i.id,i.name])],['orbit','Orbit',['LEO','MEO','GEO',...new Set(summaries.flatMap(a=>a.orbits).filter(v=>!['LEO','MEO','GEO'].includes(v)))].map(v=>[v,v])],['technology','Technology',[...new Set(summaries.flatMap(a=>a.technologies))].sort().map(v=>[v,v])],['type','Application type',[...new Set(summaries.map(a=>a.type))].sort().map(v=>[v,v])]] as [string,string,string[][]][];
+---
+<section id="applications" class="atlas-block atlas-directory" aria-labelledby="applications-title" data-directory data-endpoint={root+'index.json'} data-page-size={pageSize} data-page={page}><div class="shell">
+ <div class="atlas-heading-row"><h2 id="applications-title">Explore applications</h2><p class="atlas-total" data-total role="status" aria-live="polite">{summaries.length} published {summaries.length===1?'application':'applications'}</p></div>
+ <div class="atlas-controls" data-controls hidden>
+   <label class="atlas-search"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5"/></svg><span class="sr-only">Search applications or business problems</span><input type="search" placeholder="Search by name or problem" autocomplete="off" data-search /></label>
+   <details class="atlas-filter"><summary>Filters <span aria-hidden="true">⌄</span><span data-active></span></summary><div class="atlas-selects">{facets.map(([key,label,options])=><label>{label}<select data-key={key}><option value="">{'All '+(key==='industry'?'industries':key==='type'?'types':key==='technology'?'technologies':'orbits')}</option>{options.map(([value,text])=><option value={value}>{text}</option>)}</select></label>)}</div></details>
+   <button type="button" class="atlas-clear" data-reset hidden>Clear filters</button>
+ </div><noscript><p>Browse the published applications below or use the <a href={root+'#industries'}>industry directory</a>.</p></noscript>
+ <div class="atlas-results" data-results>{items.map((item,i)=><Card item={item} latest={i===0&&page===1} />)}</div>
+ <div class="atlas-empty" hidden data-empty><h3>No matching applications</h3><p>Try a broader search or clear the filters to see all published applications.</p><button type="button" data-reset>Show all applications</button></div>
+ <nav class="atlas-pages" aria-label="Application results pages" data-pages hidden={pages <= 1}>{page>1&&<a href={pageUrl(page-1)+'#applications'}>← Previous</a>}<span>Page {page} of {pages}</span>{pages > page &&<a href={pageUrl(page+1)+'#applications'}>Next →</a>}</nav>
+ </div></section>
+<script>
+ import {setupDirectory} from '../../data/atlas/directory';
+ const root=document.querySelector<HTMLElement>('[data-directory]');
+ if(root) setupDirectory(root);
+</script>
