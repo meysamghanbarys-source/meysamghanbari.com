@@ -1,0 +1,384 @@
+{
+  "scope": "civilian",
+  "id": "atlas-002",
+  "slug": "measuring-irrigation-water-use-field-by-field",
+  "title": "Measuring irrigation water use field by field",
+  "dek": "Satellite observations estimate how much water leaves a field through soil and plants. Pair that estimate with rainfall and delivery records to decide which fields need a closer look before the next irrigation.",
+  "industry": "agriculture-water",
+  "family": "Irrigation and water supply",
+  "tags": [
+    "irrigation",
+    "water accounting",
+    "crop water use",
+    "evapotranspiration",
+    "water allocation",
+    "farm water management",
+    "thermal imagery",
+    "Landsat"
+  ],
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Thermal and atmospheric sensing",
+    "Optical and multispectral imaging"
+  ],
+  "type": "Water accounting",
+  "published": "2026-11-19",
+  "reviewed": "2026-11-19",
+  "glance": [
+    {
+      "label": "Buying decision",
+      "value": "Which fields warrant a soil check or a review of their next water delivery?"
+    },
+    {
+      "label": "Who uses it",
+      "value": "Irrigation districts, farm operators and water-accounting teams. [1] [11]"
+    },
+    {
+      "label": "What arrives",
+      "value": "An estimate of actual evapotranspiration in millimetres for each field and period. [1] [2]"
+    },
+    {
+      "label": "Recommended orbit",
+      "value": "Low Earth orbit (LEO) for thermal and reflected-light observations at field scale. [4] [5]"
+    },
+    {
+      "label": "Maturity",
+      "value": "Public data services and commercial district-wide programmes are operating. [10] [11] [14]"
+    },
+    {
+      "label": "Example markets",
+      "value": "California in the United States, the northern Jordan Valley, northern Egypt and irrigation schemes in Kenya. [11] [14] [15]"
+    }
+  ],
+  "problem": [
+    "Two farms can receive the same canal delivery while their crops use different amounts of water. Some water returns to the atmosphere by evaporation from soil and transpiration through leaves. Together these losses are called actual evapotranspiration (ET). Rain, irrigation, stored soil water and shallow groundwater can all supply it. A satellite ET map cannot identify the volume pumped from a well. [1] [3]",
+    "Suppose a 20-hectare field records 40 mm of ET in a month. Since 1 mm over 1 hectare equals 10 m³, that is 8,000 m³ returned to the atmosphere. In an illustrative balance, 10 mm of usable rainfall and a 5 mm drawdown of stored soil water leave 25 mm, or 5,000 m³, to be supplied by irrigation. This calculation assumes negligible runoff, deep drainage and groundwater contribution. The metered diversion can be larger because water is lost during delivery or application. [3]"
+  ],
+  "workflow": [
+    {
+      "title": "Observe the field",
+      "text": "On a clear pass, a thermal sensor measures radiation emitted by the land surface. Reflected red and near-infrared light helps characterize vegetation cover. A temperature observation includes the mix of canopy and bare soil inside the sensor footprint. [2] [4] [5]"
+    },
+    {
+      "title": "Estimate evaporation and transpiration",
+      "text": "Evaporation takes energy and can cool an irrigated surface. An energy-balance model combines surface temperature, reflectance, weather and available radiation to estimate the energy going into water vapour. It converts that energy into a water depth. OpenET combines several models, including approaches with different inputs. [2]"
+    },
+    {
+      "title": "Bridge gaps between images",
+      "text": "Ground systems process the observations and reject cloudy pixels. One OpenET method estimates ET relative to a well-watered reference surface on clear overpasses, interpolates that fraction, and applies each day’s weather-derived reference ET. A daily value can therefore be modelled between observations. [2]"
+    },
+    {
+      "title": "Aggregate and reconcile",
+      "text": "Average usable pixels inside a verified field boundary over the reporting period. Keep the observed dates, cloud gaps and field area beside the result. Compare the period total with rain, metered irrigation and changes in root-zone storage. Record plausible runoff, drainage or groundwater contributions. [1] [2] [3]"
+    },
+    {
+      "title": "Choose an action",
+      "text": "If ET falls unexpectedly next to similar fields, inspect soil moisture, crop stage and emitters before changing the next irrigation. If a meter and ET disagree for a month, check the water balance and meter-to-field assignment before attributing the difference to a loss. [1] [3]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Thermal and reflected-light sensors",
+      "text": "Landsat 9 carries the Thermal Infrared Sensor 2 and the Operational Land Imager 2. Thermal bands sample at 100 m and are distributed on a 30 m grid. Most reflective bands sample at 30 m. Resampling does not create independent temperatures for adjoining 30 m plots. [4] [5]"
+    },
+    {
+      "title": "Spacecraft and downlink",
+      "text": "A mission needs stable pointing, calibration, power, thermal control, storage and a route to ground processing. NASA’s ECOSTRESS thermal radiometer demonstrates a hosted approach on the International Space Station. JPL lists a 490 kg payload and 516 W power requirement for that particular instrument. [4] [7]"
+    },
+    {
+      "title": "What a district needs on the ground",
+      "text": "An existing service can supply processed maps or field time series through an application programming interface (API). The district supplies parcel boundaries, crop and harvest records, rainfall, meter locations, delivery dates and soil observations. Assign someone to resolve boundary errors and investigate discrepancies. [1] [2] [3] [10]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Recommended",
+      "geometry": "Landsat 9 flies at about 705 km and images a 185 km swath. It repeats its ground track every 16 days. Together Landsat 8 and 9 give a nominal eight-day cycle. [2] [4]",
+      "performance": "The shorter viewing distance supports field-scale mapping. Cloud and footprint size determine whether a particular field has a useful observation. Processing and publication add delay after overpass. [1] [5]",
+      "decision": "Obtain the clear-image history and delivery delay for the actual farms. A service for seasonal accounting can tolerate older data than one used to change a weekly delivery. [1]"
+    },
+    {
+      "orbit": "MEO",
+      "status": "Impractical for this pilot",
+      "geometry": "Medium Earth orbit lies above LEO and below geostationary altitude. A sensor sees a broader area from farther away. [8]",
+      "performance": "At equal viewing angle and detector sampling, ground footprint increases with distance. Keeping field detail would demand finer angular resolution and sufficient thermal sensitivity. The ET services described here do not offer a MEO field product. [2] [4] [8]",
+      "decision": "A MEO navigation service can help survey field boundaries. Procure the thermal observation separately and use an established LEO source. [8]"
+    },
+    {
+      "orbit": "GEO",
+      "status": "Useful regional input",
+      "geometry": "At roughly 35,786 km above the equator, a geostationary satellite repeatedly views the same region. [8]",
+      "performance": "In a published U.S. example, the ALEXI model used repeated GOES morning surface-temperature measurements to estimate daily ET at 4 km resolution. Many farms can share one such pixel. [9]",
+      "decision": "Regional observations help describe how heating changes during the day. A fine-resolution LEO observation or another validated source of field detail is still needed to distinguish neighbouring farms. [9]"
+    }
+  ],
+  "costs": [
+    {
+      "model": "Use public data",
+      "headline": "$0 OpenET API access",
+      "unit": "USD · subject to usage quotas · reviewed November 2026",
+      "detail": "Each free OpenET API query covers up to 50,000 acres and can include up to 100 field IDs from its geodatabase or 50 custom polygons. A buyer still budgets for integration and field checks. Illustrative 2026 pilot: 4–8 analyst days at an assumed $600/day gives $2,400–$4,800 in labour, using existing field boundaries, weather and meter data. New meters, site visits, paid computing and continuing support are additional. This is a planning calculation, not a quoted rate. [10]"
+    },
+    {
+      "model": "Buy a managed service",
+      "headline": "Up to $493,020",
+      "unit": "USD · three-year California district agreement approved in 2025",
+      "detail": "Madera County approved this ceiling for Hydrosat remote-sensing services through December 2028, equivalent to $164,340 a year averaged over the term. The package includes crop-water monitoring and grower-facing delivery. It is a district contract. Ask for a quote that names the monitored area, update frequency, support and integration. [11] [16] The cited agreement gives no general minimum order for other buyers."
+    },
+    {
+      "model": "Fly a hosted thermal payload",
+      "headline": "$66.1 million",
+      "unit": "USD · ECOSTRESS project costs reported as of May 2023",
+      "detail": "NASA’s Inspector General reported this historical project cost for a thermal experiment flown on the International Space Station. It includes project scope beyond the instrument. A commercial host needs a separate quote covering power, cooling, calibration, integration, testing, downlink and operations. Its orbit must provide the required local-time samples and coverage. [7] [12]"
+    },
+    {
+      "model": "Commission a dedicated mission",
+      "headline": "$587.7 million",
+      "unit": "USD · historical Landsat 9 development estimate, NASA FY2021 budget",
+      "detail": "NASA’s estimate included $109.3m for the payloads together, $117.5m for the spacecraft, $154.4m for the launch vehicle and $20.0m for ground systems. These are parts of the development estimate for a wide-swath public observatory. Smaller commercial hardware needs a supplier quote. Include mission engineering, tests, licensing, operations and eventual replacement in the ownership case. [13]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "United States",
+      "iso": "US",
+      "latitude": 36.96,
+      "longitude": -120.08,
+      "reason": "Madera County, California, purchased field-scale monitoring for groundwater management. It gives another irrigation district a documented example of the purchasing, reporting and grower-support workload. [11] [16]"
+    },
+    {
+      "country": "Jordan",
+      "iso": "JO",
+      "latitude": 32.42,
+      "longitude": 35.59,
+      "reason": "FAO documents a tool for the northern Jordan Valley’s citrus-growing irrigation scheme. Managers use WaPOR-derived consumption and productivity indicators to assess differences in supply across the scheme. [15]"
+    },
+    {
+      "country": "Egypt",
+      "iso": "EG",
+      "latitude": 30.8,
+      "longitude": 30.95,
+      "reason": "FAO lists northern Egypt among its detailed 20 m WaPOR coverage areas. A Nile Delta irrigation operator can test performance across canal commands and check whether narrow parcels occupy enough usable pixels. [14]"
+    },
+    {
+      "country": "Kenya",
+      "iso": "KE",
+      "latitude": -0.66,
+      "longitude": 37.36,
+      "reason": "Mwea and the Tana and Bura schemes have detailed WaPOR coverage. Scheme managers can compare seasonal field groups and select locations for follow-up checks against delivery records. [14]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "OpenET",
+      "status": "Public field-scale ET service",
+      "text": "The ensemble combines six models. A U.S. study comparing results with 152 ground stations found a mean absolute error of 15.8 mm/month at cropland sites, or 17% of mean observed ET. That benchmark describes the study sites and period. A new buyer should test local crops and seasons. [2] [6] [10]"
+    },
+    {
+      "name": "FAO WaPOR",
+      "status": "Open water-productivity data",
+      "text": "Version 3 has global 300 m products, regional 100 m coverage in Africa and the Near East, and 20 m data for named irrigation schemes or sub-basins. Check the selected product, period and coverage before promising individual-field reporting. [14]"
+    },
+    {
+      "name": "Hydrosat IrriWatch",
+      "status": "Commercial field monitoring",
+      "text": "Under its renewed Madera County agreement, Hydrosat describes daily crop-water-use estimates, irrigation scheduling, allocation tracking and grower reporting. Request sample records showing input dates and whether an update is observed or estimated. [16]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A shared pixel can obscure a boundary",
+      "text": "A narrow parcel, road, canal and adjoining crop can fall inside one thermal footprint. Exclude parcel edges when enough area remains. Where too few independent observations remain, aggregate neighbouring fields or use ground measurements. [4] [5]"
+    },
+    {
+      "title": "A daily estimate can arrive too late",
+      "text": "OpenET’s published goal for western U.S. monthly data is a latency of six weeks or less. It also describes two days after overpass as a goal for daily products. Test actual timestamps against the district’s decision deadline. [1]"
+    },
+    {
+      "title": "Lower ET has more than one cause",
+      "text": "Harvest, bare soil, crop choice and water stress can all affect ET. Rainfall and stored water also change the share supplied by irrigation. Record the crop stage and inspect an unexpected result before changing an allocation. [1] [2] [3]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Select fields and a decision",
+      "text": "Choose one irrigation district and a mix of large and narrow fields with known crops, delivery points and meters. Agree whether the trial serves seasonal accounting or an upcoming irrigation decision. Write down the maximum useful data age."
+    },
+    {
+      "title": "Replay a complete season",
+      "text": "Plot field ET, rainfall, irrigation and measured changes in soil water on the same calendar. Record data gaps and irrigation shared between fields. Mark dates of harvest, heavy rain and equipment problems before assessing apparent discrepancies. [1] [3]"
+    },
+    {
+      "title": "Check the product against independent evidence",
+      "text": "Use an independent flux measurement or a suitably instrumented field water balance where available. A delivery meter measures inflow. Compare it to the appropriate balance rather than scoring ET as though it were meter output. Track monthly error, coverage and the age of each usable observation. [3] [6]"
+    },
+    {
+      "title": "Price the next season",
+      "text": "Count how many flagged fields warranted a visit, how often a finding changed a delivery decision and what each verified decision cost. Request commercial coverage if the public product misses the required timing or footprint. Reassess ownership only after quantifying that gap."
+    }
+  ],
+  "conclusion": [
+    "Start with one season of public ET estimates, accurate field boundaries and the district’s own delivery records. If that comparison identifies fields where a timely inspection changes a real allocation or irrigation decision, a managed monitoring contract can be priced against a measurable benefit."
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "title": "Frequently asked questions on ET, water sources and product latency",
+      "publisher": "OpenET",
+      "url": "https://etdata.org/faqs/",
+      "date": "n.d."
+    },
+    {
+      "id": 2,
+      "title": "Methods, energy balance, satellite inputs and daily interpolation",
+      "publisher": "OpenET",
+      "url": "https://etdata.org/methods/",
+      "date": "n.d."
+    },
+    {
+      "id": 3,
+      "title": "Crop evapotranspiration, chapter 8: root-zone water balance",
+      "publisher": "Food and Agriculture Organization of the United Nations, Irrigation and Drainage Paper 56",
+      "url": "https://www.fao.org/4/x0490e/x0490e0e.htm",
+      "date": "1998"
+    },
+    {
+      "id": 4,
+      "title": "Landsat 9 fast facts: orbit, observations and coverage",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/wp-content/uploads/2015/04/landsat_9_fast_facts.pdf",
+      "date": "n.d."
+    },
+    {
+      "id": 5,
+      "title": "Landsat 9 technical specifications and thermal band sampling",
+      "publisher": "NASA",
+      "url": "https://science.nasa.gov/mission/landsat-9/",
+      "date": "n.d."
+    },
+    {
+      "id": 6,
+      "title": "Assessing the accuracy of OpenET satellite-based evapotranspiration data to support water resource and land management applications",
+      "publisher": "Volk and colleagues, Nature Water / OpenET",
+      "url": "https://etdata.org/literature/assessing-the-accuracy-of-openet-satellite-based-evapotranspiration-data-to-support-water-resource-and-land-management-applications/",
+      "date": "15 January 2024"
+    },
+    {
+      "id": 7,
+      "title": "ECOSTRESS mission and instrument",
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "url": "https://ecostress.jpl.nasa.gov/mission",
+      "date": "n.d."
+    },
+    {
+      "id": 8,
+      "title": "Types of orbits",
+      "publisher": "European Space Agency",
+      "url": "https://www.esa.int/articles/about-us/directorates/space-transportation/types-of-orbits",
+      "date": "n.d."
+    },
+    {
+      "id": 9,
+      "title": "Evaluation of partitioned evaporation and transpiration estimates within the DisALEXI modeling framework over irrigated crops in California",
+      "publisher": "Remote Sensing",
+      "url": "https://doi.org/10.3390/rs15010068",
+      "date": "2022"
+    },
+    {
+      "id": 10,
+      "title": "Access to the OpenET API and field queries",
+      "publisher": "OpenET",
+      "url": "https://etdata.org/api/",
+      "date": "n.d."
+    },
+    {
+      "id": 11,
+      "title": "Board letter and minute order, item 10.b, agreement MCC 13203-25",
+      "publisher": "County of Madera, Board of Directors of the Groundwater Sustainability Agency",
+      "url": "https://pub-maderacounty.escribemeetings.com/FileStream.ashx?DocumentId=4415",
+      "date": "9 December 2025"
+    },
+    {
+      "id": 12,
+      "title": "NASA’s Earth System Science Pathfinder Program, ECOSTRESS project costs",
+      "publisher": "NASA Office of Inspector General, report IG-23-018",
+      "url": "https://www.nasa.gov/wp-content/uploads/2023/09/ig-23-018.pdf",
+      "date": "5 September 2023"
+    },
+    {
+      "id": 13,
+      "title": "FY 2021 Budget Estimates, Landsat 9 development cost details, pages ES-31–32",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/wp-content/uploads/2021/04/fy_2021_budget_book_508.pdf",
+      "date": "FY 2021 budget request"
+    },
+    {
+      "id": 14,
+      "title": "WaPOR data layers, grid sizes and high-resolution coverage",
+      "publisher": "Food and Agriculture Organization of the United Nations",
+      "url": "https://www.fao.org/in-action/remote-sensing-for-water-productivity/wapor-data/en",
+      "date": "Coverage table as of April 2026"
+    },
+    {
+      "id": 15,
+      "title": "Irrigation Performance Assessment and Diagnostics Tool, Jordan",
+      "publisher": "Food and Agriculture Organization of the United Nations",
+      "url": "https://www.fao.org/in-action/remote-sensing-for-water-productivity/applications-and-uses/applications-catalogue/product-detail/irrigation-performance-assessment-and-diagnostics-tool-(ipadt)---jordan14ecfd15-4f01-4a01-85d6-ac705cead701/en",
+      "date": "2026"
+    },
+    {
+      "id": 16,
+      "title": "Madera County crop-water monitoring agreement and service scope",
+      "publisher": "Hydrosat",
+      "url": "https://hydrosat.com/2026/03/10/hydrosat-secures-multi-year-water-monitoring-contract-in-madera-county/",
+      "date": "10 March 2026"
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Center-pivot irrigation in Arizona",
+      "alt": "A wheeled sprinkler line sprays a green field, with bare soil in the foreground and mountains behind it.",
+      "caption": "A center-pivot system waters a field in Arizona in May 2009. An operator can compare irrigation records with satellite estimates of the water that leaves the field through soil and plants.",
+      "credit": "U.S. Geological Survey, Arizona Water Science Center",
+      "source": "https://www.usgs.gov/media/images/central-pivot-irrigation",
+      "rights": "U.S. public domain",
+      "rightsUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+      "files": [
+        {
+          "src": "/images/atlas/arizona-irrigation-pivot-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/arizona-irrigation-pivot-900.webp",
+          "width": 900,
+          "height": 675
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Evapotranspiration in California’s Central Valley",
+      "alt": "A patchwork of blue, green and tan fields in a thermal-derived map. The legend ranges from zero in tan to 300 watts per square metre in blue.",
+      "caption": "NASA’s ECOSTRESS observation at 6:04 p.m. Pacific daylight time on 22 May 2022 shows stronger evaporative cooling in blue fields. The scale gives energy flux in watts per square metre at the overpass. Estimating water depth over a day takes additional modeling.",
+      "credit": "Courtesy NASA/JPL-Caltech. Field detail cropped from the original map.",
+      "source": "https://www.jpl.nasa.gov/images/pia25488-evapotranspiration-over-central-valley/",
+      "rights": "JPL image use policy",
+      "rightsUrl": "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+      "files": [
+        {
+          "src": "/images/atlas/california-ecostress-et-480.webp",
+          "width": 480,
+          "height": 457
+        },
+        {
+          "src": "/images/atlas/california-ecostress-et-900.webp",
+          "width": 900,
+          "height": 858
+        }
+      ]
+    }
+  }
+}
