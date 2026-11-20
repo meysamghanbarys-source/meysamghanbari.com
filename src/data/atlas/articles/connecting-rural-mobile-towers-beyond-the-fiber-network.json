@@ -1,0 +1,307 @@
+{
+  "id": "atlas-003",
+  "title": "Connecting rural mobile towers beyond the fiber network",
+  "slug": "connecting-rural-mobile-towers-beyond-the-fiber-network",
+  "type": "Connectivity",
+  "industry": "telecommunications",
+  "family": "Network extension",
+  "tags": [
+    "cellular backhaul",
+    "rural coverage"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-20",
+  "reviewed": "2026-11-20",
+  "orbits": [
+    "LEO",
+    "MEO",
+    "GEO"
+  ],
+  "technologies": [
+    "Satellite communications"
+  ],
+  "dek": "A village can have a mobile tower and still lack a route for its calls. Satellite backhaul connects that tower to the operator. The buying decision comes down to what the link delivers during the busiest hour.",
+  "glance": [
+    {
+      "label": "Who buys",
+      "value": "Mobile operators extending service to islands or inland communities. KDDI and Telstra have both documented deployments. [1] [2]"
+    },
+    {
+      "label": "What arrives",
+      "value": "A two-way connection between the base station and the mobile core, where the operator manages calls and data. [2] [3]"
+    },
+    {
+      "label": "What to buy",
+      "value": "A committed rate in each direction, a delay budget and an enforceable restoration agreement. [2]"
+    },
+    {
+      "label": "What to measure",
+      "value": "Completed calls, usable upload capacity and interruptions as satellites change."
+    }
+  ],
+  "problem": [
+    "Picture an island where the tower has power and a clear view across the village. A phone can reach the tower, but the call still needs a path off the island. A terminal at the site sends the tower’s combined traffic through a satellite network. Subscribers continue using ordinary mobile phones. KDDI put this arrangement into commercial service on Hatsushima in December 2022. [1]",
+    "The network planner compares this link with a microwave relay or a fiber build. A satellite quote is useful only if it specifies what survives a crowded evening, poor weather and a site power failure. In Australia, Telstra contracted for service commitments and a guaranteed information rate when moving remote sites to low Earth orbit. [2]"
+  ],
+  "workflow": [
+    {
+      "title": "Measure demand at the tower",
+      "text": "Read the base station counters for several normal weeks. Separate upstream from downstream traffic, retain five-minute peaks and record voice calls alongside data use. This provides a repeatable baseline for both satellite and terrestrial offers."
+    },
+    {
+      "title": "Send traffic into the satellite beam",
+      "text": "The base station passes packets to a router and satellite modem. The modem encodes bits onto a radio carrier. A directional antenna concentrates the signal toward the satellite. OneWeb uses Ku-band radio links at the user terminal and Ka-band at the gateways. [4]"
+    },
+    {
+      "title": "Return to the mobile core",
+      "text": "A communications payload receives the uplink and routes or retransmits it on a downlink. A gateway joins the provider’s terrestrial network. The mobile operator needs an agreed handoff from there to its own core. Responses traverse the return path. [3] [5]"
+    },
+    {
+      "title": "Measure the delivered service",
+      "text": "Compare tower counters with gateway and core measurements. Log packet loss, delay variation, outages and terminal changes of satellite. Run actual voice and upload tests during the busiest hour. KDDI checked both traffic directions, latency and jitter before deployment. [1]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Tower equipment",
+      "text": "Budget for the outdoor antenna and modem, a surveyed mount with a clear sky view, a router, protected power and local spares. A moving satellite requires tracking and handover. Check that the terminal can recover unattended after a power cut. [1] [5]"
+    },
+    {
+      "title": "A specific flight payload",
+      "text": "SES’s O3b mPOWER uses high-throughput communications satellites with dynamically allocated capacity. Antenna beams, radio amplifiers and payload routing determine which sites can share that capacity. A host must supply power, heat rejection, pointing, spectrum compatibility and feeder-link access. [5]"
+    },
+    {
+      "title": "Ground network",
+      "text": "Ask which gateways serve the site, where the operator receives the packets, and which failures share power or transport. Include provisioning, monitoring, timing at the base station and a route for maintenance staff. SES offers managed backhaul through to the operator’s core. [3]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Test first for interactive traffic",
+      "geometry": "A low Earth orbit satellite moves across the sky. KDDI described a 550 km Starlink deployment. [1]",
+      "performance": "Shorter radio paths reduce propagation delay. Moving beams require handovers, and obstructions can interrupt a pass. [1] [5]",
+      "decision": "Test handovers under voice and upload load. Obtain local peak-hour capacity in writing. [2]"
+    },
+    {
+      "orbit": "MEO",
+      "status": "Consider for aggregated sites",
+      "geometry": "Medium Earth orbit sits between low and geostationary orbits. O3b mPOWER operates at about 8,000 km. [5]",
+      "performance": "A satellite sees a wider region and still moves relative to the terminal. Greater distance adds delay. Routing and gateway location also matter. [5]",
+      "decision": "Request a managed rate for several towers and verify terminal cost, coverage at their latitudes and handover continuity. [3] [5]"
+    },
+    {
+      "orbit": "GEO",
+      "status": "Consider for fixed coverage or backup",
+      "geometry": "A geostationary satellite appears fixed above the equator at about 35,786 km. The terminal can point in one direction. [5]",
+      "performance": "Even an ideal vertical tower–satellite–gateway path and return spans four orbital heights. At light speed that is about 0.48 seconds before routing or queues. Actual slant paths are longer. [5]",
+      "decision": "Check voice quality with the real mobile core. Delay-tolerant traffic may be a better fit when price and coverage justify the link. [3]"
+    }
+  ],
+  "costs": [
+    {
+      "model": "Buy managed backhaul",
+      "headline": "Quote per site and committed Mbps",
+      "unit": "USD per site per month · procurement basis, November 2026",
+      "detail": "Telstra disclosed a committed-rate agreement without a per-site price or minimum order. Ask for both directions, pooled capacity, term, overage, installation, taxes and repair travel. An illustrative one-site acceptance test takes 5–8 engineer-days at an assumed $600/day, or $3,000–$4,800 in 2026 planning dollars. Terminal, airtime and travel are extra. [2]"
+    },
+    {
+      "model": "Price a trial data allowance",
+      "headline": "$257 per month for 1 TB",
+      "unit": "USD · Puerto Rico business tariff checked November 2026",
+      "detail": "Starlink lists one monthly Local Priority subscription with 1 TB for $257 in Puerto Rico. After the priority allowance, its plan lists speeds up to 1 Mbps down and 0.5 Mbps up. This benchmarks data volume only. Confirm hardware, installation, taxes, operator use rights and committed throughput separately. [10]"
+    },
+    {
+      "model": "Host a communications payload",
+      "headline": "Custom engineering and hosting quote",
+      "unit": "USD per payload and contracted operating term · reviewed November 2026",
+      "detail": "Request prices for one payload, integration, launch allocation, power, spectrum coordination, gateways and service life. A civilian precedent is the FAA navigation payload on SES-15. Its 2015 hosting contract included payload construction, carriage and 11 years of operations. SES disclosed no price. A two-way broadband payload requires its own engineering and commercial terms. [6]"
+    },
+    {
+      "model": "Own a dedicated spacecraft",
+      "headline": "About $400 million",
+      "unit": "USD · historical ViaSat-1 project estimate, 2009",
+      "detail": "Viasat’s filing includes one satellite, launch, insurance and related gateways through entry into service. It excludes capitalized interest. Lifetime operations and a replacement reserve need separate budgets. For scale, SpaceX lists $74 million for a Falcon 9 launch through 2026, for up to 5.5 tonnes to standard geostationary transfer orbit. This independent launch benchmark excludes spacecraft and gateways. A single low-orbit spacecraft also leaves gaps between passes. [7] [8]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Japan",
+      "iso": "JP",
+      "latitude": 35.04,
+      "longitude": 139.17,
+      "reason": "KDDI’s first commercial site on Hatsushima demonstrates an island buyer with an actual service decision. New sites still need their own sky, power and traffic surveys. [1]"
+    },
+    {
+      "country": "Australia",
+      "iso": "AU",
+      "latitude": -33.74,
+      "longitude": 151.24,
+      "reason": "At Oxford Falls, New South Wales, Telstra reported its first on-air call on the commercial OneWeb backhaul in February 2024. Its announced plan covered more than 300 existing remote sites. That figure described the rollout plan. [2]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "KDDI and Starlink",
+      "status": "Commercial mobile tower",
+      "text": "Hatsushima progressed from technical evaluation to service. KDDI reported meeting its own quality criteria. Local terrain and traffic determine whether another tower can do the same. [1]"
+    },
+    {
+      "name": "Telstra and Eutelsat OneWeb",
+      "status": "Commercial-network voice call",
+      "text": "The February 2024 milestone demonstrated a call with committed service terms. The agreement’s up-to-25 Gbit/s figure covers the wider arrangement across sites. [2]"
+    },
+    {
+      "name": "SES O3b mPOWER",
+      "status": "MEO service in operation",
+      "text": "SES reported service beginning in April 2024. Ask for beam capacity and a service-level offer for the actual region. [3] [5]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A monthly quota can disappear quickly",
+      "text": "At a sustained 10 megabits per second, one hour transfers 4.5 GB in one direction. Thirty days at that same continuous rate would consume 3.24 TB, before overhead. Use measured traffic over time to price the plan."
+    },
+    {
+      "title": "Rain and terrain affect the link",
+      "text": "Rain attenuates microwave signals. A blocked sky sector can also interrupt a passing satellite. Log weather and obstructions alongside outages so the team can distinguish a capacity issue from a site issue. [4] [9]"
+    },
+    {
+      "title": "Two links may share one failure",
+      "text": "Confirm backup power, gateway diversity and how the site switches back after an outage. Two terminals on the same circuit offer little protection from a local power cut."
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Choose one site and a comparison",
+      "text": "Select an island or inland tower with usable traffic history. Obtain the terrestrial alternative’s installation lead time and costs. Agree on busy-hour downlink, uplink, voice quality and restoration requirements before ordering."
+    },
+    {
+      "title": "Run a 30-day parallel test",
+      "text": "Use a trial circuit alongside the existing path. Make calls and run transfers during handovers, rain and evening peaks. At a staffed maintenance window test loss of power and recovery. Record delay percentiles, call completion and minutes unavailable."
+    },
+    {
+      "title": "Decide with a site-level budget",
+      "text": "Compare three-year expenditure including installation, recurring service, power, spare terminals and maintenance travel. Accept only if measured performance meets the pre-agreed limits and the supplier guarantees the required capacity. Extend testing if the trial missed seasonal weather."
+    }
+  ],
+  "conclusion": [
+    "A useful offer tells the operator how much traffic can leave the tower at peak time, how long a voice packet takes to reach the core and who restores service after a failure. Those three answers make satellite, microwave and fiber proposals comparable."
+  ],
+  "sources": [
+    {
+      "title": "First commercial mobile tower using Starlink on Hatsushima",
+      "publisher": "KDDI",
+      "date": "2022-12-01",
+      "url": "https://news.kddi.com/kddi/corporate/english/newsrelease/2022/12/01/6415.html",
+      "id": 1
+    },
+    {
+      "title": "First commercial-network voice call over committed OneWeb backhaul",
+      "publisher": "Telstra",
+      "date": "2024-02-12",
+      "url": "https://www.telstra.com.au/aboutus/media/media-releases/telstra-and-oneweb-first-voice-call",
+      "id": 2
+    },
+    {
+      "title": "Mobile backhaul via SES-17",
+      "publisher": "SES",
+      "date": "2023",
+      "url": "https://www.ses.com/sites/default/files/2023-02/SES-SB-Mobile-Backhaul-SES-17.pdf",
+      "id": 3
+    },
+    {
+      "title": "OneWeb user and gateway links, investor presentation",
+      "publisher": "Eutelsat Group",
+      "date": "2024-06",
+      "url": "https://www.eutelsat.com/files/Investor_presentation_June_2024.pdf",
+      "id": 4
+    },
+    {
+      "title": "O3b mPOWER service and orbit comparison",
+      "publisher": "SES",
+      "date": "2024-05",
+      "url": "https://www.ses.com/sites/default/files/2024-05/SES_O3bmPOWER_PressFactsheet_May2024_EN.pdf",
+      "id": 5
+    },
+    {
+      "title": "SES-15 civil aviation hosted payload contract scope",
+      "publisher": "SES",
+      "date": "2015-04",
+      "url": "https://sessd.com/gsr/press-release/ses-host-waas-payload-ses-15/",
+      "id": 6
+    },
+    {
+      "title": "Form 10-Q, ViaSat-1 project estimate",
+      "publisher": "Viasat, U.S. Securities and Exchange Commission",
+      "date": "2009",
+      "url": "https://www.sec.gov/Archives/edgar/data/797721/000095012309060699/a54289e10vq.htm",
+      "id": 7
+    },
+    {
+      "title": "Falcon launch capabilities and standard payment plan",
+      "publisher": "SpaceX",
+      "date": "2026",
+      "url": "https://www.spacex.com/assets/media/Capabilities%26Services.pdf",
+      "id": 8
+    },
+    {
+      "title": "Propagation prediction for Earth-space links",
+      "publisher": "International Telecommunication Union",
+      "date": "2023",
+      "url": "https://www.itu.int/rec/R-REC-P.618/en",
+      "id": 9
+    },
+    {
+      "title": "Puerto Rico business service plans and priority allowances",
+      "publisher": "Starlink",
+      "date": "Reviewed 2026-11-20",
+      "url": "https://starlink.com/es-pr/business/service-plans",
+      "id": 10
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Mobile phone mast antenna",
+      "alt": "Cellular antennas mounted on a steel mast.",
+      "caption": "A mobile mast in Finland. The antennas provide local coverage. A separate connection carries traffic from the mast to the operator’s network.",
+      "credit": "Santeri Viinamäki via Wikimedia Commons. Resized and converted to WebP.",
+      "source": "https://commons.wikimedia.org/wiki/File:Mobile_phone_mast_antenna.jpg",
+      "rights": "CC BY-SA 4.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+      "files": [
+        {
+          "src": "/images/atlas/mobile-mast-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/mobile-mast-900.webp",
+          "width": 900,
+          "height": 676
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Steve Jurvetson with Starlink user terminal",
+      "alt": "Steve Jurvetson beside a Starlink user terminal.",
+      "caption": "An early Starlink user terminal photographed in 2020. A network operator would qualify the antenna, mount and service plan for the specific tower.",
+      "credit": "Steve Jurvetson via Wikimedia Commons. Resized and converted to WebP.",
+      "source": "https://commons.wikimedia.org/wiki/File:Steve_Jurvetson_with_Starlink_user_terminal.jpg",
+      "rights": "CC BY 2.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by/2.0/deed.en",
+      "files": [
+        {
+          "src": "/images/atlas/starlink-terminal-480.webp",
+          "width": 480,
+          "height": 469
+        },
+        {
+          "src": "/images/atlas/starlink-terminal-900.webp",
+          "width": 900,
+          "height": 880
+        }
+      ]
+    }
+  }
+}
