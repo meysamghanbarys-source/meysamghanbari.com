@@ -1,0 +1,326 @@
+{
+  "id": "atlas-004",
+  "title": "Forecasting cloud-driven changes in solar power",
+  "slug": "forecasting-cloud-driven-changes-in-solar-power",
+  "type": "Generation forecasting",
+  "industry": "energy-infrastructure",
+  "family": "Renewable generation",
+  "tags": [
+    "solar generation",
+    "cloud motion"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-21",
+  "reviewed": "2026-11-21",
+  "orbits": [
+    "GEO"
+  ],
+  "technologies": [
+    "Optical and multispectral imaging"
+  ],
+  "dek": "A cloud bank can cut a solar farm’s output before the next dispatch interval. Track its shadow toward the panels, then use the plant meter to estimate when the drop will arrive and how many megawatts are at stake.",
+  "glance": [
+    {
+      "label": "Who buys",
+      "value": "Solar fleet operators and electricity schedulers. Neoen Australia and Edify Energy participated in an Australian solar self-forecasting project. [1]"
+    },
+    {
+      "label": "Decision",
+      "value": "Revise the generation forecast, or keep a battery available for a likely shortfall."
+    },
+    {
+      "label": "What arrives",
+      "value": "A time series of expected plant output, updated as new satellite scans arrive. Request issue time, valid time and uncertainty. [2]"
+    },
+    {
+      "label": "Best starting point",
+      "value": "Existing geostationary weather imagery or a plant-level commercial forecast, paired with meter data. [2] [3]"
+    }
+  ],
+  "problem": [
+    "At noon a plant is exporting 40 megawatts (MW). A cloud front is still west of the site, so the meter gives no warning. A sequence of satellite images shows the front moving east. If the forecast calls for a 12 MW drop lasting ten minutes, the implied shortfall is 2 megawatt-hours. That illustrative calculation gives a battery operator both a power requirement and an energy requirement. Actual delivery also depends on battery charge, losses and inverter limits.",
+    "A trader needs the timing and depth of the ramp. A grid operator needs to know whether neighboring farms will dip together. Australia’s participant forecasting program gives generators a route to supply forecasts for dispatch. Its renewable energy agency documented a completed project involving solar operators in four states. [1] [4]"
+  ],
+  "workflow": [
+    {
+      "title": "Observe clouds upstream",
+      "text": "A visible channel measures sunlight reflected toward the sensor. A bright daytime pixel can indicate thick cloud, though bright ground can look similar. Thermal infrared channels measure emitted radiance and help distinguish cloud tops by temperature. Neither measures the power at the inverter. [2] [5]"
+    },
+    {
+      "title": "Estimate where the shadow will move",
+      "text": "Compare cloud features in successive geolocated scans to estimate direction and speed. Project them forward and account for viewing geometry, cloud height and solar angle when locating the shadow. A cloud edge 18 km upstream moving at 12 m/s has an illustrative travel time of 25 minutes. A five-minute delivery delay leaves about 20 minutes to act. [2] [6]"
+    },
+    {
+      "title": "Convert sunlight to plant power",
+      "text": "Estimate incoming sunlight at the ground, translate it to the plane of the panels and model conversion to alternating-current power. Use the plant layout, tracker settings, temperature and inverter limits. Match historical estimates to time-stamped meter readings, flagging curtailment and outages. [2] [6]"
+    },
+    {
+      "title": "Deliver and score each forecast",
+      "text": "Store the observation time, forecast issue time, valid interval and time received by the control room. Compare only forecasts that actually arrived before the dispatch deadline. Keep revisions separate so a late update cannot improve a historical score."
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Flight instrument",
+      "text": "The Advanced Baseline Imager (ABI) aboard NOAA’s GOES series is a passive scanning radiometer. Its 16 spectral bands include visible, near-infrared and thermal channels. The nominal sampling at the point beneath the satellite ranges from 0.5 to 2 km by band. A small plant may occupy only part of a pixel. [5]"
+    },
+    {
+      "title": "Spacecraft and ground processing",
+      "text": "Frequent observations require a stable viewing geometry, accurate pointing, calibration, image navigation and a downlink that keeps pace with scanning. Ground processing turns received counts into geolocated radiances. A forecast service then extracts a region around the plant, tracks clouds and delivers predictions. Ask how much time each step consumes. [2] [5]"
+    },
+    {
+      "title": "At the solar farm",
+      "text": "Start with synchronized export-meter data, plant availability, curtailment flags and panel geometry. An on-site irradiance sensor helps separate errors in the predicted sunlight from losses inside the plant. Keep raw readings alongside the forecast archive. [6]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "GEO",
+      "status": "Preferred for cloud motion",
+      "geometry": "A satellite in geostationary orbit stays above one longitude and sees the same region repeatedly. GOES ABI’s standard Mode 6 scans the full disk every ten minutes and the continental U.S. sector every five. [5]",
+      "performance": "Successive frames reveal moving cloud structures. Toward the disk edge, pixels cover a larger area and elevated clouds appear displaced. Sector availability and processing delays affect usable warning time. [5] [6]",
+      "decision": "Ask for the scan interval at the plant, observed delivery latency and an archive of missed updates."
+    },
+    {
+      "orbit": "LEO",
+      "status": "Useful supplementary views",
+      "geometry": "A low Earth orbit satellite moves across the region. A single pass provides a snapshot before the ground track moves on.",
+      "performance": "Finer spatial detail can help investigate a local feature. A gap between passes can be longer than the cloud event. Cloud-motion estimates need a sequence close enough in time to match features. [6]",
+      "decision": "Use occasional images for diagnosis. Require measured same-site revisit histories before buying this as the primary forecast feed."
+    },
+    {
+      "orbit": "MEO",
+      "status": "Requires a specifically designed constellation",
+      "geometry": "A medium Earth orbit satellite above LEO sees a wider area at a given field of view. Its position changes relative to the plant.",
+      "performance": "Repeated observations would need overlapping coverage, navigation between views and consistent radiometry. The operational cloud feeds identified here use geostationary satellites. [5] [7]",
+      "decision": "Consider a MEO offer only if a provider can show time-stamped sequences over the plant and performance through handovers."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Build from public imagery",
+      "headline": "$0 imagery access",
+      "unit": "USD · public GOES data · November 2026",
+      "detail": "NOAA distributes open data through cloud partners. There is no image purchase minimum for the public archive. For one existing metered plant, a planning allowance of 8–15 analyst and integration days at an assumed $650/day gives $5,200–$9,750. This is a pilot labor budget. Storage, processing, new instruments and ongoing support are additional. [3]"
+    },
+    {
+      "model": "Buy a plant forecast",
+      "headline": "Commercial quote per site or portfolio",
+      "unit": "USD · service scope checked November 2026",
+      "detail": "Solcast lists a power model trained on production data and offers it by quotation. Its model and irradiance data can be separate purchases. Request the area, site minimum, update rate, lead times, archive of forecasts as issued, delivery guarantee and permitted uses in writing. No general commercial minimum or plant-level price is disclosed on the cited page. [8]"
+    },
+    {
+      "model": "Host a cloud imager",
+      "headline": "Instrument and hosting quote required",
+      "unit": "USD · one payload plus integration and operations · November 2026",
+      "detail": "NASA’s TEMPO instrument demonstrates civilian optical payload hosting on a commercial geostationary platform. Its mission measures air pollution. A cloud imager would need its own spectral bands, scan pattern, pointing stability, thermal control and data allocation. The cited hosting account gives no transferable price or minimum order. Request instrument and host charges separately, including launch share and ground processing. [9]"
+    },
+    {
+      "model": "Commission a dedicated mission",
+      "headline": "$152.5 million launch benchmark",
+      "unit": "USD · one GOES-U launch award announced in 2021",
+      "detail": "NASA estimated $152.5 million for launch service and associated mission costs. The spacecraft, instrument and operating network are separate. For scale, a 2017 federal review reported a $10.9 billion life-cycle baseline for the entire four-spacecraft GOES-R program through 2036. These differently scoped historical figures cannot price a smaller custom mission or be added together. [10] [11]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Australia",
+      "iso": "AU",
+      "latitude": -27.43,
+      "longitude": 151.72,
+      "reason": "ARENA names Oakey 1 Asset Company, Neoen Australia and other partners in a project to submit solar dispatch forecasts. Australia’s market operator maintains a participant forecasting program. Himawari offers a geostationary view of the region. [1] [4] [7]"
+    },
+    {
+      "country": "United States",
+      "iso": "US",
+      "latitude": 36.6,
+      "longitude": -120.1,
+      "reason": "A California Energy Commission project identified coastal fog and low-cloud breakup as forecasting challenges. A California fleet can test the timing of morning recovery separately from passing midday fronts and compare plants inland and nearer the coast. [12]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "NOAA GOES",
+      "status": "Operational observations",
+      "text": "GOES-19 became the operational eastern satellite in April 2025. Select the GOES view with suitable geometry and scan coverage for the asset. The satellite supplies measurements. Conversion to a site forecast requires additional processing. [5] [13]"
+    },
+    {
+      "name": "Japan Meteorological Agency",
+      "status": "Operational observations",
+      "text": "Himawari-9 took the main operational role in December 2022. A buyer in the Asia-Pacific region can use this observation record to evaluate a vendor’s imagery availability at local sites. [7]"
+    },
+    {
+      "name": "Solcast",
+      "status": "Commercial forecasting service",
+      "text": "Solcast describes using satellite-derived cloud motion for the early forecast period, typically zero to four hours, then combining forecasts with weather models. That is a product horizon. Plant-level accuracy at each lead time still needs testing. [2] [8]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "Clouds change as they move",
+      "text": "A front moving at a steady speed is easier to extrapolate than a cloud forming over the plant. Score cloud growth, breakup and multilayer conditions separately. A single overall error can conceal poor performance during the events that matter most. [2] [6]"
+    },
+    {
+      "title": "A shadow can miss the plant",
+      "text": "Cloud-top location, surface shadow and satellite pixel center are different points. Low sun, elevated clouds and oblique viewing amplify placement errors. A wider fleet can smooth isolated shadows or experience a shared ramp. [6]"
+    },
+    {
+      "title": "The meter may reflect an operating limit",
+      "text": "Curtailment, inverter clipping and outages suppress measured export even under clear skies. Decide whether the product forecasts available solar power or actual export, then score it against the matching reference. [4] [6]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Agree on a ramp worth acting on",
+      "text": "Select a metered plant and the neighboring assets used by its scheduler. Choose a ramp size in MW, a minimum useful warning time and the action the team could take. Record what a missed event or an unnecessary battery dispatch costs."
+    },
+    {
+      "title": "Replay forecasts as they were issued",
+      "text": "Use a representative set of clear days, moving fronts and cloud breakup, reserving later weeks for testing. Compare against persistence: the most recent measured output carried forward, also adjusted for the expected clear-sky daily curve. Score absolute MW error at 5, 15, 30 and 60 minutes, plus missed ramps, false alarms and arrival-time error."
+    },
+    {
+      "title": "Run in parallel before contracting",
+      "text": "For four weeks, deliver alerts to the scheduling desk without changing dispatch automatically. Log late data, fallback behavior and whether warnings leave enough time for an operator to act. Extend the trial if key weather conditions never occurred. Buy only if the improvement at the required lead time justifies the full annual cost."
+    }
+  ],
+  "conclusion": [
+    "Ask a supplier to replay one difficult afternoon using only data available at each dispatch deadline. If the forecast gives the team time to act, the next question is how often that advantage recurs and what it saves across the fleet."
+  ],
+  "sources": [
+    {
+      "publisher": "Australian Renewable Energy Agency",
+      "title": "Solar farm self-forecasting project, partners and dates",
+      "date": "2020",
+      "url": "https://arena.gov.au/projects/solcast-nowcasting-solutions-for-solar-farms/",
+      "id": 1
+    },
+    {
+      "publisher": "Solcast",
+      "title": "Irradiance data and short-range forecasting methodology",
+      "date": "n.d.",
+      "url": "https://www.solcast.io/irradiance-data-methodology",
+      "id": 2
+    },
+    {
+      "publisher": "NOAA",
+      "title": "Open Data Dissemination datasets and access",
+      "date": "n.d.",
+      "url": "https://www.noaa.gov/nodd/datasets",
+      "id": 3
+    },
+    {
+      "publisher": "Australian Energy Market Operator",
+      "title": "Operational solar and wind energy forecasting",
+      "date": "n.d.",
+      "url": "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-forecasting-and-planning/operational-forecasting/solar-and-wind-energy-forecasting",
+      "id": 4
+    },
+    {
+      "publisher": "NOAA GOES-R Program",
+      "title": "Beginner’s guide to GOES-R series data and ABI scan modes",
+      "date": "2025-09-08",
+      "url": "https://www.goes-r.gov/downloads/resources/documents/Beginners_Guide_to_GOES-R_Series_Data.pdf",
+      "id": 5
+    },
+    {
+      "publisher": "National Renewable Energy Laboratory",
+      "title": "Best practices handbook for solar resource data, including cloud-motion forecasting",
+      "date": "2017",
+      "url": "https://www.iea-shc.org/Data/Sites/1/publications/Best%20Practices-Handbook-for-the-Collection-and-Use-of-Solar-Resource-Data-Solar-Energy-Applcations--Second-Edition.pdf",
+      "id": 6
+    },
+    {
+      "publisher": "Japan Meteorological Agency",
+      "title": "Operational meteorological satellites",
+      "date": "n.d.",
+      "url": "https://www.jma.go.jp/jma/jma-eng/satellite/index.html",
+      "id": 7
+    },
+    {
+      "publisher": "Solcast",
+      "title": "Solar energy data and power model pricing",
+      "date": "Reviewed November 2026",
+      "url": "https://www.solcast.io/pricing/energy-data",
+      "id": 8
+    },
+    {
+      "publisher": "Smithsonian Astrophysical Observatory, TEMPO",
+      "title": "Commercial payload hosting experience",
+      "date": "n.d.",
+      "url": "https://tempo.si.edu/commercialhosting.html",
+      "id": 9
+    },
+    {
+      "publisher": "NASA",
+      "title": "GOES-U launch services contract award",
+      "date": "2021",
+      "url": "https://www.nasa.gov/news-release/nasa-awards-launch-services-contract-for-goes-u-mission/",
+      "id": 10
+    },
+    {
+      "publisher": "U.S. Government Accountability Office",
+      "title": "Satellite acquisitions, Appendix I program quantities and baseline costs",
+      "date": "2017",
+      "url": "https://www.gao.gov/assets/690/685471.pdf",
+      "id": 11
+    },
+    {
+      "publisher": "California Energy Commission",
+      "title": "Development, implementation and integration of a holistic solar forecasting system for California",
+      "date": "2023",
+      "url": "https://www.energy.ca.gov/sites/default/files/2023-05/CEC-500-2023-025.pdf",
+      "id": 12
+    },
+    {
+      "publisher": "NOAA NESDIS",
+      "title": "GOES-19 begins operations as GOES East",
+      "date": "2025-04-07",
+      "url": "https://www.nesdis.noaa.gov/news/noaas-goes-19-now-operational-goes-east-providing-critical-new-data-forecasters",
+      "id": 13
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Photovoltaic Panels Reap Solar Energy on Farms (20240809-USDA-RD-DCK-0329)",
+      "alt": "An aerial view of rows of photovoltaic panels on a farm.",
+      "caption": "A U.S. farm array photographed in August 2024. A power meter records the response of the whole array as cloud shadows pass.",
+      "credit": "USDA / David Kosling via Wikimedia Commons. Resized and converted to WebP.",
+      "source": "https://commons.wikimedia.org/wiki/File:Photovoltaic_Panels_Reap_Solar_Energy_on_Farms_(20240809-USDA-RD-DCK-0329).jpg",
+      "rights": "U.S. public domain",
+      "rightsUrl": "https://commons.wikimedia.org/wiki/File:Photovoltaic_Panels_Reap_Solar_Energy_on_Farms_(20240809-USDA-RD-DCK-0329).jpg#Licensing",
+      "files": [
+        {
+          "src": "/images/atlas/solar-array-farm-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/solar-array-farm-900.webp",
+          "width": 900,
+          "height": 675
+        }
+      ]
+    },
+    "evidence": {
+      "title": "First GOES-19 GeoColor Full Disk Image (54004483333)",
+      "alt": "Cloud bands and clear areas across the Western Hemisphere in a GOES-19 composite.",
+      "caption": "GOES-19 first-light GeoColor composite released in September 2024. Tracking a cloud edge requires a sequence of observations and accurate timestamps.",
+      "credit": "NOAA Satellites via Wikimedia Commons. Resized and converted to WebP.",
+      "source": "https://commons.wikimedia.org/wiki/File:First_GOES-19_GeoColor_Full_Disk_Image_(54004483333).png",
+      "rights": "U.S. public domain",
+      "rightsUrl": "https://commons.wikimedia.org/wiki/File:First_GOES-19_GeoColor_Full_Disk_Image_(54004483333).png#Licensing",
+      "files": [
+        {
+          "src": "/images/atlas/goes19-clouds-480.webp",
+          "width": 480,
+          "height": 480
+        },
+        {
+          "src": "/images/atlas/goes19-clouds-900.webp",
+          "width": 900,
+          "height": 900
+        }
+      ]
+    }
+  }
+}
