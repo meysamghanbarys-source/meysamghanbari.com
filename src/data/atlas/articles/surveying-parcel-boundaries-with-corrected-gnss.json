@@ -1,0 +1,341 @@
+{
+  "id": "atlas-005",
+  "title": "Surveying parcel boundaries with corrected GNSS",
+  "slug": "surveying-parcel-boundaries-with-corrected-gnss",
+  "type": "Precise positioning",
+  "industry": "navigation-geospatial",
+  "family": "Surveying and mapping",
+  "tags": [
+    "land survey",
+    "RTK"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-22",
+  "reviewed": "2026-11-22",
+  "orbits": [
+    "MEO",
+    "GEO"
+  ],
+  "technologies": [
+    "GNSS and positioning"
+  ],
+  "dek": "A rover can put a coordinate on an old survey mark. Deciding whether that mark defines a parcel corner takes more evidence. Here is how to buy the correction service, test the measurements and give the surveyor a defensible record.",
+  "glance": [
+    {
+      "label": "Who uses it",
+      "value": "Licensed cadastral surveyors and the land agencies that receive their work. New Zealand’s cadastral rules specify the surveyor’s duty to evaluate boundary evidence. [1]"
+    },
+    {
+      "label": "Purchase decision",
+      "value": "Use a rover with network corrections, set up a local base, or use terrestrial instruments where satellite reception is poor. [2] [3]"
+    },
+    {
+      "label": "Deliverable",
+      "value": "Coordinates in the required reference frame, independent checks, observation records and a surveyor’s account of the boundary evidence. [1] [2]"
+    },
+    {
+      "label": "Equipment",
+      "value": "A survey-grade, multi-frequency global navigation satellite system (GNSS) receiver, a measured pole or tripod, and a way to receive or record reference data. [2] [4]"
+    }
+  ],
+  "problem": [
+    "A developer commissions a survey before setting out a fence. The crew finds an old metal mark near the mapped corner. Measuring it precisely answers one question: where is this mark? Establishing whether it is the original corner requires records, nearby marks and other evidence evaluated under local survey rules. New Zealand explicitly requires a cadastral surveyor to gather and interpret the relevant evidence. [1]",
+    "The immediate buying decision is whether the crew can deliver independently checked positions with one rover and a network subscription. A second receiver can supply a local reference where network coverage is poor. A short optical traverse can tie an obstructed corner to control measured in clear sky. Compare the cost per accepted point, including repeat visits. [2] [3]"
+  ],
+  "workflow": [
+    {
+      "title": "Identify the evidence and reference frame",
+      "text": "Recover the parcel records and known control marks. Record each mark’s condition, provenance and whether it is a boundary mark or a control point. Confirm the horizontal datum, coordinate epoch where relevant, projection, units and any required height reference before loading the controller. [1] [2]"
+    },
+    {
+      "title": "Observe the same signals at two places",
+      "text": "Navigation satellites broadcast timing codes and carrier waves. A receiver measures code travel time and the phase of the repeating carrier. The phase reveals fractions of a wavelength, but the whole number of cycles must be resolved. A reference antenna with known coordinates observes many of the same signals as the rover. [2] [4]"
+    },
+    {
+      "title": "Resolve the rover position",
+      "text": "In real-time kinematic positioning (RTK), a radio or internet stream delivers reference observations or network corrections. The rover uses the shared satellite observations to reduce common errors and estimate the integer cycle counts. A fixed solution means the receiver has selected integers. A wrong base coordinate can shift every rover point while the display still says fixed. [2] [3]"
+    },
+    {
+      "title": "Check independently and preserve the record",
+      "text": "Measure a known point before and after the work. Revisit critical marks after reinitializing, preferably with changed satellite geometry. Save times, antenna heights, base or network identity, fix status and raw observations where available. Submit the measurements with the evidence supporting each boundary decision. [1] [2]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Navigation payload in orbit",
+      "text": "Galileo’s navigation payload uses atomic frequency standards, including passive hydrogen masers and rubidium clocks. It broadcasts ranging codes, carriers and a message containing orbit and timing information. The ground segment monitors the constellation and supplies navigation messages. The satellite illuminates many receivers at once without seeing the parcel. [4]"
+    },
+    {
+      "title": "Control and correction network",
+      "text": "Stable monuments, calibrated antenna setups, receivers, communications and a processing service tie the corrections to a reference frame. New York’s Department of Transportation offers both network and single-station observation streams. The field device must support the chosen stream and have a working link. [3] [5]"
+    },
+    {
+      "title": "Field equipment",
+      "text": "Compare the antenna and receiver, pole or tripod, controller, batteries, field software and a method to measure antenna height. A second receiver requires a stable base position and a link or a post-processing workflow. Keep access to a total station for corners under roofs or dense canopy. [2]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "MEO",
+      "status": "Use existing navigation signals",
+      "geometry": "GPS satellites orbit at about 20,200 km in medium Earth orbit. Galileo also uses a multi-plane MEO constellation. [4] [6]",
+      "performance": "Signals from satellites in different directions constrain the rover’s position and clock. The geometry changes through the day. Nearby reflections and poor control can still spoil a measurement. [2]",
+      "decision": "Buy verified field coverage, correction compatibility and repeatability across independent occupations."
+    },
+    {
+      "orbit": "LEO",
+      "status": "Demonstration rather than a survey dependency",
+      "geometry": "Low Earth orbit navigation transmitters move quickly across the local sky. ESA’s Celeste program is testing this additional navigation layer. [7]",
+      "performance": "The first two demonstration satellites launched in March 2026. This milestone establishes a flight experiment. A cadastral crew would still need a supported receiver, continuous signals, a reference frame and local test evidence. [7]",
+      "decision": "Base the tender on services already available at the site. Evaluate experimental signals in a separate trial."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Wide-area augmentation channel",
+      "geometry": "A geostationary satellite can stay in one apparent direction. The U.S. Wide Area Augmentation System (WAAS) broadcasts messages from ground monitoring stations through hosted GEO payloads. [8]",
+      "performance": "WAAS serves civil aviation. Its regional messages and integrity monitoring solve a different problem from local carrier-phase control at a parcel corner. [2] [8]",
+      "decision": "Ask a seller which correction product the receiver actually uses, its reference frame and the independent check achievable on local control."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Use a correction network",
+      "headline": "$0 network access in New York",
+      "unit": "USD · NYSNet access fee checked November 2026",
+      "detail": "NYSDOT reports no access fee for its real-time network. Registration and subscription approval are required. Its 2026 guide distinguishes network, nearest-site and manually selected single-site streams. Price the cellular plan, field software, receiver and crew separately. Confirm coverage and account terms for each rover. [3] [5]"
+    },
+    {
+      "model": "Equip a field crew",
+      "headline": "$2,999 for one example receiver",
+      "unit": "USD · U.S. hardware listing checked November 2026",
+      "detail": "Emlid lists the Reach RS3 at $2,999 per receiver. Two at that price would be $5,998 for receiver hardware if a local base is needed. This arithmetic allows no bundle discount. Budget separately for mounts, controller, correction delivery, tax, shipping and field labor. A firm with suitable equipment can trial the network before buying a second unit. [9]"
+    },
+    {
+      "model": "Host an augmentation transmitter",
+      "headline": "Supplier quote required",
+      "unit": "USD · one payload plus integration and operating term · November 2026",
+      "detail": "SES’s civil aviation contract for SES-15 included payload construction, launch carriage and 11 years of on-orbit operations. The cited report gives no transferable hosting tariff or minimum order. A new buyer must scope spectrum, uplink availability, regional monitoring and service continuity as well as the space hardware. [8] [10]"
+    },
+    {
+      "model": "Commission navigation spacecraft",
+      "headline": "About $129 million per spacecraft in a batch",
+      "unit": "USD · December 2024 presentation summarizing 2021 contracts",
+      "detail": "ESA’s €1.47 billion award covered design and production of 12 second-generation Galileo satellites. A 2024 navigation advisory presentation expressed this as about $129 million each, including two suppliers’ nonrecurring work. Separately, a 2024 award notice valued two Galileo launch services at $196.691 million in total. These purchases have different scopes and generations. Neither is a full mission budget. A standalone service also requires multiple spacecraft, monitoring stations, timekeeping, operations and replenishment. [11] [12] [13]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "United States",
+      "iso": "US",
+      "latitude": 42.65,
+      "longitude": -73.75,
+      "reason": "A surveying firm operating in New York can compare the state network with its own base before purchasing either a private subscription or a second receiver. NYSDOT advises against its manually selected single-site stream when the rover is more than 10 km from that station. This limit is specific to that service option. For static control, NOAA also offers its Online Positioning User Service to process uploaded receiver observations. [3] [5] [14]"
+    },
+    {
+      "country": "New Zealand",
+      "iso": "NZ",
+      "latitude": -41.29,
+      "longitude": 174.78,
+      "reason": "A licensed surveying firm preparing a cadastral survey must gather and interpret the evidence for a boundary defined by survey. A useful field package links each measured mark to the original plan and preserves any conflicting observations for review before lodgement. [1]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "GPS and Galileo",
+      "status": "Operational navigation signals",
+      "text": "These constellations supply the timing and ranging observations. Galileo has flown and commissioned navigation spacecraft. Second-generation procurement is a separate program from the operational signals used by surveyors. [4] [6] [11] [15]"
+    },
+    {
+      "name": "NYSNet",
+      "status": "Operational correction network",
+      "text": "Select the product appropriate to the receiver and site. The state’s guide explains which subscriptions include network, nearest-site or selected single-station connections. [5]"
+    },
+    {
+      "name": "Federal Aviation Administration",
+      "status": "Operational hosted augmentation example",
+      "text": "WAAS monitors GPS from the ground and uses GEO payloads to broadcast its messages. It demonstrates a hosted distribution architecture for a civil navigation service. [8] [10]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A precise repeat can share the same error",
+      "text": "Two readings made seconds apart can share a wrong initialization, antenna height or base coordinate. Check a control point independent of the setup and repeat the occupation after a new initialization. [2]"
+    },
+    {
+      "title": "Tree cover and walls distort the signal",
+      "text": "Branches can interrupt carrier tracking. Reflections from a building can introduce a biased observation. Move control into open sky and transfer the position with terrestrial measurements if repeated checks fail. [2]"
+    },
+    {
+      "title": "A map overlay can hide a frame mismatch",
+      "text": "Record the coordinate frame, epoch and projection of both datasets. A water pipe, fence or old survey peg has a physical location. Its significance as boundary evidence depends on the survey record and the applicable jurisdiction. [1] [2]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Set acceptance criteria first",
+      "text": "Choose one representative parcel with independently established control. Have the licensed surveyor specify allowable differences and evidence requirements for this job. Include an open-sky location and a corner near trees or a building."
+    },
+    {
+      "title": "Compare two workflows on the same marks",
+      "text": "Measure using the available network, then repeat with a separately established base or a checked total-station traverse. Preserve the independent check coordinates until comparison. Record time to fix, reinitializations, controller warnings and every failed occupation."
+    },
+    {
+      "title": "Decide on cost per accepted point",
+      "text": "Compare horizontal differences in east and north, vertical differences if required, and crew time including return visits. For example, a 12 mm east and 16 mm north difference gives a 20 mm horizontal discrepancy. Its acceptability depends on the job specification. If the hard corner fails, price the terrestrial fallback in the bid."
+    }
+  ],
+  "conclusion": [
+    "When a supplier demonstrates a fixed position, ask the crew to return to a known mark after reinitializing. An independent check in the required reference frame tells the buyer more about the proposed survey workflow than another decimal place on the controller."
+  ],
+  "sources": [
+    {
+      "publisher": "New Zealand Legislation",
+      "title": "Cadastral Survey Rules 2021, rule 6: duty of the surveyor",
+      "date": "2024-07-01 reprint",
+      "url": "https://www.legislation.govt.nz/secondary-legislation/pco-drafted/2021/95/en/2024-07-01.pdf",
+      "id": 1
+    },
+    {
+      "publisher": "NOAA National Geodetic Survey",
+      "title": "User guidelines for classical real-time GNSS positioning",
+      "date": "Version 2.0",
+      "url": "https://www.ngs.noaa.gov/PUBS_LIB/NGSRealTimeUserGuidelines.v2.0.pdf",
+      "id": 2
+    },
+    {
+      "publisher": "New York State Department of Transportation",
+      "title": "NYSNet access, reference stations and fees",
+      "date": "Reviewed November 2026",
+      "url": "https://cors.dot.ny.gov/FAQ.htm",
+      "id": 3
+    },
+    {
+      "publisher": "European Space Agency, Navipedia",
+      "title": "Galileo system and navigation payload",
+      "date": "n.d.",
+      "url": "https://gssc.esa.int/navipedia/index.php?title=GALILEO_General_Introduction",
+      "id": 4
+    },
+    {
+      "publisher": "New York State Department of Transportation",
+      "title": "NYSNet subscription and connection types",
+      "date": "2026",
+      "url": "https://cors.dot.ny.gov/NYSNET%20Subscriptions.pdf",
+      "id": 5
+    },
+    {
+      "publisher": "GPS.gov",
+      "title": "GPS space segment and orbits",
+      "date": "n.d.",
+      "url": "https://www.gps.gov/space-segment",
+      "id": 6
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Launch of the first two Celeste navigation demonstrators",
+      "date": "2026-03-28",
+      "url": "https://www.esa.int/media/about-us/directorates/resilience-navigation-and-connectivity/navigation/celeste/launch-of-esa-s-celeste-mission-1",
+      "id": 7
+    },
+    {
+      "publisher": "Federal Aviation Administration",
+      "title": "How the Wide Area Augmentation System works",
+      "date": "n.d.",
+      "url": "https://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/techops/navservices/gnss/waas/howitworks",
+      "id": 8
+    },
+    {
+      "publisher": "Emlid U.S. store",
+      "title": "RTK receiver price comparison",
+      "date": "Reviewed November 2026",
+      "url": "https://store.emlid.com/collections/rtk-receivers",
+      "id": 9
+    },
+    {
+      "publisher": "SES",
+      "title": "2015 full-year results and civil hosted payload contract scope",
+      "date": "2016",
+      "url": "https://www.ses.com/sites/ses_v2/files/2016-11/SES_2015_Full_Year_Results.pdf",
+      "id": 10
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Design and production contract for 12 Galileo satellites",
+      "date": "2021",
+      "url": "https://www.esa.int/Applications/Satellite_navigation/ESA_signs_contract_for_new_generation_of_Galileo",
+      "id": 11
+    },
+    {
+      "publisher": "U.S. National Space-Based PNT Advisory Board meeting, Galileo presentation",
+      "title": "Galileo program overview and procurement estimates",
+      "date": "2024-12",
+      "url": "https://www.gps.gov/sites/default/files/2025-06/AdvisoryMeetings_Higgins_Dec2024.pdf",
+      "id": 12
+    },
+    {
+      "publisher": "European Union, Tenders Electronic Daily",
+      "title": "Award notice 507009-2024 for two Galileo launch services",
+      "date": "2024",
+      "url": "https://ted.europa.eu/en/notice/507009-2024/pdfs",
+      "id": 13
+    },
+    {
+      "publisher": "NOAA National Geodetic Survey",
+      "title": "Online Positioning User Service",
+      "date": "n.d.",
+      "url": "https://geodesy.noaa.gov/OPUS/",
+      "id": 14
+    },
+    {
+      "publisher": "European Commission",
+      "title": "Galileo launch and operational acceptance of satellites",
+      "date": "2024-09-18",
+      "url": "https://defence-industry-space.ec.europa.eu/successful-launch-two-new-galileo-satellites-2024-09-18_en",
+      "id": 15
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "GNSS surveyor on a wet development site",
+      "alt": "Surveyor carrying a receiver on a pole across a wet development site.",
+      "caption": "A field crew can measure a recovered mark with a rover and record the evidence used to identify it.",
+      "source": "https://commons.wikimedia.org/wiki/File:GNSS_surveyor_on_a_wet_development_site.jpg",
+      "credit": "HR Surveyors (Cvstr), via Wikimedia Commons. Resized and converted to WebP.",
+      "rights": "CC BY 4.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "files": [
+        {
+          "src": "/images/atlas/parcel-field-surveyor-480.webp",
+          "width": 480,
+          "height": 340
+        },
+        {
+          "src": "/images/atlas/parcel-field-surveyor-900.webp",
+          "width": 900,
+          "height": 638
+        }
+      ]
+    },
+    "evidence": {
+      "title": "GNSS receiver at dusk among eucalyptus trees",
+      "alt": "A GNSS receiver mounted on a tripod among eucalyptus trees at dusk.",
+      "caption": "A tripod-mounted receiver illustrates a stationary setup. To use it as a local reference, the crew must establish its coordinates, antenna height and reference frame.",
+      "source": "https://commons.wikimedia.org/wiki/File:GNSS_receiver_at_dusk_among_eucalyptus_trees.jpg",
+      "credit": "HR Surveyors (Cvstr), via Wikimedia Commons. Resized and converted to WebP.",
+      "rights": "CC BY 4.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "files": [
+        {
+          "src": "/images/atlas/parcel-gnss-tripod-480.webp",
+          "width": 480,
+          "height": 372
+        },
+        {
+          "src": "/images/atlas/parcel-gnss-tripod-900.webp",
+          "width": 900,
+          "height": 697
+        }
+      ]
+    }
+  }
+}
