@@ -1,0 +1,333 @@
+{
+  "id": "atlas-006",
+  "title": "Mapping flood extent for insurance response",
+  "slug": "mapping-flood-extent-for-insurance-response",
+  "type": "Event mapping",
+  "industry": "weather-hazards",
+  "family": "Damage and recovery",
+  "tags": [
+    "flooding",
+    "claims operations"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-23",
+  "reviewed": "2026-11-23",
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Synthetic-aperture radar"
+  ],
+  "dek": "After a river floods, an insurer needs to know which customers to call first. A radar map can show where water was visible through cloud cover, when the satellite saw it and which neighborhoods still need someone on the ground.",
+  "glance": [
+    {
+      "label": "Buyer",
+      "value": "Property insurers and claims-adjustment teams. Tokio Marine & Nichido in Japan and Suncorp in Australia have used satellite flood information. [1] [2]"
+    },
+    {
+      "label": "Decision",
+      "value": "Prioritize outreach and inspections, then collect building-level evidence where a claim needs it."
+    },
+    {
+      "label": "Delivery",
+      "value": "A time-stamped flood outline, permanent-water reference and a layer showing where the radar result is uncertain or unavailable. [3]"
+    },
+    {
+      "label": "First purchase",
+      "value": "Test public flood maps against historical claims before ordering extra radar scenes or a managed event feed. [4] [5]"
+    }
+  ],
+  "problem": [
+    "A claims manager has two adjusters and reports from opposite sides of a river. One neighborhood lies inside a new flood outline. Across the river, buildings block the radar view. The first neighborhood goes onto the outreach list. The second needs phone calls, photographs or inspection. Treating the blank side of the map as dry would hide precisely the cases that still need attention. [3]",
+    "The business question is how quickly the map changes the order of calls or site visits. Suncorp combined flood observations with its policy data and property information. Tokio Marine & Nichido worked with ICEYE on faster flood assessment in Japan. Neither example makes a satellite image sufficient evidence of a particular policyholder’s loss. [1] [2]"
+  ],
+  "workflow": [
+    {
+      "title": "Measure the radar echo",
+      "text": "The spacecraft sends microwave pulses sideways and records the echoes. Processing successive returns along its flight path forms a synthetic aperture radar (SAR) image. Smooth open water often reflects energy away from the antenna and appears dark. Water among upright vegetation can return a strong double reflection. The sensor can collect at night and through cloud cover. [6] [7]"
+    },
+    {
+      "title": "Compare like with like",
+      "text": "Start with a pre-flood reference acquired with a similar look direction and polarization. Align both images to the terrain and compare the returns. Remove normally submerged areas such as the river channel. Copernicus also supplies exclusion masks and advisory flags for conditions that make the classification unreliable. [3]"
+    },
+    {
+      "title": "Keep time and uncertainty attached",
+      "text": "Label each observed patch with its acquisition time and distinguish it from any outline assembled across several passes. Compare with river gauges and dated ground photographs. A clear observation after water recedes can miss earlier flooding. Preserve dry, flooded and unknown as separate outcomes. [3]"
+    },
+    {
+      "title": "Join to the claims queue",
+      "text": "Intersect the observed area with building footprints when available. An address pin on a street or the edge of a large parcel can land in water while the insured building stands above it. Give the adjuster the source time, footprint overlap and reason for any uncertainty. Record the follow-up outcome. [1] [2]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Flight instrument",
+      "text": "Sentinel-1 carries a C-band radar operating at 5.405 GHz. Its interferometric wide-swath mode covers about 250 km with nominal 5 by 20 m spatial resolution. That is useful for a regional flood outline. A narrow street or an individual doorway may occupy only part of a resolution cell. [7]"
+    },
+    {
+      "title": "Spacecraft and delivery chain",
+      "text": "A side-looking radar needs an antenna, transmit power, accurate pointing, orbit knowledge, onboard storage and downlink capacity. Ground processing focuses the echoes and locates them on Earth. Request both the observation time and delivery time so the claims team can measure how long downlink, processing and quality checks took. [3] [7]"
+    },
+    {
+      "title": "At the insurer",
+      "text": "Prepare geocoded policies, building footprints where licensed, terrain, a permanent-water layer and dated field observations. Restrict policyholder information to the claims system. The satellite supplier can quote against an area of interest without receiving a list of customer names."
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Operational choice",
+      "geometry": "Sentinel-1 flies in a sun-synchronous low Earth orbit at about 693 km. Each image covers a strip of ground. [7]",
+      "performance": "A wide swath can map a river basin in one pass. The next usable image depends on the orbit, acquisition plan and look direction. A nominal revisit interval gives no guarantee of observing the flood crest. [3] [7]",
+      "decision": "Ask for actual acquisition and delivery times from past events in the insured region."
+    },
+    {
+      "orbit": "MEO",
+      "status": "Research option",
+      "geometry": "Medium Earth orbit offers a wider view from a greater distance. Researchers at the German Aerospace Center have studied these trade-offs for radar missions. [8]",
+      "performance": "A longer two-way path weakens echoes for the same instrument and ground patch. Antenna design, power, resolution and image formation must be evaluated together. [8]",
+      "decision": "Require demonstrated flood observations and an available service before including a MEO offer in the operational pilot."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Candidate radar architecture",
+      "geometry": "A geostationary platform could watch one region repeatedly from about 35,786 km above the equator. ESA’s Hydroterra+ is a candidate mission for this approach. [9]",
+      "performance": "Repeated looks could help time flood changes, but weak returns and the time needed to form a radar image constrain detail. A candidate mission provides no contracted event coverage. [9]",
+      "decision": "Use operational LEO measurements for the pilot and compare future GEO products against the same ground cases."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Use an existing flood map",
+      "headline": "$0 public data access",
+      "unit": "USD · Copernicus Emergency Management Service · checked November 2026",
+      "detail": "Copernicus offers flood monitoring data for free. Budget separately for mapping, integration and field checks. For one basin and two historical events, an illustrative 5–10 analyst days at an assumed $650/day is $3,250–$6,500 in labor. The estimate assumes existing policy geocodes and excludes claims-team time, new field collection and commercial imagery. [3] [4]"
+    },
+    {
+      "model": "Buy radar scenes or event analytics",
+      "headline": "$675 per 5 × 5 km scene",
+      "unit": "USD · Umbra published scene price, checked November 2026",
+      "detail": "Umbra lists $675 for one 25 km² scene at 1 m resolution with a single radar look. The listed purchase unit is the scene. At that rate, a matched before-and-after pair over one tile would be $1,350 if both suitable acquisitions were available. The scene price excludes an interpreted flood outline, depth estimates, portfolio matching and a promised delivery time. Obtain a current quote for the area, priority, license and event product. The insurer case studies do not publish a contract price or minimum. [1] [2] [5]"
+    },
+    {
+      "model": "Host a radar payload",
+      "headline": "Custom payload and host quote",
+      "unit": "USD · one instrument and operating term · reviewed November 2026",
+      "detail": "The SIR-C/X-SAR radar flew on the Space Shuttle in 1994, demonstrating radar operation on a host. That experiment provides no commercial hosting tariff. Request antenna accommodation, transmit-power duty cycle, pointing, thermal capacity, downlink, launch allocation and ground processing separately. Confirm how often the host can actually view the insured area. [10]"
+    },
+    {
+      "model": "Own a radar mission",
+      "headline": "$1.159 billion U.S. contribution to NISAR",
+      "unit": "USD · NASA–ISRO 2025 mission press kit",
+      "detail": "NASA reported $1.1589 billion for formulation, development and operations. India reported a separate investment including launch. NISAR is a large dual-frequency science mission. Its budget gives scale, not a price for a small commercial spacecraft. As a separate launch benchmark, NASA’s 2022 Sentinel-6B contract was about $94 million for launch services and related costs. It neither represents NISAR’s launch nor includes the Sentinel-6B spacecraft. A custom system requires a quote for the instrument, bus, launch, ground segment and operations. [11] [12]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Japan",
+      "iso": "JP",
+      "latitude": 35.68,
+      "longitude": 139.76,
+      "reason": "Tokio Marine & Nichido’s documented collaboration with ICEYE addresses flood claims in Japan. A pilot should sample built-up neighborhoods as well as open floodplains so that poor visibility is represented in the results. [1] [3]"
+    },
+    {
+      "country": "Australia",
+      "iso": "AU",
+      "latitude": -37.03,
+      "longitude": 145.14,
+      "reason": "Suncorp’s case study illustrates flood intelligence at Seymour in Victoria. An insurer can test whether combining observations with its policy locations improves the first day’s allocation of adjusters. [2]"
+    },
+    {
+      "country": "Mozambique",
+      "iso": "MZ",
+      "latitude": -17.7,
+      "longitude": 35.4,
+      "reason": "Sentinel-1 images from before and after Cyclone Idai show inundation near the Zambezi in Mozambique and Malawi. This documented event offers a test of basin-scale coverage. The comparison establishes a use case, not the presence of a named insurance customer. [13]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Copernicus Global Flood Monitoring",
+      "status": "Operational public service",
+      "text": "The service processes Sentinel-1 radar data using three flood-detection algorithms. Its accompanying masks distinguish where mapping is feasible and where interpretation needs care. Archive these layers with the flood outline. [3] [4]"
+    },
+    {
+      "name": "ICEYE",
+      "status": "Commercial event intelligence",
+      "text": "Documented insurer deployments combine flood information with property or policy data. A buyer should specify whether the offer includes observed extent, modeled depth, revised event footprints and delivery commitments. [1] [2]"
+    },
+    {
+      "name": "Umbra radar imagery",
+      "status": "Commercial scene purchase",
+      "text": "Spotlight imagery is sold by scene. A pre-event archive scene and a later acquisition can support a custom comparison, provided their geometry and event timing are suitable. That workflow requires a radar analyst or a processing service. [3] [5]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A dark pixel has several explanations",
+      "text": "Calm water may look dark, as can radar shadow or smooth dry surfaces. Wind can roughen open water and vegetation can conceal or enhance returns. The Copernicus exclusion mask is particularly important in urban areas and dense vegetation. [3] [6]"
+    },
+    {
+      "title": "The crest may fall between passes",
+      "text": "A map can be correct at acquisition time and still underestimate peak extent. Ask which areas were directly observed and which were reconstructed using later scenes, gauges or modeling. [3]"
+    },
+    {
+      "title": "Extent is only a horizontal footprint",
+      "text": "The boundary of visible water gives no direct measurement of indoor water depth, duration of immersion or repair cost. Request the method and validation for any depth product, and use site evidence for claim-specific decisions. [3] [6]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Replay two past floods",
+      "text": "Choose a fast event and a slower river flood in one insured basin. Hold back dated field observations for validation. Include open ground, dense buildings and tree cover. Define the time by which the claims manager must assign the first inspection routes."
+    },
+    {
+      "title": "Compare with the existing claims desk",
+      "text": "Give one team only the information it had at the original deadline. Add the time-stamped radar product for the comparison. Score correctly prioritized flooded buildings, missed confirmed cases, unnecessary visits and time to first contact. Report unknown coverage separately."
+    },
+    {
+      "title": "Set a buying rule",
+      "text": "For example, if 60 of 100 trial buildings were observable and 18 of those showed floodwater, report 18 detected, 42 observed without a flood signal and 40 unknown. Inspect a sample of all three groups. Price the service against the resulting change in visits and response time, including the work needed to resolve unknowns."
+    }
+  ],
+  "conclusion": [
+    "Request an event replay with three things attached to each policy location: when the satellite looked, what it could see and what follow-up the adjuster took. That is enough to test whether an earlier map actually improves the claims response."
+  ],
+  "sources": [
+    {
+      "publisher": "ICEYE and Tokio Marine & Nichido",
+      "title": "Flood observations for insurance claims management in Japan",
+      "date": "Case study",
+      "url": "https://www.iceye.com/resources/case-studies/tokio-marine",
+      "id": 1
+    },
+    {
+      "publisher": "ICEYE and Arturo, with Suncorp",
+      "title": "Rapid catastrophe response in Australia",
+      "date": "2023",
+      "url": "https://www.iceye.com/hubfs/ICEYE%20x%20Arturo%20Case%20Study%20-%20Suncorp_2023.pdf",
+      "id": 2
+    },
+    {
+      "publisher": "European Commission Joint Research Centre",
+      "title": "Global Flood Monitoring product layers, exclusion masks and advisory flags",
+      "date": "JRC131351",
+      "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC131351/JRC131351_01.pdf",
+      "id": 3
+    },
+    {
+      "publisher": "Copernicus Emergency Management Service",
+      "title": "Access to monitoring and mapping data",
+      "date": "Reviewed November 2026",
+      "url": "https://emergency.copernicus.eu/data/",
+      "id": 4
+    },
+    {
+      "publisher": "Umbra",
+      "title": "Radar scene pricing by footprint, resolution and number of looks",
+      "date": "Reviewed November 2026",
+      "url": "https://umbra.space/pricing/",
+      "id": 5
+    },
+    {
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "title": "Radar observations of surface water and flooded vegetation",
+      "date": "n.d.",
+      "url": "https://www.jpl.nasa.gov/go/radar-science/hydrology/water/",
+      "id": 6
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Sentinel-1 mission facts, instrument and acquisition modes",
+      "date": "Reviewed November 2026",
+      "url": "https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-1/Facts_and_figures",
+      "id": 7
+    },
+    {
+      "publisher": "German Aerospace Center",
+      "title": "Mission considerations for future MEO SAR systems",
+      "date": "2018",
+      "url": "https://elib.dlr.de/119335/1/EUSAR_2018.pdf",
+      "id": 8
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Hydroterra+ Earth Explorer candidate",
+      "date": "2026",
+      "url": "https://www.esa.int/ESA_Multimedia/Images/2026/06/Hydroterra",
+      "id": 9
+    },
+    {
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "title": "Spaceborne Imaging Radar-C/X-band Synthetic Aperture Radar",
+      "date": "n.d.",
+      "url": "https://www.jpl.nasa.gov/missions/spaceborne-imaging-radar-c-x-band-synthetic-aperture-radar-sir-c-x-sar/",
+      "id": 10
+    },
+    {
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "title": "NISAR mission quick facts and budget",
+      "date": "2025",
+      "url": "https://www.jpl.nasa.gov/press-kits/nisar/quick-facts/",
+      "id": 11
+    },
+    {
+      "publisher": "NASA",
+      "title": "Launch services contract for Sentinel-6B",
+      "date": "2022-12-20",
+      "url": "https://www.nasa.gov/news-release/nasa-awards-launch-services-contract-for-sentinel-6b-mission/",
+      "id": 12
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Flooding following Cyclone Idai, Sentinel-1 observation",
+      "date": "2019-03",
+      "url": "https://www.esa.int/ESA_Multimedia/Images/2019/03/Flooding_following_Cyclone_Idai",
+      "id": 13
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "A home surrounded by floodwater",
+      "alt": "Aerial photograph of floodwater surrounding a home.",
+      "caption": "Water around a building can help a claims team choose where to inspect. The photograph alone cannot establish the water level inside.",
+      "source": "https://commons.wikimedia.org/wiki/File:FEMA_-_39192_-_Aerial_of_a_mitigated_home_surrounded_by_flood_waters.jpg",
+      "credit": "Calvin Tolleson / FEMA. Resized and converted to WebP.",
+      "rights": "U.S. public domain",
+      "rightsUrl": "https://commons.wikimedia.org/wiki/File:FEMA_-_39192_-_Aerial_of_a_mitigated_home_surrounded_by_flood_waters.jpg#Licensing",
+      "files": [
+        {
+          "src": "/images/atlas/flood-surrounded-house-480.webp",
+          "width": 480,
+          "height": 319
+        },
+        {
+          "src": "/images/atlas/flood-surrounded-house-900.webp",
+          "width": 900,
+          "height": 598
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Flooding in Mozambique and Malawi following Cyclone Idai",
+      "alt": "Sentinel-1 radar composite with red patches marking inundation near the Zambezi River.",
+      "caption": "Red marks floodwater detected by comparing Sentinel-1 observations from 2 and 20 March 2019 in Mozambique and Malawi. It represents mapped extent at the observation time.",
+      "source": "https://commons.wikimedia.org/wiki/File:Flooding_in_Moambique_and_Malawi_following_Cyclone_Idai.jpg",
+      "credit": "Contains modified Copernicus Sentinel data (2019), processed by ESA. Resized and converted to WebP.",
+      "rights": "CC BY-SA 3.0 IGO",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "files": [
+        {
+          "src": "/images/atlas/idai-flood-radar-480.webp",
+          "width": 480,
+          "height": 270
+        },
+        {
+          "src": "/images/atlas/idai-flood-radar-900.webp",
+          "width": 900,
+          "height": 506
+        }
+      ]
+    }
+  }
+}
