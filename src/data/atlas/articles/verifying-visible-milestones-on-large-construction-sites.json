@@ -1,0 +1,306 @@
+{
+  "id": "atlas-007",
+  "title": "Verifying visible milestones on large construction sites",
+  "slug": "verifying-visible-milestones-on-large-construction-sites",
+  "type": "Progress verification",
+  "industry": "cities-construction",
+  "family": "Construction oversight",
+  "tags": [
+    "capital projects",
+    "progress reporting"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-24",
+  "reviewed": "2026-11-24",
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Optical and multispectral imaging"
+  ],
+  "dek": "A contractor reports that a station roof is complete. Can the owner see the full roof outline on an independently dated image? A pair of satellite observations can help an engineer decide where to send an inspector before the next payment review.",
+  "glance": [
+    {
+      "label": "Buyer",
+      "value": "An infrastructure owner, its supervising engineer or its lender. The Asian Infrastructure Investment Bank (AIIB) used dated imagery to follow Bengaluru Metro construction. [1]"
+    },
+    {
+      "label": "Decision",
+      "value": "Accept the visible footprint as corroborating evidence, request a clearer observation or send someone to inspect a discrepancy."
+    },
+    {
+      "label": "Deliverable",
+      "value": "A dated image pair, the approved drawing revision and an annotated record for each disputed work area."
+    },
+    {
+      "label": "First purchase",
+      "value": "Look for suitable archive dates. If the reporting window is still open, compare the cost and terms of a new collection. [2] [3]"
+    }
+  ],
+  "problem": [
+    "A progress report might call an entire station “roof complete” even though the contract treats the canopy, waterproofing and drainage as separate work packages. The owner’s engineer can ask a narrower question: was roof covering visible across the agreed footprint by the reporting date? An image can answer part of that question while a site team checks the hidden layers.",
+    "AIIB investment officers used comparisons of successive commercial images when site visits became difficult. The bank published imagery of Line R6 of the Bangalore Metro Rail Project spanning 2017–2021. Bangalore Metro Rail Corporation Limited is the implementing agency. The bank describes using the images to inform discussions with its clients and local consultants. [1] [4]"
+  ],
+  "workflow": [
+    {
+      "title": "Define the observable milestone",
+      "text": "Use the signed drawing to outline one work package, specify its due date and agree what should be visible. For paving, separate the paved surface from graded soil. For a roof, specify whether open bays count. Keep the drawing revision and site inspection date with the result."
+    },
+    {
+      "title": "Collect the reflected light",
+      "text": "Sunlight reflects from the surface into a telescope. A detector converts incoming photons into an electrical signal that is digitized on board. Planet’s SkySat cameras collect a broad panchromatic band and narrower color bands. The shapes and edges in the image help an analyst locate a roof or paved apron. Color alone is a weak basis for identifying its material. [5]"
+    },
+    {
+      "title": "Align the dates",
+      "text": "After downlink, use radiometrically corrected, orthorectified imagery. Orthorectification uses a camera model and elevation data to place pixels on a map. Overlay both dates on stable ground features outside the work zone. Record the residual offsets and draw an uncertainty band around disputed edges. Buildings can appear to lean differently in oblique views. [5]"
+    },
+    {
+      "title": "Return evidence to the engineer",
+      "text": "Trace the visible change in each work package. Mask cloud, deep shadow and areas hidden by adjacent buildings. Attach the original acquisition times, visible area, obscured area and drawing revision. Send any contradiction or unobservable claim to the engineer with a specific question for the site visit."
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Choose a camera for the feature",
+      "text": "Planet documents a 3.6 m focal-length Cassegrain telescope and three CMOS imaging detectors on SkySat. Its product specification lists a 0.50 m orthorectified pixel grid and native panchromatic samples that vary by spacecraft. For example, it lists 0.65 m for SkySat-3 through -15. Pixel spacing alone cannot establish whether two adjoining roof panels can be distinguished. [5]"
+    },
+    {
+      "title": "Specify the spacecraft and service",
+      "text": "A dedicated or hosted camera needs stable pointing during exposure, time-tagged attitude and orbit data, a calibrated focal plane, power, thermal control, storage and a downlink sized for the planned scenes. Ask the operator to demonstrate the image quality at the largest permitted look angle and the delivery time after a successful pass. [5] [6]"
+    },
+    {
+      "title": "Specify the ground delivery",
+      "text": "Request image files that can be opened in the project GIS, acquisition metadata and permission to share annotated extracts with the engineer and lender. Preserve the original files. Check alignment against surveyed points where available, and compare against withheld inspection records before using the result in a progress review. [1] [5]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Demonstrated for this use",
+      "geometry": "A low-orbit optical spacecraft sees the site during passes. An operator may point sideways to add opportunities. [5]",
+      "performance": "SkySat offers submeter image products. Sentinel-2’s 10 m visible bands show broad earthworks. Daylight, clouds and competing orders limit usable dates. [2] [5] [7]",
+      "decision": "Buy the archive pair whose scale, dates and viewing angles fit the signed milestone."
+    },
+    {
+      "orbit": "MEO",
+      "status": "Poor fit for this pilot",
+      "geometry": "For the same angular pixel size, ground sampling distance grows roughly in proportion to range near nadir.",
+      "performance": "A hypothetical camera ten times farther away would sample about ten times more ground per pixel with the same optics and detector. Recovering comparable detail requires a different optical system and pointing budget.",
+      "decision": "Seek demonstrated image pairs from the offered system before budgeting for a MEO payload."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Frequent views at coarser scales",
+      "geometry": "A geostationary satellite stays above one longitude and can repeatedly view the same region.",
+      "performance": "NOAA’s ABI weather imager samples its finest visible band at 0.5 km at nadir. That is five times the length of an illustrative 100 m building in one pixel. [8]",
+      "decision": "Use weather imagery to understand cloud conditions. Procure fine spatial detail separately."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Buy existing data or order an image",
+      "headline": "From $300 per new 25 km² collection",
+      "unit": "USD · SkyFi advertised starting price, checked 24 November 2026",
+      "detail": "SkyFi lists 50 cm optical tasking from $300 for 25 km² and 30 cm from about $812 for the same area. Two qualifying 50 cm orders would start at $600 before analysis. The general archive minimum is 1 km². New orders generally start at 25 km² and some products charge for a larger fixed frame. Ask for the price of the actual dates, rights, priority and cloud terms. Free Sentinel-2 data can screen large works. [2] [3] [7]"
+    },
+    {
+      "model": "Host a dedicated instrument",
+      "headline": "Integration and operations require a quotation",
+      "unit": "USD · one optical payload on a compatible host · November 2026",
+      "detail": "No public price for a hosted submeter system meeting this brief was identified. DLR’s DESIS flew on the ISS using the MUSES platform. It demonstrates the hosting arrangement for an optical instrument. Request separate prices for the camera, qualification, integration, launch allocation, pointing time, downlink and ground processing. Contract duration, minimum commitment and rights need to be agreed with the host. [6]"
+    },
+    {
+      "model": "Own the spacecraft",
+      "headline": "Obtain a complete mission bid",
+      "unit": "USD · one spacecraft plus launch and operations · November 2026",
+      "detail": "A purpose-built submeter mission has no verified turnkey price here. For historical scale, NASA’s inspector general listed $839 million as the planned life-cycle cost of Landsat 9 in 2021. NASA’s 2017 launch award announcement put launch and related costs at about $153.8 million. The figures overlap and concern a different public mission. A construction-imaging bid should itemize the optical payload, bus, testing, launch, ground segment, operations and disposal. [9] [10]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "India",
+      "iso": "IN",
+      "latitude": 12.98,
+      "longitude": 77.59,
+      "reason": "AIIB showed Line R6 construction in Bengaluru. A lender or implementing agency could use the same sequence to ask where a surface milestone needs an independent check. Underground tunneling requires other evidence. [1] [4]"
+    },
+    {
+      "country": "China",
+      "iso": "CN",
+      "latitude": 39.51,
+      "longitude": 116.41,
+      "reason": "ESA published Sentinel-2 observations of the development of Beijing Daxing International Airport from 2016 to 2019. The sequence demonstrates the scale at which a terminal site and runway layout become visible in open data. Individual work packages may still require finer imagery. [11]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Copernicus Sentinel-2",
+      "status": "Operational public mission",
+      "text": "Its multispectral imager records 13 bands at 10, 20 and 60 m sampling. Use its archive to establish when large earthworks began or expanded. ESA’s Daxing sequence shows what that looks like on a real site. [7] [11]"
+    },
+    {
+      "name": "Planet SkySat",
+      "status": "Documented commercial imagery product",
+      "text": "The SkySat specification distinguishes instrument sampling from the final image grid. Request a representative scene at the planned look angle before agreeing a roof-edge tolerance. The SkyFi prices above are marketplace examples without a specific SkySat delivery commitment. [2] [5]"
+    },
+    {
+      "name": "DLR DESIS on MUSES",
+      "status": "Flight-proven hosting example",
+      "text": "DESIS was installed on the International Space Station in 2018 and completed commissioning in 2019. Its different scientific instrument illustrates shared spacecraft services and negotiated data rights. [6]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A roof can conceal unfinished work",
+      "text": "A continuous roof outline can coexist with missing fire protection, incomplete waterproofing or untested equipment. Keep contractual acceptance and payment sign-off with the responsible engineer."
+    },
+    {
+      "title": "A late image cannot establish an earlier completion date",
+      "text": "If the last clear image precedes the payment deadline and the next clear image follows it, report that interval. Use dated field records to narrow it. Keep cloud-covered sections explicitly unobserved. [2]"
+    },
+    {
+      "title": "An apparent shift may be geometry",
+      "text": "Compare roof and ground edges separately. A fixed ground reference may align perfectly while a tall roof appears displaced. If the apparent change is comparable to the registration uncertainty, request a closer-to-vertical view or a field photograph. [5]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Replay one payment cycle",
+      "text": "Pick one station or terminal and ten observable work packages with dated plans. Reserve signed inspection records for a blind comparison. Give the analyst only information available by the original reporting deadline."
+    },
+    {
+      "title": "Report the denominator",
+      "text": "For an illustrative 6,000 m² planned roof, suppose 4,200 m² visibly has covering, 1,200 m² is visibly open and 600 m² is obscured. Report 70% confirmed covered and 10% unobserved. Do not count obscured bays as finished. Record the measured alignment error alongside the area estimate."
+    },
+    {
+      "title": "Compare the decision and the cost",
+      "text": "Count correctly flagged discrepancies, false alarms, missed incomplete packages, unknowns and days gained before inspection. Compare with the engineer’s original review. For illustration, four analyst days at an assumed $650/day plus two new collections at the advertised $300 floor gives $3,200 before site visits, taxes, premium rights or repeat collections. Use actual supplier terms and internal day rates for the buying decision. [2] [3]"
+    }
+  ],
+  "conclusion": [
+    "Start with a milestone the owner can define on a drawing and an inspector can verify on site. Buy a dated image pair only when it can change a specific inspection decision."
+  ],
+  "sources": [
+    {
+      "publisher": "Asian Infrastructure Investment Bank",
+      "title": "How investment officers used satellite time series for project monitoring",
+      "date": "2022",
+      "url": "https://www.aiib.org/en/news-events/media-center/blog/2022/Monitoring-Projects-with-New-Eyes-Using-Satellite-Technology-to-Build-Infrastructure-for-Tomorrow.html",
+      "id": 1
+    },
+    {
+      "publisher": "SkyFi",
+      "title": "Satellite tasking, advertised optical prices and collection terms",
+      "date": "Checked November 2026",
+      "url": "https://skyfi.com/en/blog/satellite-tasking-explained",
+      "id": 2
+    },
+    {
+      "publisher": "SkyFi Support",
+      "title": "Minimum order area and provider exceptions",
+      "date": "Checked November 2026",
+      "url": "https://skyfisupport.zendesk.com/hc/en-us/articles/54522242646036-What-is-the-minimum-order-area",
+      "id": 3
+    },
+    {
+      "publisher": "Asian Infrastructure Investment Bank",
+      "title": "Bangalore Metro Rail Project, Line R6",
+      "date": "Project record",
+      "url": "https://www.aiib.org/en/projects/details/2017/approved/India-Bangalore-Metro-Rail-Project-Line-R6.html",
+      "id": 4
+    },
+    {
+      "publisher": "Planet",
+      "title": "Planet imagery product specifications, SkySat instrument and ortho products",
+      "date": "Checked November 2026",
+      "url": "https://assets.planet.com/docs/Planet_Combined_Imagery_Product_Specs_letter_screen.pdf",
+      "id": 5
+    },
+    {
+      "publisher": "German Aerospace Center (DLR)",
+      "title": "DESIS mission, integration, commissioning and data rights",
+      "date": "Mission record",
+      "url": "https://www.dlr.de/en/eoc/research-transfer/projects-missions/desis/mission",
+      "id": 6
+    },
+    {
+      "publisher": "Copernicus Data Space Ecosystem",
+      "title": "Sentinel-2 mission, instruments and data access",
+      "date": "Checked November 2026",
+      "url": "https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-missions/sentinel-2",
+      "id": 7
+    },
+    {
+      "publisher": "NOAA",
+      "title": "Advanced Baseline Imager red visible band and its spatial resolution",
+      "date": "Band 2 quick guide",
+      "url": "https://www.star.nesdis.noaa.gov/GOES/documents/ABIQuickGuide_Band02.pdf",
+      "id": 8
+    },
+    {
+      "publisher": "NASA Office of Inspector General",
+      "title": "COVID-19 impacts on NASA’s major programs and projects, Landsat 9 budget",
+      "date": "2021",
+      "url": "https://oig.nasa.gov/wp-content/uploads/2024/02/IG-21-016.pdf",
+      "id": 9
+    },
+    {
+      "publisher": "NASA",
+      "title": "Launch services award for the Landsat 9 mission",
+      "date": "2017",
+      "url": "https://www.nasa.gov/news-release/nasa-awards-launch-services-contract-for-landsat-9-mission/",
+      "id": 10
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Beijing’s starfish airport in a Sentinel-2 time series",
+      "date": "2019",
+      "url": "https://www.esa.int/media/beijing-s-starfish-airport",
+      "id": 11
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Berlin Brandenburg Airport during construction",
+      "alt": "Oblique aerial photograph of the terminal, apron and access roads at the Berlin Brandenburg airport construction site.",
+      "caption": "Berlin Brandenburg airport during construction in 2019. The terminal roof and paved apron are visible from above. Systems inside the terminal need separate inspection.",
+      "source": "https://commons.wikimedia.org/wiki/File:Airport_berlin_BER_2019.jpg",
+      "credit": "Photo: Arne Müseler / arne-mueseler.com / CC-BY-SA-3.0. Resized and converted to WebP.",
+      "rights": "CC BY-SA 3.0 DE",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.de",
+      "files": [
+        {
+          "src": "/images/atlas/berlin-airport-construction-480.webp",
+          "width": 480,
+          "height": 320
+        },
+        {
+          "src": "/images/atlas/berlin-airport-construction-900.webp",
+          "width": 900,
+          "height": 600
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Terminal 3 at Beijing Capital International Airport",
+      "alt": "Satellite image of the branching roof of Terminal 3 and its surrounding apron at Beijing Capital International Airport.",
+      "caption": "A 2014 Planet image of Terminal 3 at Beijing Capital shows a roof outline that can be traced against a plan. This is an example of a visible feature at a completed airport.",
+      "source": "https://commons.wikimedia.org/wiki/File:Airport,_Beijing_China_-_Planet_Labs_satellite_image.jpg",
+      "credit": "Planet Labs Inc. Resized and converted to WebP.",
+      "rights": "CC BY-SA 4.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "files": [
+        {
+          "src": "/images/atlas/beijing-capital-terminal-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/beijing-capital-terminal-900.webp",
+          "width": 900,
+          "height": 675
+        }
+      ]
+    }
+  }
+}
