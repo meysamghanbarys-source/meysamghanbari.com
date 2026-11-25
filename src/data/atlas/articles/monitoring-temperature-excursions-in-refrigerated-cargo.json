@@ -1,0 +1,316 @@
+{
+  "id": "atlas-008",
+  "title": "Monitoring temperature excursions in refrigerated cargo",
+  "slug": "monitoring-temperature-excursions-in-refrigerated-cargo",
+  "type": "Condition telemetry",
+  "industry": "transportation-logistics",
+  "family": "Freight visibility",
+  "tags": [
+    "cold chain",
+    "food logistics"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-25",
+  "reviewed": "2026-11-25",
+  "orbits": [
+    "LEO",
+    "MEO",
+    "GEO"
+  ],
+  "technologies": [
+    "Satellite communications",
+    "Temperature telemetry"
+  ],
+  "dek": "A refrigerated container can keep logging temperatures while the ship loses its connection to shore. A produce exporter needs two timestamps to decide whether to call the carrier: when the probe took the reading and when the alert arrived.",
+  "glance": [
+    {
+      "label": "Buyer",
+      "value": "A produce exporter’s quality manager or a carrier’s reefer operations desk. San Miguel’s citrus shipments from Argentina to China illustrate the journey. [1]"
+    },
+    {
+      "label": "Decision",
+      "value": "Ask the carrier to check power, airflow or a probe while someone can still act. Agree who answers after hours before sailing."
+    },
+    {
+      "label": "Measurement",
+      "value": "Supply air, return air and a probe placed in the load each answer a different question. Specify the channel in every alert. [2] [3]"
+    },
+    {
+      "label": "First purchase",
+      "value": "Ask for the carrier’s monitoring fee per container and a coverage statement for each vessel, feeder and transfer on the booking. [3] [4]"
+    }
+  ],
+  "problem": [
+    "Imagine that a pallet of lemons is halfway to its destination. The latest dashboard point is above the shipper’s agreed air-temperature limit. If the reading is ten minutes old, the crew may still be able to investigate. If it was recorded yesterday and uploaded after a transfer, the useful action may be to arrange an arrival inspection. Both points could appear at the same time on the dashboard. [3]",
+    "San Miguel and Maersk documented the shipment of Argentine lemons to China. That identifies an actual exporter, carrier and trade lane. The proposed intervention here is a pilot an exporter could request. The commercial case depends on whether alerts reach a responsible person before the opportunity to act closes. [1]"
+  ],
+  "workflow": [
+    {
+      "title": "Measure at the right location",
+      "text": "A resistive temperature probe changes electrical resistance with temperature. The controller converts the measured signal to a temperature using its calibration. Supply air has just passed through the cooling unit. Return air has circulated through the load. A separately placed pulp probe is needed to measure fruit temperature at that point. Carrier’s OptimaLINE manual identifies the return sensor and recorder sensor, while Hapag-Lloyd lists cargo probes as a distinct data channel. [2] [4]"
+    },
+    {
+      "title": "Keep an independent clock",
+      "text": "Record the container ID, channel, units, sample time, set point and power state. Retain samples locally until acknowledged. A set point is the requested operating temperature. Preserve actual temperatures even when they disagree with it. Record any power interval in which the device could not sample. [3] [4]"
+    },
+    {
+      "title": "Relay from ship to shore",
+      "text": "In Maersk’s documented architecture a container radio reports to the vessel’s local network. A shipboard satellite terminal forwards the records to shore, where the carrier’s platform exposes the authorized data. On land a cellular network can carry the messages. A metal hold, an unequipped feeder or a disconnected modem can break a different part of this path. [3]"
+    },
+    {
+      "title": "Give the duty desk an actionable alert",
+      "text": "Apply the shipper’s agreed threshold and duration to sample time. Include the first and latest affected readings, link age, probe location and container number. When delayed samples arrive together, reconstruct the history once and distinguish a current alarm from a closed event. Flag stale or missing data separately."
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Container and vessel",
+      "text": "Read the refrigeration controller through an approved interface or fit a calibrated logger. For an independent LEO service, one example of a short-message shipboard modem is the Iridium 9603. It requires a compatible antenna, power and airtime. Put the satellite antenna where it has a usable sky view and test the local path from the lowest booked stowage position. [2] [3] [5]"
+    },
+    {
+      "title": "Space segment",
+      "text": "For a custom relay the payload would be a compatible radio receiver and demodulator, with a transmit path to a ground gateway or a relay link. Specify packet format, frequency authorization, antenna coverage, receiver sensitivity and how simultaneous devices share capacity. The host must supply pointing, power, thermal control and time-tagged storage. Verify margin for the actual vessel antenna and sea motion before committing to hardware. [5] [6]"
+    },
+    {
+      "title": "Shore segment",
+      "text": "The gateway hands messages to an ingestion service. Match modem and shipment identities, discard duplicate packets and retain both timestamps. Give the carrier operations desk a contact route and the exporter a traceable record of acknowledgement. Ask which parties may download the original data and how long it stays available. [3] [4]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Commercial short-message service",
+      "geometry": "Low-orbit spacecraft move across the ship’s sky. A constellation can hand traffic between satellites. [5] [6]",
+      "performance": "Short packets suit temperature and status records. A single new satellite has gaps between passes. Buffering preserves history but postpones intervention.",
+      "decision": "Use a commercial service or require a route-specific distribution of contact intervals and delivery times."
+    },
+    {
+      "orbit": "MEO",
+      "status": "Commercial ship connectivity",
+      "geometry": "SES brought its O3b mPOWER medium-orbit network into service in 2024. A shipboard tracking terminal follows moving satellites. [7]",
+      "performance": "A suitable managed vessel link can aggregate many containers. Coverage, gateway access and terminal compatibility must be confirmed for the booked route.",
+      "decision": "Consider it where the carrier already buys vessel bandwidth. Specify how reefer messages are prioritized."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Established maritime service",
+      "geometry": "A geostationary satellite stays over one longitude. A moving ship still needs a clear view toward it. FleetBroadband offers a commercial maritime L-band path. [8]",
+      "performance": "The longer radio path adds delay, usually small beside hourly reports. High latitudes and ship structures can reduce usable elevation or block the antenna.",
+      "decision": "Ask which ocean regions and vessel legs have a working terminal, and who restores the service after an outage."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Buy the carrier’s monitoring service",
+      "headline": "US$50 indicative Premium fee per container",
+      "unit": "USD · per container on a booked shipment",
+      "detail": "Maersk’s customer material lists Basic at $0, Premium at $50 and Integrated at $100 per container, subject to total volume. Its October 2022 Taiwan filing independently records USD 50 per container for reefer monitoring. The package sheet gives no minimum volume or lane-specific quote. Request a current trade-lane quote, exact features, alert coverage and any volume commitment. Freight, refrigeration and response labor are separate. Hapag-Lloyd’s terms specify booking by shipment and charging by container. [9] [10] [12]"
+    },
+    {
+      "model": "Host a radio payload",
+      "headline": "A comparable cargo-relay quote is unavailable",
+      "unit": "USD · one negotiated hosting agreement · reviewed November 2026",
+      "detail": "Iridium’s 2023 annual report lists $200 million in contracted hosting fees for Aireon receivers across its constellation, plus about $23.5 million per year in aggregate power and data fees. This civil aviation agreement demonstrates how hosting and recurring services are priced separately. It cannot be scaled by container count. Obtain quotes for the radio, integration, ground access, operations and minimum service term. [6]"
+    },
+    {
+      "model": "Own the spacecraft",
+      "headline": "US$117 million historical procurement for 18 satellites",
+      "unit": "USD · ORBCOMM contract reported in 2014",
+      "detail": "The agreement covered 18 LEO spacecraft, launch support and specified ground support equipment. The filing accounts for launch services separately. This historical contract excludes the full cost of running an end-to-end cargo service and provides no current unit price for a single satellite. Request a system bid including launch, terminals, spectrum, ground stations, fleet support and replacement. Test the alert deadline against orbital contact gaps first. [11]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Argentina",
+      "iso": "AR",
+      "latitude": -34.6,
+      "longitude": -58.38,
+      "reason": "San Miguel’s documented export of lemons gives a shipper and origin market for a pilot. The exporter could compare the carrier feed with its own shipment log before deciding which subsequent sailings to monitor. [1]"
+    },
+    {
+      "country": "China",
+      "iso": "CN",
+      "latitude": 31.23,
+      "longitude": 121.47,
+      "reason": "China was the receiving market for the same documented shipment. Ask the consignee to match an arrival probe reading and inspection time to the incoming trace. The map marker denotes a market, not the historical discharge port. [1]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Maersk Captain Peter",
+      "status": "Commercial carrier service",
+      "text": "Maersk documents the container, vessel and satellite data path. Its published architecture relies on equipment on the vessel. Ask explicitly about partner vessels, feeders and short-term charters. Check the actual sailing and any transshipment before purchase. [3]"
+    },
+    {
+      "name": "Hapag-Lloyd LIVE",
+      "status": "Commercial carrier service",
+      "text": "The carrier offers different data packages, including temperature graphs and, on suitable bookings, controlled-atmosphere or cold-treatment probe data. Its terms tie hourly updates to power and cellular connectivity. Ask how each sea leg connects. [4] [10]"
+    },
+    {
+      "name": "Iridium and Aireon",
+      "status": "Operational LEO network with hosted receivers",
+      "text": "Iridium’s satellite network supports short messages and hosts an aviation receiver service. These are separate functions. A cargo pilot using a commercial modem buys messaging access. A custom hosted radio would require its own engineering and commercial agreement. [5] [6]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "Air can warm before the product does",
+      "text": "Airflow, door opening, defrost and where the sensor sits affect the trace. Compare the channel with power records and any independent load probe before making a cargo disposition decision. One probe describes one location. [2] [4]"
+    },
+    {
+      "title": "Missing data needs its own alarm",
+      "text": "A flat line may be the last received value. Show its age. On a feeder without a continuous path, request buffered history and use an arrival check if the intervention deadline has passed. [3]"
+    },
+    {
+      "title": "An alert needs someone on the vessel",
+      "text": "Agree who may investigate and change controller settings. The shore team should send the evidence to that person and log the response. Keep authority over the cargo with the parties named in the transport agreement. [10]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Book a small paired trial",
+      "text": "Select ten comparable reefer bookings on one lane. Record each vessel and transfer. Place a calibrated reference logger at an agreed location in each load and document the placement. Agree thresholds, a persistence interval and an escalation deadline with the shipper before loading."
+    },
+    {
+      "title": "Test the handover",
+      "text": "Compare controller samples with the independent logger at like locations. Replay a labeled alarm through the shore workflow without changing cargo conditions. Count missed alerts, late alerts and unnecessary calls. Report sample completeness and delivery delay separately for each vessel and transfer."
+    },
+    {
+      "title": "Price each useful intervention",
+      "text": "Using the indicative $50 Premium fee, ten containers would cost $500 if the quoted rate matches the package sheet. As an illustrative planning allowance, add eight staff hours at $45/hour for $860 before freight, loggers, calibration, taxes or inspections. Replace the assumed labor rate and indicative fee with the actual contracted rate. Renew only if timely, verified interventions justify the cost. [3] [9]"
+    }
+  ],
+  "conclusion": [
+    "Before the next sailing, ask the carrier to show one trace through a vessel transfer, identify the probe that produced it and show when each point first reached shore. That demonstration lets a buyer tell whether the service will support a call during the voyage or an inspection at arrival."
+  ],
+  "sources": [
+    {
+      "publisher": "Maersk",
+      "title": "San Miguel citrus logistics and the Argentina–China shipment",
+      "date": "2021",
+      "url": "https://www.maersk.com/news/articles/2021/03/02/partners-in-growth-maersk-4pl-for-san-miguel",
+      "id": 1
+    },
+    {
+      "publisher": "Carrier Transicold",
+      "title": "OptimaLINE T-384, refrigeration unit and sensor locations",
+      "date": "Service manual",
+      "url": "https://www.transcentral.carrier.com/CPGTechPubs/ops_service/t384_optimaline/T-384/3_Description_OL/3_Description_OL.htm",
+      "id": 2
+    },
+    {
+      "publisher": "Maersk",
+      "title": "Smart containers, Remote Container Management architecture",
+      "date": "2015–2016 annual magazine",
+      "url": "https://www.maersk.com/~/media_sc9/maersk/corporate/press/publications/files/20160401-annual-magazine-2015-2016-en.pdf",
+      "id": 3
+    },
+    {
+      "publisher": "Hapag-Lloyd",
+      "title": "LIVE reefer packages, controller and cargo probe data",
+      "date": "Reviewed November 2026",
+      "url": "https://www.hapag-lloyd.com/en/services-information/cargo-fleet/container-monitoring/hapag-lloyd-live-reefer.html",
+      "id": 4
+    },
+    {
+      "publisher": "Iridium",
+      "title": "9603 short burst data transceiver",
+      "date": "Product specification",
+      "url": "https://www.iridium.com/products/iridium-9603-module",
+      "id": 5
+    },
+    {
+      "publisher": "Iridium Communications",
+      "title": "Annual report, network and hosted payload agreements",
+      "date": "2023",
+      "url": "https://investor.iridium.com/download/2023_Iridium_Annual_Report.pdf",
+      "id": 6
+    },
+    {
+      "publisher": "SES",
+      "title": "O3b mPOWER starts providing connectivity services",
+      "date": "2024",
+      "url": "https://www.ses.com/press-release/sess-o3b-mpower-system-starts-providing-high-performance-connectivity-services",
+      "id": 7
+    },
+    {
+      "publisher": "Inmarsat",
+      "title": "FleetBroadband maritime service",
+      "date": "Reviewed November 2026",
+      "url": "https://www.inmarsat.com/narrowband-services/fleetbroadband/",
+      "id": 8
+    },
+    {
+      "publisher": "Maersk",
+      "title": "Taiwan surcharge filing, Captain Peter reefer monitoring",
+      "date": "October 2022",
+      "url": "https://www.maersk.com/~/media_sc9/maersk/local-information/files/asia-pacific/taiwan/overview/twn-surcharge-filing-records-19-oct-22.pdf",
+      "id": 9
+    },
+    {
+      "publisher": "Hapag-Lloyd",
+      "title": "LIVE terms, service coverage and fee basis",
+      "date": "Reviewed November 2026",
+      "url": "https://www.hapag-lloyd.com/content/dam/website/downloads/OLB/HapagLloydLive_Terms.pdf",
+      "id": 10
+    },
+    {
+      "publisher": "ORBCOMM via U.S. Securities and Exchange Commission",
+      "title": "Form 10-Q, next-generation satellite and launch agreements",
+      "date": "2014",
+      "url": "https://www.sec.gov/Archives/edgar/data/1361983/000119312514406039/d791452d10q.htm",
+      "id": 11
+    },
+    {
+      "publisher": "Maersk",
+      "title": "Captain Peter package features and indicative prices",
+      "date": "Reviewed November 2026",
+      "url": "https://www.maersk.com/~/media_sc9/maersk/solutions/digital-solutions/captain-peter-all-features-v2.pdf",
+      "id": 12
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Refrigerated containers at the port of Leixões",
+      "alt": "Refrigerated containers at the port of Leixões. White containers sit on truck chassis near a warehouse.",
+      "caption": "Refrigerated containers on chassis in Leixões, Portugal. A transfer like this is a useful place to check both power continuity and the age of the last reading.",
+      "credit": "TrainLearnGrow. Resized and converted to WebP.",
+      "rights": "CC BY-SA 4.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Reefer_on_container_chassis.jpg",
+      "files": [
+        {
+          "src": "/images/atlas/reefer-port-chassis-480.webp",
+          "width": 480,
+          "height": 359
+        },
+        {
+          "src": "/images/atlas/reefer-port-chassis-900.webp",
+          "width": 900,
+          "height": 673
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Inside an empty refrigerated container",
+      "alt": "Inside an empty refrigerated container. Longitudinal floor channels run to the far bulkhead.",
+      "caption": "The ribbed floor provides an air path beneath the load. A sensor at the refrigeration unit and a probe inside a fruit carton sample different environments.",
+      "credit": "Claudio Elias. Resized and converted to WebP.",
+      "rights": "Public domain, released by the photographer",
+      "rightsUrl": "https://commons.wikimedia.org/wiki/File:Interior_Reefercontainer.JPG#Licensing",
+      "source": "https://commons.wikimedia.org/wiki/File:Interior_Reefercontainer.JPG",
+      "files": [
+        {
+          "src": "/images/atlas/reefer-container-interior-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/reefer-container-interior-900.webp",
+          "width": 900,
+          "height": 675
+        }
+      ]
+    }
+  }
+}
