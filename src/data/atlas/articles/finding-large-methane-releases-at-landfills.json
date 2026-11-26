@@ -1,0 +1,306 @@
+{
+  "id": "atlas-009",
+  "title": "Finding large methane releases at landfills",
+  "slug": "finding-large-methane-releases-at-landfills",
+  "type": "Emissions screening",
+  "industry": "environment-climate",
+  "family": "Emissions and air quality",
+  "tags": [
+    "waste management",
+    "methane"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-26",
+  "reviewed": "2026-11-26",
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Imaging spectroscopy"
+  ],
+  "dek": "A methane plume appears downwind of a landfill. Should the operator send a crew to the active waste face, the capped area or the gas collection system? A satellite can narrow the search if the image, wind and site records tell a consistent story.",
+  "glance": [
+    {
+      "label": "Buyer",
+      "value": "A municipal waste authority or landfill operator. CEAMSE, which operates Norte III near Buenos Aires, illustrates who has the field records needed to interpret a satellite estimate. [1]"
+    },
+    {
+      "label": "Decision",
+      "value": "Select the area to inspect first, then use on-site measurements to identify a release and check the outcome of any repair."
+    },
+    {
+      "label": "Deliverable",
+      "value": "A dated plume map, estimated emission rate with uncertainty, wind information, observation footprint and a list of unsuccessful looks. [2] [3]"
+    },
+    {
+      "label": "First purchase",
+      "value": "Replay a known event with archive data. If coverage is inadequate, get a written quote for repeat observations, usable-scene criteria and follow-up after repairs. [3] [4]"
+    }
+  ],
+  "problem": [
+    "Organic waste decomposing without oxygen produces methane. A release spread across a working face and a localized escape near a collection well call for different field responses. The operator needs a location, an observation time and enough confidence to assign a crew. The site map and operating log tell the crew what equipment or activity was there that day. [2] [5]",
+    "Researchers combined regional satellite measurements with finer observations over cities including Buenos Aires. CEAMSE later disputed how a separate 2025 emissions ranking represented Norte III, citing the scale of operations, timing and gas management. These records illustrate why an estimate for one overpass should travel with its sampling history and the operator’s evidence. [1] [2]"
+  ],
+  "workflow": [
+    {
+      "title": "Measure the missing sunlight",
+      "text": "Sunlight reflected from the surface passes through methane on its way to the instrument. Methane absorbs at characteristic shortwave-infrared wavelengths, including near 2.3 micrometers. An imaging spectrometer measures brightness across many adjacent wavelengths for each ground pixel. The processor compares the observed spectrum with a methane absorption signature and a local background. [2] [5]"
+    },
+    {
+      "title": "Map the excess methane",
+      "text": "Calibration and geolocation turn detector counts into a map of spectral radiance. The retrieval estimates methane above the surrounding atmospheric column. Mask cloud and unusable surfaces, then identify a coherent enhancement extending downwind. Keep the full usable footprint so a later reviewer can see where the instrument actually looked. [2] [3]"
+    },
+    {
+      "title": "Estimate a rate with the wind attached",
+      "text": "One approach integrates the excess methane mass across the plume. Multiplying that mass by an effective transport speed and dividing by a characteristic plume length gives an estimated emission rate. Kilograms times meters per hour divided by meters gives kilograms per hour. Wind error, plume boundaries and background choice propagate into this estimate. Record the method, wind source and uncertainty with the result. [2] [3]"
+    },
+    {
+      "title": "Hand off to the site team",
+      "text": "Overlay the upwind end on the dated site plan. If several sources fit the wind direction, list them all. The operator can compare well readings, extraction interruptions and cover work, then survey the candidate areas. Record what the crew found and request a later usable look after any intervention. [1] [2]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Flight instrument",
+      "text": "NASA’s Earth Surface Mineral Dust Source Investigation (EMIT) is an imaging spectrometer flown on the International Space Station. It measured a methane plume at least 4.8 km long south of Tehran. The displayed color overlay represents retrieved methane enhancement. A conventional color photograph would show the terrain without that measurement. [5]"
+    },
+    {
+      "title": "Spacecraft and pointing",
+      "text": "For a dedicated instrument, specify the methane absorption band, spectral response, signal-to-noise across realistic surface brightness and ground sampling at the proposed altitude. Stable pointing, knowledge of viewing geometry and spectral calibration matter because small spectral or location errors can distort a weak plume. Budget for detector thermal control, data storage and downlink of the spectral scene. [2] [5]"
+    },
+    {
+      "title": "Ground processing",
+      "text": "Require calibrated imagery or a documented retrieval, acquisition time, geolocation, quality masks, wind and an uncertainty field or interval. The ground team needs the landfill boundary, current cell plan and a controlled record of inspections. Archive unsuccessful acquisition attempts beside the delivered plumes to measure actual coverage. [2] [3]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Demonstrated at landfills",
+      "geometry": "ISS-hosted EMIT and dedicated low-orbit imagers have observed landfill plumes. A given site is in view only during suitable passes. [2] [5] [6]",
+      "performance": "Shorter range helps resolve a plume, but daylight, clouds, surface brightness and acquisition scheduling affect the number of useful looks. A pass between releases can miss an intermittent source. [2] [3]",
+      "decision": "Ask for historical usable looks at the site by season and a contracted delivery time."
+    },
+    {
+      "orbit": "MEO",
+      "status": "Unproven for this buying decision",
+      "geometry": "At a fixed angular pixel size, the ground footprint grows approximately in proportion to the range near nadir.",
+      "performance": "A plume occupying less of a pixel produces a weaker contrast against the background. A higher orbit would require a different optical design to recover comparable detail and sensitivity.",
+      "decision": "Request validated landfill observations from the proposed altitude before considering a hosted instrument."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Regional concept with limits",
+      "geometry": "A geostationary platform can repeatedly view the same region. The long range makes landfill-scale spatial sampling demanding.",
+      "performance": "Repeated daylight measurements could improve the timing record, subject to cloud and viewing geometry. NASA canceled its planned GeoCarb greenhouse-gas mission in 2022. [7]",
+      "decision": "Base a purchase on demonstrated facility-scale retrievals. A regional column map alone cannot locate a faulty well."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Access existing data or buy repeat observations",
+      "headline": "Public screening and commissioned monitoring have different terms",
+      "unit": "USD · per site, usable observation or annual service · checked November 2026",
+      "detail": "Carbon Mapper offers public access. Its terms allow limited internal business use to find and fix emissions. A consultant selling derived reports needs a separate agreement. A current commercial landfill price per usable scene, minimum order and cloud replacement terms were unavailable in the cited offers. GHGSat reported a NASA agreement with a US$7 million ceiling per call. This procurement ceiling gives no scene price. Ask what counts as a billable attempt. [3] [4] [8]"
+    },
+    {
+      "model": "Host a methane-capable spectrometer",
+      "headline": "US$110.9 million historical EMIT project cost",
+      "unit": "USD · one ISS-hosted science project · May 2023 accounting",
+      "detail": "NASA’s inspector general reported this project cost for EMIT. It covers a science project with its own instrument and processing needs. It gives neither the ISS accommodation fee nor a commercial hosting tariff. Request camera development, qualification, host integration, pointing opportunities, launch allocation, data rights and operations as separate items. No public minimum term for the proposed payload was identified. [9]"
+    },
+    {
+      "model": "Build a dedicated spacecraft",
+      "headline": "US$467.7 million historical OCO-2 mission investment",
+      "unit": "USD · design, development, launch and operations · 2014 launch press kit",
+      "detail": "NASA’s OCO-2 benchmark covers an entire dedicated carbon-dioxide observatory with a different measurement objective. Launch is included in the figure. It is neither a launch-only price nor a quote for a landfill methane satellite. For a comparable buying decision require the methane instrument, bus, launch, commissioning, ground processing, operations and end-of-life costs. A current complete mission price meeting this brief is unavailable. [10]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Argentina",
+      "iso": "AR",
+      "latitude": -34.55,
+      "longitude": -58.64,
+      "reason": "Norte III provides a documented operating context for testing whether a plume changes an inspection decision. CEAMSE’s own response provides the site-management perspective and the researchers describe the satellite method used in Buenos Aires. [1] [2]"
+    },
+    {
+      "country": "Iran",
+      "iso": "IR",
+      "latitude": 35.46,
+      "longitude": 51.35,
+      "reason": "NASA published an EMIT observation from a landfill south of Tehran and estimated about 8.5 metric tons per hour for that observation. It is a worked example of a large, detectable plume. Its rate cannot be transferred to a different site or extrapolated to a whole year without a representative time series. [5]"
+    },
+    {
+      "country": "Pakistan",
+      "iso": "PK",
+      "latitude": 24.86,
+      "longitude": 67.01,
+      "reason": "Tanager-1 observed a methane plume at a Karachi landfill on 19 September 2024 during commissioning. Carbon Mapper reported a preliminary estimate of 1,200 kg per hour. This confirms an observed case, while routine service performance requires a longer sample. [6]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "NASA EMIT",
+      "status": "Flown ISS instrument and published observation",
+      "text": "Its Tehran observation is a documented example for training analysts to interpret a plume overlay. An archive example does not guarantee a new observation on a customer-selected day. [5] [9]"
+    },
+    {
+      "name": "GHGSat",
+      "status": "Commercial low-orbit observations",
+      "text": "The landfill study used GHGSat observations to resolve individual sources within a wider regional signal. Ask the provider to demonstrate the expected sensitivity at your surface brightness and wind conditions. [2] [8]"
+    },
+    {
+      "name": "Carbon Mapper and Planet Tanager-1",
+      "status": "Flown dedicated satellite and public data products",
+      "text": "Carbon Mapper documents first light over Karachi and subsequent operational data releases. Its product guide and terms describe what can be downloaded and reused. [3] [4] [6]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A clear map can still contain a gap",
+      "text": "Cloud, low reflected light, strong wind or diffuse emissions can prevent detection. Keep “usable, no plume detected” separate from “no usable measurement.” Neither result proves zero emissions. [2] [3]"
+    },
+    {
+      "title": "Nearby sources can share a plume",
+      "text": "A wind-direction error can shift the apparent origin. Match the time and wind to site operations, and use a local survey before assigning responsibility or specifying a repair. [1] [2]"
+    },
+    {
+      "title": "A rate is tied to a time",
+      "text": "Do not multiply one high reading by the hours in a year. Seasonal changes, short maintenance events and selection of clear days can all bias a total. Report the observed rates and the sampling assumptions separately. [1] [2]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Choose one site and one decision",
+      "text": "Run an eight-week trial with a named operations supervisor. Before the first look, agree how quickly the team can inspect an anomaly and what evidence would change its existing inspection route. Include known maintenance periods and routine days."
+    },
+    {
+      "title": "Buy coverage that can be audited",
+      "text": "Ask for six attempted acquisitions with timestamps and a quality report for each. Compare delivered results with a field survey made close to the overpass. Report attempted, usable, detected, locally confirmed and actionable as separate counts. Check a sample of clear nondetections as well."
+    },
+    {
+      "title": "Price the decision",
+      "text": "As a November 2026 planning example, 24 analyst hours at an assumed US$75/hour plus two field visits at an assumed US$600 each give US$3,000 before imagery, taxes, travel outside the site or repairs. Add the written observation and licensing quote. Compare cost per usable look and confirmed intervention with the operator’s ordinary survey program. [4] [8]"
+    }
+  ],
+  "conclusion": [
+    "Ask the supplier for one plume, one usable scene with no detection and one failed look over the same facility. Have the supervisor explain what the crew would do in each case. That exercise tests the value of the service before the operator commits to a year of observations."
+  ],
+  "sources": [
+    {
+      "publisher": "CEAMSE",
+      "title": "Operator response on methane estimates at Complejo Ambiental Norte III",
+      "date": "2026",
+      "url": "https://www.ceamse.gov.ar/informacion-inexacta-con-respecto-a-la-emision-de-metano-del-complejo-ambiental-norte-iii/",
+      "id": 1
+    },
+    {
+      "publisher": "Maasakkers et al., Science Advances",
+      "title": "Using satellites to uncover large methane emissions from landfills",
+      "date": "2022",
+      "url": "https://europepmc.org/api/getPdf?pmcid=PMC9365275",
+      "id": 2
+    },
+    {
+      "publisher": "Carbon Mapper",
+      "title": "Product guide and data specifications",
+      "date": "Reviewed November 2026",
+      "url": "https://carbonmapper.org/articles/product-guide",
+      "id": 3
+    },
+    {
+      "publisher": "Carbon Mapper",
+      "title": "Data terms of use and commercial-use provisions",
+      "date": "Reviewed November 2026",
+      "url": "https://carbonmapper.org/terms",
+      "id": 4
+    },
+    {
+      "publisher": "NASA/JPL-Caltech",
+      "title": "EMIT spots methane hotspots, including a landfill south of Tehran",
+      "date": "2022",
+      "url": "https://science.nasa.gov/photojournal/emit-spots-methane-hotspots/",
+      "id": 5
+    },
+    {
+      "publisher": "Carbon Mapper",
+      "title": "Tanager-1 observations, commissioning and operational milestones",
+      "date": "2026",
+      "url": "https://carbonmapper.org/articles/tanager-1-two-years-of-turning-satellite-data-into-methane-action",
+      "id": 6
+    },
+    {
+      "publisher": "NASA",
+      "title": "Cancellation of the GeoCarb mission",
+      "date": "2022",
+      "url": "https://www.nasa.gov/news-release/nasa-to-cancel-geocarb-mission-expands-greenhouse-gas-portfolio/",
+      "id": 7
+    },
+    {
+      "publisher": "GHGSat",
+      "title": "NASA commercial small satellite data acquisition agreement",
+      "date": "Contract announcement",
+      "url": "https://www.ghgsat.com/resources/nasa-awards-ghgsat-commercial-small-satellite-data-acquisition-agreement/",
+      "id": 8
+    },
+    {
+      "publisher": "NASA Office of Inspector General",
+      "title": "Earth System Science Pathfinder Program, EMIT project costs",
+      "date": "2023",
+      "url": "https://oig.nasa.gov/wp-content/uploads/2024/02/IG-23-018.pdf",
+      "id": 9
+    },
+    {
+      "publisher": "NASA/JPL-Caltech",
+      "title": "Orbiting Carbon Observatory-2 launch press kit, mission investment",
+      "date": "2014",
+      "url": "https://www.jpl.nasa.gov/news/press_kits/oco2-launch-press-kit.pdf",
+      "id": 10
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Gas collection on a capped landfill",
+      "alt": "Collection pipes extend through a pale landfill cover.",
+      "caption": "Gas collection infrastructure on a capped area. Once the operator identifies an area worth checking, a site plan and field measurements guide the inspection.",
+      "source": "https://commons.wikimedia.org/wiki/File:Landfill_gas_collection_from_capped_landfill_area.jpg",
+      "credit": "Z22. Resized and converted to WebP.",
+      "rights": "CC BY-SA 4.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "files": [
+        {
+          "src": "/images/atlas/landfill-gas-cover-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/landfill-gas-cover-900.webp",
+          "width": 900,
+          "height": 675
+        }
+      ]
+    },
+    "evidence": {
+      "title": "An observed methane plume south of Tehran",
+      "alt": "NASA EMIT methane enhancement overlay over a landfill south of Tehran.",
+      "caption": "Figure B from NASA’s October 2022 release. The colors show methane inferred from measured spectra over a mapped surface. NASA reported a plume extending at least 4.8 km.",
+      "source": "https://science.nasa.gov/photojournal/emit-spots-methane-hotspots/",
+      "credit": "NASA/JPL-Caltech. Resized and converted to WebP.",
+      "rights": "JPL image use policy",
+      "rightsUrl": "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+      "files": [
+        {
+          "src": "/images/atlas/emit-tehran-landfill-480.webp",
+          "width": 480,
+          "height": 257
+        },
+        {
+          "src": "/images/atlas/emit-tehran-landfill-900.webp",
+          "width": 900,
+          "height": 482
+        }
+      ]
+    }
+  }
+}
