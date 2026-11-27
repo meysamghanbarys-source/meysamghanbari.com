@@ -1,0 +1,307 @@
+{
+  "id": "atlas-010",
+  "title": "Routing commercial vessels through seasonal sea ice",
+  "slug": "routing-commercial-vessels-through-seasonal-sea-ice",
+  "type": "Route planning support",
+  "industry": "maritime-coastal",
+  "family": "Navigation and ports",
+  "tags": [
+    "sea ice",
+    "ice services"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-27",
+  "reviewed": "2026-11-27",
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Synthetic-aperture radar",
+    "Passive microwave radiometry"
+  ],
+  "dek": "A cargo ship is due at a Baltic port tomorrow. The chart shows ice across its approach, but some observations are already hours old. Should the dispatcher keep the arrival slot, ask the ice service for an update or budget time for icebreaker assistance?",
+  "glance": [
+    {
+      "label": "Buyer",
+      "value": "An ice-class shipping company, port dispatcher or icebreaking operator. Arctia and the Finnish Meteorological Institute are documented participants in Finland’s winter navigation service. [1] [2]"
+    },
+    {
+      "label": "Decision",
+      "value": "Compare the expected timing of viable approaches, identify where conditions remain uncertain and coordinate with the ice service before the vessel arrives."
+    },
+    {
+      "label": "Delivery",
+      "value": "A time-stamped briefing with chart polygons, observation footprints, assistance restrictions and the next expected update. [1] [3]"
+    },
+    {
+      "label": "First purchase",
+      "value": "Start with the official chart and its issue time. Commission a new radar scene only if it covers the uncertain area and can reach the decision-maker in time. [1] [4]"
+    }
+  ],
+  "problem": [
+    "A dispatcher looking at two approaches needs to know how much of each one was actually observed. An opening seen early in the morning may have narrowed by evening. If the chart postdates the image, the chart’s publication time can make the opening look fresher than it is. Keep the observation time, issue time and planned arrival time together. [3] [5]",
+    "The scale of the service matters. In the 2025–26 Finnish season, Arctia reported about 1,580 instances of icebreaker assistance across the participating fleet. A better estimate of waiting time has value even when the ship ultimately follows the same approach. Test whether an extra image changes a dispatch decision before buying corridor-wide coverage. [2]"
+  ],
+  "workflow": [
+    {
+      "title": "Observe the ice surface",
+      "text": "Sentinel-1 transmits C-band microwave pulses and records the returning echoes. Processing the echoes collected along the flight path produces a synthetic-aperture radar (SAR) image. Scattering depends on surface roughness, ice properties, polarization and viewing angle. Smooth new ice and calm water can both look dark. Wind-roughened water can look bright. SAR can collect at night and through cloud. [5] [6]"
+    },
+    {
+      "title": "Add a regional view",
+      "text": "A passive microwave radiometer measures naturally emitted radiation in several channels. Differences in the brightness temperatures over water and ice allow a retrieval algorithm to estimate ice concentration. A daily product on a 25 km grid provides regional context. A cell partly covered by ice does not tell the bridge where a ship-width opening lies. [7]"
+    },
+    {
+      "title": "Build and date the chart",
+      "text": "An ice analyst combines imagery, weather and observations into regions with broadly similar conditions. Canadian ice charts express concentration in tenths and may include stage of development and floe size. Eight tenths describes the fraction of an area covered at analysis time. It does not describe the thickness of the ice or the probability that a ship can pass. [3]"
+    },
+    {
+      "title": "Brief the voyage team",
+      "text": "Mark the imagery footprint on the chart. For each candidate approach, record the oldest relevant observation, missing sections, reported drift and assistance restrictions. Send the master the official chart and forecast with the briefing. Use local ice advice and bridge observations for the actual navigation decision. [1] [5]"
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Spaceborne instrument",
+      "text": "Sentinel-1 carries a C-band SAR operating at 5.405 GHz. Its Extra Wide Swath mode covers about 400 km across track. A broad swath supports regional ice analysis. A small spotlight scene buys extra detail over a selected area and leaves most of a long approach outside the frame. [4] [6]"
+    },
+    {
+      "title": "Spacecraft and collection plan",
+      "text": "A radar payload needs an antenna, peak transmit power, heat rejection, precise orbit and attitude knowledge, storage and downlink capacity. Ask for swath, polarization, incidence-angle range, available acquisition windows and the time from overpass to delivery. A spacecraft passing overhead is useful only if it collects the right strip and gets the data ashore before the briefing. [6]"
+    },
+    {
+      "title": "Ground and vessel delivery",
+      "text": "SAR processing focuses the echoes, calibrates their intensity and geolocates the image. The ice service needs an analyst, current weather and field reports. Supply a compact, georeferenced chart and a readable low-bandwidth briefing. Preserve the acquisition time on any crop or screenshot that reaches the bridge. [3] [5] [6]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Operational ice observation",
+      "geometry": "Near-polar low orbits repeatedly cross northern waters. Sentinel-1 and Canada’s RADARSAT Constellation Mission provide documented radar capabilities. [6] [8]",
+      "performance": "SAR can image a wide area across a pass, while the next suitable acquisition depends on orbit, look direction and scheduling. Several spacecraft improve opportunities without providing a continuous view.",
+      "decision": "Ask for the history of actual acquisitions and deliveries along the intended approach."
+    },
+    {
+      "orbit": "MEO",
+      "status": "No validated service identified for this pilot",
+      "geometry": "A greater range enlarges the ground area subtended by a fixed angular beam.",
+      "performance": "For an otherwise comparable radar, greater range weakens the returned signal. Recovering useful ice contrast and resolution requires a different antenna, power and acquisition design.",
+      "decision": "Require sample ice scenes and measured delivery performance at the offered geometry before paying for a host."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Limited polar viewing geometry",
+      "geometry": "A geostationary spacecraft stays over the equator. High-latitude waters are seen obliquely, and the highest latitudes are outside its view.",
+      "performance": "Repeated visible or infrared images can provide weather context over visible areas. Cloud hides surface features in optical imagery, and low viewing angles degrade local detail. [5]",
+      "decision": "Use weather context alongside the ice service. Specify a demonstrated high-latitude ice product for the approach itself."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Use charts and buy a scene where needed",
+      "headline": "US$675 for one 5 × 5 km radar scene",
+      "unit": "USD · Umbra published spotlight tariff · checked 27 November 2026",
+      "detail": "Finland publishes the Baltic chart online. Umbra lists $675 for a 1 m, single-look spotlight scene covering 25 km². Two separate qualifying scenes would cost $1,350 at that rate. This is an imagery unit price. Analyst interpretation, bridge delivery, timing commitments, redistribution rights and any minimum contract spend need separate confirmation. [1] [4]"
+    },
+    {
+      "model": "Host a radar instrument",
+      "headline": "Compatible host and integration require a quotation",
+      "unit": "USD · one proposed hosted SAR · November 2026",
+      "detail": "NASA’s SIR-C/X-SAR flew on two Space Shuttle missions in 1994, demonstrating radar imaging from a host. Those short research flights establish flight heritage. They give no current price or service cadence for a commercial ice-monitoring payload. Request separate terms for the antenna accommodation, power, integration, launch allocation, downlink, task priority and minimum term. [9]"
+    },
+    {
+      "model": "Own a dedicated radar spacecraft",
+      "headline": "US$1.1589 billion NASA investment in NISAR",
+      "unit": "USD · historical large-mission benchmark · 2025 launch press kit",
+      "detail": "NASA’s figure covers its formulation, development and operations contribution. ISRO funded separate work including launch operations. The NASA amount is neither a launch fee nor a turnkey price for an ice satellite. Obtain a mission bid covering the spacecraft and instrument, launch, commissioning, ground processing and sustained operations. A complete price for the proposed smaller system was unavailable. [10]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Finland",
+      "iso": "FI",
+      "latitude": 65.0,
+      "longitude": 25.4,
+      "reason": "Gulf of Bothnia port calls provide a practical test of whether a fresh observation changes an arrival plan. The Finnish chart includes assistance restrictions and icebreaker positions. Arctia documents the scale of seasonal assistance. [1] [2]"
+    },
+    {
+      "country": "Canada",
+      "iso": "CA",
+      "latitude": 48.4,
+      "longitude": -68.5,
+      "reason": "Canada’s ice service issues ice analyses and the Coast Guard provides navigation guidance for ice-covered waters. A St. Lawrence operator could replay winter port approaches using the charts available at each historical decision time. Canada’s radar constellation supports ice monitoring. [3] [5] [8]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "Finnish Meteorological Institute",
+      "status": "Operational ice chart service",
+      "text": "The full Baltic chart is issued on Mondays and Thursdays in autumn, then daily as ice increases until spring breakup. Check the publication schedule for the voyage date. [1]"
+    },
+    {
+      "name": "Canadian Ice Service",
+      "status": "Operational chart production",
+      "text": "Analysts describe ice concentration, stage of development and ice form. A regional picture supports voyage planning while local conditions and ship capability govern close navigation. [3] [5]"
+    },
+    {
+      "name": "Copernicus Sentinel-1 and NASA Terra",
+      "status": "Flown observation missions",
+      "text": "Sentinel-1 provides radar at night or through cloud. Terra’s MODIS captured broken Gulf of Bothnia ice on 5 March 2010. The optical scene below also shows how cloud can mask part of the ice field. [6] [11]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A lead can close",
+      "text": "A lead is an opening in the ice. Wind and currents move floes after acquisition. An image taken before a weather change may locate yesterday’s opening accurately and still give poor advice for the arrival window. [5]"
+    },
+    {
+      "title": "Ice concentration is only one attribute",
+      "text": "Decayed ice, ridges, pressure and ice type change how a ship experiences the same chart concentration. A dark radar strip alone cannot establish open water or adequate clearance. Retain uncertainty and seek local advice where the sources disagree. [3] [5]"
+    },
+    {
+      "title": "Keep the ship’s operating limits visible",
+      "text": "Two ships may need different assistance in the same conditions. Keep applicable assistance restrictions, the vessel’s ice capability and current official directions in the briefing. Route analysis supports the master and ice service. [1] [5]"
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Replay one season",
+      "text": "Select twelve past approaches to one port, including delays, assistance requests and uneventful arrivals. Fix a decision time for each voyage and hide later imagery and actual arrival times from the analyst."
+    },
+    {
+      "title": "Compare two briefings",
+      "text": "Use the official chart and forecast for the baseline. Add one time-stamped SAR observation where a suitable archive scene exists. Record whether the dispatcher changes the arrival slot, requests help earlier or keeps the plan. Score arrival-time error, avoidable calls and the fraction of scenes received before the deadline."
+    },
+    {
+      "title": "Set a buying threshold",
+      "text": "For a November 2026 planning example, two suitable scenes at $675 plus eight analyst hours at an assumed $75/hour give $1,950 before taxes, integration or premium delivery. Compare that budget with the operator’s documented cost of an hour of delay. Buy repeat coverage only when the gain survives cases in which the extra scene arrives late or resolves no ambiguity. [4]"
+    }
+  ],
+  "conclusion": [
+    "Ask a supplier to replay a delayed arrival using only material available before departure. Ask the dispatcher which decision would have changed, when it could have changed and how much of the approach was actually observed. That is a practical acceptance test for the first purchase."
+  ],
+  "sources": [
+    {
+      "publisher": "Finnish Meteorological Institute",
+      "title": "Baltic ice conditions, chart contents and publication schedule",
+      "date": "Reviewed November 2026",
+      "url": "https://en.ilmatieteenlaitos.fi/ice-conditions",
+      "id": 1
+    },
+    {
+      "publisher": "Arctia",
+      "title": "End of the Finnish 2025–26 icebreaking season",
+      "date": "7 May 2026",
+      "url": "https://www.arctia.fi/en/news/icebreaking-season-ended-on-may-6.html",
+      "id": 2
+    },
+    {
+      "publisher": "Environment and Climate Change Canada",
+      "title": "Canadian Ice Service chart descriptions",
+      "date": "Reviewed November 2026",
+      "url": "https://www.canada.ca/en/environment-climate-change/services/ice-forecasts-observations/latest-conditions/products-guides/chart-descriptions.html",
+      "id": 3
+    },
+    {
+      "publisher": "Umbra",
+      "title": "Spotlight imagery pricing by footprint, resolution and looks",
+      "date": "Checked November 2026",
+      "url": "https://umbra.space/pricing/",
+      "id": 4
+    },
+    {
+      "publisher": "Canadian Coast Guard",
+      "title": "Ice Navigation in Canadian Waters, chapter 4",
+      "date": "Operational guidance",
+      "url": "https://www.canada.ca/en/canadian-coast-guard/corporate/publications/ice-navigation-in-canadian-waters/chapter-4-navigation-ice-covered-waters.html",
+      "id": 5
+    },
+    {
+      "publisher": "European Space Agency",
+      "title": "Sentinel-1 instrument and acquisition modes",
+      "date": "Mission facts",
+      "url": "https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-1/Facts_and_figures",
+      "id": 6
+    },
+    {
+      "publisher": "NASA National Snow and Ice Data Center DAAC",
+      "title": "AMSR-E/AMSR2 daily brightness temperatures and sea ice concentration on 25 km polar grids",
+      "date": "Product user guide",
+      "url": "https://nsidc.org/sites/default/files/au_si25-v001-userguide.pdf",
+      "id": 7
+    },
+    {
+      "publisher": "Canadian Space Agency",
+      "title": "RADARSAT Constellation Mission, user and mission questions",
+      "date": "Mission record",
+      "url": "https://www.asc-csa.gc.ca/eng/satellites/radarsat/faq.asp",
+      "id": 8
+    },
+    {
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "title": "Spaceborne Imaging Radar-C/X-band Synthetic Aperture Radar",
+      "date": "Mission archive",
+      "url": "https://www.jpl.nasa.gov/missions/spaceborne-imaging-radar-c-x-band-synthetic-aperture-radar-sir-c-x-sar/",
+      "id": 9
+    },
+    {
+      "publisher": "NASA Jet Propulsion Laboratory",
+      "title": "NISAR mission quick facts and partner investment",
+      "date": "2025",
+      "url": "https://www.jpl.nasa.gov/press-kits/nisar/quick-facts/",
+      "id": 10
+    },
+    {
+      "publisher": "NASA Earth Observatory",
+      "title": "Thick ice in the Gulf of Bothnia, Terra MODIS observation",
+      "date": "March 2010",
+      "url": "https://science.nasa.gov/earth/earth-observatory/thick-ice-in-the-gulf-of-bothnia-43042/",
+      "id": 11
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Otso escorting Mirva",
+      "alt": "Finnish icebreaker Otso and the merchant vessel Mirva in broken sea ice.",
+      "caption": "Otso escorts Mirva in the Gulf of Bothnia. For dispatchers, the useful output is often the expected time and location of assistance.",
+      "source": "https://commons.wikimedia.org/wiki/File:Otso_escorting_Mirva.jpg",
+      "credit": "Kalle Inkinen. Resized and converted to WebP.",
+      "rights": "CC BY-SA 3.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "files": [
+        {
+          "src": "/images/atlas/otso-merchant-escort-480.webp",
+          "width": 480,
+          "height": 320
+        },
+        {
+          "src": "/images/atlas/otso-merchant-escort-900.webp",
+          "width": 900,
+          "height": 600
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Ice in the Gulf of Bothnia",
+      "alt": "True-color satellite view of broken sea ice and partial cloud over the Gulf of Bothnia.",
+      "caption": "Terra MODIS, 5 March 2010. Broken ice is visible over much of the gulf. Thin cloud obscures part of the eastern side. This historical image illustrates coverage and has no current navigational validity.",
+      "source": "https://commons.wikimedia.org/wiki/File:Thick_Ice_in_the_Gulf_of_Bothnia_2010-03-05_lrg.jpg",
+      "credit": "NASA Earth Observatory / MODIS Rapid Response Team. Resized and converted to WebP.",
+      "rights": "NASA public domain",
+      "rightsUrl": "https://commons.wikimedia.org/wiki/File:Thick_Ice_in_the_Gulf_of_Bothnia_2010-03-05_lrg.jpg#Licensing",
+      "files": [
+        {
+          "src": "/images/atlas/bothnia-terra-sea-ice-480.webp",
+          "width": 480,
+          "height": 576
+        },
+        {
+          "src": "/images/atlas/bothnia-terra-sea-ice-834.webp",
+          "width": 834,
+          "height": 1000
+        }
+      ]
+    }
+  }
+}
