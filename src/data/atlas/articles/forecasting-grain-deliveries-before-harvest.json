@@ -1,0 +1,320 @@
+{
+  "id": "atlas-011",
+  "title": "Forecasting grain deliveries before harvest",
+  "slug": "forecasting-grain-deliveries-before-harvest",
+  "type": "Production forecasting",
+  "industry": "agriculture-water",
+  "family": "Crop management",
+  "tags": [
+    "grain procurement",
+    "yield"
+  ],
+  "scope": "civilian",
+  "published": "2026-11-28",
+  "reviewed": "2026-11-28",
+  "orbits": [
+    "LEO"
+  ],
+  "technologies": [
+    "Multispectral imaging"
+  ],
+  "dek": "A grain cooperative must reserve storage and book trucks before the first loads cross its scales. Satellite images help estimate how much grain is growing in the catchment. Grower contracts and past delivery patterns tell the cooperative how much is likely to arrive at its own gate.",
+  "glance": [
+    {
+      "label": "Buyer",
+      "value": "A cooperative’s grain intake manager. In Western Australia, CBH Group reported receiving 24.1 million tonnes by 18 January in its 2025–26 harvest. [1]"
+    },
+    {
+      "label": "Decision",
+      "value": "Reserve temporary storage, truck slots and intake shifts against a range of weekly deliveries. Update the reservation when the cost of waiting exceeds the cost of unused capacity."
+    },
+    {
+      "label": "Inputs",
+      "value": "Crop-specific area, a time series of canopy reflectance, weather, field samples, historical yields and the cooperative’s own weighbridge records. [2] [3]"
+    },
+    {
+      "label": "First purchase",
+      "value": "Replay a past harvest using open imagery. Pay for denser observations only where missing dates materially change a booking decision. [4] [5]"
+    }
+  ],
+  "problem": [
+    "A depot may have room for 4,000 tonnes next week and still face a queue if half of that grain arrives on one dry afternoon. Regional production, the depot’s share of it and the timing of arrivals are three separate estimates. A crop image informs the first. Contracts, grower intentions, on-farm storage and harvest progress inform the other two.",
+    "CBH reported storing 16.3 million tonnes under tarps in open bulkheads in its 2025–26 harvest. That is an actual storage decision at commercial scale. A depot-level pilot could test whether an earlier forecast helps reserve those resources. The published receipt figures provide context without implying that CBH used the proposed satellite model. [1]"
+  ],
+  "workflow": [
+    {
+      "title": "Identify the crop and its area",
+      "text": "Fix the depot’s sourcing area and reporting date. Separate wheat, barley and other crops using declarations, field boundaries or a crop map available that day. Subtract abandoned area when evidence supports it. Keep uncertain fields as a separate area range. Statistics Canada’s Manitoba study used historical crop insurance records containing seeded area, harvested area and yield. [3]"
+    },
+    {
+      "title": "Read the canopy through the season",
+      "text": "A multispectral imager measures reflected sunlight. Leaf pigments absorb red light while internal leaf structure scatters near-infrared light. Compute NDVI, the difference between near-infrared and red reflectance divided by their sum, from cloud-screened surface reflectance. Summarize interior field pixels and keep the acquisition date. Compare equivalent growth stages across years. Statistics Canada used weekly composites to reduce cloud effects. [2] [4] [6]"
+    },
+    {
+      "title": "Estimate tonnes with local measurements",
+      "text": "Fit crop-specific yield against the seasonal image curve, weather and measured harvest outcomes. Inspect fields where samples disagree with the image. Multiply expected harvested hectares by tonnes per hectare, then sum fields. Carry area and yield uncertainty through the sum, including shared drought or heat effects across farms. [2] [3]"
+    },
+    {
+      "title": "Forecast deliveries at the gate",
+      "text": "For an illustrative 2,000 harvested hectares at 3 tonnes per hectare, production is 6,000 tonnes. If 60% comes to this depot and 40% of its share arrives in the booking week, expected intake is 1,440 tonnes. If just the weekly share falls to 25% after rain, intake falls to 900 tonnes with exactly the same yield. Replace these assumptions with local contracts and historical weighings."
+    }
+  ],
+  "hardware": [
+    {
+      "title": "Select an instrument and processing level",
+      "text": "Landsat 8 and 9 provide 30 m red and near-infrared bands through the Operational Land Imager and OLI-2. Surface-reflectance processing corrects for atmospheric effects so dates are more comparable. Where mixed field edges dominate, Sentinel-2’s multispectral instrument offers 10 m red and near-infrared bands. Compare usable field interiors before paying for smaller pixels. [4] [6] [7]"
+    },
+    {
+      "title": "Specify a hosted or owned payload",
+      "text": "An agricultural imager needs calibrated red and near-infrared channels, repeatable geometry, accurate pointing and exposure timing. Specify swath across the entire catchment, usable signal at expected illumination, cloud masking and radiometric stability across dates. The spacecraft must provide power, thermal control, orbit knowledge, storage and downlink. A sharp individual scene cannot compensate for a missing growth stage. [4] [6] [7]"
+    },
+    {
+      "title": "Deliver a forecast with an audit trail",
+      "text": "At the ground station or archive, preserve calibration, cloud flags, field masks and observation dates. On the buyer side, link field samples and receipts by crop, season and catchment under the agreed access terms. Deliver a weekly tonnage range, its issue date, the last clear observation and the largest unresolved assumption. [2] [3]"
+    }
+  ],
+  "orbitsCompared": [
+    {
+      "orbit": "LEO",
+      "status": "Operational field-scale imagery",
+      "geometry": "Landsat and Sentinel-2 observe in daylight on repeated low-orbit passes. [6] [7]",
+      "performance": "Field-scale multispectral measurements support a seasonal curve. Nominal revisit opportunities can include cloudy days, so the gap between usable observations can be much longer.",
+      "decision": "Measure clear coverage during the crop stages that affect this depot’s decision."
+    },
+    {
+      "orbit": "MEO",
+      "status": "No validated field-scale offer identified here",
+      "geometry": "For the same angular sample near nadir, the ground footprint increases with distance.",
+      "performance": "Resolving small fields at greater range would require a different optical aperture, detector sampling and pointing budget. A wider view alone does not resolve crops mixed within a pixel.",
+      "decision": "Request repeat calibrated images over representative fields before pricing a host."
+    },
+    {
+      "orbit": "GEO",
+      "status": "Regional weather context",
+      "geometry": "A geostationary weather satellite repeatedly observes a broad region. NOAA’s ABI lists best spatial resolutions of 0.5 km for its red band and 1 km for its vegetation near-infrared band. [8]",
+      "performance": "These footprints can include several crops, roads or fallow plots. Frequent cloud observations are valuable for interpreting weather and harvest delays.",
+      "decision": "Use regional weather with low-orbit field observations and actual deliveries."
+    }
+  ],
+  "costs": [
+    {
+      "model": "Buy imagery and build the forecast",
+      "headline": "US$175–900 per 500 ha for the illustrated annual area charge",
+      "unit": "USD · Planet Agriculture geographic tiers · checked 28 November 2026",
+      "detail": "At the start of an annual contract, Planet’s calculator lists 500 ha at $175 in Tier 3, $425 in Tier 2 and $900 in Tier 1, plus required monitoring credits. A field may be as small as 1 ha, but the calculator sells area in 500 ha increments. Confirm the location tier, archive period, platform credits and mid-contract additions. These figures exclude yield modeling, sampling and depot integration. Landsat data provide a no-fee starting point. [4] [5] [9]"
+    },
+    {
+      "model": "Host a multispectral instrument",
+      "headline": "Request a host-specific quotation",
+      "unit": "USD · one proposed optical instrument · November 2026",
+      "detail": "DLR’s DESIS imaging spectrometer flew on the MUSES platform aboard the ISS, demonstrating optical payload hosting. NASA’s inspector general reported $110.9 million in project costs for a different ISS-hosted spectrometer, EMIT, as of May 2023. This project figure does not isolate hosting fees. Obtain separate prices for instrument development, host integration, launch allocation, observation rights, downlink and processing. Minimum term and price for this crop service were unavailable. [10] [11]"
+    },
+    {
+      "model": "Own a dedicated spacecraft",
+      "headline": "US$839 million historical planned Landsat 9 life-cycle cost",
+      "unit": "USD · NASA inspector general estimate reported in 2021",
+      "detail": "This government observatory is a benchmark for mission scope, not a bid for a small agricultural imager. NASA separately announced approximately $153.8 million for Landsat 9 launch and related costs in 2017. Do not add the launch figure to the life-cycle estimate. Price the proposed instrument, bus, test, launch, operations and end-of-life work separately, with a coverage simulation for the catchment. No comparable turnkey quote was verified. [12] [13]"
+    }
+  ],
+  "markets": [
+    {
+      "country": "Canada",
+      "iso": "CA",
+      "latitude": 49.89,
+      "longitude": -97.14,
+      "reason": "Statistics Canada tested models in Manitoba against historical crop insurance yields. That gives a local precedent for validating the production component. A grain handler would still need its own receipt history to predict arrivals at a particular elevator. [3]"
+    },
+    {
+      "country": "Australia",
+      "iso": "AU",
+      "latitude": -31.95,
+      "longitude": 115.86,
+      "reason": "CBH publishes dated harvest receipts across its Western Australian network. Those reports document seasonal intake and temporary storage demand. A pilot with one participating depot would require its daily local records rather than a network total. [1]"
+    }
+  ],
+  "providers": [
+    {
+      "name": "USGS Landsat and Copernicus Sentinel-2",
+      "status": "Operational optical archives",
+      "text": "Use surface reflectance and quality masks to establish an open-data baseline. Evaluate the number of cloud-free dates for each crop and decision deadline. [4] [6] [7]"
+    },
+    {
+      "name": "Statistics Canada",
+      "status": "Documented statistical methodology",
+      "text": "The agency combined remotely sensed vegetation information, agroclimatic variables and survey data for crop estimates. Its Manitoba work also tested crop insurance inputs. These are precedents for yield modeling. The last step from regional yield to depot intake requires separate validation. [2] [3]"
+    },
+    {
+      "name": "Planet Agriculture",
+      "status": "Commercial monitoring subscription",
+      "text": "The supplier describes area-based access, a two-year archive window for its current monitoring-credit plans and additional credit use for older imagery. Ask for the cost of historical training seasons before selecting a subscription. [5] [9]"
+    }
+  ],
+  "limits": [
+    {
+      "title": "A green canopy may produce little grain",
+      "text": "NDVI responds to vegetation cover and vigor. It can saturate in dense canopies, and late heat or water stress can affect grain filling after peak greenness. Compare forecasts with dated samples and weather observations, especially when a season lies outside the training range. [2] [3]"
+    },
+    {
+      "title": "Keep future information out of a replay",
+      "text": "A final crop map, revised yield statistic or delivered tonnage can make a historical forecast look better than it would have been. Freeze every input at the original issue date. Hold out entire seasons and compare with a forecast based only on contracts and historical arrivals."
+    },
+    {
+      "title": "Production does not fix the delivery week",
+      "text": "Farm storage, a competing buyer, rainfall and truck availability can shift a delivery without changing field yield. Track the capture share and arrival-week share separately. Ask growers about uncommitted grain whenever those terms dominate the range."
+    }
+  ],
+  "pilot": [
+    {
+      "title": "Replay before buying",
+      "text": "Select one crop and one depot with several completed seasons of daily receipts. Rebuild forecasts four and two weeks before harvest using only data available then. Sample contrasting field types, and keep the latest complete season out of training."
+    },
+    {
+      "title": "Score the decision in tonnes and dollars",
+      "text": "Compare weekly absolute tonnage error, signed bias, missed capacity overruns and unused reserved storage against the contracts-only baseline. Check how often observations fall inside the stated prediction intervals. Include cloudy weeks and seasons when the crop arrived at a different depot."
+    },
+    {
+      "title": "Set the buying threshold",
+      "text": "For a November 2026 example, budget 24 analyst hours at an assumed $75/hour and four field visits at $150 each: $2,400 before subscriptions, travel beyond the catchment or taxes. A 500 ha Tier 2 imagery purchase at the advertised area price brings that illustration to $2,825 before monitoring credits. Compare against the buyer’s own costs of overtime, overflow and idle bookings. [5]"
+    }
+  ],
+  "conclusion": [
+    "Ask the supplier for a dated prediction of tonnes crossing one weighbridge in one week, the range around it and the decision it would have changed. A better yield estimate earns its place in the buying process only when it improves that local forecast."
+  ],
+  "sources": [
+    {
+      "publisher": "CBH Group",
+      "title": "Western Australia harvest reports and weekly grain receipts",
+      "date": "2025–26 season",
+      "url": "https://www.cbh.com.au/news/2025/11/harvest-reports-2025-26",
+      "id": 1
+    },
+    {
+      "publisher": "Statistics Canada",
+      "title": "Integrated crop yield modelling using remote sensing, agroclimatic data and survey data",
+      "date": "Methodology",
+      "url": "https://www.statcan.gc.ca/en/statistical-programs/document/5225_D1_T9_V1",
+      "id": 2
+    },
+    {
+      "publisher": "Statistics Canada",
+      "title": "Integrated crop yield model using crop insurance data in Manitoba",
+      "date": "Methodology and validation",
+      "url": "https://www.statcan.gc.ca/en/statistical-programs/document/3401_D2_V1",
+      "id": 3
+    },
+    {
+      "publisher": "NASA",
+      "title": "Landsat data products and free access",
+      "date": "Reviewed November 2026",
+      "url": "https://science.nasa.gov/mission/landsat/data-overview/",
+      "id": 4
+    },
+    {
+      "publisher": "Planet",
+      "title": "Agriculture pricing, annual area increments and additional credits",
+      "date": "Checked November 2026",
+      "url": "https://www.planet.com/pricing/agriculture/",
+      "id": 5
+    },
+    {
+      "publisher": "NASA",
+      "title": "Landsat spectral bands and applications",
+      "date": "Mission reference",
+      "url": "https://science.nasa.gov/mission/landsat/spectral-bands-and-applications/",
+      "id": 6
+    },
+    {
+      "publisher": "Copernicus Data Space Ecosystem",
+      "title": "Sentinel-2 mission, instruments and data",
+      "date": "Mission reference",
+      "url": "https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-missions/sentinel-2",
+      "id": 7
+    },
+    {
+      "publisher": "NOAA NESDIS",
+      "title": "ABI scan mode and channel summary",
+      "date": "Instrument reference",
+      "url": "https://www.nesdis.noaa.gov/our-satellites/currently-flying/goes-east-west/abi-scan-mode-information-and-channel-summary",
+      "id": 8
+    },
+    {
+      "publisher": "Planet",
+      "title": "Planet Agriculture area, archive and credit rules",
+      "date": "August 2026",
+      "url": "https://support.planet.com/hc/en-us/articles/38645848254621-Planet-Agriculture-previously-Area-Under-Management",
+      "id": 9
+    },
+    {
+      "publisher": "German Aerospace Center",
+      "title": "DESIS instrument and MUSES mission",
+      "date": "Mission record",
+      "url": "https://www.dlr.de/en/eoc/research-transfer/projects-missions/desis/mission",
+      "id": 10
+    },
+    {
+      "publisher": "NASA Office of Inspector General",
+      "title": "Earth System Science Pathfinder Program, EMIT project costs",
+      "date": "2023",
+      "url": "https://oig.nasa.gov/wp-content/uploads/2024/02/IG-23-018.pdf",
+      "id": 11
+    },
+    {
+      "publisher": "NASA Office of Inspector General",
+      "title": "Impacts on NASA projects, Landsat 9 planned life-cycle cost",
+      "date": "2021",
+      "url": "https://oig.nasa.gov/wp-content/uploads/2024/02/IG-21-016.pdf",
+      "id": 12
+    },
+    {
+      "publisher": "NASA",
+      "title": "Landsat 9 launch services contract",
+      "date": "2017",
+      "url": "https://www.nasa.gov/news-release/nasa-awards-launch-services-contract-for-landsat-9-mission/",
+      "id": 13
+    }
+  ],
+  "images": {
+    "hero": {
+      "title": "Grain elevator at Rosthern, Saskatchewan",
+      "alt": "A grain elevator in Rosthern rises above trees beside the road.",
+      "caption": "An elevator in Rosthern, Saskatchewan. The delivery forecast belongs to a specific receiving site and reporting week. This photograph illustrates the facility type.",
+      "source": "https://commons.wikimedia.org/wiki/File:Grain_Elevator_Rosthern_Saskatchewan.jpg",
+      "credit": "Canadian2006. Resized and converted to WebP.",
+      "rights": "CC BY-SA 3.0",
+      "rightsUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "files": [
+        {
+          "src": "/images/atlas/rosthern-grain-elevator-480.webp",
+          "width": 480,
+          "height": 360
+        },
+        {
+          "src": "/images/atlas/rosthern-grain-elevator-900.webp",
+          "width": 900,
+          "height": 675
+        }
+      ]
+    },
+    "evidence": {
+      "title": "Landsat view of irrigated fields in Kansas",
+      "alt": "Green circular irrigated fields and rectangular parcels in a Landsat image of Kansas.",
+      "caption": "Field boundaries and center-pivot circles are visible in this Kansas scene. A single color image gives spatial context. Yield estimation requires a calibrated time series and measured harvests.",
+      "source": "https://commons.wikimedia.org/wiki/File:Landsat_sees_crops_in_Kansas.jpg",
+      "credit": "NASA / USGS Landsat. Resized and converted to WebP.",
+      "rights": "NASA public domain",
+      "rightsUrl": "https://commons.wikimedia.org/wiki/File:Landsat_sees_crops_in_Kansas.jpg#Licensing",
+      "files": [
+        {
+          "src": "/images/atlas/landsat-kansas-crop-fields-480.webp",
+          "width": 480,
+          "height": 270
+        },
+        {
+          "src": "/images/atlas/landsat-kansas-crop-fields-900.webp",
+          "width": 900,
+          "height": 507
+        }
+      ]
+    }
+  }
+}
